@@ -1,0 +1,44 @@
+instructor_details
+
+instructor_id
+user_id bin[16] uuid
+f_name	varchar[100]
+l_name	varchar[100]
+title eg.Dr., Prof varchar[100]
+bio	Text
+profile_img	Text [url]/ blob
+email	varchar[100]
+mob_no	char[13]
+qualifications -> qualification_details table
+specialization -> specialization table
+registration_date [datetime]
+is_active	boolean / char[10]
+is_approved	boolean
+last_login	datetime
+num_of_published_courses	int
+num_of_students	int
+average_rating	float
+num_of_reviews	int
+
+
+user_feedback
+feedback_id	bin[16] uuid
+user_id		bin[16] uuid
+course_id	bin[16] uuid 
+submission_date	datetime
+submission_type	char? in-course/ course-end/ support
+feedback_text	text
+overall_rating	int
+content_quality_rating	int
+instructor_rating	int
+platform_usability_rating	int
+techical_system_rating	int
+support_rating		int
+area_of_improvement	text
+user_opinion		text
+is_anonymous		bool
+status	char[20] new/under review/ resolved
+admin_response	text
+last_updated_at	datetime
+
+

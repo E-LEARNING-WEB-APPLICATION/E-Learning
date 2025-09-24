@@ -1,5 +1,5 @@
-instructor_details
 
+--INSTRUCTOR_DETAILS--
 instructor_id
 user_id bin[16] uuid
 f_name	varchar[100]
@@ -21,7 +21,7 @@ average_rating	float
 num_of_reviews	int
 
 
-user_feedback
+--USER_FEEDBACK TABLE --
 feedback_id	bin[16] uuid
 user_id		bin[16] uuid
 course_id	bin[16] uuid 
@@ -40,5 +40,29 @@ is_anonymous		bool
 status	char[20] new/under review/ resolved
 admin_response	text
 last_updated_at	datetime
+
+
+--USER Table--
+user_id (Primary Key , Auto-Increment)
+f_name varchar(20)
+l_name varchar(20)
+email varchar(20)
+password varchar(80)
+role Enum('admin' , 'student' , 'instructor')
+status Enum('active' , 'inactive')
+created_at datetime
+updated_at datetime
+
+--ADDRESS Table--
+address_id  (Primary Key , Auto-Increment)
+user_id (Foreign Key --> users.user_id) on delete cascade
+address_line1 varchar(150)
+address_line2 varchar(150)
+city varchar(100)
+state varchar(100)
+pincode varchar(20)
+created_at datetime
+updated_at datetime
+
 
 

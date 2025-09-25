@@ -65,4 +65,37 @@ created_at datetime
 updated_at datetime
 
 
+-- COURSE Table --
+course_id int
+course_name varchar(40)
+course_category varchar(20)
+course_duration int
+course_rating int
+course_price decimal
+course_thumbnail blob
+course_discount int
+course introduction video blob
+course_Description varchar(400)
+Instructor ( Foreign Key ) 
+Number of Student Enrolled int 
+course_rank int
+topics (foreign Key )
+
+
+-- BOOKING TABLE --
+booking_id
+student_id
+course_id
+mentor_id
+payment_id
+date_of_purchase datetime
+course_price decimal
+discounted_price decimal
+instructor_withdrawal_status boolean
+admin_withdrawal_status boolean
+
+
+
+
+
 

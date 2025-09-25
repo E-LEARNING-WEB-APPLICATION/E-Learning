@@ -66,7 +66,7 @@ updated_at datetime
 
 
 -- COURSE Table --
-course_id int
+course_id int (primary key)
 course_name varchar(40)
 course_category varchar(20)
 course_duration int
@@ -83,11 +83,11 @@ topics (foreign Key )
 
 
 -- BOOKING TABLE --
-booking_id
-student_id
-course_id
-mentor_id
-payment_id
+booking_id (primary key)
+student_id (foreign key)
+course_id  (foreign key)
+mentor_id  (foreign key)
+payment_id  (foreign key)
 date_of_purchase datetime
 course_price decimal
 discounted_price decimal

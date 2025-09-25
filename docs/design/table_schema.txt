@@ -94,8 +94,17 @@ discounted_price decimal
 instructor_withdrawal_status boolean
 admin_withdrawal_status boolean
 
+--CATEGORY--
+category_id (Primary Key , Auto-Increment)
+category_name varchar(100)
+category_desc text
 
 
-
-
+--TOPICS--
+topic_id (Primary Key , Auto-Increment)
+course_id (Foreign Key)
+topic_desc text
+topic_name varchar(100)
+topic_video varchar(250)
+topic_notes varchar(255) 
 

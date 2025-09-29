@@ -1,110 +1,142 @@
-
---INSTRUCTOR_DETAILS--
-instructor_id
-user_id bin[16] uuid
-f_name	varchar[100]
-l_name	varchar[100]
-title eg.Dr., Prof varchar[100]
-bio	Text
-profile_img	Text [url]/ blob
-email	varchar[100]
-mob_no	char[13]
-qualifications -> qualification_details table
-specialization -> specialization table
-registration_date [datetime]
-is_active	boolean / char[10]
-is_approved	boolean
-last_login	datetime
-num_of_published_courses	int
-num_of_students	int
-average_rating	float
-num_of_reviews	int
+auth
+-----
+auth_id       INT PRIMARY KEY AUTO_INCREMENT
+email         VARCHAR(255) UNIQUE NOT NULL
+password_hash VARCHAR(255) NOT NULL
+role          ENUM('student','instructor','admin') NOT NULL
+status        ENUM('active','inactive') DEFAULT 'active'
+created_at    DATETIME DEFAULT CURRENT_TIMESTAMP
 
 
---USER_FEEDBACK TABLE --
-feedback_id	bin[16] uuid
-user_id		bin[16] uuid
-course_id	bin[16] uuid 
-submission_date	datetime
-submission_type	char? in-course/ course-end/ support
-feedback_text	text
-overall_rating	int
-content_quality_rating	int
-instructor_rating	int
-platform_usability_rating	int
-techical_system_rating	int
-support_rating		int
-area_of_improvement	text
-user_opinion		text
-is_anonymous		bool
-status	char[20] new/under review/ resolved
-admin_response	text
-last_updated_at	datetime
+user_profile
+-------------
+profile_id   INT PRIMARY KEY AUTO_INCREMENT
+auth_id      INT UNIQUE NOT NULL REFERENCES auth(auth_id)   -- 1:1
+fname        VARCHAR(50)
+lname        VARCHAR(50)
+dob          DATE
+gender       ENUM('male','female','other')
+profile_pic  VARCHAR(255)
+created_at   DATETIME DEFAULT CURRENT_TIMESTAMP
 
 
---USER Table--
-user_id (Primary Key , Auto-Increment)
-f_name varchar(20)
-l_name varchar(20)
-email varchar(20)
-password varchar(80)
-role Enum('admin' , 'student' , 'instructor')
-status Enum('active' , 'inactive')
-created_at datetime
-updated_at datetime
-
---ADDRESS Table--
-address_id  (Primary Key , Auto-Increment)
-user_id (Foreign Key --> users.user_id) on delete cascade
-address_line1 varchar(150)
-address_line2 varchar(150)
-city varchar(100)
-state varchar(100)
-pincode varchar(20)
-created_at datetime
-updated_at datetime
+student_details
+----------------
+sID           INT PRIMARY KEY AUTO_INCREMENT
+profile_id    INT UNIQUE NOT NULL REFERENCES user_profile(profile_id)  -- 1:1
+add_id        INT REFERENCES address(add_id)
+created_at    DATETIME DEFAULT CURRENT_TIMESTAMP
 
 
--- COURSE Table --
-course_id int (primary key)
-course_name varchar(40)
-course_category varchar(20)
-course_duration int
-course_rating int
-course_price decimal
-course_thumbnail blob
-course_discount int
-course introduction video blob
-course_Description varchar(400)
-Instructor ( Foreign Key ) 
-Number of Student Enrolled int 
-course_rank int
-topics (foreign Key )
+instructor_details
+-------------------
+iId           INT PRIMARY KEY AUTO_INCREMENT
+profile_id    INT UNIQUE NOT NULL REFERENCES user_profile(profile_id)  -- 1:1
+title         VARCHAR(100)
+bio           TEXT
+mob_no        VARCHAR(15)
+status        ENUM('active','inactive') DEFAULT 'active'
+isApproved    BOOLEAN DEFAULT FALSE
+add_id        INT REFERENCES address(add_id)
+created_at    DATETIME DEFAULT CURRENT_TIMESTAMP
 
 
--- BOOKING TABLE --
-booking_id (primary key)
-student_id (foreign key)
-course_id  (foreign key)
-mentor_id  (foreign key)
-payment_id  (foreign key)
-date_of_purchase datetime
-course_price decimal
-discounted_price decimal
-instructor_withdrawal_status boolean
-admin_withdrawal_status boolean
-
---CATEGORY--
-category_id (Primary Key , Auto-Increment)
-category_name varchar(100)
-category_desc text
+education_details
+------------------
+eid            INT PRIMARY KEY AUTO_INCREMENT
+student_id     INT REFERENCES student_details(sID)           -- 1 student → many education entries
+instructor_id  INT REFERENCES instructor_details(iId)        -- optional for instructors
+degree         VARCHAR(100)
+field_of_study VARCHAR(100)
+institute      VARCHAR(100)
+grade          VARCHAR(10)
+description    TEXT
+start_date     DATE
+end_date       DATE
+created_at     DATETIME DEFAULT CURRENT_TIMESTAMP
 
 
---TOPICS--
-topic_id (Primary Key , Auto-Increment)
-course_id (Foreign Key)
-topic_desc text
-topic_name varchar(100)
-topic_video varchar(250)
-topic_notes varchar(255) 
+address
+--------
+add_id        INT PRIMARY KEY AUTO_INCREMENT
+address_line1 VARCHAR(255)
+address_line2 VARCHAR(255)
+city          VARCHAR(50)
+state         VARCHAR(50)
+pincode       VARCHAR(10)
+country       VARCHAR(50)
+created_at    DATETIME DEFAULT CURRENT_TIMESTAMP
+
+
+category
+--------
+cId           INT PRIMARY KEY AUTO_INCREMENT
+cname         VARCHAR(50)
+cdesc         TEXT
+created_at    DATETIME DEFAULT CURRENT_TIMESTAMP
+
+
+courses
+--------
+courseId           INT PRIMARY KEY AUTO_INCREMENT
+c_id               INT REFERENCES category(cId)
+iId                INT REFERENCES instructor_details(iId)
+course_name        VARCHAR(100)
+course_desc        TEXT
+fees               DECIMAL(10,2)
+discount_percentage DECIMAL(5,2)
+course_thumbnail   VARCHAR(255)
+course_intro_video VARCHAR(255)
+course_duration    VARCHAR(50)
+created_at         DATETIME DEFAULT CURRENT_TIMESTAMP
+
+
+
+sections
+--------
+sId             INT PRIMARY KEY AUTO_INCREMENT
+course_id       INT REFERENCES courses(courseId)
+section_name    VARCHAR(100)
+section_desc    TEXT
+created_at      DATETIME DEFAULT CURRENT_TIMESTAMP
+
+
+topics
+------
+t_id           INT PRIMARY KEY AUTO_INCREMENT
+s_id           INT REFERENCES sections(sId)
+topic_name     VARCHAR(100)
+topic_desc     TEXT
+topic_video    VARCHAR(255)
+topic_notes    TEXT
+created_at     DATETIME DEFAULT CURRENT_TIMESTAMP
+
+
+booking
+-------
+booking_id       INT PRIMARY KEY AUTO_INCREMENT
+student_id       INT REFERENCES student_details(sID)
+course_id        INT REFERENCES courses(courseId)
+payment_id       INT REFERENCES transactions(tid)
+date_of_purchase DATETIME DEFAULT CURRENT_TIMESTAMP
+course_price     DECIMAL(10,2)   -- snapshot of course price at booking
+price_paid       DECIMAL(10,2)   -- actual amount student paid
+
+
+transactions
+-------------
+tid             INT PRIMARY KEY AUTO_INCREMENT
+mode_of_payment VARCHAR(50)
+amount          DECIMAL(10,2)
+created_at      DATETIME DEFAULT CURRENT_TIMESTAMP
+
+
+feedback
+--------
+feedback_id     INT PRIMARY KEY AUTO_INCREMENT
+student_id      INT REFERENCES student_details(sID)
+course_id       INT REFERENCES courses(courseId)
+rating          DECIMAL(2,1)   -- e.g., 4.5 out of 5
+comment         TEXT
+created_at      DATETIME DEFAULT CURRENT_TIMESTAMP
 

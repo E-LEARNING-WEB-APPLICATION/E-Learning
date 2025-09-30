@@ -120,11 +120,11 @@ CREATE TABLE topics (
 );
 
 -- BOOKING (junction table: student ↔ course ↔ payment)
-CREATE TABLE booking (
+CREATE TABLE booking_course (
     booking_id INT PRIMARY KEY AUTO_INCREMENT,
     student_id INT,
     course_id INT,
-    payment_id UNIQUE INT,
+    payment_id INT UNIQUE,
     date_of_purchase DATETIME DEFAULT CURRENT_TIMESTAMP,
     course_price DECIMAL(10,2),
     price_paid DECIMAL(10,2),

@@ -1,0 +1,8 @@
+.topic-video
+{
+  
+  width: 80%;
+  height: 300px;
+  object-fit: cover; 
+  border-radius: 8px; 
+}

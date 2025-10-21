@@ -21,7 +21,6 @@ function App() {
   return (
     <>
       <div>
-      
         <Routes>
           <Route path='/' element={<Navigate to="/login" />} />
           <Route path='/login' element={<Login />} />
@@ -31,47 +30,18 @@ function App() {
             <Route path='mycourses' element={<MyCourses />} />
             <Route path='wishlist' element={<WishList />} />
           </Route>
-        </Routes>
-        <Routes>
           <Route path='/instructor' element={<InstructorLayout />}>
-            <Route path='dashboard' element={<InstructorDashboard />}>  </Route>
-
-          <Route path='addCourse' element={<AddCourse />}></Route>
-          
-          <Route path='addedCourses' element={<AddedCourses/>}> </Route>
-          <Route path='addedCourses/add-section' element={<AddSection/>}></Route>
-          <Route path='addedCourses/show-sections' element={<ShowSection/>}> </Route>
-          
-        
-          <Route path='addedCourses/show-sections/add-topic' element={<AddTopic/>}></Route>
-          <Route path='addedCourses/show-sections/show-topics' element={<ShowTopic/>}></Route>
+            <Route path='dashboard' element={<InstructorDashboard />} />
+            <Route path='addCourse' element={<AddCourse />} />
+            <Route path='addedCourses' element={<AddedCourses />} />
+            <Route path='addedCourses/add-section' element={<AddSection />} />
+            <Route path='addedCourses/show-sections' element={<ShowSection />} />
+            <Route path='addedCourses/show-sections/add-topic' element={<AddTopic />} />
+            <Route path='addedCourses/show-sections/show-topics' element={<ShowTopic />} />
           </Route>
-          
-          
         </Routes>
-        
       </div>
     </>
   );
 }
-
 export default App
-
-
-
-      
-
-      
-      
-
-      
-
-      
-
-      
-      
-
-
-
- 
-     

@@ -15,6 +15,7 @@ import AddSection from './pages/instructor/AddSection/AddSection';
 import ShowSection from './pages/instructor/ShowSections/ShowSection';
 import ShowTopic from './pages/instructor/ShowTopics/ShowTopic';
 import AddTopic from './pages/instructor/AddTopics/AddTopic';
+import AboutUs from './pages/aboutUs/AboutUs';
 
 function App() {
 
@@ -30,6 +31,7 @@ function App() {
             <Route path='dashboard' element={<StudentDashboard />} />
             <Route path='mycourses' element={<MyCourses />} />
             <Route path='wishlist' element={<WishList />} />
+            <Route path='aboutus' element={<AboutUs/>} />
           </Route>
         </Routes>
         <Routes>

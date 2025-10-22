@@ -17,7 +17,7 @@ function AddSection() {
     })
 
     const dispatch = useDispatch()
-  //  console.log("Sections - ",sections)
+   // console.log("Sections in Add Section - ",sections)
     const navigate = useNavigate()
     const location = useLocation()
     const { courseName } = location.state
@@ -43,7 +43,7 @@ function AddSection() {
         //  console.log("New data in add section ",newData)
           dispatch(add(newData))
         window.alert("Section Added Successfully")
-        navigate('/instructor/addedCourses')
+        navigate(-1)
        }
        else
        {

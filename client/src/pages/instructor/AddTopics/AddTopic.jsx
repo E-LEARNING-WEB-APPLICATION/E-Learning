@@ -1,6 +1,6 @@
 import { addTopic } from '../../../services/Instructor/topic';
 import React, { useState } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useLocation} from 'react-router-dom'
 import { useSelector, useDispatch } from "react-redux";
 import { add } from '../../../slices/topics/topicSlice';
 
@@ -9,7 +9,7 @@ function AddTopic() {
   const topics = useSelector((state) => state.topics.value)
   const dispatch = useDispatch()
 
-  const navigate = useNavigate()
+
   const location = useLocation()
   const data = location.state.data
 
@@ -49,16 +49,11 @@ function AddTopic() {
         
 
       }
-    // console.log("topicData" , topicData)
+   
      const newData = [...topics,topicData]
-   //  console.log("newData",newData)
+
       dispatch(add(newData));
-     navigate(-1,{
-      state : {
-        courseName : topicData.courseName
-      }
-     }) 
-       
+
 
   }
 

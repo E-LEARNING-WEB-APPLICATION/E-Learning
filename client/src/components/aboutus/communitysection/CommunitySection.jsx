@@ -10,9 +10,11 @@ const CommunitySection = () => {
                 </h2>
                 <div className="row g-4">
                     <div className="col-md-4">
-                        <div className="card p-3 border shadow-sm">
+                        <div
+                            className="card p-3 border shadow-sm"
+                            style={{ justifyContent: "center" }}>
                             <img
-                                src="https://picsum.photos/100/100"
+                                src="https://picsum.photos/300/300"
                                 alt="Instructor"
                                 className="rounded-circle mb-3 community-img"
                             />
@@ -28,7 +30,7 @@ const CommunitySection = () => {
                     <div className="col-md-4">
                         <div className="card p-3 border shadow-sm">
                             <img
-                                src="https://picsum.photos/100/100"
+                                src="https://picsum.photos/300/300"
                                 alt="Learners"
                                 className="rounded-circle mb-3 community-img"
                             />
@@ -43,16 +45,18 @@ const CommunitySection = () => {
                     </div>
                     <div className="col-md-4">
                         <div className="card p-3 border shadow-sm bg-light">
-                            <h1 className="fw-bold text-primary">500K+</h1>
+                            <h3 className="fw-bold text-primary">500K+</h3>
                             <p className="text-secondary">Learners worldwide</p>
-                            <h1 className="fw-bold text-primary">1200+</h1>
+                            <h3 className="fw-bold text-primary">1200+</h3>
                             <p className="text-secondary">Instructors</p>
-                            <h1 className="fw-bold text-primary">80+</h1>
+                            <h3 className="fw-bold text-primary">80+</h3>
                             <p className="text-secondary">Countries</p>
-                            <h1 className="fw-bold text-primary">15K+</h1>
+                            <h3 className="fw-bold text-primary">15K+</h3>
                             <p className="text-secondary">Courses Available</p>
-                            <h1 className="fw-bold text-primary">2M+</h1>
-                            <p className="text-secondary">Certificates Issued</p>
+                            <h3 className="fw-bold text-primary">2M+</h3>
+                            <p className="text-secondary">
+                                Certificates Issued
+                            </p>
                         </div>
                     </div>
                 </div>

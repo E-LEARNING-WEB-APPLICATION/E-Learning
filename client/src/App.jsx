@@ -18,6 +18,7 @@ import InstructorRegistration from './pages/guest/instructorRegister/InstructorR
 import StudentRegistration from './pages/guest/studentRegister/StudentRegistration';
 import Login from './pages/guest/login/Login';
 import AboutUs from './pages/aboutUs/AboutUs';
+import ContactUs from './pages/contactUs/ContactUs';
 
 function App() {
 
@@ -35,7 +36,8 @@ function App() {
                         <Route path='dashboard' element={<StudentDashboard />} />
                         <Route path='mycourses' element={<MyCourses />} />
                         <Route path='wishlist' element={<WishList />} />
-                        <Route path='aboutus' element={<AboutUs/>} />
+                        <Route path='aboutus' element={<AboutUs />} />
+                        <Route path='contactus' element={<ContactUs/>}/>
                     </Route>
                     <Route path='/instructor' element={<InstructorLayout />}>
                         <Route path='dashboard' element={<InstructorDashboard />} />

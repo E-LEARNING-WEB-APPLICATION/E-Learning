@@ -1,11 +1,41 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './StudentRegistration.css'
 import { FaEnvelope, FaLock, FaUser, FaPhone, FaBirthdayCake } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify';
 
 const StudentRegistration = () => {
 
+    const [formData, setFormData] = useState({
+        fname: "",
+        lname: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
+        phone: ""
+    });
+
     const navigate = useNavigate();
+
+    const handleChange = (e) => {
+        setFormData({
+            ...formData,
+            [e.target.id]: e.target.value
+        })
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (formData.password != formData.confirmPassword) {
+            toast.warning("Password and Confirm Password Did not Match !!");
+            return;
+        }
+        console.log(formData);
+        setTimeout(() => {
+            navigate("/guest/login");
+        }, 1000);
+    }
+
 
     return (
         <div className="reg-outer-container d-flex align-items-center justify-content-center">
@@ -13,11 +43,12 @@ const StudentRegistration = () => {
                 <h2 className="reg-title text-center mb-4" style={{ color: '#214979ff' }}>
                     Student Registration
                 </h2>
-                <form className="reg-form">
+                <form className="reg-form" onSubmit={handleSubmit}>
                     <div className="name-row row g-3 mb-3">
                         <div className="col-md-6 form-floating">
                             <input
                                 type="text"
+                                onChange={handleChange}
                                 className="form-control"
                                 id="fname"
                                 placeholder="First Name"
@@ -31,6 +62,7 @@ const StudentRegistration = () => {
                         <div className="col-md-6 form-floating">
                             <input
                                 type="text"
+                                onChange={handleChange}
                                 className="form-control"
                                 id="lname"
                                 placeholder="Last Name"
@@ -46,6 +78,7 @@ const StudentRegistration = () => {
                     <div className="form-floating mb-3">
                         <input
                             type="email"
+                            onChange={handleChange}
                             className="form-control"
                             id="email"
                             placeholder="Email"
@@ -60,6 +93,7 @@ const StudentRegistration = () => {
                     <div className="form-floating mb-3">
                         <input
                             type="password"
+                            onChange={handleChange}
                             className="form-control"
                             id="password"
                             placeholder="Password"
@@ -74,6 +108,7 @@ const StudentRegistration = () => {
                     <div className="form-floating mb-3">
                         <input
                             type="password"
+                            onChange={handleChange}
                             className="form-control"
                             id="confirmPassword"
                             placeholder="Confirm Password"
@@ -88,6 +123,7 @@ const StudentRegistration = () => {
                     <div className="form-floating mb-3">
                         <input
                             type="tel"
+                            onChange={handleChange}
                             className="form-control"
                             id="phone"
                             placeholder="Phone Number"
@@ -101,7 +137,10 @@ const StudentRegistration = () => {
                     <button type="submit" className="reg-button w-100 mb-3">Register</button>
                     <p className='text-center' style={{ color: "black" }}>
                         Don't have an account.?{' '}
-                        <button onClick={() => { navigate('/guest/login') }} className='text-decoration-underline fw-semibold btn btn-link' style={{ color: '#112d4e' }}>
+                        <button
+                            type='submit'
+                            className='text-decoration-underline fw-semibold btn btn-link'
+                            style={{ color: '#112d4e' }}>
                             Login here
                         </button>
                     </p>

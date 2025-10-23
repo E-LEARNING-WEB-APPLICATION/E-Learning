@@ -12,7 +12,8 @@ const StudentRegistration = () => {
         email: "",
         password: "",
         confirmPassword: "",
-        phone: ""
+        phone: "",
+        role: "student"
     });
 
     const navigate = useNavigate();

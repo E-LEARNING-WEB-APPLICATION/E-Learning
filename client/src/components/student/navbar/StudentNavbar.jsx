@@ -46,12 +46,12 @@ function StudentNavbar() {
                             </Link>
                         </li>
                         <li>
-                            <Link className='nav-link' to='/student/about-us'>
+                            <Link className='nav-link' to='/student/aboutus'>
                                 About Us
                             </Link>
                         </li>
                         <li>
-                            <Link className='nav-link' to='/student/contact-us'>
+                            <Link className='nav-link' to='/student/contactus'>
                                 Contact Us
                             </Link>
                         </li>

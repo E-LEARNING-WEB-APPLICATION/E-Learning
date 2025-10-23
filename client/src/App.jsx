@@ -19,12 +19,14 @@ import StudentRegistration from './pages/guest/studentRegister/StudentRegistrati
 import Login from './pages/guest/login/Login';
 import AboutUs from './pages/aboutUs/AboutUs';
 import ContactUs from './pages/contactUs/ContactUs';
+import { ToastContainer } from 'react-toastify';
 
 function App() {
 
     return (
         <>
             <div>
+                <ToastContainer />
                 <Routes>
                     <Route path='/' element={<Navigate to="/guest" />} />
                     <Route path='/guest' element={<GuestLayout />}>
@@ -37,7 +39,7 @@ function App() {
                         <Route path='mycourses' element={<MyCourses />} />
                         <Route path='wishlist' element={<WishList />} />
                         <Route path='aboutus' element={<AboutUs />} />
-                        <Route path='contactus' element={<ContactUs/>}/>
+                        <Route path='contactus' element={<ContactUs />} />
                     </Route>
                     <Route path='/instructor' element={<InstructorLayout />}>
                         <Route path='dashboard' element={<InstructorDashboard />} />

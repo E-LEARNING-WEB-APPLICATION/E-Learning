@@ -8,6 +8,14 @@ const Form = () => {
         email: "",
         comment: "",
     });
+    const handleChange = (e) => {
+        setForm({
+            ...form,
+            [e.target.name]: e.target.value,
+        })
+    }
+
+
 
     return (
         <div className="contact-container ">
@@ -18,15 +26,11 @@ const Form = () => {
                         <label className="form-label">NAME</label>
                         <input
                             name="name"
-                            //...form - gets the previous values of the form(Spread Operator)
-                            //e.target.name - to pick which property to be updated the "name" here is the 'name' in input tag [name="name"]
-                            //e.target.value - to get the value dynamically
-                            onChange={(e) =>
-                                setForm({
-                                    ...form,
-                                    [e.target.name]: e.target.value,
-                                })
-                            }
+                            //e -> synchronize based event(onclick,onchange,onsubmit,etc are its properties)
+                            //...form -> gets the previous values of the form(Spread Operator)
+                            //e.target.name -> to pick which property to be updated the "name" here is the 'name' in input tag [name="name"]
+                            //e.target.value -> to get the value dynamically
+                            onChange={handleChange}
                             type="text"
                             className="form-control"
                             value={form.name}
@@ -37,12 +41,7 @@ const Form = () => {
                         <label className="form-label">PHONE NUMBER</label>
                         <input
                             name="phoneno"
-                            onChange={(e) =>
-                                setForm({
-                                    ...form,
-                                    [e.target.name]: e.target.value,
-                                })
-                            }
+                            onChange={handleChange}
                             type="tel"
                             className="form-control"
                             value={form.phoneno}
@@ -54,12 +53,7 @@ const Form = () => {
                     <label className="form-label">EMAIL</label>
                     <input
                         name="email"
-                        onChange={(e) =>
-                            setForm({
-                                ...form,
-                                [e.target.name]: e.target.value,
-                            })
-                        }
+                        onChange={handleChange}
                         type="email"
                         className="form-control"
                         placeholder="Enter your email*"
@@ -69,12 +63,7 @@ const Form = () => {
                     <label className="form-label">YOUR MESSAGE</label>
                     <textarea
                         name="comment"
-                        onChange={(e) =>
-                            setForm({
-                                ...form,
-                                [e.target.name]: e.target.value,
-                            })
-                        }
+                        onChange={handleChange}
                         className="form-control"
                         rows="4"
                         placeholder="Type your message here..."></textarea>

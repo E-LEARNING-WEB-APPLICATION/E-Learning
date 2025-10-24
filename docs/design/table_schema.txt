@@ -141,3 +141,10 @@ rating          DECIMAL(2,1)   -- e.g., 4.5 out of 5
 comment         TEXT
 created_at      DATETIME DEFAULT CURRENT_TIMESTAMP
 
+wishlist
+--------
+wishlist_id   INT PRIMARY KEY AUTO_INCREMENT
+student_id    INT REFERENCES student_details(sID)
+course_id     INT REFERENCES courses(courseId)
+created_at    DATETIME DEFAULT CURRENT_TIMESTAMP
+

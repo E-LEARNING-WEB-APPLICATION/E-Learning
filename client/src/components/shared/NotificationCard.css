@@ -1,0 +1,77 @@
+
+.notification-card {
+  position: relative;
+  border: none;
+  border-radius: 12px;
+  padding: 1rem 1.25rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  transition: all 0.25s ease;
+  color: #fff;
+}
+
+.notification-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Notification color */
+.notification-success {
+  background: linear-gradient(135deg, #43a047, #66bb6a);
+}
+
+.notification-info {
+  background: linear-gradient(135deg, #1976d2, #42a5f5);
+}
+
+.notification-warning {
+  background: linear-gradient(135deg, #fbc02d, #fdd835);
+  color: #333;
+}
+
+.notification-danger {
+  background: linear-gradient(135deg, #d32f2f, #e57373);
+}
+
+.notification-default {
+  background: linear-gradient(135deg, #607d8b, #90a4ae);
+}
+
+/* Header section */
+.notification-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Title styling */
+.notification-title {
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+/* Timestamp */
+.notification-timestamp {
+  font-size: 0.85rem;
+  opacity: 0.9;
+}
+
+/* Body text */
+.notification-body {
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+/* Delete button */
+.btn-close-custom {
+  background: transparent;
+  border: none;
+  color: inherit;
+  opacity: 0.8;
+  font-size: 1.1rem;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.btn-close-custom:hover {
+  opacity: 1;
+  transform: scale(1.15);
+}

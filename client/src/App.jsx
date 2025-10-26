@@ -20,6 +20,12 @@ import Login from './pages/guest/login/Login';
 import AboutUs from './pages/aboutUs/AboutUs';
 import ContactUs from './pages/contactUs/ContactUs';
 import { ToastContainer } from 'react-toastify';
+import AdminLayout from './components/admin/layout/AdminLayout';
+import AdminDashboard from './pages/admin/Dashboard/AdminDashboard';
+import AdminCourses from './pages/admin/CoursesView/AdminCourses';
+import InstructorsList from './pages/admin/InstructorsView/InstructorsList';
+import InstructorRequests from './pages/admin/InstrcutorRequests/InstructorRequest';
+import AdminNotifications from './pages/admin/notifications/AdminNotifications';
 
 function App() {
 
@@ -49,6 +55,13 @@ function App() {
                         <Route path='addedCourses/show-sections' element={<ShowSection />} />
                         <Route path='addedCourses/show-sections/add-topic' element={<AddTopic />} />
                         <Route path='addedCourses/show-sections/show-topics' element={<ShowTopic />} />
+                    </Route>
+                    <Route path='/admin' element={<AdminLayout/>}>
+                        <Route path='dashboard' element={<AdminDashboard/>}/>
+                        <Route path='courses' element={<AdminCourses/>}/>
+                        <Route path='instructors' element={<InstructorsList/>}/>
+                        <Route path='instructor-requests' element={<InstructorRequests/>}/>
+                        <Route path='notifications' element={<AdminNotifications/>}/>
                     </Route>
                 </Routes>
             </div>

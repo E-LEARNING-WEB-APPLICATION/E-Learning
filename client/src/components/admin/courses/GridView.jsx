@@ -2,7 +2,7 @@ import React from 'react'
 
 const GridView = ({courses}) => {
   return (
-    <div className="row">
+    <div className="row mb-3 gy-3">
           {courses.map((course) => {
             return (
               <div className="col-3" key={course.course_id}>

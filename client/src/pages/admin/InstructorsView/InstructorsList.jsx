@@ -1,51 +1,59 @@
-import React, { useEffect, useState } from 'react'
-import instructorData from '../../../../DummyData/Instructors.json'
+import React, { useEffect, useState } from "react";
+import instructorData from "../../../../DummyData/Instructors.json";
+import InstructorTableView from '../../../components/admin/instructors/InstructorTableView';
+import InstructorGridView from '../../../components/admin/instructors/InstructorGridView';
 
 const InstructorsList = () => {
+  const [instructors, setInstructors] = useState([]);
+  const [view, setView] = useState("table");
 
-    const [instructors, setInstructors] = useState([])
+  const fetchInstructors = () => {
+    setInstructors(instructorData);
+  };
 
-    const fetchInstructors = () => {
-        setInstructors(instructorData);
-    }
+  const handleViewToggle = (view) => {
+    view === "grid" ? setView("grid") : setView("table");
+  };
 
-    useEffect(()=>{
-        fetchInstructors()
-    },[])
+  const handleRemove = (index) => {
+    console.log(`remove ${index}`)
+  }
+
+  useEffect(() => {
+    fetchInstructors();
+  }, []);
 
   return (
     <div>
-        <table className='table'>
-            <thead>
-             <tr>
-                <th>id</th>
-                <th>name</th>
-                <th>dob</th>
-                <th>email</th>
-                <th>mobile</th>
-                <th>education</th>
-                <th>status</th>
-             </tr>
-            </thead>
-            <tbody>
-                
-        {instructors.map((instructor)=>{
-            return(
-                <tr key={instructor.id}>
-                    <td>{instructor.id}</td>
-                    <td>{instructor.fname}</td>
-                    <td>{instructor.dob}</td>
-                    <td>{instructor.email}</td>
-                    <td>{instructor.mobile}</td>
-                    <td>{instructor.education.degree}</td>
-                    <td className={instructor.isApproved ? 'bg-success': 'bg-danger'}>{instructor.isApproved ? "approved": "not approved"}</td>
-                </tr>
-            )
-            })}
-            </tbody>
-        </table>
+      <div className="container text-center">
+        <div className="d-flex mb-3 justify-content-between align-items-center">
+          <h4>Courses</h4>
+          <div className="btn-group">
+            <button
+              type="button"
+              className={`btn btn-primary ${view == "grid" ? "active" : ""}`}
+              onClick={() => {
+                handleViewToggle("grid");
+              }}
+            >
+              <i className="bi bi-grid"></i>
+            </button>
+            <button
+              type="button"
+              className={`btn btn-primary ${view == "table" ? "active" : ""}`}
+              onClick={() => {
+                handleViewToggle("table");
+              }}
+            >
+              <i className="bi bi-list"></i>
+            </button>
+          </div>
+        </div>
+        {view == "grid" && <InstructorGridView instructors={instructors} onDelete={handleRemove}/>}
+        {view == "table" && <InstructorTableView instructors={instructors} handleRemove={handleRemove} />}
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default InstructorsList
+export default InstructorsList;

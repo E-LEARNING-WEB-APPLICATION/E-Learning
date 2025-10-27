@@ -1,0 +1,6 @@
+[
+    { "title": "Success!", "timestamp":" 10:30 AM", "body": "your action was successful.", "type": "success" },
+    { "title": "Info", "timestamp": "11:30 AM", "body": "You have a new update.", "type": "info" },
+    { "title": "Warning!", "timestamp": "12:30 PM", "body": "your action was successful.", "type": "warning" },
+    { "title": "Error!", "timestamp": "1:30 PM", "body": "Something might be wrong.", "type": "danger" }
+  ]

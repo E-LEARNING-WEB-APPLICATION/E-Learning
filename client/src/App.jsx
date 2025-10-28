@@ -26,6 +26,7 @@ import AdminCourses from './pages/admin/CoursesView/AdminCourses';
 import InstructorsList from './pages/admin/InstructorsView/InstructorsList';
 import InstructorRequests from './pages/admin/InstrcutorRequests/InstructorRequest';
 import AdminNotifications from './pages/admin/notifications/AdminNotifications';
+import StudentProfile from './pages/student/studentProfile/StudentProfile';
 
 function App() {
 
@@ -46,6 +47,7 @@ function App() {
                         <Route path='wishlist' element={<WishList />} />
                         <Route path='aboutus' element={<AboutUs />} />
                         <Route path='contactus' element={<ContactUs />} />
+                        <Route path='profile' element={<StudentProfile/> } />
                     </Route>
                     <Route path='/instructor' element={<InstructorLayout />}>
                         <Route path='dashboard' element={<InstructorDashboard />} />

@@ -17,6 +17,8 @@ lname        VARCHAR(50)
 dob          DATE
 gender       ENUM('male','female','other')
 profile_pic  VARCHAR(255)
+mob_no        VARCHAR(15)
+bio           TEXT
 created_at   DATETIME DEFAULT CURRENT_TIMESTAMP
 
 
@@ -33,9 +35,7 @@ instructor_details
 iId           INT PRIMARY KEY AUTO_INCREMENT
 profile_id    INT UNIQUE NOT NULL REFERENCES user_profile(profile_id)  -- 1:1
 specialization   VARCHAR(100)
-bio           TEXT
 experience    VARCHAR(50)
-mob_no        VARCHAR(15)
 status        ENUM('active','inactive') DEFAULT 'active'
 isApproved    ENUM('pending' , 'approved' , 'rejected') DEFAULT 'pending'
 add_id        INT REFERENCES address(add_id)

@@ -2,10 +2,12 @@ import React, { useEffect, useState } from "react";
 import instructorData from "../../../../DummyData/Instructors.json";
 import InstructorTableView from '../../../components/admin/instructors/InstructorTableView';
 import InstructorGridView from '../../../components/admin/instructors/InstructorGridView';
+import { IoGridOutline } from "react-icons/io5";
+import { LuTableOfContents } from "react-icons/lu";
 
 const InstructorsList = () => {
   const [instructors, setInstructors] = useState([]);
-  const [view, setView] = useState("table");
+  const [view, setView] = useState("grid");
 
   const fetchInstructors = () => {
     setInstructors(instructorData);
@@ -27,7 +29,7 @@ const InstructorsList = () => {
     <div>
       <div className="container text-center">
         <div className="d-flex mb-3 justify-content-between align-items-center">
-          <h4>Courses</h4>
+          <h4>Instructors</h4>
           <div className="btn-group">
             <button
               type="button"
@@ -36,7 +38,7 @@ const InstructorsList = () => {
                 handleViewToggle("grid");
               }}
             >
-              <i className="bi bi-grid"></i>
+              <IoGridOutline />
             </button>
             <button
               type="button"
@@ -45,7 +47,7 @@ const InstructorsList = () => {
                 handleViewToggle("table");
               }}
             >
-              <i className="bi bi-list"></i>
+              <LuTableOfContents />
             </button>
           </div>
         </div>

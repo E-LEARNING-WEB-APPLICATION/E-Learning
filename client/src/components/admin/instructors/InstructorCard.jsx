@@ -2,6 +2,9 @@ import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./InstructorCard.css";
 import { useNavigate } from "react-router-dom";
+import { IoShieldCheckmarkOutline } from "react-icons/io5";
+import { RxCrossCircled } from "react-icons/rx";
+import { FaRegTrashAlt } from "react-icons/fa";
 
 const InstructorCard = ({ user, onDelete }) => {
     const navigate = useNavigate()
@@ -9,14 +12,11 @@ const InstructorCard = ({ user, onDelete }) => {
   const { id, fname, lname, education, email, mobile, profile_pic, isApproved } = user;
   
     const handleProfileClick = (e) => {
-    // Prevent the click event from bubbling up to the parent div (the card)
     e.stopPropagation();
-    // Navigate to the instructor page
     navigate(`/instructor/${user.id}`);
   };
 
   const handleCardClick = () => {
-    // Navigate to the courses page when the card itself is clicked
     navigate(`/courses/${user.id}`);
   };
   
@@ -47,9 +47,9 @@ const InstructorCard = ({ user, onDelete }) => {
           {/* Approved Status using Bootstrap Icons */}
           <div className="approved-icon">
             {isApproved ? (
-              <i className="bi bi-check-circle text-success"></i>
+              <IoShieldCheckmarkOutline className="text-success"/>
             ) : (
-              <i className="bi bi-x-circle text-danger"></i>
+              <RxCrossCircled className="text-danger"/>
             )}
           </div>
         </div>
@@ -59,7 +59,7 @@ const InstructorCard = ({ user, onDelete }) => {
           className="btn btn-outline-danger btn-sm mt-2"
           onClick={() => { onDelete(user.id) }}
         >
-          <i className="bi bi-trash"></i> Delete
+          <FaRegTrashAlt/> Delete
         </button>
       </div>
     </div>

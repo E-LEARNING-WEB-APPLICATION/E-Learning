@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import GridView from "../../../components/admin/courses/GridView";
 import TableView from "../../../components/admin/courses/TableView";
+import { LuTableOfContents } from "react-icons/lu";
+import { CiGrid41 } from 'react-icons/ci';
 
 const AdminCourses = () => {
   const [courses, setCourses] = useState([]);
@@ -90,14 +92,14 @@ const AdminCourses = () => {
               className={`btn btn-primary ${view == "grid" ? "active" : ""}`}
               onClick={()=>{handleViewToggle('grid')}}
             >
-              <i className="bi bi-grid"></i>
+              <CiGrid41/>
             </button>
             <button
               type="button"
               className={`btn btn-primary ${view == "table" ? "active" : ""}`}
               onClick={()=>{handleViewToggle('table')}}
             >
-              <i className="bi bi-list"></i>
+              <LuTableOfContents/>
             </button>
           </div>
         </div>

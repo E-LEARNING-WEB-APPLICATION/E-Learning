@@ -10,7 +10,8 @@
       "field": "Comp.Sci"
     },
     "mobile": "90243242525",
-    "isApproved": true
+    "isApproved": true,
+    "profile_pic": "/images/307ce493-b254-4b2d-8ba4-d12c080d6651.jpg"
   },
   {
     "id": 2,
@@ -23,7 +24,8 @@
       "field": "Comp.Sci"
     },
     "mobile": "2934238424",
-    "isApproved": true
+    "isApproved": true,
+    "profile_pic": "/images/307ce493-b254-4b2d-8ba4-d12c080d6651.jpg"
   },
   {
     "id": 3,
@@ -36,7 +38,8 @@
       "field": "Comp.Sci"
     },
     "mobile": "998765432",
-    "isApproved": true
+    "isApproved": true,
+    "profile_pic": "/images/307ce493-b254-4b2d-8ba4-d12c080d6651.jpg"
   },
   {
     "id": 4,
@@ -49,6 +52,7 @@
       "field": "UI"
     },
     "mobile": "987654375432",
-    "isApproved": false
+    "isApproved": false,
+    "profile_pic": "/images/307ce493-b254-4b2d-8ba4-d12c080d6651.jpg"
   }
 ]

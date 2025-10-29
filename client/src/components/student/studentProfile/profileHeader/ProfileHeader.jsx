@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import "./ProfileHeader.css";
 
 const ProfileHeader = () => {
@@ -19,7 +18,6 @@ const ProfileHeader = () => {
                 <h5 className="fw-semibold text-primary">
                     Role: <span className="text-dark">Student</span>
                 </h5>
-                
             </div>
         </div>
     );

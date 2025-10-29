@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./ProfileInfo.css";
+import { FaPencilAlt } from "react-icons/fa";
 
 const ProfileInfo = () => {
     const [form, setForm] = useState({
@@ -19,15 +20,14 @@ const ProfileInfo = () => {
     return (
         <div>
             <div className="container">
-                <div
-                    className="card p-3 border shadow-sm"
-                    style={{ justifyContent: "center" }}>
+                <div className="card p-3 border shadow-sm">
                     <button
-                        type="button"
-                        className="btn btn-primary"
+                        type="button "
+                        className="btn d-flex justify-content-center align-items-center button-edit"
                         data-bs-toggle="modal"
-                        data-bs-target="#exampleModal">
-                        Edit
+                        data-bs-target="#profileInfoModal"
+                        >
+                        <FaPencilAlt size={20} />
                     </button>
                     <h5 className="fw-semibold text-primary">
                         D.O.B: <span className="text-dark">{form.dob}</span>
@@ -47,7 +47,7 @@ const ProfileInfo = () => {
 
             <div
                 className="modal fade"
-                id="exampleModal"
+                id="profileInfoModal"
                 tabIndex="-1"
                 aria-labelledby="exampleModalLabel"
                 aria-hidden="true">
@@ -129,12 +129,12 @@ const ProfileInfo = () => {
                                 type="button"
                                 className="btn btn-primary"
                                 data-bs-dismiss="modal"
-                                onClick=
-                                {(e) => {
+                                onClick={(e) => {
                                     e.preventDefault();
                                     console.log(form);
-                                }}
-                                > Save changes
+                                }}>
+                                {" "}
+                                Save changes
                             </button>
                         </div>
                     </div>

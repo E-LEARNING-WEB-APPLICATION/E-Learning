@@ -9,7 +9,7 @@ import { FaRegTrashAlt } from "react-icons/fa";
 const InstructorCard = ({ user, onDelete }) => {
     const navigate = useNavigate()
 
-  const { id, fname, lname, education, email, mobile, profile_pic, isApproved } = user;
+  const { fname, lname, education, email, mobile, profile_pic, isApproved } = user;
   
     const handleProfileClick = (e) => {
     e.stopPropagation();

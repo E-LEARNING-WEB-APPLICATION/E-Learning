@@ -9,11 +9,11 @@ const InstructorRequests = () => {
         setInstructors(instructorData.filter((instructor)=>{return !instructor.isApproved}));
     }
 
-    const handleApprove = (id) => {
+    const handleApprove = () => {
         //handle
     }
 
-    const handleReject = (id) => {
+    const handleReject = () => {
         //handle
     }
 

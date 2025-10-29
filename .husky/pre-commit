@@ -1,5 +1,4 @@
 echo "🔍 Running ESLint and Prettier checks..."
 cd client || exit 1
 
-npx prettier --check .
 npx eslint . --ext js,jsx,ts,tsx

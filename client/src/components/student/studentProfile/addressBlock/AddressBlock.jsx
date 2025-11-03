@@ -158,56 +158,89 @@ const AddressBlock = () => {
                                                 <input
                                                     type="text"
                                                     className="form-control"
-                                                    id="dob"
-                                                    name="dob"
+                                                    id="address_line1"
+                                                    name="address_line1"
                                                     onChange={handleChangeAdd}
-                                                    value={formAdd.dob}
-                                                    placeholder="dob"
+                                                    value={
+                                                        formAdd.address_line1
+                                                    }
+                                                    placeholder="address"
                                                 />
-                                                <label htmlFor="dob">
-                                                    Date of Birth
+                                                <label htmlFor="address_line1">
+                                                    Address Line 1
                                                 </label>
                                             </div>
+
                                             <div className="form-floating mb-3">
                                                 <input
-                                                    type="email"
+                                                    type="text"
                                                     className="form-control"
-                                                    id="email"
-                                                    name="email"
+                                                    id="address_line2"
+                                                    name="address_line2"
                                                     onChange={handleChangeAdd}
-                                                    value={formAdd.email}
-                                                    placeholder="email"
+                                                    value={
+                                                        formAdd.address_line2
+                                                    }
+                                                    placeholder="address"
                                                 />
-                                                <label htmlFor="email">
-                                                    Email
-                                                </label>
-                                            </div>
-                                            <div className="form-floating mb-3">
-                                                <input
-                                                    type="tel"
-                                                    className="form-control"
-                                                    id="phoneno"
-                                                    name="phoneno"
-                                                    onChange={handleChangeAdd}
-                                                    value={formAdd.phoneno}
-                                                    placeholder="Phone No"
-                                                />
-                                                <label htmlFor="phoneno">
-                                                    Phone No
+                                                <label htmlFor="address_line2">
+                                                    Address Line 2
                                                 </label>
                                             </div>
                                             <div className="form-floating mb-3">
                                                 <input
                                                     type="text"
                                                     className="form-control"
-                                                    id="gender"
-                                                    name="gender"
+                                                    id="city"
+                                                    name="city"
                                                     onChange={handleChangeAdd}
-                                                    value={formAdd.gender}
-                                                    placeholder="Gender"
+                                                    value={formAdd.city}
+                                                    placeholder="city"
                                                 />
-                                                <label htmlFor="gender">
-                                                    Gender
+                                                <label htmlFor="city">
+                                                    City
+                                                </label>
+                                            </div>
+                                            <div className="form-floating mb-3">
+                                                <input
+                                                    type="text"
+                                                    className="form-control"
+                                                    id="state"
+                                                    name="state"
+                                                    onChange={handleChangeAdd}
+                                                    value={formAdd.state}
+                                                    placeholder="state"
+                                                />
+                                                <label htmlFor="state">
+                                                    State
+                                                </label>
+                                            </div>
+                                            <div className="form-floating mb-3">
+                                                <input
+                                                    type="text"
+                                                    className="form-control"
+                                                    id="pincode"
+                                                    name="pincode"
+                                                    onChange={handleChangeAdd}
+                                                    value={formAdd.pincode}
+                                                    placeholder="pincode"
+                                                />
+                                                <label htmlFor="pincode">
+                                                    Pincode
+                                                </label>
+                                            </div>
+                                            <div className="form-floating mb-3">
+                                                <input
+                                                    type="text"
+                                                    className="form-control"
+                                                    id="country"
+                                                    name="country"
+                                                    onChange={handleChangeAdd}
+                                                    value={formAdd.country}
+                                                    placeholder="country"
+                                                />
+                                                <label htmlFor="country">
+                                                    Country
                                                 </label>
                                             </div>
                                         </div>
@@ -260,56 +293,90 @@ const AddressBlock = () => {
                                                 <input
                                                     type="text"
                                                     className="form-control"
-                                                    id="dob"
-                                                    name="dob"
+                                                    id="Enrollment_ID"
+                                                    name="Enrollment_ID"
                                                     onChange={handleChange}
-                                                    value={formAdd.dob}
-                                                    placeholder="dob"
+                                                    value={
+                                                        formAcadamic.Enrollment_ID
+                                                    }
+                                                    placeholder="Enrollment_ID"
                                                 />
-                                                <label htmlFor="dob">
-                                                    Date of Birth
-                                                </label>
-                                            </div>
-                                            <div className="form-floating mb-3">
-                                                <input
-                                                    type="email"
-                                                    className="form-control"
-                                                    id="email"
-                                                    name="email"
-                                                    onChange={handleChange}
-                                                    value={formAdd.email}
-                                                    placeholder="email"
-                                                />
-                                                <label htmlFor="email">
-                                                    Email
-                                                </label>
-                                            </div>
-                                            <div className="form-floating mb-3">
-                                                <input
-                                                    type="tel"
-                                                    className="form-control"
-                                                    id="phoneno"
-                                                    name="phoneno"
-                                                    onChange={handleChange}
-                                                    value={formAdd.phoneno}
-                                                    placeholder="Phone No"
-                                                />
-                                                <label htmlFor="phoneno">
-                                                    Phone No
+                                                <label htmlFor="Enrollment_ID">
+                                                    Enrollment ID
                                                 </label>
                                             </div>
                                             <div className="form-floating mb-3">
                                                 <input
                                                     type="text"
                                                     className="form-control"
-                                                    id="gender"
-                                                    name="gender"
+                                                    id="Program"
+                                                    name="Program"
                                                     onChange={handleChange}
-                                                    value={formAdd.gender}
-                                                    placeholder="Gender"
+                                                    value={formAcadamic.Program}
+                                                    placeholder="Program"
                                                 />
-                                                <label htmlFor="gender">
-                                                    Gender
+                                                <label htmlFor="Program">
+                                                    Program
+                                                </label>
+                                            </div>
+                                            <div className="form-floating mb-3">
+                                                <input
+                                                    type="text"
+                                                    className="form-control"
+                                                    id="Semester"
+                                                    name="Semester"
+                                                    onChange={handleChange}
+                                                    value={
+                                                        formAcadamic.Semester
+                                                    }
+                                                    placeholder="Semester"
+                                                />
+                                                <label htmlFor="Semester">
+                                                    Semester
+                                                </label>
+                                            </div>
+                                            <div className="form-floating mb-3">
+                                                <input
+                                                    type="text"
+                                                    className="form-control"
+                                                    id="GPA"
+                                                    name="GPA"
+                                                    onChange={handleChange}
+                                                    value={formAcadamic.GPA}
+                                                    placeholder="GPA"
+                                                />
+                                                <label htmlFor="GPA">GPA</label>
+                                            </div>
+                                            <div className="form-floating mb-3">
+                                                <input
+                                                    type="text"
+                                                    className="form-control"
+                                                    id="Courses_Enrolled"
+                                                    name="Courses_Enrolled"
+                                                    onChange={handleChange}
+                                                    value={
+                                                        formAcadamic.Courses_Enrolled
+                                                    }
+                                                    placeholder="Courses_Enrolled"
+                                                />
+                                                <label htmlFor="Courses_Enrolled">
+                                                    Courses Enrolled
+                                                </label>
+                                            </div>
+                                            <div className="form-floating mb-3">
+                                                <input
+                                                    type="text"
+                                                    className="form-control"
+                                                    id="Certificates"
+                                                    name="Certificates"
+                                                    onChange={handleChange}
+                                                    value={
+                                                        formAcadamic.Certificates
+                                                    }
+                                                    placeholder="Certificates"
+                                                />
+                                                <label htmlFor="Certificates">
+                                                    Certificates
                                                 </label>
                                             </div>
                                         </div>
@@ -326,7 +393,7 @@ const AddressBlock = () => {
                                                 data-bs-dismiss="modal"
                                                 onClick={(e) => {
                                                     e.preventDefault();
-                                                    console.log(formAdd);
+                                                    console.log(formAcadamic);
                                                 }}>
                                                 {" "}
                                                 Save changes

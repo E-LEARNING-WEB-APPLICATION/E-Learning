@@ -68,7 +68,7 @@ const ProfileInfo = () => {
                         <div className="modal-body">
                             <div className="form-floating mb-3">
                                 <input
-                                    type="text"
+                                    type="date"
                                     className="form-control"
                                     id="dob"
                                     name="dob"

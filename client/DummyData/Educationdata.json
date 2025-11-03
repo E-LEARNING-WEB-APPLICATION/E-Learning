@@ -1,0 +1,29 @@
+[
+    {
+        "degree": "Bachelor of Engineering",
+        "field_of_study": "Computer Engineering",
+        "institute": "Savitribai Phule Pune University",
+        "grade": "8.6 CGPA",
+        "description": "Focused on software development, algorithms, and system design. Completed projects on web and AI.",
+        "start_date": "2021-08-01",
+        "end_date": "2025-05-01"
+    },
+    {
+        "degree": "Higher Secondary Certificate (HSC)",
+        "field_of_study": "Science",
+        "institute": "Modern College, Pune",
+        "grade": "85%",
+        "description": "Studied core subjects like Physics, Chemistry, and Mathematics.",
+        "start_date": "2019-06-01",
+        "end_date": "2021-03-01"
+    },
+    {
+        "degree": "Secondary School Certificate (SSC)",
+        "field_of_study": "General",
+        "institute": "St. Mary’s High School",
+        "grade": "90%",
+        "description": "Completed 10th with distinction.",
+        "start_date": "2018-06-01",
+        "end_date": "2019-03-01"
+    }
+]

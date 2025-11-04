@@ -1,4 +1,4 @@
-# 🚀 Project Name
+# 🚀 E-learning Application 
 
 A modern full-stack web application built with **React (Vite)** on the frontend and **Spring Boot** on the backend.  
 This project emphasizes clean code practices, consistent commit standards, and a collaborative development workflow using ESLint, Husky, and Commitlint.

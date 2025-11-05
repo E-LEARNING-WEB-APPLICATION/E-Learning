@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import GridView from "../../../components/admin/courses/GridView";
-import TableView from "../../../components/admin/courses/TableView";
+import GridView from "@/components/admin/courses/GridView";
+import TableView from "@/components/admin/courses/TableView";
 import { LuTableOfContents } from "react-icons/lu";
 import { CiGrid41 } from 'react-icons/ci';
 

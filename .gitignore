@@ -139,4 +139,4 @@ vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 
 #mock db file
-db.json
+client/mock-server/db.json

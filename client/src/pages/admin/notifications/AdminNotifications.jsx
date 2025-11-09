@@ -1,10 +1,15 @@
-import React, { useState } from "react";
-import notificationData from "../../../../DummyData/notifications";
-import NotificationCard from "../../../components/shared/NotificationCard";
+import React, { useEffect, useState } from "react";
+
+import NotificationCard from "@/components/shared/NotificationCard";
+
+import { getAdminNotification } from "@/api/api";
 
 const AdminNotifications = () => {
+  const [notifications, setNotifications] = useState([]);
 
-  const [notifications, setNotifications] = useState(notificationData);
+  useEffect(() => {
+    getAdminNotification().then((data) => setNotifications(data));
+  }, []);
 
   const handleDelete = (index) => {
     const filteredNotifications = notifications.filter((_, i) => i !== index);

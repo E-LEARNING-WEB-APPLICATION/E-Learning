@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from "react";
-import instructorData from "../../../../DummyData/Instructors.json";
-import InstructorTableView from '../../../components/admin/instructors/InstructorTableView';
-import InstructorGridView from '../../../components/admin/instructors/InstructorGridView';
 import { IoGridOutline } from "react-icons/io5";
 import { LuTableOfContents } from "react-icons/lu";
+
+import InstructorTableView from "@/components/admin/instructors/InstructorTableView";
+import InstructorGridView from "@/components/admin/instructors/InstructorGridView";
+import { getInstructors } from "@/api/api";
+
+
 
 const InstructorsList = () => {
   const [instructors, setInstructors] = useState([]);
   const [view, setView] = useState("grid");
 
   const fetchInstructors = () => {
-    setInstructors(instructorData);
+    getInstructors().then((data) => setInstructors(data));
   };
 
   const handleViewToggle = (view) => {
@@ -18,8 +21,8 @@ const InstructorsList = () => {
   };
 
   const handleRemove = (index) => {
-    console.log(`remove ${index}`)
-  }
+    console.log(`remove ${index}`);
+  };
 
   useEffect(() => {
     fetchInstructors();
@@ -51,8 +54,18 @@ const InstructorsList = () => {
             </button>
           </div>
         </div>
-        {view == "grid" && <InstructorGridView instructors={instructors} onDelete={handleRemove}/>}
-        {view == "table" && <InstructorTableView instructors={instructors} handleRemove={handleRemove} />}
+        {view == "grid" && (
+          <InstructorGridView
+            instructors={instructors}
+            onDelete={handleRemove}
+          />
+        )}
+        {view == "table" && (
+          <InstructorTableView
+            instructors={instructors}
+            handleRemove={handleRemove}
+          />
+        )}
       </div>
     </div>
   );

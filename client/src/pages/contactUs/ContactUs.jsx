@@ -1,8 +1,8 @@
 import React from "react";
-import Form from "../../components/contactus/form/Form";
-import ContactInfo from "./../../components/contactus/contactinfo/ContactInfo";
-import Map from "./../../components/contactus/map/Map";
-import Heading from './../../components/contactus/heading/Heading';
+import Form from "@/components/contactus/form/Form";
+import ContactInfo from "@/components/contactus/contactinfo/ContactInfo";
+import Map from "@/components/contactus/map/Map";
+import Heading from '@/components/contactus/heading/Heading';
 
 const ContactUs = () => {
     return (

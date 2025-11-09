@@ -1,20 +1,22 @@
 import React, { useEffect, useState } from 'react'
-import instructorData from '../../../../DummyData/Instructors.json'
+import { getInstructors } from '@/api/api'
 
 const InstructorRequests = () => {
 
     const [instructors, setInstructors] = useState([])
 
     const fetchInstructors = () => {
-        setInstructors(instructorData.filter((instructor)=>{return !instructor.isApproved}));
+        getInstructors().then((data)=>{
+            setInstructors(data.filter((instructor)=>{return !instructor.isApproved}));
+        })
     }
 
     const handleApprove = () => {
-        //handle
+        //TODO: handle
     }
 
     const handleReject = () => {
-        //handle
+        //TODO: handle
     }
 
 

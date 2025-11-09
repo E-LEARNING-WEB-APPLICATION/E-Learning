@@ -1,0 +1,9 @@
+.course-details-page {
+  background-color: #f8f9fa;
+  min-height: 100vh;
+  padding-bottom: 40px;
+}
+
+.course-header h2 {
+  color: #222;
+}

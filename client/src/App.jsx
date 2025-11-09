@@ -26,7 +26,6 @@ import InstructorsList from "./pages/admin/InstructorsView/InstructorsList";
 import InstructorRequests from "./pages/admin/InstrcutorRequests/InstructorRequest";
 import AdminNotifications from "./pages/admin/notifications/AdminNotifications";
 import StudentProfile from "./pages/student/studentProfile/StudentProfile";
-import CourseDetails from "./pages/student/coursedetails/CourseDetails";
 
 function App() {
   return (
@@ -48,7 +47,6 @@ function App() {
           </Route>
           <Route path="/student" element={<StudentLayout />}>
             <Route path="dashboard" element={<StudentDashboard />} />
-            <Route path="course-details" element={<CourseDetails />} />
             <Route path="mycourses" element={<MyCourses />} />
             <Route path="wishlist" element={<WishList />} />
             <Route path="aboutus" element={<AboutUs />} />

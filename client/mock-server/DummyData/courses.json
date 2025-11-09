@@ -7,7 +7,7 @@
       "course_desc": "Learn the core building blocks of web development.",
       "fees": 99.99,
       "discount_percentage": 0,
-      "course_thumbnail": "https://example.com/thumbnails/html-css.jpg",
+      "course_thumbnail": "https://picsum.photos/400/250?random=1",
       "course_intro_video": "https://example.com/videos/html-css-intro.mp4",
       "course_duration": "1 month",
       "created_at": "2025-11-05T11:00:00",
@@ -56,7 +56,7 @@
       "course_desc": "Learn how to add interactivity to your web pages.",
       "fees": 149.99,
       "discount_percentage": 10,
-      "course_thumbnail": "https://example.com/thumbnails/js-essentials.jpg",
+      "course_thumbnail": "https://picsum.photos/400/250?random=2",
       "course_intro_video": "https://example.com/videos/js-intro.mp4",
       "course_duration": "1.5 months",
       "created_at": "2025-11-05T11:30:00",
@@ -89,7 +89,7 @@
       "course_desc": "Get started with React to build dynamic web interfaces.",
       "fees": 199.99,
       "discount_percentage": 15,
-      "course_thumbnail": "https://example.com/thumbnails/react-beginners.jpg",
+      "course_thumbnail": "https://picsum.photos/400/250?random=3",
       "course_intro_video": "https://example.com/videos/react-beginners.mp4",
       "course_duration": "2 months",
       "created_at": "2025-11-05T12:00:00",
@@ -116,13 +116,13 @@
       ]
     },
     {
-      "courseId": 5,
+      "courseId": 4,
       "iId": 101,
       "course_name": "Introduction to Data Science",
       "course_desc": "Understand the data science workflow and tools.",
       "fees": 199.99,
       "discount_percentage": 10,
-      "course_thumbnail": "https://example.com/thumbnails/data-science-intro.jpg",
+      "course_thumbnail": "https://picsum.photos/400/250?random=4",
       "course_intro_video": "https://example.com/videos/data-science-intro.mp4",
       "course_duration": "2 months",
       "created_at": "2025-11-05T11:45:00",
@@ -149,13 +149,13 @@
       ]
     },
     {
-      "courseId": 7,
+      "courseId": 5,
       "iId": 101,
       "course_name": "Data Visualization with Tableau",
       "course_desc": "Create interactive dashboards and visual reports.",
       "fees": 249.99,
       "discount_percentage": 20,
-      "course_thumbnail": "https://example.com/thumbnails/tableau.jpg",
+      "course_thumbnail": "https://picsum.photos/400/250?random=5",
       "course_intro_video": "https://example.com/videos/tableau-intro.mp4",
       "course_duration": "2 months",
       "created_at": "2025-11-05T13:15:00",
@@ -182,13 +182,13 @@
       ]
     },
     {
-      "courseId": 8,
+      "courseId": 6,
       "iId": 102,
       "course_name": "Android Development with Kotlin",
       "course_desc": "Build native Android apps using Kotlin and Android Studio.",
       "fees": 299.99,
       "discount_percentage": 15,
-      "course_thumbnail": "https://example.com/thumbnails/kotlin-android.jpg",
+      "course_thumbnail": "https://picsum.photos/400/250?random=6",
       "course_intro_video": "https://example.com/videos/kotlin-android.mp4",
       "course_duration": "3 months",
       "created_at": "2025-11-05T12:00:00",
@@ -215,13 +215,13 @@
       ]
     },
     {
-      "courseId": 9,
+      "courseId": 7,
       "iId": 101,
       "course_name": "Flutter for Beginners",
       "course_desc": "Develop beautiful apps for Android and iOS with Flutter.",
       "fees": 249.99,
       "discount_percentage": 5,
-      "course_thumbnail": "https://example.com/thumbnails/flutter.jpg",
+      "course_thumbnail": "https://picsum.photos/400/250?random=7",
       "course_intro_video": "https://example.com/videos/flutter-intro.mp4",
       "course_duration": "2.5 months",
       "created_at": "2025-11-05T12:30:00",
@@ -242,6 +242,171 @@
               "topic_video": "https://example.com/videos/widgets.mp4",
               "topic_notes": "Stateless widgets don’t hold internal state.",
               "created_at": "2025-11-05T14:30:00"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "courseId": 8,
+      "iId": 104,
+      "course_name": "Python for Absolute Beginners",
+      "course_desc": "Start coding in Python with simple and practical examples.",
+      "fees": 0,
+      "discount_percentage": 0,
+      "course_thumbnail": "https://picsum.photos/400/250?random=8",
+      "course_intro_video": "https://example.com/videos/python-intro.mp4",
+      "course_duration": "1.5 months",
+      "created_at": "2025-11-05T14:30:00",
+      "category": "Programming",
+      "rating": 4.8,
+      "number_of_reviews": 2100,
+      "sections": [
+        {
+          "sId": 11,
+          "section_name": "Getting Started with Python",
+          "section_desc": "Learn how to install Python and write your first program.",
+          "created_at": "2025-11-05T15:00:00",
+          "topics": [
+            {
+              "t_id": 11,
+              "topic_name": "Hello World in Python",
+              "topic_desc": "Understand syntax and print statements in Python.",
+              "topic_video": "https://example.com/videos/python-hello.mp4",
+              "topic_notes": "Python uses indentation for code blocks.",
+              "created_at": "2025-11-05T16:00:00"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "courseId": 9,
+      "iId": 105,
+      "course_name": "Git & GitHub Essentials",
+      "course_desc": "Learn version control and collaboration using Git and GitHub.",
+      "fees": 0,
+      "discount_percentage": 0,
+      "course_thumbnail": "https://picsum.photos/400/250?random=9",
+      "course_intro_video": "https://example.com/videos/git-intro.mp4",
+      "course_duration": "1 month",
+      "created_at": "2025-11-05T15:00:00",
+      "category": "Development Tools",
+      "rating": 4.7,
+      "number_of_reviews": 1750,
+      "sections": [
+        {
+          "sId": 12,
+          "section_name": "Understanding Git Basics",
+          "section_desc": "Learn commits, branches, and repository management.",
+          "created_at": "2025-11-05T15:30:00",
+          "topics": [
+            {
+              "t_id": 12,
+              "topic_name": "Version Control Introduction",
+              "topic_desc": "Know why version control is important for developers.",
+              "topic_video": "https://example.com/videos/git-basics.mp4",
+              "topic_notes": "Commit early and commit often.",
+              "created_at": "2025-11-05T16:30:00"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "courseId": 10,
+      "iId": 106,
+      "course_name": "Node.js Fundamentals",
+      "course_desc": "Learn how to build backend servers using Node.js.",
+      "fees": 0,
+      "discount_percentage": 0,
+      "course_thumbnail": "https://picsum.photos/400/250?random=10",
+      "course_intro_video": "https://example.com/videos/nodejs-intro.mp4",
+      "course_duration": "2 months",
+      "created_at": "2025-11-05T16:00:00",
+      "category": "Backend Development",
+      "rating": 4.8,
+      "number_of_reviews": 1280,
+      "sections": [
+        {
+          "sId": 13,
+          "section_name": "Introduction to Node.js",
+          "section_desc": "Understand event-driven architecture and Node runtime.",
+          "created_at": "2025-11-05T16:30:00",
+          "topics": [
+            {
+              "t_id": 13,
+              "topic_name": "Node.js Basics",
+              "topic_desc": "Learn about npm, modules, and asynchronous JavaScript.",
+              "topic_video": "https://example.com/videos/nodejs-basics.mp4",
+              "topic_notes": "Node uses a single-threaded event loop model.",
+              "created_at": "2025-11-05T17:00:00"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "courseId": 11,
+      "iId": 107,
+      "course_name": "Intro to SQL & Databases",
+      "course_desc": "Understand relational databases and learn SQL queries.",
+      "fees": 0,
+      "discount_percentage": 0,
+      "course_thumbnail": "https://picsum.photos/400/250?random=11",
+      "course_intro_video": "https://example.com/videos/sql-intro.mp4",
+      "course_duration": "1.5 months",
+      "created_at": "2025-11-05T17:15:00",
+      "category": "Database Management",
+      "rating": 4.6,
+      "number_of_reviews": 990,
+      "sections": [
+        {
+          "sId": 14,
+          "section_name": "SQL Basics",
+          "section_desc": "Learn SELECT, INSERT, UPDATE, and DELETE statements.",
+          "created_at": "2025-11-05T17:30:00",
+          "topics": [
+            {
+              "t_id": 14,
+              "topic_name": "Writing SQL Queries",
+              "topic_desc": "Master simple queries to fetch and manipulate data.",
+              "topic_video": "https://example.com/videos/sql-queries.mp4",
+              "topic_notes": "Always use WHERE clause carefully to filter results.",
+              "created_at": "2025-11-05T18:00:00"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "courseId": 12,
+      "iId": 108,
+      "course_name": "Spring Boot Crash Course",
+      "course_desc": "Get started with Spring Boot to build REST APIs fast.",
+      "fees": 0,
+      "discount_percentage": 0,
+      "course_thumbnail": "https://picsum.photos/400/250?random=12",
+      "course_intro_video": "https://example.com/videos/springboot-intro.mp4",
+      "course_duration": "2 months",
+      "created_at": "2025-11-05T18:00:00",
+      "category": "Backend Development",
+      "rating": 4.9,
+      "number_of_reviews": 1860,
+      "sections": [
+        {
+          "sId": 15,
+          "section_name": "Spring Boot Fundamentals",
+          "section_desc": "Learn annotations, controllers, and dependency injection.",
+          "created_at": "2025-11-05T18:30:00",
+          "topics": [
+            {
+              "t_id": 15,
+              "topic_name": "Building REST APIs",
+              "topic_desc": "Create and test your first REST endpoint with Spring Boot.",
+              "topic_video": "https://example.com/videos/springboot-rest.mp4",
+              "topic_notes": "Use @RestController for RESTful endpoints.",
+              "created_at": "2025-11-05T19:00:00"
             }
           ]
         }

@@ -1,0 +1,251 @@
+{
+  "courses": [
+    {
+      "courseId": 1,
+      "iId": 101,
+      "course_name": "HTML & CSS Fundamentals",
+      "course_desc": "Learn the core building blocks of web development.",
+      "fees": 99.99,
+      "discount_percentage": 0,
+      "course_thumbnail": "https://example.com/thumbnails/html-css.jpg",
+      "course_intro_video": "https://example.com/videos/html-css-intro.mp4",
+      "course_duration": "1 month",
+      "created_at": "2025-11-05T11:00:00",
+      "category": "Web Development",
+      "rating": 4.6,
+      "number_of_reviews": 1250,
+      "sections": [
+        {
+          "sId": 1,
+          "section_name": "HTML Basics",
+          "section_desc": "Learn about structure, tags, and semantic HTML.",
+          "created_at": "2025-11-05T12:00:00",
+          "topics": [
+            {
+              "t_id": 1,
+              "topic_name": "HTML Structure",
+              "topic_desc": "Understanding elements, attributes, and document layout.",
+              "topic_video": "https://example.com/videos/html-structure.mp4",
+              "topic_notes": "Always start with <!DOCTYPE html>.",
+              "created_at": "2025-11-05T13:00:00"
+            }
+          ]
+        },
+        {
+          "sId": 2,
+          "section_name": "CSS Basics",
+          "section_desc": "Style your website with CSS selectors and properties.",
+          "created_at": "2025-11-05T14:00:00",
+          "topics": [
+            {
+              "t_id": 2,
+              "topic_name": "Selectors and Colors",
+              "topic_desc": "Apply styling using different types of selectors.",
+              "topic_video": "https://example.com/videos/css-selectors.mp4",
+              "topic_notes": "IDs are unique, classes are reusable.",
+              "created_at": "2025-11-05T15:00:00"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "courseId": 2,
+      "iId": 102,
+      "course_name": "JavaScript Essentials",
+      "course_desc": "Learn how to add interactivity to your web pages.",
+      "fees": 149.99,
+      "discount_percentage": 10,
+      "course_thumbnail": "https://example.com/thumbnails/js-essentials.jpg",
+      "course_intro_video": "https://example.com/videos/js-intro.mp4",
+      "course_duration": "1.5 months",
+      "created_at": "2025-11-05T11:30:00",
+      "category": "Web Development",
+      "rating": 4.7,
+      "number_of_reviews": 980,
+      "sections": [
+        {
+          "sId": 3,
+          "section_name": "Core Concepts",
+          "section_desc": "Learn variables, data types, and control flow.",
+          "created_at": "2025-11-05T12:30:00",
+          "topics": [
+            {
+              "t_id": 3,
+              "topic_name": "Variables and Data Types",
+              "topic_desc": "Understand let, const, and var declarations.",
+              "topic_video": "https://example.com/videos/js-variables.mp4",
+              "topic_notes": "Always use const unless you plan to reassign.",
+              "created_at": "2025-11-05T13:30:00"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "courseId": 3,
+      "iId": 103,
+      "course_name": "React for Beginners",
+      "course_desc": "Get started with React to build dynamic web interfaces.",
+      "fees": 199.99,
+      "discount_percentage": 15,
+      "course_thumbnail": "https://example.com/thumbnails/react-beginners.jpg",
+      "course_intro_video": "https://example.com/videos/react-beginners.mp4",
+      "course_duration": "2 months",
+      "created_at": "2025-11-05T12:00:00",
+      "category": "Web Development",
+      "rating": 4.8,
+      "number_of_reviews": 1540,
+      "sections": [
+        {
+          "sId": 4,
+          "section_name": "Introduction to Components",
+          "section_desc": "Learn how to build and reuse React components.",
+          "created_at": "2025-11-05T13:00:00",
+          "topics": [
+            {
+              "t_id": 4,
+              "topic_name": "Functional Components",
+              "topic_desc": "Create UI using JavaScript functions.",
+              "topic_video": "https://example.com/videos/react-components.mp4",
+              "topic_notes": "Functional components are simpler and modern.",
+              "created_at": "2025-11-05T14:00:00"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "courseId": 5,
+      "iId": 101,
+      "course_name": "Introduction to Data Science",
+      "course_desc": "Understand the data science workflow and tools.",
+      "fees": 199.99,
+      "discount_percentage": 10,
+      "course_thumbnail": "https://example.com/thumbnails/data-science-intro.jpg",
+      "course_intro_video": "https://example.com/videos/data-science-intro.mp4",
+      "course_duration": "2 months",
+      "created_at": "2025-11-05T11:45:00",
+      "category": "Data Science",
+      "rating": 4.7,
+      "number_of_reviews": 890,
+      "sections": [
+        {
+          "sId": 6,
+          "section_name": "Overview of Data Science",
+          "section_desc": "Understand data science lifecycle and concepts.",
+          "created_at": "2025-11-05T12:45:00",
+          "topics": [
+            {
+              "t_id": 6,
+              "topic_name": "Data Science Process",
+              "topic_desc": "Learn data collection, cleaning, and visualization basics.",
+              "topic_video": "https://example.com/videos/data-process.mp4",
+              "topic_notes": "Always start with data understanding.",
+              "created_at": "2025-11-05T13:45:00"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "courseId": 7,
+      "iId": 101,
+      "course_name": "Data Visualization with Tableau",
+      "course_desc": "Create interactive dashboards and visual reports.",
+      "fees": 249.99,
+      "discount_percentage": 20,
+      "course_thumbnail": "https://example.com/thumbnails/tableau.jpg",
+      "course_intro_video": "https://example.com/videos/tableau-intro.mp4",
+      "course_duration": "2 months",
+      "created_at": "2025-11-05T13:15:00",
+      "category": "Data Science",
+      "rating": 4.9,
+      "number_of_reviews": 1320,
+      "sections": [
+        {
+          "sId": 8,
+          "section_name": "Visualization Fundamentals",
+          "section_desc": "Learn best practices in data visualization.",
+          "created_at": "2025-11-05T14:15:00",
+          "topics": [
+            {
+              "t_id": 8,
+              "topic_name": "Charts and Dashboards",
+              "topic_desc": "Build engaging visuals with Tableau.",
+              "topic_video": "https://example.com/videos/tableau-charts.mp4",
+              "topic_notes": "Use color and layout to guide user insights.",
+              "created_at": "2025-11-05T15:15:00"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "courseId": 8,
+      "iId": 102,
+      "course_name": "Android Development with Kotlin",
+      "course_desc": "Build native Android apps using Kotlin and Android Studio.",
+      "fees": 299.99,
+      "discount_percentage": 15,
+      "course_thumbnail": "https://example.com/thumbnails/kotlin-android.jpg",
+      "course_intro_video": "https://example.com/videos/kotlin-android.mp4",
+      "course_duration": "3 months",
+      "created_at": "2025-11-05T12:00:00",
+      "category": "Mobile Development",
+      "rating": 4.8,
+      "number_of_reviews": 1120,
+      "sections": [
+        {
+          "sId": 9,
+          "section_name": "Kotlin Basics",
+          "section_desc": "Get started with Kotlin syntax and app structure.",
+          "created_at": "2025-11-05T13:00:00",
+          "topics": [
+            {
+              "t_id": 9,
+              "topic_name": "Kotlin Syntax",
+              "topic_desc": "Understand classes, variables, and null safety.",
+              "topic_video": "https://example.com/videos/kotlin-basics.mp4",
+              "topic_notes": "Kotlin is concise and null-safe.",
+              "created_at": "2025-11-05T14:00:00"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "courseId": 9,
+      "iId": 101,
+      "course_name": "Flutter for Beginners",
+      "course_desc": "Develop beautiful apps for Android and iOS with Flutter.",
+      "fees": 249.99,
+      "discount_percentage": 5,
+      "course_thumbnail": "https://example.com/thumbnails/flutter.jpg",
+      "course_intro_video": "https://example.com/videos/flutter-intro.mp4",
+      "course_duration": "2.5 months",
+      "created_at": "2025-11-05T12:30:00",
+      "category": "Mobile Development",
+      "rating": 4.6,
+      "number_of_reviews": 970,
+      "sections": [
+        {
+          "sId": 10,
+          "section_name": "Flutter Widgets",
+          "section_desc": "Learn Flutter’s widget-based architecture.",
+          "created_at": "2025-11-05T13:30:00",
+          "topics": [
+            {
+              "t_id": 10,
+              "topic_name": "Stateless Widgets",
+              "topic_desc": "Understand the building blocks of Flutter UI.",
+              "topic_video": "https://example.com/videos/widgets.mp4",
+              "topic_notes": "Stateless widgets don’t hold internal state.",
+              "created_at": "2025-11-05T14:30:00"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

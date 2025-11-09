@@ -1,6 +1,6 @@
 [
   {
-    "id": 1,
+    "id": 101,
     "fname": "rohan",
     "lname": "",
     "dob": "1/1/1990",
@@ -11,10 +11,11 @@
     },
     "mobile": "90243242525",
     "isApproved": true,
-    "profile_pic": "/images/307ce493-b254-4b2d-8ba4-d12c080d6651.jpg"
+    "profile_pic": "/images/307ce493-b254-4b2d-8ba4-d12c080d6651.jpg",
+    "bio": "Rohan is a passionate web developer and educator with over 8 years of experience in front-end technologies like HTML, CSS, and JavaScript. He focuses on making coding simple and practical for beginners."
   },
   {
-    "id": 2,
+    "id": 102,
     "fname": "ketan",
     "lname": "",
     "dob": "1/2/1990",
@@ -25,10 +26,11 @@
     },
     "mobile": "2934238424",
     "isApproved": true,
-    "profile_pic": "/images/307ce493-b254-4b2d-8ba4-d12c080d6651.jpg"
+    "profile_pic": "/images/307ce493-b254-4b2d-8ba4-d12c080d6651.jpg",
+    "bio": "Ketan is an experienced software engineer specializing in JavaScript, Android, and full-stack development. He enjoys helping students build real-world applications through hands-on coding sessions."
   },
   {
-    "id": 3,
+    "id": 103,
     "fname": "Sameer",
     "lname": "",
     "dob": "1/1/1960",
@@ -39,10 +41,11 @@
     },
     "mobile": "998765432",
     "isApproved": true,
-    "profile_pic": "/images/307ce493-b254-4b2d-8ba4-d12c080d6651.jpg"
+    "profile_pic": "/images/307ce493-b254-4b2d-8ba4-d12c080d6651.jpg",
+    "bio": "Prof. Sameer has over 25 years of academic and industry experience in computer science. He specializes in software architecture, data science, and mentoring aspiring developers to excel in technology careers."
   },
   {
-    "id": 4,
+    "id": 104,
     "fname": "Amit",
     "lname": "",
     "dob": "",
@@ -53,6 +56,7 @@
     },
     "mobile": "987654375432",
     "isApproved": false,
-    "profile_pic": "/images/307ce493-b254-4b2d-8ba4-d12c080d6651.jpg"
+    "profile_pic": "/images/307ce493-b254-4b2d-8ba4-d12c080d6651.jpg",
+    "bio": "Amit is an upcoming UI/UX designer passionate about creating user-friendly interfaces. With a background in computer applications, he aims to combine aesthetics and usability in digital products."
   }
 ]

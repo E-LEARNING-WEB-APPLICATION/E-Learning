@@ -26,6 +26,7 @@ import InstructorsList from "./pages/admin/InstructorsView/InstructorsList";
 import InstructorRequests from "./pages/admin/InstrcutorRequests/InstructorRequest";
 import AdminNotifications from "./pages/admin/notifications/AdminNotifications";
 import StudentProfile from "./pages/student/studentProfile/StudentProfile";
+import InstructorCourses from "./pages/admin/InstructorsView/InstructorCourses";
 
 function App() {
   return (
@@ -75,6 +76,7 @@ function App() {
             <Route path="dashboard" element={<AdminDashboard />} />
             <Route path="courses" element={<AdminCourses />} />
             <Route path="instructors" element={<InstructorsList />} />
+            <Route path="instructor-courses" element={<InstructorCourses />} />
             <Route
               path="instructor-requests"
               element={<InstructorRequests />}

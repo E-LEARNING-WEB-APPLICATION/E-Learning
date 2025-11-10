@@ -4,7 +4,7 @@
       "courseId": 1,
       "iId": 101,
       "course_name": "HTML & CSS Fundamentals",
-      "course_desc": "Learn the core building blocks of web development.",
+      "course_desc": "Learn the core building blocks of web development in this foundational course. You will gain a strong understanding of how HTML provides structure and semantics to web pages, while CSS is used to add design, color, and layout. By the end of this course, you will be able to create well-structured, visually appealing, and responsive websites that follow modern web standards and accessibility guidelines.",
       "fees": 99.99,
       "discount_percentage": 0,
       "course_thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgZ-XNf77w59wHsEbbc-xFCukxy2uoeWJbJg&s",
@@ -18,13 +18,13 @@
         {
           "sId": 1,
           "section_name": "HTML Basics",
-          "section_desc": "Learn about structure, tags, and semantic HTML.",
+          "section_desc": "Learn about structure, tags, and semantic HTML. This section introduces the purpose of HTML elements, attributes, and their roles in defining webpage content and meaning. You will also understand how semantic tags improve SEO and accessibility for better user experiences.",
           "created_at": "2025-11-05T12:00:00",
           "topics": [
             {
               "t_id": 1,
               "topic_name": "HTML Structure",
-              "topic_desc": "Understanding elements, attributes, and document layout.",
+              "topic_desc": "Understand how to structure a webpage using elements, attributes, and the document object model. Learn the purpose of the DOCTYPE declaration, and how to properly nest elements for a clean and accessible layout.",
               "topic_video": "https://example.com/videos/html-structure.mp4",
               "topic_notes": "Always start with <!DOCTYPE html>.",
               "created_at": "2025-11-05T13:00:00"
@@ -34,13 +34,13 @@
         {
           "sId": 2,
           "section_name": "CSS Basics",
-          "section_desc": "Style your website with CSS selectors and properties.",
+          "section_desc": "Style your website with CSS selectors and properties. This section explains how to control layout, color, typography, and spacing using CSS. You will also explore the difference between inline, internal, and external stylesheets.",
           "created_at": "2025-11-05T14:00:00",
           "topics": [
             {
-              "t_id": 2,
+              "t_id": 1,
               "topic_name": "Selectors and Colors",
-              "topic_desc": "Apply styling using different types of selectors.",
+              "topic_desc": "Apply styling using various types of selectors such as class, ID, and attribute selectors. Learn how to use CSS color models, manage specificity, and combine selectors efficiently.",
               "topic_video": "https://example.com/videos/css-selectors.mp4",
               "topic_notes": "IDs are unique, classes are reusable.",
               "created_at": "2025-11-05T15:00:00"
@@ -53,7 +53,7 @@
       "courseId": 2,
       "iId": 102,
       "course_name": "JavaScript Essentials",
-      "course_desc": "Learn how to add interactivity to your web pages.",
+      "course_desc": "Learn how to make web pages interactive using JavaScript. This course covers the fundamentals of JavaScript syntax, data types, control structures, and core programming concepts that bring static websites to life. By the end, you will be able to write clean and efficient scripts that manipulate the DOM, handle user input, and perform logical operations.",
       "fees": 149.99,
       "discount_percentage": 10,
       "course_thumbnail": "https://bairesdev.mo.cloudinary.net/blog/2023/08/What-Is-JavaScript-Used-For.jpg",
@@ -65,15 +65,15 @@
       "number_of_reviews": 980,
       "sections": [
         {
-          "sId": 3,
+          "sId": 1,
           "section_name": "Core Concepts",
-          "section_desc": "Learn variables, data types, and control flow.",
+          "section_desc": "Learn the essential building blocks of JavaScript, including variables, data types, and control flow statements. This section lays the groundwork for understanding how logic and conditions control program behavior.",
           "created_at": "2025-11-05T12:30:00",
           "topics": [
             {
-              "t_id": 3,
+              "t_id": 1,
               "topic_name": "Variables and Data Types",
-              "topic_desc": "Understand let, const, and var declarations.",
+              "topic_desc": "Understand how to declare variables using var, let, and const, and explore the different data types in JavaScript. Learn the nuances between mutable and immutable values and the importance of scope.",
               "topic_video": "https://example.com/videos/js-variables.mp4",
               "topic_notes": "Always use const unless you plan to reassign.",
               "created_at": "2025-11-05T13:30:00"
@@ -86,7 +86,7 @@
       "courseId": 3,
       "iId": 103,
       "course_name": "React for Beginners",
-      "course_desc": "Get started with React to build dynamic web interfaces.",
+      "course_desc": "Get started with React to build dynamic and component-driven web interfaces. This course introduces the principles of component-based architecture, JSX syntax, and how React handles rendering efficiently. You will learn to create reusable UI components and manage state to build modern, scalable front-end applications.",
       "fees": 199.99,
       "discount_percentage": 15,
       "course_thumbnail": "https://miro.medium.com/v2/resize:fit:1400/0*y6IcBe5J1AdALzXw.png",
@@ -98,15 +98,15 @@
       "number_of_reviews": 1540,
       "sections": [
         {
-          "sId": 4,
+          "sId": 1,
           "section_name": "Introduction to Components",
-          "section_desc": "Learn how to build and reuse React components.",
+          "section_desc": "Learn how to create, organize, and reuse components in React applications. Understand props, state, and how data flows between parent and child components for building modular UI structures.",
           "created_at": "2025-11-05T13:00:00",
           "topics": [
             {
-              "t_id": 4,
+              "t_id": 1,
               "topic_name": "Functional Components",
-              "topic_desc": "Create UI using JavaScript functions.",
+              "topic_desc": "Discover how to build UI components using JavaScript functions in React. Learn how these components render data, manage properties, and follow a declarative UI approach.",
               "topic_video": "https://example.com/videos/react-components.mp4",
               "topic_notes": "Functional components are simpler and modern.",
               "created_at": "2025-11-05T14:00:00"
@@ -119,7 +119,7 @@
       "courseId": 4,
       "iId": 101,
       "course_name": "Introduction to Data Science",
-      "course_desc": "Understand the data science workflow and tools.",
+      "course_desc": "Understand the complete data science workflow and its applications. This course introduces key concepts such as data collection, cleaning, exploration, visualization, and model interpretation. By the end, you will gain clarity on how data drives decision-making across industries and learn to think like a data scientist.",
       "fees": 199.99,
       "discount_percentage": 10,
       "course_thumbnail": "https://pg-p.ctme.caltech.edu/wp-content/uploads/sites/4/2024/09/Is-Data-Science-Hard.jpg",
@@ -131,15 +131,15 @@
       "number_of_reviews": 890,
       "sections": [
         {
-          "sId": 6,
+          "sId": 1,
           "section_name": "Overview of Data Science",
-          "section_desc": "Understand data science lifecycle and concepts.",
+          "section_desc": "Explore the lifecycle of data science projects from data acquisition to model deployment. This section emphasizes understanding real-world workflows, key roles, and best practices for data-driven problem solving.",
           "created_at": "2025-11-05T12:45:00",
           "topics": [
             {
-              "t_id": 6,
+              "t_id": 1,
               "topic_name": "Data Science Process",
-              "topic_desc": "Learn data collection, cleaning, and visualization basics.",
+              "topic_desc": "Learn the essential steps of the data science process, including data collection, preprocessing, analysis, and visualization. Understand the importance of reproducibility and clear communication in data projects.",
               "topic_video": "https://example.com/videos/data-process.mp4",
               "topic_notes": "Always start with data understanding.",
               "created_at": "2025-11-05T13:45:00"
@@ -152,7 +152,7 @@
       "courseId": 5,
       "iId": 101,
       "course_name": "Data Visualization with Tableau",
-      "course_desc": "Create interactive dashboards and visual reports.",
+      "course_desc": "Learn how to transform complex datasets into clear, interactive, and visually compelling dashboards using Tableau. This course walks you through essential visualization principles, helping you communicate data insights effectively. By the end, you’ll understand how to design professional dashboards that enable data-driven decisions across different industries.",
       "fees": 249.99,
       "discount_percentage": 20,
       "course_thumbnail": "https://www.datameer.com/wp-content/uploads/2019/12/Data-Vizualisation-924x512.png",
@@ -164,15 +164,15 @@
       "number_of_reviews": 1320,
       "sections": [
         {
-          "sId": 8,
+          "sId": 1,
           "section_name": "Visualization Fundamentals",
-          "section_desc": "Learn best practices in data visualization.",
+          "section_desc": "Understand the foundational principles of effective data visualization. Learn how to choose the right chart types, use colors responsibly, and build meaningful visuals that highlight key patterns and insights in data.",
           "created_at": "2025-11-05T14:15:00",
           "topics": [
             {
-              "t_id": 8,
+              "t_id": 1,
               "topic_name": "Charts and Dashboards",
-              "topic_desc": "Build engaging visuals with Tableau.",
+              "topic_desc": "Explore how to design engaging dashboards using Tableau’s visual tools. Learn to create interactive charts, apply filters, and arrange visual components to convey information clearly and effectively.",
               "topic_video": "https://example.com/videos/tableau-charts.mp4",
               "topic_notes": "Use color and layout to guide user insights.",
               "created_at": "2025-11-05T15:15:00"
@@ -185,7 +185,7 @@
       "courseId": 6,
       "iId": 102,
       "course_name": "Android Development with Kotlin",
-      "course_desc": "Build native Android apps using Kotlin and Android Studio.",
+      "course_desc": "Build modern, responsive Android applications using Kotlin and Android Studio. This course introduces you to Kotlin’s concise syntax, Android app architecture, and lifecycle management. You’ll learn to create intuitive mobile interfaces and implement core Android features while following best practices for performance and maintainability.",
       "fees": 299.99,
       "discount_percentage": 15,
       "course_thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlX0Vt5IrMWGX2k1p9vPaPUmrJO_Z4mzJv3Q&s",
@@ -197,15 +197,15 @@
       "number_of_reviews": 1120,
       "sections": [
         {
-          "sId": 9,
+          "sId": 1,
           "section_name": "Kotlin Basics",
-          "section_desc": "Get started with Kotlin syntax and app structure.",
+          "section_desc": "Get comfortable with Kotlin’s syntax and language fundamentals. This section helps you understand variable types, control flow, null safety, and how Kotlin simplifies Android app development.",
           "created_at": "2025-11-05T13:00:00",
           "topics": [
             {
-              "t_id": 9,
+              "t_id": 1,
               "topic_name": "Kotlin Syntax",
-              "topic_desc": "Understand classes, variables, and null safety.",
+              "topic_desc": "Learn the syntax, variable declarations, and class structure in Kotlin. Explore how Kotlin improves code readability and reduces common errors through features like null safety and immutability.",
               "topic_video": "https://example.com/videos/kotlin-basics.mp4",
               "topic_notes": "Kotlin is concise and null-safe.",
               "created_at": "2025-11-05T14:00:00"
@@ -218,7 +218,7 @@
       "courseId": 7,
       "iId": 101,
       "course_name": "Flutter for Beginners",
-      "course_desc": "Develop beautiful apps for Android and iOS with Flutter.",
+      "course_desc": "Develop visually stunning, high-performance mobile applications for Android and iOS using Flutter. This course introduces Flutter’s widget-based framework and teaches you how to create responsive, interactive UIs with minimal code. You’ll also learn how Flutter’s hot reload feature accelerates the development workflow.",
       "fees": 249.99,
       "discount_percentage": 5,
       "course_thumbnail": "https://www.daily.co/blog/content/images/2023/07/Flutter-feature.png",
@@ -230,15 +230,15 @@
       "number_of_reviews": 970,
       "sections": [
         {
-          "sId": 10,
+          "sId": 1,
           "section_name": "Flutter Widgets",
-          "section_desc": "Learn Flutter’s widget-based architecture.",
+          "section_desc": "Learn the widget-based architecture that forms the core of Flutter development. Understand how everything in Flutter is a widget, from layouts and text to animations and navigation elements.",
           "created_at": "2025-11-05T13:30:00",
           "topics": [
             {
-              "t_id": 10,
+              "t_id": 1,
               "topic_name": "Stateless Widgets",
-              "topic_desc": "Understand the building blocks of Flutter UI.",
+              "topic_desc": "Discover how to build simple UI elements that do not require state changes. Learn how stateless widgets improve performance and help you structure reusable UI components.",
               "topic_video": "https://example.com/videos/widgets.mp4",
               "topic_notes": "Stateless widgets don’t hold internal state.",
               "created_at": "2025-11-05T14:30:00"
@@ -251,7 +251,7 @@
       "courseId": 8,
       "iId": 104,
       "course_name": "Python for Absolute Beginners",
-      "course_desc": "Start coding in Python with simple and practical examples.",
+      "course_desc": "Start coding in Python through practical, hands-on exercises designed for complete beginners. This course covers the fundamentals of syntax, variables, loops, and data types. You’ll also learn best practices for writing clean, readable code and solving problems efficiently using Python’s simple and intuitive structure.",
       "fees": 0,
       "discount_percentage": 0,
       "course_thumbnail": "https://picsum.photos/400/250?random=8",
@@ -263,15 +263,15 @@
       "number_of_reviews": 2100,
       "sections": [
         {
-          "sId": 11,
+          "sId": 1,
           "section_name": "Getting Started with Python",
-          "section_desc": "Learn how to install Python and write your first program.",
+          "section_desc": "Learn how to install Python, set up your development environment, and write your first lines of code. This section gives you the confidence to navigate Python syntax and understand how scripts are executed.",
           "created_at": "2025-11-05T15:00:00",
           "topics": [
             {
-              "t_id": 11,
+              "t_id": 1,
               "topic_name": "Hello World in Python",
-              "topic_desc": "Understand syntax and print statements in Python.",
+              "topic_desc": "Write your first Python program and understand how print statements, variables, and indentation work. Learn about Python’s simple syntax and how it differs from other programming languages.",
               "topic_video": "https://example.com/videos/python-hello.mp4",
               "topic_notes": "Python uses indentation for code blocks.",
               "created_at": "2025-11-05T16:00:00"
@@ -282,9 +282,9 @@
     },
     {
       "courseId": 9,
-      "iId": 105,
+      "iId": 101,
       "course_name": "Git & GitHub Essentials",
-      "course_desc": "Learn version control and collaboration using Git and GitHub.",
+      "course_desc": "Learn the fundamentals of version control and collaborative development using Git and GitHub. This course introduces the key concepts of commits, branches, and repositories. You will understand how to manage project versions efficiently and collaborate with teams using modern workflows and pull requests.",
       "fees": 0,
       "discount_percentage": 0,
       "course_thumbnail": "https://picsum.photos/400/250?random=9",
@@ -296,15 +296,15 @@
       "number_of_reviews": 1750,
       "sections": [
         {
-          "sId": 12,
+          "sId": 1,
           "section_name": "Understanding Git Basics",
-          "section_desc": "Learn commits, branches, and repository management.",
+          "section_desc": "Learn how Git tracks changes and helps manage source code versions. This section introduces repositories, commits, and branching strategies used in real-world software development.",
           "created_at": "2025-11-05T15:30:00",
           "topics": [
             {
-              "t_id": 12,
+              "t_id": 1,
               "topic_name": "Version Control Introduction",
-              "topic_desc": "Know why version control is important for developers.",
+              "topic_desc": "Understand why version control systems are essential for developers. Learn how Git maintains a complete history of changes, supports collaboration, and allows safe experimentation through branching.",
               "topic_video": "https://example.com/videos/git-basics.mp4",
               "topic_notes": "Commit early and commit often.",
               "created_at": "2025-11-05T16:30:00"
@@ -315,9 +315,9 @@
     },
     {
       "courseId": 10,
-      "iId": 106,
+      "iId": 102,
       "course_name": "Node.js Fundamentals",
-      "course_desc": "Learn how to build backend servers using Node.js.",
+      "course_desc": "Learn how to build fast and scalable backend applications using Node.js. This course covers the event-driven architecture, non-blocking I/O model, and the core modules of Node.js. You’ll also explore npm, asynchronous programming, and how Node.js powers real-time web applications.",
       "fees": 0,
       "discount_percentage": 0,
       "course_thumbnail": "https://picsum.photos/400/250?random=10",
@@ -329,15 +329,15 @@
       "number_of_reviews": 1280,
       "sections": [
         {
-          "sId": 13,
+          "sId": 1,
           "section_name": "Introduction to Node.js",
-          "section_desc": "Understand event-driven architecture and Node runtime.",
+          "section_desc": "Understand the Node.js runtime environment and how it executes JavaScript on the server. This section introduces Node’s event loop, asynchronous nature, and modular structure for backend development.",
           "created_at": "2025-11-05T16:30:00",
           "topics": [
             {
-              "t_id": 13,
+              "t_id": 1,
               "topic_name": "Node.js Basics",
-              "topic_desc": "Learn about npm, modules, and asynchronous JavaScript.",
+              "topic_desc": "Learn about Node.js modules, npm package management, and asynchronous programming concepts such as callbacks and promises. Discover how Node handles concurrent requests efficiently.",
               "topic_video": "https://example.com/videos/nodejs-basics.mp4",
               "topic_notes": "Node uses a single-threaded event loop model.",
               "created_at": "2025-11-05T17:00:00"
@@ -348,9 +348,9 @@
     },
     {
       "courseId": 11,
-      "iId": 107,
+      "iId": 104,
       "course_name": "Intro to SQL & Databases",
-      "course_desc": "Understand relational databases and learn SQL queries.",
+      "course_desc": "Gain a solid understanding of relational databases and SQL fundamentals. This course helps you master the syntax for querying, updating, and managing data using SQL. By the end, you will be able to design simple databases, write efficient queries, and understand how SQL powers modern data-driven applications.",
       "fees": 0,
       "discount_percentage": 0,
       "course_thumbnail": "https://picsum.photos/400/250?random=11",
@@ -362,15 +362,15 @@
       "number_of_reviews": 990,
       "sections": [
         {
-          "sId": 14,
+          "sId": 1,
           "section_name": "SQL Basics",
-          "section_desc": "Learn SELECT, INSERT, UPDATE, and DELETE statements.",
+          "section_desc": "Learn the core concepts of SQL used to interact with relational databases. This section introduces basic statements such as SELECT, INSERT, UPDATE, and DELETE with hands-on examples.",
           "created_at": "2025-11-05T17:30:00",
           "topics": [
             {
-              "t_id": 14,
+              "t_id": 1,
               "topic_name": "Writing SQL Queries",
-              "topic_desc": "Master simple queries to fetch and manipulate data.",
+              "topic_desc": "Understand how to construct queries to fetch, filter, and manipulate data in relational databases. Learn about clauses like WHERE, ORDER BY, and GROUP BY to control query output effectively.",
               "topic_video": "https://example.com/videos/sql-queries.mp4",
               "topic_notes": "Always use WHERE clause carefully to filter results.",
               "created_at": "2025-11-05T18:00:00"
@@ -381,9 +381,9 @@
     },
     {
       "courseId": 12,
-      "iId": 108,
+      "iId": 103,
       "course_name": "Spring Boot Crash Course",
-      "course_desc": "Get started with Spring Boot to build REST APIs fast.",
+      "course_desc": "Get started with Spring Boot and learn how to develop production-ready RESTful APIs quickly. This course guides you through Spring Boot’s core features, including dependency injection, configuration management, and auto-configuration. By the end, you’ll be able to build and test modern backend applications efficiently.",
       "fees": 0,
       "discount_percentage": 0,
       "course_thumbnail": "https://picsum.photos/400/250?random=12",
@@ -395,15 +395,15 @@
       "number_of_reviews": 1860,
       "sections": [
         {
-          "sId": 15,
+          "sId": 1,
           "section_name": "Spring Boot Fundamentals",
-          "section_desc": "Learn annotations, controllers, and dependency injection.",
+          "section_desc": "Learn the essentials of building Java-based backend systems using Spring Boot. This section covers annotations, controllers, and how to structure scalable REST APIs with minimal configuration.",
           "created_at": "2025-11-05T18:30:00",
           "topics": [
             {
-              "t_id": 15,
+              "t_id": 1,
               "topic_name": "Building REST APIs",
-              "topic_desc": "Create and test your first REST endpoint with Spring Boot.",
+              "topic_desc": "Create and test REST endpoints using Spring Boot. Learn how to map requests with annotations like @GetMapping and @PostMapping and handle responses effectively in modern web applications.",
               "topic_video": "https://example.com/videos/springboot-rest.mp4",
               "topic_notes": "Use @RestController for RESTful endpoints.",
               "created_at": "2025-11-05T19:00:00"
@@ -412,5 +412,6 @@
         }
       ]
     }
+
   ]
 }

@@ -1,0 +1,9 @@
+.course-details-page .col-md-8 {
+  border-radius: 12px;
+}
+
+/* Right Section (Action Card Area) */
+.course-details-page .col-md-4 {
+  position: sticky;
+  top: 100px;
+}

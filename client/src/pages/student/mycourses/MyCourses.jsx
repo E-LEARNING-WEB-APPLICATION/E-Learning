@@ -22,8 +22,11 @@ const MyCourses = () => {
 
   const navigate = useNavigate();
 
-  const handleNavigate = () => {
-    navigate(`/student/course-details/`);
+  const handleNavigate = (course) => {
+    console.log(course);
+    navigate("/student/course-details/", {
+      state: { courseId: course.courseId },
+    });
   };
 
   const filteredCourses = enrolledCourses.filter(
@@ -96,7 +99,7 @@ const MyCourses = () => {
                   <button
                     className="btn btn-primary mt-3 fw-semibold w-100"
                     onClick={() => {
-                      handleNavigate();
+                      handleNavigate(course);
                     }}
                   >
                     Start Learning →

@@ -1,0 +1,126 @@
+/* ==============================
+   Modern Centered Popup Modal
+   ============================== */
+
+/* Dimmed background */
+.payment-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  animation: fadeIn 0.3s ease forwards;
+}
+
+/* Centered payment box */
+.payment-box {
+  width: 420px;
+  max-width: 90%;
+  background: linear-gradient(180deg, #ffffff 0%, #f9fafc 100%);
+  border-radius: 14px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  padding: 25px 30px;
+  animation: popUp 0.35s ease forwards;
+  transform-origin: center;
+}
+
+/* Smooth animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes popUp {
+  from {
+    transform: translateY(-30px) scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+/* Inputs */
+.payment-box .form-control {
+  border-radius: 8px;
+  border: 1px solid #d0d7de;
+  font-size: 0.95rem;
+  padding: 8px 10px;
+}
+
+.payment-box .form-control:focus {
+  border-color: #0d6efd;
+  box-shadow: 0 0 0 0.15rem rgba(13, 110, 253, 0.25);
+}
+
+/* Buttons */
+.payment-box .btn-primary {
+  padding: 8px 20px;
+  font-weight: 600;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(13, 110, 253, 0.3);
+  transition: all 0.25s ease;
+}
+
+.payment-box .btn-primary:hover {
+  transform: scale(1.03);
+  box-shadow: 0 6px 16px rgba(13, 110, 253, 0.35);
+}
+
+/* ==============================
+   Success State Styling
+   ============================== */
+
+/* Circle animation */
+.success-circle {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #16a34a, #22c55e);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  box-shadow: 0 4px 12px rgba(22, 163, 74, 0.4);
+  animation: popSuccess 0.6s ease;
+}
+
+.success-circle svg {
+  animation: iconGlow 1s ease infinite alternate;
+}
+
+@keyframes iconGlow {
+  from {
+    transform: scale(1);
+    opacity: 0.9;
+  }
+  to {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+}
+
+@keyframes popSuccess {
+  0% {
+    transform: scale(0.3);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+

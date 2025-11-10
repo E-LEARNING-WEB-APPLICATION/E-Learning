@@ -1,0 +1,118 @@
+.action-card {
+  top: 100px;
+  border-radius: 16px;
+  background: linear-gradient(180deg, #eef2f7 0%, #d9e2ec 50%, #cfd8e3 100%);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  padding: 32px 26px;
+  transition: all 0.25s ease-in-out;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.action-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.1);
+}
+
+.action-card h3 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+}
+
+.price-box {
+  position: relative;
+  text-align: center;
+  padding-bottom: 20px;
+}
+
+.discounted-price {
+  font-size: 2.2rem;
+  color: #16a34a;
+  font-weight: 700;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+}
+
+.discounted-price {
+  background: linear-gradient(90deg, #22c55e, #16a34a);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.discount-badge {
+  display: inline-block;
+  background: linear-gradient(90deg, #0d6efd, #2563eb);
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.8rem;
+  padding: 4px 10px;
+  border-radius: 20px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: -12px;
+  box-shadow: 0 2px 6px rgba(13, 110, 253, 0.25);
+  z-index: 2;
+}
+
+.action-card p {
+  font-size: 0.9rem;
+}
+
+.action-card .text-muted.small {
+  color: #4b5563 !important;
+  font-weight: 500;
+  opacity: 0.8;
+}
+
+.action-card ul {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 1.5rem;
+  color: #555;
+}
+
+.action-card ul li {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-bottom: 0.75rem;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+}
+
+.action-card ul li::before {
+  content: "✔️";
+  font-size: 0.9rem;
+  color: #0d6efd;
+}
+
+.action-card ul li:hover {
+  transform: translateX(4px);
+  color: #0d6efd;
+}
+
+.pay-btn {
+  background: linear-gradient(90deg, #0d6efd, #2563eb);
+  border: none;
+  font-weight: 600;
+  font-size: 1.05rem;
+  letter-spacing: 0.3px;
+  padding: 10px 0;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(13, 110, 253, 0.3);
+  transition: all 0.3s ease;
+}
+
+.pay-btn:hover {
+  background: linear-gradient(90deg, #2563eb, #0d6efd);
+  transform: scale(1.04);
+  box-shadow: 0 6px 18px rgba(13, 110, 253, 0.35);
+}
+
+.action-card .text-center.mt-3 {
+  color: #6c757d;
+  font-size: 0.85rem;
+  margin-top: 1.2rem !important;
+}

@@ -17,7 +17,7 @@ const InstructorCard = ({ user, onDelete }) => {
   };
 
   const handleCardClick = () => {
-    navigate(`/courses/${user.id}`);
+    navigate(`/admin/instructor-courses`,{state:user.id});
   };
   
   return (

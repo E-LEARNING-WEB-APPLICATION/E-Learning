@@ -3,6 +3,8 @@ import "./CourseDetails.css";
 import CourseHeader from "@/components/student/coursedetails/courseheader/CourseHeader";
 import CoursePreview from "@/components/student/coursedetails/coursepreview/CoursePreview";
 import ActionSection from "@/components/student/coursedetails/actionsection/ActionSection";
+import CourseContent from "@/components/student/coursedetails/coursecontent/CourseContent";
+import InstructorSection from "@/components/student/coursedetails/instructorsection/InstructorSection";
 import { useLocation } from "react-router-dom";
 import { getCourseById } from "@/api/api";
 import Loader from "@/components/shared/Loader";
@@ -70,6 +72,11 @@ const CourseDetails = () => {
           <ActionSection course={course} />
         </div>
       </div>
+
+      {/* Course Section */}
+      <CourseContent />
+      {/* Instructor Section */}
+      <InstructorSection />
     </div>
   );
 };

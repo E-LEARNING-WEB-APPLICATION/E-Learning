@@ -1,24 +1,44 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./InstructorSection.css";
 import { FaLinkedin, FaTwitter, FaGithub } from "react-icons/fa";
+import { getInstructorById } from "@/api/api";
+import Loader from "@/components/shared/Loader";
 
-const InstructorSection = () => {
-  const instructor = {
-    name: "Evelyn Parker",
-    title: "Senior React Instructor & Frontend Architect",
-    bio: `Evelyn Parker is a highly experienced frontend engineer with a deep 
-          passion for teaching modern web technologies. With over a decade of 
-          experience in React, JavaScript, and UI/UX, she has mentored thousands 
-          of developers to build elegant, scalable, and user-centric applications.`,
-    image:
-      "https://images.unsplash.com/photo-1595152772835-219674b2a8a6?auto=format&fit=crop&w=600&q=80",
-    socials: {
-      linkedin: "https://linkedin.com/in/evelynparker",
-      twitter: "https://twitter.com/evelynparker",
-      github: "https://github.com/evelynparker",
-    },
-  };
+const InstructorSection = ({ course }) => {
+  const id = course[0]?.iId;
+  const [instructor, setInstructor] = useState(null);
+  const [loading, setLoading] = useState(true);
 
+  useEffect(() => {
+    const fetchInstructor = async () => {
+      try {
+        const data = await getInstructorById(id);
+        setInstructor(data[0]);
+      } catch (error) {
+        console.error("Error fetching instructor:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    if (id) fetchInstructor();
+  }, [id]);
+
+  if (loading) {
+    return (
+      <section className="instructor-section my-5 p-4 rounded-4 shadow-sm text-center">
+        <Loader text="Loading instructor details..." />
+      </section>
+    );
+  }
+
+  if (!instructor) {
+    return (
+      <section className="instructor-section my-5 p-4 rounded-4 shadow-sm text-center">
+        <p className="text-danger mb-0">Instructor details not found.</p>
+      </section>
+    );
+  }
   return (
     <section className="instructor-section my-5 p-4 rounded-4 shadow-sm">
       <h4 className="fw-bold mb-4 gradient-heading">Instructor</h4>
@@ -28,8 +48,8 @@ const InstructorSection = () => {
         <div className="col-md-3 text-center">
           <div className="profile-frame mx-auto">
             <img
-              src={instructor.image}
-              alt={instructor.name}
+              src={instructor.profile_pic}
+              alt={`${instructor.fname} ${instructor.lname}`}
               className="instructor-img img-fluid rounded-circle"
             />
           </div>
@@ -37,38 +57,48 @@ const InstructorSection = () => {
 
         {/* ===== Instructor Details ===== */}
         <div className="col-md-9">
-          <h3 className="instructor-name mb-1">{instructor.name}</h3>
+          <h3 className="instructor-name mb-1">
+            {instructor.fname} {instructor.lname}
+          </h3>
           <p className="instructor-title mb-3">{instructor.title}</p>
 
           <p className="instructor-bio text-secondary mb-4">{instructor.bio}</p>
 
           {/* ===== Social Links ===== */}
-          <div className="d-flex gap-3">
-            <a
-              href={instructor.socials.linkedin}
-              target="_blank"
-              rel="noreferrer"
-              className="social-link"
-            >
-              <FaLinkedin />
-            </a>
-            <a
-              href={instructor.socials.twitter}
-              target="_blank"
-              rel="noreferrer"
-              className="social-link"
-            >
-              <FaTwitter />
-            </a>
-            <a
-              href={instructor.socials.github}
-              target="_blank"
-              rel="noreferrer"
-              className="social-link"
-            >
-              <FaGithub />
-            </a>
-          </div>
+          {instructor.socials && (
+            <div className="d-flex gap-3">
+              {instructor.socials.linkedin && (
+                <a
+                  href={instructor.socials.linkedin}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="social-link"
+                >
+                  <FaLinkedin />
+                </a>
+              )}
+              {instructor.socials.twitter && (
+                <a
+                  href={instructor.socials.twitter}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="social-link"
+                >
+                  <FaTwitter />
+                </a>
+              )}
+              {instructor.socials.github && (
+                <a
+                  href={instructor.socials.github}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="social-link"
+                >
+                  <FaGithub />
+                </a>
+              )}
+            </div>
+          )}
         </div>
       </div>
     </section>

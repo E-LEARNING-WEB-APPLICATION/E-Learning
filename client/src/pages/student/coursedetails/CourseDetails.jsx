@@ -74,9 +74,9 @@ const CourseDetails = () => {
       </div>
 
       {/* Course Section */}
-      <CourseContent />
+      <CourseContent course={course} />
       {/* Instructor Section */}
-      <InstructorSection />
+      <InstructorSection course={course} />
     </div>
   );
 };

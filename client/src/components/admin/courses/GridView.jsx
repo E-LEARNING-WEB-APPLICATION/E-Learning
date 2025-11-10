@@ -1,29 +1,24 @@
-import React from 'react'
+import React from "react";
+import CourseCard from "@/components/shared/InstructorCourseCard/CourseCard";
 
-const GridView = ({courses}) => {
+const GridView = ({ courses }) => {
   return (
-    <div className="row mb-3 gy-3">
-          {courses.map((course) => {
-            return (
-              <div className="col-3" key={course.course_id}>
-                <div className="card" style={{width: "18rem"}}>
-                  <img
-                    src={course.course_thumbnail}
-                    className="card-img-top"
-                    alt={course.course_name}
-                  />
-                  <div className="card-body">
-                    <h5 className="card-title">{course.course_name}</h5>
-                    <h6 className="card-title">{course.category}</h6>
-                    <p className="card-text">{course.course_desc}</p>
-                    {/* <a href="#" className="btn btn-primary">Go somewhere</a> */}
-                  </div>
-                </div>
-              </div>
-            );
-          })}
+    <div className="container py-5">
+      <h3 className="mb-4 fw-bold text-primary">Instructor Courses</h3>
+      <div className="container py-5">
+        <div className="row g-4">
+          {courses.map((course) => (
+            <div
+              key={course.courseId}
+              className="col-12 col-sm-6 col-lg-3 d-flex"
+            >
+              <CourseCard course={course} />
+            </div>
+          ))}
         </div>
-  )
-}
+      </div>
+    </div>
+  );
+};
 
-export default GridView
+export default GridView;

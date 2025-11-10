@@ -27,6 +27,7 @@ import InstructorRequests from "./pages/admin/InstrcutorRequests/InstructorReque
 import AdminNotifications from "./pages/admin/notifications/AdminNotifications";
 import StudentProfile from "./pages/student/studentProfile/StudentProfile";
 import InstructorCourses from "./pages/admin/InstructorsView/InstructorCourses";
+import CourseDetails from "./pages/student/coursedetails/CourseDetails";
 
 function App() {
   return (

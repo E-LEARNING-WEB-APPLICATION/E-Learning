@@ -16,7 +16,7 @@ export async function getAddedCourses() {
         {
         courseName : "React",
         courseDesc : "This is the Courses Description of React.This is the Courses Description of React.This is the Courses Description of React.This is the Courses Description of React.This is the Courses Description of React.",
-        image : "./../../../public/images/react.jpg"
+        image : "./../../../public/images/react.png"
         },
 
         {

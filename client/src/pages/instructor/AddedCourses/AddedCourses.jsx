@@ -45,58 +45,68 @@ function AddedCourses() {
     }
 
     return (
-        <div>
-            <center>
-                <h1> Added Courses</h1>
-            </center>
+        <div className='container' >
+
+            <h1 className="page-heading">Added Courses</h1>
+
+
+            <div className="row">
             {
                 data.map((data, index) => {
-                    return <div key={index}>
-                        <div className="card mb-3">
-                            <img className="card-img-top" src={data.image} alt="Card image cap" height={"150px"} />
+                    return <div className='outer-div'>
+                    
+                    <div key={index}>
+                        <div className="card mb-3 ">
+                            <img className="card-img-top " src={data.image} alt="Card image cap" height={"150px"} />
                             <div className="card-body">
                                 <h5 className="card-title">{data.courseName}</h5>
                                 <p className="card-text">{data.courseDesc}</p>
-                                <div >
-                                    <div>
-                                        <button type="button" className="btn btn-primary added-courses-buttons" onClick={()=>
-                                        {
-                                            handleShowSections(data.courseName)
-                                        }}>Show Sections</button>
-                                        <button type="button" className="btn btn-primary added-courses-buttons" onClick={() => {
-                                            goToAddSection(data.courseName)
-                                        }
-                                        }>Add Sections</button>
-                                        <button type="button" className="btn btn-secondary added-courses-buttons">Edit Course</button>
-                                        <button type="button" className="btn btn-success added-courses-buttons">Publish Course</button>
+
+                                    <div className='buttons'>
+                                       
+                                       <div>
+                                       <button type="button" className="btn btn-primary show-section-button" onClick={() => {
+                                                handleShowSections(data.courseName)
+                                            }}>Show Sections</button>
+                                       </div>
+
+                                           <div>
+
+                                           <button type="button" className="btn btn-primary add-section-button" onClick={() => {
+                                                goToAddSection(data.courseName)
+                                            }
+                                            }>Add Sections</button>
+
+                                           </div> 
+                                           <div>
+                                           <button type="button" className="btn btn-secondary edit-course-button">Edit Course</button>
+                                           </div>
+                                            
+                                            
+
                                     </div>
 
-                                </div>
+                                    <div className='publish-button'>
+                                        <button type="button" className="btn btn-success publish-course-buttons">Publish Course</button>
+                                    </div>
                             </div>
                         </div>
                     </div>
+
+
+                    </div>
+
+                    
                 })
             }
 
+            </div>
+
         </div>
+
     )
 }
 
 export default AddedCourses
 
 
-{/* <div className="card mb-3">
-                <img className="card-img-top" src={data[0].image} alt="Card image cap" height={"150px"}/>
-                <div className="card-body">
-                    <h5 className="card-title">Course Name</h5>
-                    <p className="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                    <div >
-                        <div>
-                            <button type="button" className="btn btn-primary added-courses-buttons">Add Topics</button>
-                            <button type="button" className="btn btn-secondary added-courses-buttons">Edit Course</button>
-                            <button type="button" className="btn btn-success added-courses-buttons">Publish Course</button>
-                        </div>
-
-                    </div>
-                </div>
-   </div> */}

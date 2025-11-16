@@ -1,4 +1,197 @@
+.page-title {
+  text-align: center;
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #2c3e50;
+  margin: 25px 0 35px;
+  letter-spacing: 0.5px;
+  text-transform: capitalize;
+  font-family: "Poppins", sans-serif;
+  position: relative;
+}
+
+
+
 .sections-buttons
 {
     margin-right: 20px;
+}
+
+
+
+.most-outer-div {
+  margin: 20px auto;
+  max-width: 750px;
+  
+}
+
+
+.card {
+  border: 1px solid #e0e6ed;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #ffffff;
+  box-shadow: 0px 4px 12px rgba(0,0,0,0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  margin-bottom: 20px;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0px 8px 18px rgba(0,0,0,0.12);
+}
+
+
+.section-header {
+  background: linear-gradient(135deg, #3498db, #6dd5fa);
+  padding: 14px 22px;
+  color: #fff;
+  border-radius: 14px 14px 0 0 !important;
+}
+
+.section-header h4 {
+  margin: 0;
+  font-size: 1.4rem;
+  font-weight: 600;
+  font-family: "Poppins", sans-serif;
+}
+
+
+.card-body {
+  padding: 22px;
+}
+
+.card-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 8px;
+  font-family: "Poppins", sans-serif;
+}
+
+.card-text {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 18px;
+  line-height: 1.5;
+}
+
+
+.sections-buttons {
+  margin-right: 10px;
+  margin-top: 8px;
+  min-width: 120px;
+  font-weight: 500;
+  border-radius: 8px !important;
+}
+
+.btn-primary.sections-buttons {
+  background: #3498db;
+  border-color: #3498db;
+}
+
+.btn-primary.sections-buttons:hover {
+  background: #217dbb;
+}
+
+.btn-secondary.sections-buttons {
+  background: #7f8c8d;
+  border-color: #7f8c8d;
+}
+
+.btn-danger.sections-buttons {
+  background: #e74c3c;
+  border-color: #e74c3c;
+}
+
+.btn-danger.sections-buttons:hover {
+  background: #d03627;
+}
+
+
+
+.topic-modal-body {
+  padding: 25px 30px;
+  background: #f9fbfd;
+  border-radius: 10px;
+}
+
+
+.topic-modal-body h1 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #2c3e50;
+  margin-bottom: 5px;
+  font-family: "Poppins", sans-serif;
+}
+
+.topic-modal-body h3 {
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #555;
+  margin-bottom: 25px;
+  font-family: "Poppins", sans-serif;
+}
+
+
+.topic-modal-body label {
+  font-weight: 600;
+  color: #34495e;
+  margin-bottom: 6px;
+  display: block;
+  font-size: 0.95rem;
+}
+
+
+.topic-modal-body .form-control {
+  border-radius: 8px;
+  padding: 10px 12px;
+  border: 1px solid #d0d7de;
+  font-size: 0.95rem;
+  transition: all 0.2s ease-in-out;
+}
+
+.topic-modal-body .form-control:focus {
+  border-color: #3498db;
+  box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+}
+
+
+.topic-modal-body .input-group-text {
+  background: #3498db;
+  color: white;
+  border: none;
+  font-weight: bold;
+  padding: 10px 14px;
+}
+
+
+.topic-modal-body .btn-primary {
+  background: #3498db;
+  border-radius: 8px;
+  padding: 10px 22px;
+  font-weight: 600;
+  border: none;
+  transition: 0.2s ease;
+}
+
+.topic-modal-body .btn-primary:hover {
+  background: #2370a1;
+}
+
+.topic-modal-body .btn-danger {
+  border-radius: 8px;
+  padding: 10px 22px;
+  font-weight: 600;
+  border: none;
+  transition: 0.2s ease;
+}
+
+.topic-modal-body .btn-danger:hover {
+  background: #c0392b;
+}
+
+
+.topic-modal-body button {
+  margin-right: 10px;
 }

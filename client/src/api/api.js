@@ -78,3 +78,15 @@ export const getInstructorCourses = async (id) => {
     throw error;
   }
 };
+
+export const getInstructorById = async (id) => {
+  try {
+    const res = await api.get("/instructors");
+    const instructors = res.data;
+    const instructor = instructors.filter((inst) => inst.id == id);
+    return instructor;
+  } catch (error) {
+    console.error(`Error fetching instructor with ID ${id}:`, error);
+    throw error;
+  }
+};

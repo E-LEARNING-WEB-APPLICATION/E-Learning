@@ -3,7 +3,6 @@ import "./CourseHeader.css";
 
 const CourseHeader = ({ course }) => {
   if (!course) return null;
-  console.log(course);
   return (
     <div className="course-header border-bottom pb-3">
       <h2 className="fw-bold mb-1">{course[0].course_name}</h2>

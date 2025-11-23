@@ -31,6 +31,9 @@ function AddCourse() {
     }
 
     return (
+
+        <div className='container'> 
+
         <div className='add-course-main'>
             <h1>Add Course</h1>
 
@@ -115,6 +118,8 @@ function AddCourse() {
                 <button type="submit" className="btn btn-primary mb-3" onClick={handleAddCourse}>Submit</button>
             
      
+
+        </div>
 
         </div>
     )

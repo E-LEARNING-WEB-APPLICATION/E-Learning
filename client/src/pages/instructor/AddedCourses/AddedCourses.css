@@ -1,4 +1,159 @@
+.page-heading {
+    text-align: center;
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin: 25px 0 35px 0;
+    color: #2c3e50;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+
+   
+    text-shadow: 0px 2px 4px rgba(0,0,0,0.15);
+ 
+    animation: fadeInDown 0.6s ease;
+}
+
+
+
+
 .added-courses-buttons
 {
-  margin-right: 30px;
+  margin-right: 15px;
 }
+
+.outer-div {
+    width: 48%;
+    display: flex;
+    vertical-align: top;
+    margin: 1%;
+    flex: 0 0 45%;
+}
+
+.buttons {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 10px;
+    margin-top: 10px;
+    align-items: center;
+}
+
+.edit-course-button {
+    margin-top: 10px;
+}
+
+
+
+
+
+.buttons button {
+    flex: 1;
+    min-width: 0;
+}
+
+
+.card-img-top {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    height: 150px;
+}
+
+
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    padding: 20px 10px;
+    margin-top: 10px;
+    margin-bottom: 30px;
+
+    background: #f8fbff;                   
+    border-radius: 14px;
+
+    box-shadow: 
+        0 4px 20px rgba(0, 120, 255, 0.18),
+        0 0 12px rgba(0, 120, 255, 0.12);
+
+    transition: 0.3s ease;
+}
+
+
+.row:hover {
+    box-shadow:
+        0 8px 30px rgba(0, 120, 255, 0.25),
+        0 0 15px rgba(0, 120, 255, 0.15);
+}
+
+
+.card-title {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: #1a4f9b;               
+    margin-bottom: 10px;
+    letter-spacing: 0.5px;
+
+
+    position: relative;
+    padding-bottom: 6px;
+}
+
+
+
+.card-text {
+    font-size: 0.95rem;
+    color: #4a5568;                    
+    line-height: 1.5;
+    margin-bottom: 18px;
+
+
+    -webkit-font-smoothing: antialiased;
+
+   
+    opacity: 0.90;
+    transition: opacity 0.25s ease;
+}
+
+
+.card:hover .card-text {
+    opacity: 1;
+    color: #2d3748;                      
+}
+
+
+.buttons > div {
+    flex: 1;
+}
+
+
+.buttons button {
+    width: 100%;
+    padding: 10px 14px;
+    font-size: 0.9rem;
+    border-radius: 8px;
+    transition: 0.2s ease;
+}
+
+
+.publish-button {
+    margin-top: 10px;
+}
+
+.publish-button button {
+    width: 100%;
+    padding: 11px 14px;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 8px;
+}
+
+.publish-button button:hover,
+.buttons button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+
+
+

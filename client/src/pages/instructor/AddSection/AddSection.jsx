@@ -54,8 +54,13 @@ function AddSection() {
 
 
     return (
-        <div>
-            <center><h1>Add Section for {courseName} Course </h1></center>
+        <div className="add-section-container">
+
+            <h1 className="section-heading">
+                Add Section for {courseName} Course
+            </h1>
+
+
             <div className="form-group">
                 <label htmlFor="sectionNumber">Enter Section Number</label>
                 <input type="number" className="form-control" id="sectionNumber" 
@@ -80,7 +85,7 @@ function AddSection() {
            
             
             <div className="form-group">
-                <label htmlFor="sectionDesc">Example Section Description</label>
+                <label htmlFor="sectionDesc">Enter Section Description</label>
                 <textarea className="form-control text-area" id="sectionDesc" rows={3} defaultValue={""}
                 onChange={(e) =>
                 {

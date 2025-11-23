@@ -7,7 +7,7 @@ const StudentLayout = () => {
     return (
         <div>
             <StudentNavbar />
-            <main className='container mt-3'>
+            <main className='container-fluid mt-3'>
                 <Outlet />
             </main>
             <Footer />

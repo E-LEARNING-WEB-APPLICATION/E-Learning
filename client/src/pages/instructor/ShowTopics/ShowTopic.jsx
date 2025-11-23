@@ -15,37 +15,42 @@ function ShowTopic() {
     const { sectionNumber, sectionTitle, courseName } = location.state
     // console.log("section number and title",sectionNumber,sectionTitle)
     return (
-        <div>
-            <center><h1> {courseName} </h1></center>
-            <center><h1> Section  {sectionNumber} - {sectionTitle} </h1></center>
+        <div className="show-topics-container">
+  
+  <h1 className="course-title">{courseName}</h1>
+  <h1 className="section-title">Section {sectionNumber} – {sectionTitle}</h1>
 
-            <div>
+  <div className="topics-list">
 
-                {allTopics.length > 0 && allTopics.map((data, index) => {
-                  return sectionTitle == data.sectionName  &&  <div className="card" key={index}>
-                        <div className="card-body">
-                            <h5 className="card-title">Topic {data.topicNumber} - {data.topicName}</h5>
-                            <p className="card-text">{data.topicDesc}</p>
-                            <div> <button type="button" className="btn btn-secondary">Update Topic</button></div>
-                        </div>
-                        <center><video className='card-img-top topic-video' src={data.video} controls > </video></center>
-                    </div>
-                })}
+    {allTopics.length > 0 &&
+      allTopics.map((data, index) => {
+        return (
+          sectionTitle === data.sectionName && (
+            <div className="topic-card" key={index}>
+              
+              <div className="card-body">
+                <h5 className="card-title">
+                  Topic {data.topicNumber} – {data.topicName}
+                </h5>
 
+                <p className="card-text">{data.topicDesc}</p>
+
+                <button type="button" className="btn btn-secondary update-btn">
+                  Update Topic
+                </button>
+              </div>
+
+              <video className="topic-video" src={data.video} controls></video>
             </div>
+          )
+        );
+      })}
 
-        </div>
+  </div>
+
+</div>
+
     )
 }
 
 export default ShowTopic
-
-
-{/* <div className="card">
-                    <div className="card-body">
-                    {   allTopics.length > 0 && <h5 className="card-title">Topic {allTopics[0].topicNumber} - {allTopics[0].topicName}</h5> }
-                        <p className="card-text">{allTopics[0].topicDesc}</p>
-                        <p className="card-text"><small className="text-muted">Last updated 3 mins ago</small></p>
-                    </div>
-                   <center><video className='card-img-top topic-video' src= {allTopics[0].video} controls > </video></center> 
-                </div> */}

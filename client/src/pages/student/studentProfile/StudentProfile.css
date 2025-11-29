@@ -112,3 +112,52 @@ body {
     height: 120px;
   }
 }
+
+.profile-pic-wrapper {
+  width: 160px;
+  height: 160px;
+}
+
+.camera-icon {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background: rgba(0,0,0,0.6);
+  color: white;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: 0.3s ease;
+  cursor: pointer;
+}
+
+.profile-pic-wrapper:hover .camera-icon {
+  opacity: 1;
+}
+
+
+
+.edit-skill-icon {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: rgba(0,0,0,0.5);
+  color: white;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.edit-skill-icon:hover {
+  background: rgba(0,0,0,0.7);
+  transform: scale(1.1);
+}

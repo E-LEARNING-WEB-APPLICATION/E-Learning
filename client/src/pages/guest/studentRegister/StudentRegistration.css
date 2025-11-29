@@ -1,54 +1,58 @@
 .reg-outer-container {
-    min-height: 100vh;
-    padding: 20px;
+  min-height: 100vh;
+  padding: 20px;
 }
 
 .reg-inner-container {
-    width: 100%;
-    max-width: 550px;
-    background: linear-gradient(135deg, rgba(24, 61, 157, 0.85), rgba(215, 213, 213, 0.9));
-    border-radius: 25px;
-    color: #fff;
-    border: 1px solid (0, 0, 0, 0.05);
-    transition: all 0.3s ease-in-out;
-    box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+  width: 100%;
+  max-width: 550px;
+  background: linear-gradient(
+    135deg,
+    rgba(24, 61, 157, 0.85),
+    rgba(215, 213, 213, 0.9)
+  );
+  border-radius: 25px;
+  color: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
 }
 
 .reg-inner-container:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 12px 40px rgba(74, 0, 224, 0.2);
+  transform: translateY(-10px);
+  box-shadow: 0 12px 40px rgba(74, 0, 224, 0.2);
 }
 
 .reg-title {
-    font-size: 28px;
-    font-weight: bold;
+  font-size: 28px;
+  font-weight: bold;
 }
 
 .form-floating input.form-control {
-    border-radius: 12px;
-    padding: 14px 15px;
-    font-size: 16px;
+  border-radius: 12px;
+  padding: 14px 15px;
+  font-size: 16px;
 }
 
 .reg-button {
-    padding: 12px;
-    font-size: 17px;
-    font-weight: bold;
-    color: #fff;
-    background: linear-gradient(to right, #8e2de2, #5405f1);
-    border: none;
-    border-radius: 50px;
-    cursor: pointer;
-    transition: all 0.3s ease-in-out;
+  padding: 12px;
+  font-size: 17px;
+  font-weight: bold;
+  color: #fff;
+  background: linear-gradient(to right, #8e2de2, #5405f1);
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
 }
 
 .reg-button:hover {
-    transform: scale(1.03);
-    box-shadow: 0 4px 20px rgba(74, 0, 224, 0.4);
+  transform: scale(1.03);
+  box-shadow: 0 4px 20px rgba(74, 0, 224, 0.4);
 }
 
 @media (max-width: 576px) {
-    .name-row {
-        flex-direction: column;
-    }
+  .name-row {
+    flex-direction: column;
+  }
 }

@@ -1,18 +1,24 @@
-import React from 'react'
-import AdminNavbar from '../navbar/AdminNavbar'
-import { Outlet } from 'react-router-dom'
-import Footer from '../../footer/Footer';
+import { useState } from "react";
+import AdminNavbar from "./AdminNavbar";
+import { Outlet } from "react-router-dom";
+import "./layout.css";
+import Sidebar from "./AdminSidebar";
 
-const AdminLayout = () => {
+const DashboardLayout = () => {
+  const [collapsed, setCollapsed] = useState(false);
+
   return (
-    <div>
-        <AdminNavbar/>
-                    <main className='container mt-3'>
-                <Outlet />
-            </main>
-            <Footer />
-    </div>
-  )
-}
+    <div className={`admin-layout ${collapsed ? "collapsed" : ""}`}>
+      <Sidebar onToggle={(c) => setCollapsed(c)} />
 
-export default AdminLayout
+      <div className="main-content">
+        <AdminNavbar />
+        <div className="p-4">
+          <Outlet />
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default DashboardLayout;

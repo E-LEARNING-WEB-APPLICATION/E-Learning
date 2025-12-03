@@ -40,7 +40,7 @@ const InstructorProfile = () => {
 
     const handleProfilePhotoUpload = (file) => {
         const previewURL = URL.createObjectURL(file);
-        setProfile((prev) => ({ ...prev, photo: previewURL }));
+        setInstructor((prev) => ({ ...prev, photo: previewURL }));
     };
 
     const [education, setEducation] = useState([

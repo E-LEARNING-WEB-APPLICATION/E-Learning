@@ -21,24 +21,31 @@ const InstructorCard = ({ user, onDelete }) => {
   return (
     <div className="instructor-card" onClick={handleCardClick}>
       <div className="card-header">
-        <img
-          src={profile_pic}
-          alt="Profile"
-          className="profile-image"
-          onClick={handleProfileClick}
-        />
 
-        <div className="instructor-info ellipsis">
-          <h5>{fname} {lname}</h5>
-          <p className="education ellipsis">{education.degree} - {education.field}</p>
-          <p className="email ellipsis">{email}</p>
-          <p className="mobile ellipsis">{mobile}</p>
-        </div>
+  {/* Image Wrapper */}
+  <div className="image-wrapper" onClick={handleProfileClick}>
+    <img
+      src={profile_pic}
+      alt="Profile"
+      className="profile-image"
+    />
 
-        <div className={`status-badge ${isApproved ? "approved" : "rejected"}`}>
-          {isApproved ? <IoShieldCheckmarkOutline /> : <RxCrossCircled />}
-        </div>
-      </div>
+    {/* Badge now inside wrapper */}
+    <div className={`status-badge ${isApproved ? "approved" : "rejected"}`}>
+      {isApproved ? <IoShieldCheckmarkOutline /> : <RxCrossCircled />}
+    </div>
+  </div>
+
+  {/* Info Section */}
+  <div className="instructor-info ellipsis">
+    <h5>{fname} {lname}</h5>
+    <p className="education ellipsis">{education.degree} - {education.field}</p>
+    <p className="email ellipsis">{email}</p>
+    <p className="mobile ellipsis">{mobile}</p>
+  </div>
+
+</div>
+
 
       <div className="card-footer">
         <button

@@ -1,0 +1,16 @@
+.category-page h2 {
+  font-size: 28px;
+}
+
+.add-category-card {
+  background: #ffffff;
+  border-radius: 14px;
+}
+
+.table img {
+  border-radius: 8px;
+}
+
+.btn-warning {
+  color: #fff !important;
+}

@@ -1,0 +1,19 @@
+.analytics-card,
+.graph-card,
+.students-section {
+  background: #fff;
+  border-radius: 12px;
+}
+
+.admin-course-details h2 {
+  font-weight: 700;
+}
+
+.graph-card {
+  height: 100%;
+}
+
+.clickable:hover {
+  transform: translateY(-3px);
+  transition: 0.2s;
+}

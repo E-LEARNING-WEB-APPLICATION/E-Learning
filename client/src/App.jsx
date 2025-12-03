@@ -29,6 +29,7 @@ import StudentProfile from "./pages/student/studentProfile/StudentProfile";
 import InstructorCourses from "./pages/admin/InstructorsView/InstructorCourses";
 import CourseDetails from "./pages/student/coursedetails/CourseDetails";
 import InstructorProfile from "./pages/instructor/instructorProfile/InstructorProfile";
+import AdminCourseDetails from "./pages/admin/CoursesView/AdminCourseDetails";
 
 function App() {
   return (
@@ -78,6 +79,7 @@ function App() {
           </Route>
           <Route path="/admin" element={<AdminLayout />}>
             <Route path="dashboard" element={<AdminDashboard />} />
+            <Route path="courses/:courseId" element={<AdminCourseDetails />} />
             <Route path="courses" element={<AdminCourses />} />
             <Route path="instructors" element={<InstructorsList />} />
             <Route path="instructor-courses" element={<InstructorCourses />} />

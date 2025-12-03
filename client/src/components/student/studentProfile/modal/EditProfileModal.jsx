@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-const EditProfileModal = ({ show, onClose, profile, onSave }) => {
+const EditProfileModal = ({ show, onClose, profile, onSave, page }) => {
     const [form, setForm] = useState(profile);
 
     useEffect(() => {
@@ -12,12 +12,9 @@ const EditProfileModal = ({ show, onClose, profile, onSave }) => {
     };
 
     const handleSave = () => {
-        // Convert skills string → array
         const updatedForm = {
             ...form,
-            skills: form.skills.split(",").map((s) => s.trim()),
         };
-
         onSave(updatedForm);
         onClose();
     };
@@ -48,7 +45,6 @@ const EditProfileModal = ({ show, onClose, profile, onSave }) => {
                                 value={form.name}
                                 onChange={handleChange}
                             />
-
                             {/* About Me */}
                             <label className="fw-semibold">About Me</label>
                             <textarea
@@ -57,20 +53,27 @@ const EditProfileModal = ({ show, onClose, profile, onSave }) => {
                                 rows="3"
                                 value={form.bio}
                                 onChange={handleChange}></textarea>
-
-                            {/* Skills */}
-                            <label className="fw-semibold">
-                                Skills (comma-separated)
-                            </label>
-                            <input
-                                type="text"
-                                name="skills"
-                                className="form-control mb-3"
-                                value={form.skills}
-                                onChange={handleChange}
-                                placeholder="React, Node.js, MongoDB"
-                            />
-
+                            {/* Experience Only for instructor */}
+                            {page == "instructor" ? (
+                                <div className="mb-3">
+                                    <label className="form-label fw-semibold">
+                                        Experience
+                                    </label>
+                                    <select
+                                        name="experience"
+                                        className="form-select"
+                                        value={form.experience}
+                                        onChange={handleChange}>
+                                        <option value="">
+                                            Select experience
+                                        </option>
+                                        <option value="0-1">0-1 years</option>
+                                        <option value="2-3">2–3 years</option>
+                                        <option value="4-5">4–5 years</option>
+                                        <option value="5+">5+ years</option>
+                                    </select>
+                                </div>
+                            ) : null}
                             {/* Address */}
                             <label className="fw-semibold">Address</label>
                             <input
@@ -80,7 +83,6 @@ const EditProfileModal = ({ show, onClose, profile, onSave }) => {
                                 value={form.location}
                                 onChange={handleChange}
                             />
-
                             {/* Email */}
                             <label className="fw-semibold">Email</label>
                             <input
@@ -90,7 +92,6 @@ const EditProfileModal = ({ show, onClose, profile, onSave }) => {
                                 value={form.email}
                                 onChange={handleChange}
                             />
-
                             {/* Phone */}
                             <label className="fw-semibold">Phone</label>
                             <input

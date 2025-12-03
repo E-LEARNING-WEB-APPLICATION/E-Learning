@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { FaPencilAlt } from "react-icons/fa";
 
-const SkillsCard = ({ skills, allSkills, onSave }) => {
+const SkillsCard = ({ skills, allSkills, onSave, page }) => {
     const [editMode, setEditMode] = useState(false);
     const [selectedSkills, setSelectedSkills] = useState(skills);
 
@@ -27,7 +27,9 @@ const SkillsCard = ({ skills, allSkills, onSave }) => {
                 <FaPencilAlt size={16} />
             </div>
 
-            <h5 className="fw-bold text-primary mb-3">Skills</h5>
+            <h5 className="fw-bold text-primary mb-3">
+                {page == "student" ? "Skills" : "Specialization"}
+            </h5>
 
             {/* NORMAL VIEW */}
             {!editMode && (

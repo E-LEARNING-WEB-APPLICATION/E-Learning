@@ -7,12 +7,12 @@ const InstructorLayout = () => {
     return (
         <div>
             <InstructorNavbar />
-            <main className='container mt-3'>
+            <main className="container-fluid mt-3">
                 <Outlet />
             </main>
             <Footer />
         </div>
-    )
+    );
 }
 
 export default InstructorLayout

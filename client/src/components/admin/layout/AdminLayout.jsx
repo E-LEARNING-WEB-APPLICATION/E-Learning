@@ -12,7 +12,7 @@ const DashboardLayout = () => {
       <Sidebar onToggle={(c) => setCollapsed(c)} />
 
       <div className="main-content">
-        <AdminNavbar />
+        {/* <AdminNavbar /> */}
         <div className="p-4">
           <Outlet />
         </div>

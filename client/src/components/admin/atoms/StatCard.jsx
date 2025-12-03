@@ -1,6 +1,6 @@
 const StatCard = ({ title, value, icon }) => {
   return (
-    <div className="col-md-3">
+    <div className="col">
       <div className="stat-card p-3 shadow-sm rounded">
         <div className="d-flex justify-content-between align-items-center">
           <div>

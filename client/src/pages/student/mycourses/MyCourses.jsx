@@ -24,7 +24,7 @@ const MyCourses = () => {
 
   const handleNavigate = (course) => {
     console.log(course);
-    navigate("/student/course-details/", {
+    navigate("/student/enrolled-course-details/", {
       state: { courseId: course.courseId },
     });
   };

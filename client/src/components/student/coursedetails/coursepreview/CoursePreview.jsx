@@ -9,7 +9,7 @@ const CoursePreview = ({ course }) => {
     "https://raw.githubusercontent.com/gandhiomkar/testrepository/main/JavaScript%20for%20the%20Haters.mp4";
 
   return (
-    <div className="course-preview mb-4">
+    <div className="course-preview mb-4 mt-2">
       {/* ==== Video Section ==== */}
       <div className="video-wrapper border rounded-4 overflow-hidden shadow-sm">
         <video

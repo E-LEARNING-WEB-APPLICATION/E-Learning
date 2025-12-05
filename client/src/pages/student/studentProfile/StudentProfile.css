@@ -1,4 +1,4 @@
-body {
+.profilebody {
   font-family: "Poppins", sans-serif;
   background: #f5f8ff;
   color: #333;
@@ -58,13 +58,13 @@ body {
 }
 
 /* ===== Cards ===== */
-.card {
+.student-profile .card {
   background: #fff;
   border-radius: 16px;
   transition: 0.3s ease;
 }
 
-.card:hover {
+.student-profile .card:hover {
   transform: translateY(-3px);
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.07);
 }

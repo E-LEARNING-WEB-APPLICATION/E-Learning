@@ -1,5 +1,3 @@
-import React from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
 import "./InstructorCard.css";
 import { useNavigate } from "react-router-dom";
 import { IoShieldCheckmarkOutline } from "react-icons/io5";
@@ -22,49 +20,38 @@ const InstructorCard = ({ user, onDelete }) => {
   };
 
   return (
-    <div className="card user-card shadow-sm mb-3">
-      <div className="card-body position-relative">
-        {" "}
-        {/* Set position relative to control the icon */}
-        <div
-          className="d-flex align-items-center btn"
-          onClick={handleCardClick}
-        >
-          {/* Profile Picture */}
-          <img
-            src={profile_pic}
-            alt="Profile"
-            className="rounded-circle border border-light btn"
-            width="100"
-            height="100"
-            onClick={handleProfileClick}
-          />
+    <div className="instructor-card" onClick={handleCardClick}>
+      <div className="card-header">
+        {/* Image Wrapper */}
+        <div className="image-wrapper" onClick={handleProfileClick}>
+          <img src={profile_pic} alt="Profile" className="profile-image" />
 
-          {/* User Info */}
-          <div className="ms-3">
-            <h5 className="card-title mb-0">
-              {fname} {lname}
-            </h5>
-            <p className="card-subtitle text-muted mb-1">
-              {education.degree} - {education.field}
-            </p>
-            <p className="card-text mb-0">{email}</p>
-            <p className="card-text">{mobile}</p>
-          </div>
-
-          {/* Approved Status using Bootstrap Icons */}
-          <div className="approved-icon">
-            {isApproved ? (
-              <IoShieldCheckmarkOutline className="text-success" />
-            ) : (
-              <RxCrossCircled className="text-danger" />
-            )}
+          {/* Badge now inside wrapper */}
+          <div
+            className={`status-badge ${isApproved ? "approved" : "rejected"}`}
+          >
+            {isApproved ? <IoShieldCheckmarkOutline /> : <RxCrossCircled />}
           </div>
         </div>
-        {/* Delete Button */}
+
+        {/* Info Section */}
+        <div className="instructor-info ellipsis">
+          <h5>
+            {fname} {lname}
+          </h5>
+          <p className="education ellipsis">
+            {education.degree} - {education.field}
+          </p>
+          <p className="email ellipsis">{email}</p>
+          <p className="mobile ellipsis">{mobile}</p>
+        </div>
+      </div>
+
+      <div className="card-footer">
         <button
-          className="btn btn-outline-danger btn-sm mt-2"
-          onClick={() => {
+          className="delete-btn"
+          onClick={(e) => {
+            e.stopPropagation();
             onDelete(user.id);
           }}
         >

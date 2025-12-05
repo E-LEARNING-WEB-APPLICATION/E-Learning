@@ -29,6 +29,7 @@ import StudentProfile from "./pages/student/studentProfile/StudentProfile";
 import InstructorCourses from "./pages/admin/InstructorsView/InstructorCourses";
 import CourseDetails from "./pages/student/coursedetails/CourseDetails";
 import CourseEnrolledPage from "./pages/student/enrolledcoursedetails/CourseEnrolledPage";
+import InstructorProfile from "./pages/instructor/instructorProfile/InstructorProfile";
 
 function App() {
   return (
@@ -66,6 +67,7 @@ function App() {
             <Route path="addCourse" element={<AddCourse />} />
             <Route path="addedCourses" element={<AddedCourses />} />
             <Route path="addedCourses/add-section" element={<AddSection />} />
+            <Route path="profile" element={<InstructorProfile />} />
             <Route
               path="addedCourses/show-sections"
               element={<ShowSection />}

@@ -15,7 +15,7 @@ auth_id      INT UNIQUE NOT NULL REFERENCES auth(auth_id)   -- 1:1
 fname        VARCHAR(50)
 lname        VARCHAR(50)
 dob          DATE
-gender       ENUM('male','female','other')
+gender       ENUM('male','female')
 profile_pic  VARCHAR(255)
 mob_no        VARCHAR(15)
 bio           TEXT

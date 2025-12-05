@@ -1,44 +1,46 @@
+import AboutCard from "@/components/student/studentProfile/aboutCard/aboutCard";
+import ContactCard from "@/components/student/studentProfile/contactCard/ContactCard";
+import EducationCard from "@/components/student/studentProfile/educationCard/EducationCard";
+import EditEducationModal from "@/components/student/studentProfile/modal/EditEducationModal";
+import EditProfileModal from "@/components/student/studentProfile/modal/EditProfileModal";
+import ProfileHeader from "@/components/student/studentProfile/profileHeader/ProfileHeader";
+import SkillsCard from "@/components/student/studentProfile/skillsCard/SkillsCard";
 import React, { useState } from "react";
-import "./StudentProfile.css";
 
-import ProfileHeader from "../../../components/student/studentProfile/profileHeader/ProfileHeader";
-import AboutCard from "../../../components/student/studentProfile/aboutCard/aboutCard";
-import SkillsCard from "../../../components/student/studentProfile/skillsCard/SkillsCard";
-import ContactCard from "../../../components/student/studentProfile/contactCard/ContactCard";
-import EducationCard from "../../../components/student/studentProfile/educationCard/EducationCard";
-
-import EditProfileModal from "../../../components/student/studentProfile/modal/EditProfileModal";
-import EditEducationModal from "../../../components/student/studentProfile/modal/EditEducationModal";
-
-const StudentProfile = () => {
-    const allSkills = [
-        "React.js",
-        "Node.js",
-        "MongoDB",
-        "JavaScript",
-        "UI/UX Design",
-        "C++",
-        "Express.js",
-        "Python",
-        "HTML",
-        "CSS",
+const InstructorProfile = () => {
+    const allSpecializations = [
+        "Machine Learning",
+        "Data Science",
+        "Artificial Intelligence",
+        "Cloud Computing",
+        "Cyber Security",
+        "DevOps",
+        "Full-Stack Development",
+        "Backend Engineering",
+        "Frontend Engineering",
+        "Software Architecture",
+        "Database Management",
+        "Blockchain",
+        "Mobile App Development",
+        "IoT (Internet of Things)",
     ];
 
-    const [profile, setProfile] = useState({
-        name: "Sanket Raut",
-        bio: "Full-Stack Developer",
+    const [instructor, setInstructor] = useState({
+        name: "John Doe",
+        bio: "Senior Instructor | Expert in Computer Science",
         location: "Pune, Maharashtra",
-        email: "sanket@example.com",
+        email: "john@example.com",
         phone: "+91 98765 43210",
-        skills: ["React.js", "Node.js", "MongoDB", "JavaScript"],
-        dob: "2003-25-1", 
-        gender: "male",
+        specialization: ["Machine Learning", "Data Science", "Cloud Computing"],
+        experience: "3-5",
+        dob: "1990-05-12", 
+        gender: "female",
         photo: "https://i.pravatar.cc/160",
     });
 
     const handleProfilePhotoUpload = (file) => {
         const previewURL = URL.createObjectURL(file);
-        setProfile((prev) => ({ ...prev, photo: previewURL }));
+        setInstructor((prev) => ({ ...prev, photo: previewURL }));
     };
 
     const [education, setEducation] = useState([
@@ -59,8 +61,8 @@ const StudentProfile = () => {
     return (
         <div className="student-profile profilebody">
             <ProfileHeader
-                page={"student"}
-                profile={profile}
+                page={"instructor"}
+                profile={instructor}
                 openProfileModal={() => setShowProfileModal(true)}
                 onPhotoUpload={handleProfilePhotoUpload}
             />
@@ -68,7 +70,7 @@ const StudentProfile = () => {
             <div className="container py-5">
                 <div className="row g-4">
                     <div className="col-lg-8">
-                        <AboutCard bio={profile.bio} />
+                        <AboutCard bio={instructor.bio} />
 
                         <EducationCard
                             education={education}
@@ -85,21 +87,21 @@ const StudentProfile = () => {
 
                     <div className="col-lg-4">
                         <SkillsCard
-                            page={"student"}
-                            skills={profile.skills}
-                            allSkills={allSkills}
-                            onSave={(updatedSkills) =>
-                                setProfile((prev) => ({
+                            page={"instructor"}
+                            skills={instructor.specialization}
+                            allSkills={allSpecializations}
+                            onSave={(updatedSpecializations) =>
+                                setInstructor((prev) => ({
                                     ...prev,
-                                    skills: updatedSkills,
+                                    specialization: updatedSpecializations,
                                 }))
                             }
                         />
 
                         <ContactCard
-                            location={profile.location}
-                            email={profile.email}
-                            phone={profile.phone}
+                            location={instructor.location}
+                            email={instructor.email}
+                            phone={instructor.phone}
                         />
                     </div>
                 </div>
@@ -107,11 +109,11 @@ const StudentProfile = () => {
 
             {/* Bootstrap Modals */}
             <EditProfileModal
-                page={"student"}
+                page={"instructor"}
                 show={showProfileModal}
                 onClose={() => setShowProfileModal(false)}
-                profile={profile}
-                onSave={setProfile}
+                profile={instructor}
+                onSave={setInstructor}
             />
 
             <EditEducationModal
@@ -135,4 +137,4 @@ const StudentProfile = () => {
     );
 };
 
-export default StudentProfile;
+export default InstructorProfile;

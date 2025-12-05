@@ -1,5 +1,6 @@
 import { FaUsers, FaBook, FaUserPlus, FaMoneyBillWave } from "react-icons/fa";
 import StatCard from "../atoms/StatCard";
+import AdvancedStatCard from "../atoms/AdvancedStatCard";
 
 const KPISection = () => {
   return (
@@ -8,16 +9,19 @@ const KPISection = () => {
         <StatCard
           title="Total Students"
           value="12,430"
+          color="danger"
+          growth={-5}
           icon={<FaUsers size={28} />}
         />
         <StatCard
           title="Total Instructors"
           value="240"
           icon={<FaUsers size={28} />}
+          color="warning"
         />
-        <StatCard
+        <AdvancedStatCard
           title="New Enrollments"
-          value="320"
+          stats={{"daily":100,"weekly":300,"monthly":1000}}
           icon={<FaUserPlus size={28} />}
         />
         <StatCard
@@ -29,6 +33,8 @@ const KPISection = () => {
           title="Revenue (Monthly)"
           value="$12,400"
           icon={<FaMoneyBillWave size={28} />}
+          growth={10}
+          color="success"
         />
       </div>
     </div>

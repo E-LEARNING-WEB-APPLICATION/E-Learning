@@ -1,0 +1,169 @@
+.stat-card.modern {
+  background: #ffffff;
+  border: 1px solid #e8e8f3;
+  padding: 18px 20px;
+  transition: all 0.2s ease;
+}
+
+.stat-card.modern:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+}
+
+.stat-title {
+  font-size: 0.9rem;
+  color: #7a7a9d;
+  margin-bottom: 2px;
+}
+
+.stat-value {
+  font-weight: 700;
+  font-size: 1.7rem;
+  color: #2b2b3c;
+}
+
+/* Colored icon bubble */
+.stat-icon-wrapper {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--icon-bg);
+  color: var(--icon-color);
+  font-size: 1.4rem;
+}
+
+/* Color presets */
+.stat-primary {
+  --icon-bg: rgba(78, 115, 223, 0.15);
+  --icon-color: #4e73df;
+}
+
+.stat-success {
+  --icon-bg: rgba(28, 200, 138, 0.15);
+  --icon-color: #1cc88a;
+}
+
+.stat-warning {
+  --icon-bg: rgba(246, 194, 62, 0.15);
+  --icon-color: #f6c23e;
+}
+
+.stat-danger {
+  --icon-bg: rgba(231, 74, 59, 0.15);
+  --icon-color: #e74a3b;
+}
+
+
+/* Tabs Container */
+.stat-tabs {
+  display: flex;
+  gap: 8px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid #e5e5ee;
+}
+
+/* Transparent tab buttons */
+.tab-btn {
+  background: transparent;
+  border: none;
+  padding: 4px 10px;
+  font-size: 0.85rem;
+  color: #6e6e8a;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: all 0.15s ease;
+}
+
+.tab-btn:hover {
+  background: #f4f4fa;
+}
+
+.tab-btn.active {
+  background: #ededf9;
+  font-weight: 600;
+  color: #4e4eb5;
+}
+
+/* Fade animation */
+.fade-anim {
+  animation: fadeIn 0.25s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(3px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Advanced card padding fix */
+.stat-card.advanced {
+  padding: 18px 18px;
+}
+
+
+/* UNIFIED CARD SIZE */
+.stat-card.unified {
+  height: 140px;           /* fixed same height for both */
+  min-height: 140px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Growth indicator */
+.stat-growth {
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-top: 4px;
+}
+
+.stat-growth.up {
+  color: #1cc88a;   /* green */
+}
+
+.stat-growth.down {
+  color: #e74a3b;   /* red */
+}
+
+/* Adjust icon container to be consistent */
+.stat-icon-wrapper {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  margin: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--icon-bg);
+  color: var(--icon-color);
+  font-size: 1.4rem;
+}
+
+/* Modern + Advanced stay same */
+.stat-card.modern,
+.stat-card.advanced {
+  background: #ffffff;
+  border: 1px solid #e8e8f3;
+  padding: 18px 20px;
+  transition: all 0.2s ease;
+}
+
+.stat-card.unified:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+}
+
+/* Title/Value unchanged */
+.stat-title {
+  font-size: 0.9rem;
+  color: #7a7a9d;
+  margin-bottom: 2px;
+}
+
+.stat-value {
+  font-weight: 700;
+  font-size: 1.7rem;
+  color: #2b2b3c;
+}

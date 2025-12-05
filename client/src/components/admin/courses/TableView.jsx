@@ -136,7 +136,7 @@ const TableView = ({ courses }) => {
                 {/* course link */}
                 <td>
                   <Link
-                    to={`/admin/course/${course.courseId}`}
+                    to={`/admin/courses/${course.courseId}`}
                     className="course-link"
                   >
                     {course.course_name}

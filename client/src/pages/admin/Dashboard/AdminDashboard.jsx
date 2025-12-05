@@ -8,7 +8,9 @@ import React from "react";
 const AdminDashboard = () => {
   return (
     <div>
-      <div>Admin Dashboard</div>
+              <div>
+          <h3 className="mb-4 fw-bold text-primary">Welcome Admin</h3>
+        </div>
       <div className="container-fluid dashboard-container">
         <KPISection />
 

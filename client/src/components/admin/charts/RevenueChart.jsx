@@ -1,4 +1,11 @@
-import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts";
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  Tooltip,
+  ResponsiveContainer,
+} from "recharts";
 
 const data = [
   { month: "Jan", revenue: 4000 },
@@ -14,7 +21,12 @@ const RevenueChart = () => {
         <XAxis dataKey="month" />
         <YAxis />
         <Tooltip />
-        <Line type="monotone" dataKey="revenue" stroke="#007bff" strokeWidth={3} />
+        <Line
+          type="monotone"
+          dataKey="revenue"
+          stroke="#007bff"
+          strokeWidth={3}
+        />
       </LineChart>
     </ResponsiveContainer>
   );

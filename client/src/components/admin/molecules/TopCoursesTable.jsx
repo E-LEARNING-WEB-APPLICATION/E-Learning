@@ -29,7 +29,6 @@ const TopCoursesTable = () => {
             </tr>
           </tbody>
         </table>
-
       </div>
     </div>
   );

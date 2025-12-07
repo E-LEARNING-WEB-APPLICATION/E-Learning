@@ -6,7 +6,9 @@ const ChartTooltipAtom = ({ active, payload, label }) => {
       <strong>{label}</strong>
       <br />
       {payload.map((p, i) => (
-        <div key={i}>{p.name}: {p.value}</div>
+        <div key={i}>
+          {p.name}: {p.value}
+        </div>
       ))}
     </div>
   );

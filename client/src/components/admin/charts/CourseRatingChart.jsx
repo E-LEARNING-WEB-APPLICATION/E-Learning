@@ -1,10 +1,5 @@
 import React from "react";
-import {
-  ResponsiveContainer,
-  BarChart,
-  Tooltip,
-  Legend,
-} from "recharts";
+import { ResponsiveContainer, BarChart, Tooltip, Legend } from "recharts";
 
 import ChartContainer from "@/components/admin/atoms/ChartContainer";
 import ChartBarAtom from "@/components/admin/atoms/ChartBarAtom";

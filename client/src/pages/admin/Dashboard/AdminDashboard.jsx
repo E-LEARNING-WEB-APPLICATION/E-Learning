@@ -13,7 +13,6 @@ const AdminDashboard = () => {
       <h3 className="mb-4 fw-bold text-primary">Welcome Admin</h3>
 
       <div className="container-fluid dashboard-container">
-
         {/* 1) KPI SECTION */}
         <KPISection />
 
@@ -40,10 +39,7 @@ const AdminDashboard = () => {
         </div>
 
         {/* 6) Recent Enrollments + Recent Reviews */}
-        <div className="row mt-4">
-          {/* <RecentPanels /> */}
-        </div>
-
+        <div className="row mt-4">{/* <RecentPanels /> */}</div>
       </div>
     </div>
   );

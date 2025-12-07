@@ -1,13 +1,11 @@
 import React from "react";
-import {
-  ResponsiveContainer,
-  LineChart,
-  Tooltip,
-  Legend,
-} from "recharts";
+import { ResponsiveContainer, LineChart, Tooltip, Legend } from "recharts";
 
 import ChartContainer from "@/components/admin/atoms/ChartContainer";
-import {ChartXAxisAtom, ChartYAxisAtom} from "@/components/admin/atoms/ChartAxisAtom";
+import {
+  ChartXAxisAtom,
+  ChartYAxisAtom,
+} from "@/components/admin/atoms/ChartAxisAtom";
 import ChartTooltipAtom from "@/components/admin/atoms/ChartTooltipAtom";
 import ChartLineAtom from "@/components/admin/atoms/ChartLineAtom";
 import NoDataAtom from "@/components/admin/atoms/NoDataAtom";

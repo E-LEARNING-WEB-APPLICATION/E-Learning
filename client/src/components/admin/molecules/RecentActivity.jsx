@@ -11,7 +11,8 @@ const RecentActivity = () => {
           </li>
 
           <li className="list-group-item">
-            <strong>Riya</strong> reviewed <strong>React Mastery</strong>: ⭐⭐⭐⭐☆
+            <strong>Riya</strong> reviewed <strong>React Mastery</strong>:
+            ⭐⭐⭐⭐☆
           </li>
         </ul>
       </div>

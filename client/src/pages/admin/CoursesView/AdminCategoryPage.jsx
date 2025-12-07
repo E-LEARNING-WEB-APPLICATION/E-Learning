@@ -68,7 +68,6 @@ const AdminCategoryPage = () => {
 
   return (
     <div className="container py-4 category-page">
-
       {/* Page Header */}
       <div className="mb-4">
         <h2 className="fw-bold">Manage Course Categories</h2>
@@ -79,12 +78,10 @@ const AdminCategoryPage = () => {
 
       {/* Add Category Section */}
       <div className="add-category-card p-4 shadow-sm rounded mb-5">
-
         <h4 className="fw-bold mb-3">Add New Category</h4>
 
         <form onSubmit={handleAddCategory}>
           <div className="row g-3">
-
             {/* Category Name */}
             <div className="col-md-6">
               <label className="form-label fw-semibold">Category Name</label>
@@ -143,7 +140,11 @@ const AdminCategoryPage = () => {
                   src={previewImg}
                   alt="Preview"
                   className="img-thumbnail"
-                  style={{ width: "120px", height: "120px", objectFit: "cover" }}
+                  style={{
+                    width: "120px",
+                    height: "120px",
+                    objectFit: "cover",
+                  }}
                 />
               ) : (
                 <p className="text-muted">No image selected</p>
@@ -156,15 +157,12 @@ const AdminCategoryPage = () => {
                 + Add Category
               </button>
             </div>
-
           </div>
         </form>
-
       </div>
 
       {/* Categories Table */}
       <div className="shadow-sm p-4 rounded bg-white">
-
         <h4 className="fw-bold mb-3">All Categories</h4>
 
         <table className="table table-bordered table-striped">
@@ -195,9 +193,7 @@ const AdminCategoryPage = () => {
                 <td>{cat.description}</td>
                 <td>{cat.keywords}</td>
                 <td>
-                  <button className="btn btn-warning btn-sm me-2">
-                    Edit
-                  </button>
+                  <button className="btn btn-warning btn-sm me-2">Edit</button>
                   <button
                     className="btn btn-danger btn-sm"
                     onClick={() => handleDelete(cat.id)}
@@ -208,10 +204,8 @@ const AdminCategoryPage = () => {
               </tr>
             ))}
           </tbody>
-
         </table>
       </div>
-
     </div>
   );
 };

@@ -1,4 +1,10 @@
-import { FaUsers, FaBook, FaUserPlus, FaMoneyBillWave, FaUserCheck } from "react-icons/fa";
+import {
+  FaUsers,
+  FaBook,
+  FaUserPlus,
+  FaMoneyBillWave,
+  FaUserCheck,
+} from "react-icons/fa";
 import StatCard from "../atoms/StatCard";
 import AdvancedStatCard from "../atoms/AdvancedStatCard";
 

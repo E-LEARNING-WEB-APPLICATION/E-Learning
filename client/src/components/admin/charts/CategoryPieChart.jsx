@@ -1,10 +1,5 @@
 import React from "react";
-import {
-  ResponsiveContainer,
-  PieChart,
-  Tooltip,
-  Legend,
-} from "recharts";
+import { ResponsiveContainer, PieChart, Tooltip, Legend } from "recharts";
 
 import ChartContainer from "@/components/admin/atoms/ChartContainer";
 import ChartPieAtom from "@/components/admin/atoms/ChartPieAtom";
@@ -15,10 +10,8 @@ import LoadingSpinnerAtom from "@/components/admin/atoms/LoadingSpinnerAtom";
 const COLORS = ["#4a77f3", "#ff7675", "#55efc4", "#ffeaa7", "#fd79a8"];
 
 const CategoryPieChart = ({ data, loading }) => {
-    console.log(data);
-    data.map((_, i) => (
-            console.log(i)    
-              ));
+  console.log(data);
+  data.map((_, i) => console.log(i));
   return (
     <ChartContainer title="Category Distribution">
       {loading ? (
@@ -30,9 +23,12 @@ const CategoryPieChart = ({ data, loading }) => {
           <PieChart>
             <Tooltip content={<ChartTooltipAtom />} />
             <Legend />
-            <ChartPieAtom dataKey="value" nameKey="category" data={data} colors={COLORS}>
-
-            </ChartPieAtom>
+            <ChartPieAtom
+              dataKey="value"
+              nameKey="category"
+              data={data}
+              colors={COLORS}
+            ></ChartPieAtom>
           </PieChart>
         </ResponsiveContainer>
       )}

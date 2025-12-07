@@ -21,16 +21,16 @@ const TopInstructorsAndRatings = () => (
       </div> */}
 
     <div className="col-md-6">
-        <TopInstructorsTable
-          data={[
-            { name: "John Doe", revenue: 180000, enrollments: 1200 },
-            { name: "Sarah Smith", revenue: 145000, enrollments: 980 },
-            { name: "Alex Johnson", revenue: 130000, enrollments: 890 },
-            { name: "Priya Sharma", revenue: 122000, enrollments: 760 },
-            { name: "Ravi Kumar", revenue: 118000, enrollments: 720 },
-          ]}
-        />
-      </div>
+      <TopInstructorsTable
+        data={[
+          { name: "John Doe", revenue: 180000, enrollments: 1200 },
+          { name: "Sarah Smith", revenue: 145000, enrollments: 980 },
+          { name: "Alex Johnson", revenue: 130000, enrollments: 890 },
+          { name: "Priya Sharma", revenue: 122000, enrollments: 760 },
+          { name: "Ravi Kumar", revenue: 118000, enrollments: 720 },
+        ]}
+      />
+    </div>
 
     <div className="col-md-6 mb-3">
       <ChartCard title="Course Rating Overview">

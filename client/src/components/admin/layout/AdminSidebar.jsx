@@ -22,9 +22,8 @@ const Sidebar = ({ onToggle }) => {
   const [openInstructors, setOpenInstructors] = useState(false);
 
   // Profile popup
-//   const [showProfileMenu, setShowProfileMenu] = useState(false);
+  //   const [showProfileMenu, setShowProfileMenu] = useState(false);
   const [showProfile, setShowProfile] = useState(false);
-
 
   const location = useLocation();
 
@@ -152,8 +151,9 @@ const Sidebar = ({ onToggle }) => {
           className="profile-icon-wrapper"
           onClick={() => setShowProfile((prev) => !prev)}
         >
-          <FaUserCircle size={28} color="#fff" /> 
-        </div><strong>Admin</strong>
+          <FaUserCircle size={28} color="#fff" />
+        </div>
+        <strong>Admin</strong>
 
         {showProfile && (
           <div className="profile-popup">
@@ -170,7 +170,6 @@ const Sidebar = ({ onToggle }) => {
             </div>
           </div>
         )}
-        
       </div>
     </div>
   );

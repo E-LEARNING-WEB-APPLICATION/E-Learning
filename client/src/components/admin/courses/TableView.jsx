@@ -13,9 +13,10 @@ const TableView = ({ courses }) => {
 
   // ---- SEARCH ----
   const filteredCourses = useMemo(() => {
-    return courses.filter((c) =>
-      c.course_name.toLowerCase().includes(search.toLowerCase()) ||
-      c.category.toLowerCase().includes(search.toLowerCase())
+    return courses.filter(
+      (c) =>
+        c.course_name.toLowerCase().includes(search.toLowerCase()) ||
+        c.category.toLowerCase().includes(search.toLowerCase())
     );
   }, [courses, search]);
 
@@ -57,16 +58,11 @@ const TableView = ({ courses }) => {
   const renderSortIcon = (field) => {
     if (sortField !== field) return <FaSort className="text-muted" />;
 
-    return sortOrder === "asc" ? (
-      <FaSortUp />
-    ) : (
-      <FaSortDown />
-    );
+    return sortOrder === "asc" ? <FaSortUp /> : <FaSortDown />;
   };
 
   return (
     <div className="container mt-4 course-page">
-
       {/* -------- SUMMARY CARDS -------- */}
       <div className="row mb-4">
         <div className="col-md-4">
@@ -113,7 +109,10 @@ const TableView = ({ courses }) => {
               <th onClick={() => toggleSort("courseId")} className="sortable">
                 ID {renderSortIcon("courseId")}
               </th>
-              <th onClick={() => toggleSort("course_name")} className="sortable">
+              <th
+                onClick={() => toggleSort("course_name")}
+                className="sortable"
+              >
                 Course Name {renderSortIcon("course_name")}
               </th>
               <th onClick={() => toggleSort("category")} className="sortable">
@@ -169,13 +168,18 @@ const TableView = ({ courses }) => {
               key={i}
               className={`page-item ${currentPage === i + 1 ? "active" : ""}`}
             >
-              <button className="page-link" onClick={() => setCurrentPage(i + 1)}>
+              <button
+                className="page-link"
+                onClick={() => setCurrentPage(i + 1)}
+              >
                 {i + 1}
               </button>
             </li>
           ))}
 
-          <li className={`page-item ${currentPage === totalPages && "disabled"}`}>
+          <li
+            className={`page-item ${currentPage === totalPages && "disabled"}`}
+          >
             <button
               className="page-link"
               onClick={() => setCurrentPage((p) => p + 1)}
@@ -185,7 +189,6 @@ const TableView = ({ courses }) => {
           </li>
         </ul>
       </nav>
-
     </div>
   );
 };

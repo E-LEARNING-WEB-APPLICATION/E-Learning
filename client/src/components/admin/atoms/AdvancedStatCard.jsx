@@ -6,8 +6,9 @@ const AdvancedStatCard = ({ title, stats, icon, color = "primary" }) => {
 
   return (
     <div className="col">
-      <div className={`stat-card advanced unified shadow-sm rounded stat-${color}`}>
-        
+      <div
+        className={`stat-card advanced unified shadow-sm rounded stat-${color}`}
+      >
         {/* Header Tabs */}
         <div className="stat-tabs">
           {["daily", "weekly", "monthly"].map((r) => (
@@ -25,9 +26,7 @@ const AdvancedStatCard = ({ title, stats, icon, color = "primary" }) => {
         <div className="d-flex justify-content-between align-items-center mt-2">
           <div>
             <p className="stat-title">{title}</p>
-            <h3 className="stat-value fade-anim">
-              {stats[range]}
-            </h3>
+            <h3 className="stat-value fade-anim">{stats[range]}</h3>
           </div>
 
           <div className="stat-icon-wrapper">{icon}</div>

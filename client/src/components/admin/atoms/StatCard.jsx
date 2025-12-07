@@ -4,7 +4,6 @@ const StatCard = ({ title, value, icon, growth, color = "primary" }) => {
   return (
     <div className="col">
       <div className={`stat-card unified shadow-sm rounded stat-${color} px-3`}>
-        
         <div className="d-flex justify-content-between align-items-center">
           <div>
             <p className="stat-title">{title}</p>
@@ -19,7 +18,6 @@ const StatCard = ({ title, value, icon, growth, color = "primary" }) => {
 
           <div className="stat-icon-wrapper">{icon}</div>
         </div>
-
       </div>
     </div>
   );

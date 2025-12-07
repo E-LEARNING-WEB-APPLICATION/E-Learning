@@ -56,7 +56,6 @@
   --icon-color: #e74a3b;
 }
 
-
 /* Tabs Container */
 .stat-tabs {
   display: flex;
@@ -93,8 +92,14 @@
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(3px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(3px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* Advanced card padding fix */
@@ -102,10 +107,9 @@
   padding: 18px 18px;
 }
 
-
 /* UNIFIED CARD SIZE */
 .stat-card.unified {
-  height: 140px;           /* fixed same height for both */
+  height: 140px; /* fixed same height for both */
   min-height: 140px;
   display: flex;
   flex-direction: column;
@@ -120,11 +124,11 @@
 }
 
 .stat-growth.up {
-  color: #1cc88a;   /* green */
+  color: #1cc88a; /* green */
 }
 
 .stat-growth.down {
-  color: #e74a3b;   /* red */
+  color: #e74a3b; /* red */
 }
 
 /* Adjust icon container to be consistent */

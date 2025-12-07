@@ -62,10 +62,8 @@ const InstructorTableView = ({ instructors, handleRemove }) => {
 
   return (
     <div className="container py-4">
-
       {/* ---------- SUMMARY CARDS ---------- */}
       <div className="row mb-4">
-        
         <div className="col-md-4 mb-3">
           <div className="card shadow-sm border-primary">
             <div className="card-body">
@@ -92,7 +90,6 @@ const InstructorTableView = ({ instructors, handleRemove }) => {
             </div>
           </div>
         </div>
-
       </div>
 
       {/* ---------- SEARCH BAR ---------- */}
@@ -116,22 +113,34 @@ const InstructorTableView = ({ instructors, handleRemove }) => {
           <table className="table table-hover align-middle">
             <thead className="table-light">
               <tr>
-                <th style={{ cursor: "pointer" }} onClick={() => handleSort("id")}>
+                <th
+                  style={{ cursor: "pointer" }}
+                  onClick={() => handleSort("id")}
+                >
                   ID {renderSortIcon("id")}
                 </th>
 
-                <th style={{ cursor: "pointer" }} onClick={() => handleSort("fname")}>
+                <th
+                  style={{ cursor: "pointer" }}
+                  onClick={() => handleSort("fname")}
+                >
                   Instructor {renderSortIcon("fname")}
                 </th>
 
-                <th style={{ cursor: "pointer" }} onClick={() => handleSort("dob")}>
+                <th
+                  style={{ cursor: "pointer" }}
+                  onClick={() => handleSort("dob")}
+                >
                   DOB {renderSortIcon("dob")}
                 </th>
 
                 <th>Email</th>
                 <th>Mobile</th>
 
-                <th style={{ cursor: "pointer" }} onClick={() => handleSort("education")}>
+                <th
+                  style={{ cursor: "pointer" }}
+                  onClick={() => handleSort("education")}
+                >
                   Education {renderSortIcon("education")}
                 </th>
 
@@ -151,10 +160,14 @@ const InstructorTableView = ({ instructors, handleRemove }) => {
                       <img
                         src={ins.profile_pic}
                         className="rounded-circle border me-2"
-                        style={{ width: "45px", height: "45px", objectFit: "cover" }}
+                        style={{
+                          width: "45px",
+                          height: "45px",
+                          objectFit: "cover",
+                        }}
                       />
                       <div className="text-start">
-                        <strong >
+                        <strong>
                           {ins.fname} {ins.lname}
                         </strong>
                         <div className="small text-muted">{ins.title}</div>
@@ -181,7 +194,9 @@ const InstructorTableView = ({ instructors, handleRemove }) => {
                     {ins.isApproved ? (
                       <span className="badge bg-success">Approved</span>
                     ) : (
-                      <span className="badge bg-warning text-dark">Pending</span>
+                      <span className="badge bg-warning text-dark">
+                        Pending
+                      </span>
                     )}
                   </td>
 
@@ -204,11 +219,9 @@ const InstructorTableView = ({ instructors, handleRemove }) => {
                 </tr>
               )}
             </tbody>
-
           </table>
         </div>
       </div>
-
     </div>
   );
 };

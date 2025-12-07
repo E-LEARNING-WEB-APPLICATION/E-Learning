@@ -19,7 +19,8 @@
   border-radius: 10px;
 }
 
-.chart-card, .table-card {
+.chart-card,
+.table-card {
   background: #ffffff;
   border-radius: 12px;
 }

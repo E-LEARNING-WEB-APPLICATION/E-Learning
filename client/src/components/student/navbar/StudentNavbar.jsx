@@ -1,70 +1,121 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { NavLink } from "react-router-dom";
+import "./StudentNavbar.css";
 
 function StudentNavbar() {
-    return (
-        <nav className='navbar navbar-expand-lg bg-primary' data-bs-theme="dark">
-            <div className='container-fluid'>
-                <Link className='navbar-brand' to="/student/dashboard">E-Learning</Link>
-                <button
-                    className="navbar-toggler"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#studentNavbar"
-                    aria-controls="studentNavbar"
-                    aria-expanded="false"
-                    aria-label="Toggle navigation"
-                >
-                    <span className="navbar-toggler-icon"></span>
-                </button>
+  return (
+    <nav
+      className="navbar navbar-expand-lg student-navbar"
+      data-bs-theme="dark"
+    >
+      <div className="container-fluid">
+        {/* Brand */}
+        <NavLink to="/student/dashboard" className="student-brand">
+          <i className="bi bi-mortarboard-fill me-2"></i>
+          <span className="brand-text">E-Learning</span>
+        </NavLink>
 
-                <div className="collapse navbar-collapse" id="studentNavbar">
-                    <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
-                        <li className="nav-item">
-                            <Link className="nav-link active" to="/student/dashboard">
-                                Dashboard
-                            </Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link className="nav-link" to="/student/mycourses">
-                                MyCourses
-                            </Link>
-                        </li>
-                        <li className='nav-item'>
-                            <Link className='nav-link' to="/student/wishlist">
-                                Wishlist
-                            </Link>
-                        </li>
-                        <li className='nav-item'>
-                            <Link className='nav-link' to="/student/notification">
-                                Notifications
-                            </Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link className="nav-link" to="/student/profile">
-                                Profile
-                            </Link>
-                        </li>
-                        <li>
-                            <Link className='nav-link' to='/student/aboutus'>
-                                About Us
-                            </Link>
-                        </li>
-                        <li>
-                            <Link className='nav-link' to='/student/contactus'>
-                                Contact Us
-                            </Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link className="nav-link" to="/login">
-                                Logout
-                            </Link>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    );
+        {/* Toggle */}
+        <button
+          className="navbar-toggler student-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#studentNavbar"
+        >
+          <span className="navbar-toggler-icon"></span>
+        </button>
+
+        {/* Links */}
+        <div className="collapse navbar-collapse" id="studentNavbar">
+          <ul className="navbar-nav ms-auto mb-2 mb-lg-0 student-links">
+            {/* Dashboard */}
+            <li className="nav-item" style={{ marginLeft: "7px" }}>
+              <NavLink
+                to="/student/dashboard"
+                className={({ isActive }) =>
+                  isActive ? "nav-link active-link" : "nav-link"
+                }
+              >
+                Dashboard
+              </NavLink>
+            </li>
+
+            <li className="nav-item" style={{ marginLeft: "7px" }}>
+              <NavLink
+                to="/student/mycourses"
+                className={({ isActive }) =>
+                  isActive ? "nav-link active-link" : "nav-link"
+                }
+              >
+                MyCourses
+              </NavLink>
+            </li>
+
+            <li className="nav-item" style={{ marginLeft: "7px" }}>
+              <NavLink
+                to="/student/wishlist"
+                className={({ isActive }) =>
+                  isActive ? "nav-link active-link" : "nav-link"
+                }
+              >
+                Wishlist
+              </NavLink>
+            </li>
+
+            <li className="nav-item" style={{ marginLeft: "7px" }}>
+              <NavLink
+                to="/student/notification"
+                className={({ isActive }) =>
+                  isActive ? "nav-link active-link" : "nav-link"
+                }
+              >
+                Notifications
+              </NavLink>
+            </li>
+
+            <li className="nav-item" style={{ marginLeft: "7px" }}>
+              <NavLink
+                to="/student/profile"
+                className={({ isActive }) =>
+                  isActive ? "nav-link active-link" : "nav-link"
+                }
+              >
+                Profile
+              </NavLink>
+            </li>
+
+            <li className="nav-item" style={{ marginLeft: "7px" }}>
+              <NavLink
+                to="/student/aboutus"
+                className={({ isActive }) =>
+                  isActive ? "nav-link active-link" : "nav-link"
+                }
+              >
+                About Us
+              </NavLink>
+            </li>
+
+            <li className="nav-item" style={{ marginLeft: "7px" }}>
+              <NavLink
+                to="/student/contactus"
+                className={({ isActive }) =>
+                  isActive ? "nav-link active-link" : "nav-link"
+                }
+              >
+                Contact Us
+              </NavLink>
+            </li>
+
+            <li className="nav-item" style={{ marginLeft: "7px" }}>
+              <NavLink to="/guest/login" className="nav-link logout-btn">
+                Logout
+              </NavLink>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  );
 }
 
 export default StudentNavbar;

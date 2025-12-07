@@ -1,46 +1,70 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React from "react";
+import { NavLink } from "react-router-dom";
+import "../../student/navbar/StudentNavbar.css";
 
 const GuestNavbar = () => {
-    return (
-        <nav className='navbar navbar-expand-lg bg-primary' data-bs-theme="dark">
-            <div className='container-fluid'>
-                <Link className='navbar-brand' to='/guest/dashboard'>E-Learning</Link>
-                <button
-                    className="navbar-toggler"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#studentNavbar"
-                    aria-controls="studentNavbar"
-                    aria-expanded="false"
-                    aria-label="Toggle navigation"
-                >
-                    <span className="navbar-toggler-icon"></span>
-                </button>
-                <div className='collapse navbar-collapse' id='studentNavbar'>
-                    <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
-                        <li className="nav-item">
-                            <Link className="nav-link active" to="/guest/instructor-registration">
-                                Instructor Registration
-                            </Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link className="nav-link" to="/guest/student-registration">
-                                Student Registration
-                            </Link>
-                        </li>
-                        <li className='nav-item'>
-                            <Link className='nav-link' to="/guest/login">
-                                Login
-                            </Link>
-                        </li>
-                    </ul>
+  return (
+    <nav
+      className="navbar navbar-expand-lg student-navbar"
+      data-bs-theme="dark"
+    >
+      <div className="container-fluid">
+        {/* Brand */}
+        <NavLink to="/guest/dashboard" className="student-brand">
+          <i className="bi bi-mortarboard-fill me-2"></i>
+          <span className="brand-text">E-Learning</span>
+        </NavLink>
 
-                </div>
-            </div>
-        </nav>
-    )
-}
+        {/* Toggle */}
+        <button
+          className="navbar-toggler student-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#guestNavbar"
+        >
+          <span className="navbar-toggler-icon"></span>
+        </button>
 
-export default GuestNavbar
+        {/* Links */}
+        <div className="collapse navbar-collapse" id="guestNavbar">
+          <ul className="navbar-nav ms-auto mb-2 mb-lg-0 student-links">
+            <li className="nav-item" style={{ marginLeft: "10px" }}>
+              <NavLink
+                to="/guest/instructor-registration"
+                className={({ isActive }) =>
+                  isActive ? "nav-link active-link" : "nav-link"
+                }
+              >
+                Instructor Registration
+              </NavLink>
+            </li>
 
+            <li className="nav-item" style={{ marginLeft: "10px" }}>
+              <NavLink
+                to="/guest/student-registration"
+                className={({ isActive }) =>
+                  isActive ? "nav-link active-link" : "nav-link"
+                }
+              >
+                Student Registration
+              </NavLink>
+            </li>
+
+            <li className="nav-item" style={{ marginLeft: "10px" }}>
+              <NavLink
+                to="/guest/login"
+                className={({ isActive }) =>
+                  isActive ? "nav-link active-link" : "nav-link"
+                }
+              >
+                Login
+              </NavLink>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  );
+};
+
+export default GuestNavbar;

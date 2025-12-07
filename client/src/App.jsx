@@ -28,6 +28,7 @@ import AdminNotifications from "./pages/admin/notifications/AdminNotifications";
 import StudentProfile from "./pages/student/studentProfile/StudentProfile";
 import InstructorCourses from "./pages/admin/InstructorsView/InstructorCourses";
 import CourseDetails from "./pages/student/coursedetails/CourseDetails";
+import CourseEnrolledPage from "./pages/student/enrolledcoursedetails/CourseEnrolledPage";
 import InstructorProfile from "./pages/instructor/instructorProfile/InstructorProfile";
 
 function App() {
@@ -56,6 +57,10 @@ function App() {
             <Route path="aboutus" element={<AboutUs />} />
             <Route path="contactus" element={<ContactUs />} />
             <Route path="profile" element={<StudentProfile />} />
+            <Route
+              path="enrolled-course-details"
+              element={<CourseEnrolledPage />}
+            />
           </Route>
           <Route path="/instructor" element={<InstructorLayout />}>
             <Route path="dashboard" element={<InstructorDashboard />} />

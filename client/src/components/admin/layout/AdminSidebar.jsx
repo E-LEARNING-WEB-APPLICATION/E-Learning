@@ -20,6 +20,7 @@ const Sidebar = ({ onToggle }) => {
   // Submenus open/close
   const [openCourses, setOpenCourses] = useState(false);
   const [openInstructors, setOpenInstructors] = useState(false);
+  const [openAnalytics, setOpenAnalytics] = useState(false);
 
   // Profile popup
   //   const [showProfileMenu, setShowProfileMenu] = useState(false);
@@ -114,7 +115,39 @@ const Sidebar = ({ onToggle }) => {
         )}
 
         {/* Analytics */}
-        <Link
+        <div
+          className={`menu-item dropdown ${
+            isActive("/admin/analytics") ? "active" : ""
+          }`}
+          onClick={() => setOpenAnalytics(!openAnalytics)}
+        >
+          <FaChartPie className="icon" />
+          {!collapsed && (
+            <>
+              <span>Analytics</span>
+              {openAnalytics ? <FaChevronDown /> : <FaChevronRight />}
+            </>
+          )}
+        </div>
+
+        {!collapsed && openAnalytics && (
+          <div className="submenu">
+            <Link className="submenu-item" to="/admin/analytics/course">
+              Course Analytics
+            </Link>
+
+            <Link className="submenu-item" to="/admin/analytics/instructor">
+              Instructor Analytics
+            </Link>
+
+            <Link className="submenu-item" to="/admin/analytics/student">
+              Student Analytics
+            </Link>
+          </div>
+        )}
+
+        {/* Analytics */}
+        {/* <Link
           className={`menu-item ${
             isActive("/admin/analytics") ? "active" : ""
           }`}
@@ -122,7 +155,7 @@ const Sidebar = ({ onToggle }) => {
         >
           <FaChartPie className="icon" />
           {!collapsed && <span>Analytics</span>}
-        </Link>
+        </Link> */}
 
         {/* Notifications */}
         <Link

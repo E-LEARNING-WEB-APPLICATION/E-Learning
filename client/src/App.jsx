@@ -32,6 +32,10 @@ import CourseEnrolledPage from "./pages/student/enrolledcoursedetails/CourseEnro
 import InstructorProfile from "./pages/instructor/instructorProfile/InstructorProfile";
 import AdminCourseDetails from "./pages/admin/CoursesView/AdminCourseDetails";
 import AdminCategoryPage from "./pages/admin/CoursesView/AdminCategoryPage";
+import AnalyticsLayout from "./pages/analytics/AnalyticsLayout";
+import CourseAnalyticsPage from "./pages/analytics/course/CourseAnalyticsPage";
+import StudentAnalyticsPage from "./pages/analytics/student/StudentAnalyticsPage";
+import InstructorAnalyticsPage from "./pages/analytics/instructors/InstructorAnalyticsPage";
 
 function App() {
   return (
@@ -95,6 +99,11 @@ function App() {
               element={<InstructorRequests />}
             />
             <Route path="notifications" element={<AdminNotifications />} />
+            <Route path="analytics" element={<AnalyticsLayout />}>
+              <Route path="course" element={<CourseAnalyticsPage />} />
+              <Route path="student" element={<StudentAnalyticsPage />} />
+              <Route path="instructor" element={<InstructorAnalyticsPage />} />
+            </Route>
           </Route>
         </Routes>
       </div>

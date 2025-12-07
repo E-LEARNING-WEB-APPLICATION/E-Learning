@@ -1,0 +1,135 @@
+.course-card {
+  border: none;
+  border-radius: 1rem;
+  background-color: #ffffff;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.course-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 80, 0.15);
+}
+
+/* Thumbnail section */
+.course-thumbnail {
+  overflow: hidden;
+  position: relative;
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+}
+
+.course-thumbnail img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.course-card:hover .course-thumbnail img {
+  transform: scale(1.05);
+}
+
+/* Video overlay */
+.video-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 50, 0.2),
+    rgba(0, 0, 50, 0.4)
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.course-card:hover .video-overlay {
+  opacity: 1;
+}
+
+.play-icon {
+  color: #ffffff;
+  font-size: 2.5rem;
+  opacity: 0.9;
+}
+
+/* Body */
+.course-body {
+  background: #f8f9ff;
+}
+
+.course-title {
+  color: #1b2a59;
+  font-weight: 600;
+}
+
+.course-category {
+  color: #5a5a8f;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.course-desc {
+  color: #6c757d;
+}
+
+.course-duration {
+  color: #0056d2;
+}
+
+.price {
+  color: #111;
+  font-size: 1.1rem;
+}
+
+.discount {
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.btn-primary {
+  background: linear-gradient(90deg, #4f46e5, #007bff);
+  border: none;
+  transition: background 0.3s ease, transform 0.2s;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(90deg, #5b4df0, #3399ff);
+  transform: scale(1.05);
+}
+
+.course-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.course-body {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.course-title,
+.course-desc {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+}
+
+.course-title {
+  -webkit-line-clamp: 1;
+}
+
+.course-desc {
+  -webkit-line-clamp: 2;
+}

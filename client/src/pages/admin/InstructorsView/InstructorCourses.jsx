@@ -1,5 +1,5 @@
 import { getInstructorCourses } from "@/api/api";
-import CourseCard from "@/components/shared/InstructorCourseCard/CourseCard";
+import AdminCourseCard from "@/components/admin/courses/AdminCourseCard";
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 
@@ -19,7 +19,7 @@ const InstructorCourses = () => {
         <div className="row g-4">
           {instructorCourses.map((course) => (
             <div key={course.courseId} className="col-12 col-sm-6 col-lg-3 d-flex">
-              <CourseCard course={course} />
+              <AdminCourseCard course={course} />
             </div>
           ))}
         </div>

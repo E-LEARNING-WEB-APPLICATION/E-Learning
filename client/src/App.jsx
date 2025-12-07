@@ -30,6 +30,8 @@ import InstructorCourses from "./pages/admin/InstructorsView/InstructorCourses";
 import CourseDetails from "./pages/student/coursedetails/CourseDetails";
 import CourseEnrolledPage from "./pages/student/enrolledcoursedetails/CourseEnrolledPage";
 import InstructorProfile from "./pages/instructor/instructorProfile/InstructorProfile";
+import AdminCourseDetails from "./pages/admin/CoursesView/AdminCourseDetails";
+import AdminCategoryPage from "./pages/admin/CoursesView/AdminCategoryPage";
 
 function App() {
   return (
@@ -83,6 +85,8 @@ function App() {
           </Route>
           <Route path="/admin" element={<AdminLayout />}>
             <Route path="dashboard" element={<AdminDashboard />} />
+            <Route path="courses/:courseId" element={<AdminCourseDetails />} />
+            <Route path="course-categories" element={<AdminCategoryPage />} />
             <Route path="courses" element={<AdminCourses />} />
             <Route path="instructors" element={<InstructorsList />} />
             <Route path="instructor-courses" element={<InstructorCourses />} />

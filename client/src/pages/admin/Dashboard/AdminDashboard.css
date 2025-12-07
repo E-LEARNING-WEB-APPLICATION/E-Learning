@@ -1,0 +1,30 @@
+.dashboard-container {
+  background: #f5f7fa;
+  min-height: 100vh;
+}
+
+.stat-card {
+  background: #ffffff;
+  border-radius: 12px;
+  transition: transform 0.2s;
+}
+
+.stat-card:hover {
+  transform: translateY(-3px);
+}
+
+.stat-icon {
+  background: #eef2ff;
+  padding: 12px;
+  border-radius: 10px;
+}
+
+.chart-card,
+.table-card {
+  background: #ffffff;
+  border-radius: 12px;
+}
+
+h5 {
+  font-weight: 600;
+}

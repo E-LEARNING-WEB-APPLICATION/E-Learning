@@ -1,9 +1,9 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { FaStar } from "react-icons/fa";
-import "./CourseCard.css";
+import "./AdminCourseCard.css";
 
-const CourseCard = ({ course }) => {
+const AdminCourseCard = ({ course }) => {
   const navigate = useNavigate();
 
   const openCourseDetails = () => {
@@ -27,9 +27,6 @@ const CourseCard = ({ course }) => {
       <div className="course-body p-3">
         <h5 className="course-title mb-1">{course.course_name}</h5>
         <p className="course-category mb-2">{course.category}</p>
-        <p className="course-desc text-muted small mb-3">
-          {course.course_desc}
-        </p>
 
         <div className="d-flex justify-content-between align-items-center mb-2">
           <span className="course-duration text-primary fw-semibold">
@@ -68,4 +65,4 @@ const CourseCard = ({ course }) => {
   );
 };
 
-export default CourseCard;
+export default AdminCourseCard;

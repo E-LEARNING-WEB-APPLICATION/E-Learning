@@ -7,7 +7,7 @@ import { getAllCourses } from "@/api/api";
 
 const AdminCourses = () => {
   const [courses, setCourses] = useState([]);
-  const [view, setView] = useState("grid");
+  const [view, setView] = useState("table");
 
   const handleViewToggle = (view) => {
     view === "grid" ? setView("grid") : setView("table");
@@ -42,6 +42,9 @@ const AdminCourses = () => {
               <LuTableOfContents />
             </button>
           </div>
+        </div>
+        <div>
+          <h3 className="mb-4 fw-bold text-primary">All Courses</h3>
         </div>
         {view == "grid" && <GridView courses={courses} />}
         {view == "table" && <TableView courses={courses} />}

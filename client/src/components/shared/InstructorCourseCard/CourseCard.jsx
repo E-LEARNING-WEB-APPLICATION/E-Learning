@@ -1,19 +1,27 @@
 import React from "react";
-import { FaStar, FaPlayCircle } from "react-icons/fa";
-import "./CourseCard.css"; // CSS file below
+import { useNavigate } from "react-router-dom";
+import { FaStar } from "react-icons/fa";
+import "./CourseCard.css";
 
 const CourseCard = ({ course }) => {
+  const navigate = useNavigate();
+
+  const openCourseDetails = () => {
+    navigate(`/admin/courses/${course.courseId}`);
+  };
+
   return (
-    <div className="course-card shadow-sm">
+    <div
+      className="course-card shadow-sm clickable"
+      onClick={openCourseDetails}
+      style={{ cursor: "pointer" }}
+    >
       <div className="course-thumbnail position-relative">
         <img
           src={course.course_thumbnail}
           alt={course.course_name}
           className="img-fluid rounded-top"
         />
-        <div className="video-overlay">
-          <FaPlayCircle className="play-icon" />
-        </div>
       </div>
 
       <div className="course-body p-3">
@@ -44,7 +52,14 @@ const CourseCard = ({ course }) => {
               </span>
             )}
           </div>
-          <button className="btn btn-primary btn-sm px-3 rounded-pill">
+
+          <button
+            className="btn btn-primary btn-sm px-3 rounded-pill"
+            onClick={(e) => {
+              e.stopPropagation();
+              openCourseDetails();
+            }}
+          >
             View Details
           </button>
         </div>

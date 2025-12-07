@@ -1,0 +1,40 @@
+.top-instructors-table {
+  width: 100%;
+  font-size: 0.9rem;
+  border-collapse: separate;
+  border-spacing: 0 6px;
+}
+
+.top-instructors-table thead th {
+  font-weight: 600;
+  color: #4b4b7c;
+  cursor: pointer;
+  border-bottom: 2px solid #e9e9f3;
+  padding-bottom: 8px;
+}
+
+.top-instructors-table tbody tr {
+  background: #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  transition: 0.2s;
+}
+
+.top-instructors-table tbody tr:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+}
+
+.top-instructors-table td {
+  padding: 12px 14px;
+  border-top: none !important;
+}
+
+.sortable {
+  user-select: none;
+}
+
+.sort-icon {
+  margin-left: 6px;
+  font-size: 14px;
+  opacity: 0.5;
+}

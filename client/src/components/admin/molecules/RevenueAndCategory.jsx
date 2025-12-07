@@ -1,3 +1,4 @@
+import CategoryPieChart from "../charts/CategoryPieChart";
 import RevenueChart from "../charts/RevenueChart";
 // import CategoryPieChart from "../charts/CategoryPieChart";
 
@@ -14,7 +15,13 @@ const RevenueAndCategory = () => {
       <div className="col-md-4">
         <div className="chart-card p-3 shadow-sm rounded">
           <h5>Course Categories</h5>
-          {/* <CategoryPieChart /> */}
+          <CategoryPieChart
+            data={[
+              { category: "frontend", value: 30 },
+              { category: "backend", value: 50 },
+              { category: "devops", value: 20 },
+            ]}
+          />
         </div>
       </div>
     </>

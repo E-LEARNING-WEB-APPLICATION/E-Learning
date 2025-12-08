@@ -7,7 +7,7 @@ const InstructorLayout = () => {
     return (
         <div>
             <InstructorNavbar />
-            <main className="container-fluid mt-3">
+            <main className="container-fluid mt-0">
                 <Outlet />
             </main>
             <Footer />

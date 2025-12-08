@@ -1,71 +1,81 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
+import "./InstructorNavbar.css";
 
 function InstructorNavbar() {
   return (
-    <nav className="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
+    <nav
+      className="navbar navbar-expand-lg instructor-navbar"
+      data-bs-theme="dark"
+    >
       <div className="container-fluid">
-        <Link className="navbar-brand" to="/student/dashboard">
-          E-Learning
+        {/* Brand */}
+        <Link to="/student/dashboard" className="instructor-brand">
+          <i className="bi bi-easel-fill me-2"></i>
+          <span className="brand-text">E-Learning</span>
         </Link>
+
+        {/* Toggle */}
         <button
-          className="navbar-toggler"
+          className="navbar-toggler instructor-toggler"
           type="button"
           data-bs-toggle="collapse"
-          data-bs-target="#studentNavbar"
-          aria-controls="studentNavbar"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
+          data-bs-target="#instructorNavbar"
         >
           <span className="navbar-toggler-icon"></span>
         </button>
 
-        <div className="collapse navbar-collapse" id="studentNavbar">
-          <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
-            <li className="nav-item">
-              <Link className="nav-link active" to="/student/dashboard">
+        {/* Links */}
+        <div className="collapse navbar-collapse" id="instructorNavbar">
+          <ul className="navbar-nav ms-auto mb-2 mb-lg-0 instructor-links">
+            <li className="nav-item" style={{ marginLeft: "7px" }}>
+              <NavLink
+                to="/student/dashboard"
+                className={({ isActive }) =>
+                  isActive ? "nav-link active-link" : "nav-link"
+                }
+              >
                 Dashboard
-              </Link>
+              </NavLink>
             </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/instructor/addCourse">
+
+            <li className="nav-item" style={{ marginLeft: "7px" }}>
+              <NavLink
+                to="/instructor/addCourse"
+                className={({ isActive }) =>
+                  isActive ? "nav-link active-link" : "nav-link"
+                }
+              >
                 Add Course
-              </Link>
+              </NavLink>
             </li>
-            {/* <li className="nav-item">
-              <Link className="nav-link" to="/instructor/mystudents">
-                My Students
-              </Link>
-            </li> */}
-            <li className="nav-item">
-              <Link className="nav-link" to="/instructor/addedCourses/">
+
+            <li className="nav-item" style={{ marginLeft: "7px" }}>
+              <NavLink
+                to="/instructor/addedCourses/"
+                className={({ isActive }) =>
+                  isActive ? "nav-link active-link" : "nav-link"
+                }
+              >
                 My Courses
-              </Link>
+              </NavLink>
             </li>
-            {/* <li className="nav-item">
-              <Link className="nav-link" to="/instructor/notification">
-                Notifications
-              </Link>
-            </li> */}
-            {/* <li>
-              <Link className="nav-link" to="/instructor/about-us">
-                About Us
-              </Link>
-            </li> */}
-            {/* <li>
-              <Link className="nav-link" to="/instructor/contact-us">
-                Contact Us
-              </Link>
-            </li> */}
-            <li className="nav-item">
-              <Link className="nav-link" to="/instructor/profile">
+
+            <li className="nav-item" style={{ marginLeft: "7px" }}>
+              <NavLink
+                to="/instructor/profile"
+                className={({ isActive }) =>
+                  isActive ? "nav-link active-link" : "nav-link"
+                }
+              >
                 Profile
-              </Link>
+              </NavLink>
             </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/guest/login">
+
+            <li className="nav-item" style={{ marginLeft: "7px" }}>
+              <NavLink to="/guest/login" className="nav-link logout-btn">
                 Logout
-              </Link>
+              </NavLink>
             </li>
           </ul>
         </div>

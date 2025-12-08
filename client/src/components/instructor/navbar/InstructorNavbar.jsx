@@ -28,42 +28,42 @@ function InstructorNavbar() {
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/instructor/addcourse">
+              <Link className="nav-link" to="/instructor/addCourse">
                 Add Course
               </Link>
             </li>
-            <li className="nav-item">
+            {/* <li className="nav-item">
               <Link className="nav-link" to="/instructor/mystudents">
                 My Students
               </Link>
-            </li>
+            </li> */}
             <li className="nav-item">
-              <Link className="nav-link" to="/instructor/mycourses">
+              <Link className="nav-link" to="/instructor/addedCourses/">
                 My Courses
               </Link>
             </li>
-            <li className="nav-item">
+            {/* <li className="nav-item">
               <Link className="nav-link" to="/instructor/notification">
                 Notifications
               </Link>
-            </li>
-            <li>
+            </li> */}
+            {/* <li>
               <Link className="nav-link" to="/instructor/about-us">
                 About Us
               </Link>
-            </li>
-            <li>
+            </li> */}
+            {/* <li>
               <Link className="nav-link" to="/instructor/contact-us">
                 Contact Us
               </Link>
-            </li>
+            </li> */}
             <li className="nav-item">
               <Link className="nav-link" to="/instructor/profile">
                 Profile
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/login">
+              <Link className="nav-link" to="/guest/login">
                 Logout
               </Link>
             </li>

@@ -4,14 +4,14 @@ import Footer from "../../footer/Footer";
 import StudentNavbar from "../navbar/StudentNavbar";
 
 const StudentLayout = () => {
-    return (
-        <div>
-            <StudentNavbar />
-            <main className="container-fluid mt-0">
-                <Outlet />
-            </main>
-            <Footer />
-        </div>
-    );
+  return (
+    <div>
+      <StudentNavbar />
+      <main className="container-fluid mt-0 p-0">
+        <Outlet />
+      </main>
+      <Footer />
+    </div>
+  );
 };
 export default StudentLayout;

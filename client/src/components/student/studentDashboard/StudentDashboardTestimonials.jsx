@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaQuoteLeft, FaStar } from "react-icons/fa";
 
 export default function StudentDashboardTestimonials({ sampleTestimonials }) {
@@ -12,7 +12,13 @@ export default function StudentDashboardTestimonials({ sampleTestimonials }) {
         );
 
     const current = sampleTestimonials[index];
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setIndex((prev) => (prev + 1) % sampleTestimonials.length);
+        }, 4000);
 
+        return () => clearInterval(interval);
+    }, []);
     return (
         <section className="py-5 bg-light">
             <div className="container">

@@ -20,7 +20,7 @@ const StudentDashboardTopCourses = ({ courses = [] }) => {
 
     return (
         <section className="py-5">
-            <div className="container">
+            <div className="container" >
                 <h3 className="fw-bold mb-4">Top Courses</h3>
 
                 <div
@@ -32,7 +32,7 @@ const StudentDashboardTopCourses = ({ courses = [] }) => {
                             <div
                                 className={`carousel-item ${
                                     slideIndex === 0 ? "active" : ""
-                                }`}
+                                } data-bs-interval="2000" `}
                                 key={`slide-${slideIndex}`}>
                                 <div className="row g-4">
                                     {group.map((course) => {
@@ -43,9 +43,9 @@ const StudentDashboardTopCourses = ({ courses = [] }) => {
 
                                         return (
                                             <div
-                                                className="col-md-3"
+                                                className="col-md-3 pt-3"
                                                 key={`course-${course.id}`}>
-                                                <div className="card top-course-card h-100 shadow-sm border-0">
+                                                <div className="card top-course-card h-200 shadow-sm border-0">
                                                     <img
                                                         src={course.thumbnail}
                                                         onError={(e) =>
@@ -79,6 +79,9 @@ const StudentDashboardTopCourses = ({ courses = [] }) => {
                                                                 reviews
                                                             </small>
                                                         </div>
+                                                        <button className="btn btn-primary w-100 mb-1">
+                                                            View Course
+                                                        </button>
 
                                                         {/* Pricing */}
                                                         {course.discount > 0 ? (

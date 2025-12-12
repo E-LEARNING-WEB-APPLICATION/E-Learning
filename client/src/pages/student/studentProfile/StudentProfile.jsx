@@ -28,6 +28,7 @@ const StudentProfile = () => {
         name: "Sanket Raut",
         bio: "Full-Stack Developer",
         location: "Pune, Maharashtra",
+        role: "student",
         email: "sanket@example.com",
         phone: "+91 98765 43210",
         skills: ["React.js", "Node.js", "MongoDB", "JavaScript"],
@@ -88,6 +89,7 @@ const StudentProfile = () => {
                             page={"student"}
                             skills={profile.skills}
                             allSkills={allSkills}
+                            role={profile.role}
                             onSave={(updatedSkills) =>
                                 setProfile((prev) => ({
                                     ...prev,

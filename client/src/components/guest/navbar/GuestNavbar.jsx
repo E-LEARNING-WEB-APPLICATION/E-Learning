@@ -60,6 +60,26 @@ const GuestNavbar = () => {
                 Login
               </NavLink>
             </li>
+            <li className="nav-item" style={{ marginLeft: "10px" }}>
+              <NavLink
+                to="/guest/aboutus"
+                className={({ isActive }) =>
+                  isActive ? "nav-link active-link" : "nav-link"
+                }
+              >
+                About Us
+              </NavLink>
+            </li>
+            <li className="nav-item" style={{ marginLeft: "10px" }}>
+              <NavLink
+                to="/guest/contactus"
+                className={({ isActive }) =>
+                  isActive ? "nav-link active-link" : "nav-link"
+                }
+              >
+                Contact Us
+              </NavLink>
+            </li>
           </ul>
         </div>
       </div>

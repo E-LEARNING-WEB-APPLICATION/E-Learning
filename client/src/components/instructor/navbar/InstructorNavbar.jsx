@@ -71,6 +71,16 @@ function InstructorNavbar() {
                 Profile
               </NavLink>
             </li>
+            <li className="nav-item" style={{ marginLeft: "7px" }}>
+              <NavLink
+                to="/instructor/aboutus"
+                className={({ isActive }) =>
+                  isActive ? "nav-link active-link" : "nav-link"
+                }
+              >
+                AboutUs
+              </NavLink>
+            </li>
 
             <li className="nav-item" style={{ marginLeft: "7px" }}>
               <NavLink to="/guest/login" className="nav-link logout-btn">

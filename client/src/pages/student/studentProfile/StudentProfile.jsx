@@ -1,5 +1,5 @@
-import React, { useState } from "react";
 import "./StudentProfile.css";
+import React, { useState } from "react";
 
 import ProfileHeader from "../../../components/student/studentProfile/profileHeader/ProfileHeader";
 import AboutCard from "../../../components/student/studentProfile/aboutCard/aboutCard";
@@ -31,7 +31,7 @@ const StudentProfile = () => {
         email: "sanket@example.com",
         phone: "+91 98765 43210",
         skills: ["React.js", "Node.js", "MongoDB", "JavaScript"],
-        dob: "2003-25-1", 
+        dob: "2003-25-1",
         gender: "male",
         photo: "https://i.pravatar.cc/160",
     });

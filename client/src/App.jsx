@@ -50,6 +50,8 @@ function App() {
               element={<StudentRegistration />}
             />
             <Route path="login" element={<Login />} />
+            <Route path="aboutus" element={<AboutUs />} />
+            <Route path="contactus" element={<ContactUs />} />
           </Route>
           <Route path="/student" element={<StudentLayout />}>
             <Route path="dashboard" element={<StudentDashboard />} />
@@ -70,6 +72,7 @@ function App() {
             <Route path="addedCourses" element={<AddedCourses />} />
             <Route path="addedCourses/add-section" element={<AddSection />} />
             <Route path="profile" element={<InstructorProfile />} />
+            <Route path="aboutus" element={<AboutUs />} />
             <Route
               path="addedCourses/show-sections"
               element={<ShowSection />}

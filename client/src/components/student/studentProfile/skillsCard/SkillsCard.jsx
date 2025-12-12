@@ -37,7 +37,7 @@ const SkillsCard = ({ skills, allSkills, onSave, page }) => {
                     {skills.map((skill, i) => (
                         <span
                             key={i}
-                            className="badge skill-badge px-3 py-2">
+                            className="skill-badge px-3 py-2">
                             {skill}
                         </span>
                     ))}

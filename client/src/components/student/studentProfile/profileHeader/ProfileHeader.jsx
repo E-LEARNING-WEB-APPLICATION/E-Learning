@@ -30,12 +30,12 @@ const ProfileHeader = ({ profile, openProfileModal, onPhotoUpload,page }) => {
                         alt="Profile"
                         className="profile-pic shadow-lg"
                     />
-
-                    <div
-                        className="camera-icon"
-                        onClick={openFilePicker}>
-                        <FaCamera size={18} />
-                    </div>
+                    {page === "viewOnly" ? null : (
+                        <div
+                            className="camera-icon"
+                            onClick={openFilePicker}>
+                            <FaCamera size={18} />
+                        </div>)}
 
                     <input
                         type="file"
@@ -45,12 +45,12 @@ const ProfileHeader = ({ profile, openProfileModal, onPhotoUpload,page }) => {
                         onChange={handleFileChange}
                     />
                 </div>
-
-                <button
-                    className="btn btn-primary btn-sm mt-3"
-                    onClick={openProfileModal}>
-                    Edit Profile
-                </button>
+                {page === "viewOnly" ? null : (
+                    <button
+                        className="btn btn-primary btn-sm mt-3"
+                        onClick={openProfileModal}>
+                        Edit Profile
+                    </button>)}
 
                 <h3 className="fw-bold mt-2 mb-1 text-dark">{profile.name}</h3>
                 {page === "instructor" ? (

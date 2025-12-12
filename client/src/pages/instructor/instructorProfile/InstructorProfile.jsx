@@ -30,6 +30,7 @@ const InstructorProfile = () => {
         name: "John Doe",
         bio: "Senior Instructor | Expert in Computer Science",
         location: "Pune, Maharashtra",
+        role: "instructor",
         email: "john@example.com",
         phone: "+91 98765 43210",
         specialization: ["Machine Learning", "Data Science", "Cloud Computing"],
@@ -91,6 +92,7 @@ const InstructorProfile = () => {
                             page={"instructor"}
                             skills={instructor.specialization}
                             allSkills={allSpecializations}
+                            role={instructor.role}
                             onSave={(updatedSpecializations) =>
                                 setInstructor((prev) => ({
                                     ...prev,

@@ -1,4 +1,6 @@
 import React from "react";
+import CourseCard from "./StudentCourseCard";
+import StudentCourseCard from "./StudentCourseCard";
 
 const StudentDashboardTopCourses = ({ courses = [] }) => {
     if (!Array.isArray(courses) || courses.length === 0) return null;
@@ -36,77 +38,9 @@ const StudentDashboardTopCourses = ({ courses = [] }) => {
                                 key={`slide-${slideIndex}`}>
                                 <div className="row g-4">
                                     {group.map((course) => {
-                                        const discountedPrice =
-                                            course.fees -
-                                            (course.fees * course.discount) /
-                                                100;
 
                                         return (
-                                            <div
-                                                className="col-md-3 pt-3"
-                                                key={`course-${course.id}`}>
-                                                <div className="card top-course-card h-200 shadow-sm border-0">
-                                                    <img
-                                                        src={course.thumbnail}
-                                                        onError={(e) =>
-                                                            (e.target.src =
-                                                                "https://picsum.photos/seed/fallback/300/200")
-                                                        }
-                                                        className="card-img-top rounded-top"
-                                                        alt={course.title}
-                                                        style={{
-                                                            height: "150px",
-                                                            objectFit: "cover",
-                                                        }}
-                                                    />
-
-                                                    <div className="card-body">
-                                                        <h6 className="fw-semibold">
-                                                            {course.title}
-                                                        </h6>
-
-                                                        <p className="text-muted small mb-1">
-                                                            {course.category}
-                                                        </p>
-
-                                                        <div className="d-flex align-items-center gap-2">
-                                                            <span className="badge bg-warning text-dark">
-                                                                {course.rating}{" "}
-                                                                ★
-                                                            </span>
-                                                            <small className="text-muted">
-                                                                {course.reviews}{" "}
-                                                                reviews
-                                                            </small>
-                                                        </div>
-                                                        <button className="btn btn-primary w-100 mb-1">
-                                                            View Course
-                                                        </button>
-
-                                                        {/* Pricing */}
-                                                        {course.discount > 0 ? (
-                                                            <div className="mt-2">
-                                                                <span className="text-success fw-bold me-2">
-                                                                    ₹
-                                                                    {discountedPrice.toFixed(
-                                                                        2
-                                                                    )}
-                                                                </span>
-                                                                <small className="text-decoration-line-through text-muted">
-                                                                    ₹
-                                                                    {
-                                                                        course.fees
-                                                                    }
-                                                                </small>
-                                                            </div>
-                                                        ) : (
-                                                            <div className="mt-2 fw-bold">
-                                                                ₹{course.fees}
-                                                            </div>
-                                                        )}
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            <StudentCourseCard course={course} />
                                         );
                                     })}
                                 </div>

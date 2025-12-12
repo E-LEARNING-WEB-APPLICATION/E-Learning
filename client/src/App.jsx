@@ -33,6 +33,7 @@ import InstructorProfile from "./pages/instructor/instructorProfile/InstructorPr
 import AdminCourseDetails from "./pages/admin/CoursesView/AdminCourseDetails";
 import AdminCategoryPage from "./pages/admin/CoursesView/AdminCategoryPage";
 import ProfileView from "./pages/profileView/ProfileView";
+import CategoryCourses from "./pages/student/categorycourses/CategoryCourses";
 
 function App() {
   return (
@@ -61,6 +62,7 @@ function App() {
             <Route path="profile" element={<StudentProfile />} />
             <Route path="profile-view" element={<ProfileView />} />
             <Route path="enrolled-course-details" element={<CourseEnrolledPage />} />
+            <Route path="courses/category/:categoryId" element={<CategoryCourses />} />
           </Route>
           {/* Instructor Routes */}
           <Route path="/instructor" element={<InstructorLayout />}>

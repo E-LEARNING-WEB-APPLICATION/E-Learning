@@ -1,5 +1,5 @@
 import { FaLinkedin, FaTwitter, FaGithub } from "react-icons/fa";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const StudentDashboardInstructor = ({ instructors = [] }) => {
 
@@ -11,6 +11,13 @@ const StudentDashboardInstructor = ({ instructors = [] }) => {
     const prev = instructors[(index - 1 + total) % total];
     const next = instructors[(index + 1) % total];
 
+      useEffect(() => {
+          const interval = setInterval(() => {
+              setIndex((prev) => (prev + 1) % total);
+          }, 2000); // Change every 3 seconds
+
+          return () => clearInterval(interval);
+      }, []);
     return (
         <section className="py-5 bg-white">
             <div className="container">

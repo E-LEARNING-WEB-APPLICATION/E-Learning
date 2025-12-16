@@ -70,9 +70,11 @@ export function StudentDashboardCategoryCourse({
                                     />
 
                                     <div className="card-body">
-                                        <h5 className="fw-bold">
-                                            {course.title}
-                                        </h5>
+                                        <div style={{height : 60}}>
+                                            <h5 className="fw-bold">
+                                                {course.title}
+                                            </h5>
+                                        </div>
 
                                         <p className="text-muted small mb-1">
                                             {course.duration}
@@ -99,7 +101,7 @@ export function StudentDashboardCategoryCourse({
                                             )}
                                         </p>
 
-                                        <button className="btn btn-primary w-100 mt-2">
+                                        <button className="btn btn-primary w-100 mb-1">
                                             View Course
                                         </button>
                                     </div>

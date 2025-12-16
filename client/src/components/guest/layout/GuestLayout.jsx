@@ -7,7 +7,7 @@ const GuestLayout = () => {
     return (
         <div>
             <GuestNavbar />
-            <main className='container mt-3'>
+            <main className='container-fluid mt-0 p-0'>
                 <Outlet />
             </main>
             <Footer />

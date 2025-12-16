@@ -32,6 +32,7 @@ import CourseEnrolledPage from "./pages/student/enrolledcoursedetails/CourseEnro
 import InstructorProfile from "./pages/instructor/instructorProfile/InstructorProfile";
 import AdminCourseDetails from "./pages/admin/CoursesView/AdminCourseDetails";
 import AdminCategoryPage from "./pages/admin/CoursesView/AdminCategoryPage";
+import ProfileView from "./pages/profileView/ProfileView";
 
 function App() {
   return (
@@ -39,18 +40,17 @@ function App() {
       <div>
         <ToastContainer />
         <Routes>
+          {/* Redirect root to /guest */}
           <Route path="/" element={<Navigate to="/guest" />} />
           <Route path="/guest" element={<GuestLayout />}>
-            <Route
-              path="instructor-registration"
-              element={<InstructorRegistration />}
-            />
-            <Route
-              path="student-registration"
-              element={<StudentRegistration />}
-            />
+            <Route path="instructor-registration" element={<InstructorRegistration />}/>
+            <Route path="student-registration" element={<StudentRegistration />} />
             <Route path="login" element={<Login />} />
+            <Route path="aboutus" element={<AboutUs />} />
+            <Route path="contactus" element={<ContactUs />} />
+            <Route path="profile-view" element={<ProfileView />} />
           </Route>
+          {/* Student Routes */}
           <Route path="/student" element={<StudentLayout />}>
             <Route path="dashboard" element={<StudentDashboard />} />
             <Route path="course-details" element={<CourseDetails />} />
@@ -59,30 +59,23 @@ function App() {
             <Route path="aboutus" element={<AboutUs />} />
             <Route path="contactus" element={<ContactUs />} />
             <Route path="profile" element={<StudentProfile />} />
-            <Route
-              path="enrolled-course-details"
-              element={<CourseEnrolledPage />}
-            />
+            <Route path="profile-view" element={<ProfileView />} />
+            <Route path="enrolled-course-details" element={<CourseEnrolledPage />} />
           </Route>
+          {/* Instructor Routes */}
           <Route path="/instructor" element={<InstructorLayout />}>
             <Route path="dashboard" element={<InstructorDashboard />} />
             <Route path="addCourse" element={<AddCourse />} />
             <Route path="addedCourses" element={<AddedCourses />} />
             <Route path="addedCourses/add-section" element={<AddSection />} />
             <Route path="profile" element={<InstructorProfile />} />
-            <Route
-              path="addedCourses/show-sections"
-              element={<ShowSection />}
-            />
-            <Route
-              path="addedCourses/show-sections/add-topic"
-              element={<AddTopic />}
-            />
-            <Route
-              path="addedCourses/show-sections/show-topics"
-              element={<ShowTopic />}
-            />
+            <Route path="aboutus" element={<AboutUs />} />
+            <Route path="profile-view" element={<ProfileView />} />
+            <Route path="addedCourses/show-sections" element={<ShowSection />}/>
+            <Route path="addedCourses/show-sections/add-topic" element={<AddTopic />}/>
+            <Route path="addedCourses/show-sections/show-topics" element={<ShowTopic />}/>
           </Route>
+          {/* Admin Routes */}
           <Route path="/admin" element={<AdminLayout />}>
             <Route path="dashboard" element={<AdminDashboard />} />
             <Route path="courses/:courseId" element={<AdminCourseDetails />} />
@@ -90,10 +83,8 @@ function App() {
             <Route path="courses" element={<AdminCourses />} />
             <Route path="instructors" element={<InstructorsList />} />
             <Route path="instructor-courses" element={<InstructorCourses />} />
-            <Route
-              path="instructor-requests"
-              element={<InstructorRequests />}
-            />
+            <Route path="profile-view" element={<ProfileView />} />
+            <Route path="instructor-requests" element={<InstructorRequests />} />
             <Route path="notifications" element={<AdminNotifications />} />
           </Route>
         </Routes>

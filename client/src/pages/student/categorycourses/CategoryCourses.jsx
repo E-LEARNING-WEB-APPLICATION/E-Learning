@@ -649,16 +649,6 @@ const CategoryCourses = () => {
             sections: 7,
         },
     ];
-    const options = [
-        { value: "", label: "None" },
-        { value: "price_low_high", label: "Price: Low to High" },
-        { value: "price_high_low", label: "Price: High to Low" },
-        { value: "discount_high_low", label: "Discount: High to Low" },
-        { value: "name_asc", label: "Name: A → Z" },
-        { value: "name_desc", label: "Name: Z → A" },
-        { value: "rating_high_low", label: "Rating: High to Low" },
-        { value: "reviews_high_low", label: "Reviews: High to Low" },
-    ];
     const [categoryCourses, setCategoryCourses] = useState(
         courses.filter((course) => course.category === categoryId)
     );

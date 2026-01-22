@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import "./Login.css";
 import { FaEnvelope, FaLock } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { signIn } from "@/services/authService";
+import { toast } from "react-toastify";
+import { jwtDecode } from "jwt-decode";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -18,10 +21,29 @@ const Login = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     window.alert(JSON.stringify(formData));
-    console.log(formData);
+
+    const response = await signIn(formData);
+
+    if (response.success) {
+      toast.success(response.message);
+      localStorage.setItem("token", response.token);
+      const decoded = jwtDecode(response.token);
+      const role = decoded.role;
+      localStorage.setItem("role", role);
+      if (role === "ADMIN") {
+        navigate("/admin/dashboard");
+      } else if (role === "INSTRUCTOR") {
+        navigate("/instructor/dashboard");
+      } else {
+        navigate("/student/dashboard");
+      }
+    } else {
+      toast.error(response.message);
+    }
+    console.log(response);
   };
 
   return (

@@ -40,12 +40,12 @@ const StudentRegistration = () => {
     console.log(response);
     if (response.success) {
       toast.success(response.message);
+      setTimeout(() => {
+        navigate("/guest/login");
+      }, 1000);
     } else {
       toast.error(response.message);
     }
-    setTimeout(() => {
-      navigate("/guest/login");
-    }, 1000);
   };
 
   return (

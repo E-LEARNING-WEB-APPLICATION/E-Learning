@@ -1,3 +1,4 @@
+import { registerInstructor } from "@/services/authService";
 import React, { useState } from "react";
 import {
   FaBriefcase,
@@ -13,16 +14,14 @@ import { toast } from "react-toastify";
 
 const InstructorRegistration = () => {
   const [formData, setFormData] = useState({
-    fname: "",
-    lname: "",
+    firstName: "",
+    lastName: "",
     email: "",
     password: "",
     confirmPassword: "",
-    phone: "",
-    specialization: "",
+    phoneNo: "",
     experience: "",
     bio: "",
-    role: "instructor",
   });
 
   const navigate = useNavigate();
@@ -34,16 +33,24 @@ const InstructorRegistration = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (formData.password !== formData.confirmPassword) {
       toast.warning("Password and Confirm Password did not match!!");
       return;
     }
     console.log(formData);
-    setTimeout(() => {
-      navigate("/guest/login");
-    }, 1000);
+
+    const response = await registerInstructor(formData);
+    if (response.success) {
+      toast.success(response.message);
+      setTimeout(() => {
+        navigate("/guest/login");
+      }, 1000);
+    } else {
+      toast.error(response.message);
+    }
+    console.log(response);
   };
 
   return (
@@ -61,7 +68,7 @@ const InstructorRegistration = () => {
               <input
                 type="text"
                 className="form-control"
-                id="fname"
+                id="firstName"
                 placeholder="First Name"
                 onChange={handleChange}
                 required
@@ -76,7 +83,7 @@ const InstructorRegistration = () => {
               <input
                 type="text"
                 className="form-control"
-                id="lname"
+                id="lastName"
                 placeholder="Last Name"
                 onChange={handleChange}
                 required
@@ -133,28 +140,14 @@ const InstructorRegistration = () => {
             <input
               type="tel"
               className="form-control"
-              id="phone"
-              placeholder="Phone Number"
+              id="phoneNo"
+              placeholder="phoneNo Number"
               onChange={handleChange}
               required
             />
             <label>
               <FaPhone className="me-2" />
-              Phone Number
-            </label>
-          </div>
-          <div className="form-floating mb-3">
-            <input
-              type="text"
-              className="form-control"
-              id="specialization"
-              placeholder="Expertise / Specialization"
-              onChange={handleChange}
-              required
-            />
-            <label>
-              <FaGraduationCap className="me-2" />
-              Expertise / Specialization
+              phoneNo Number
             </label>
           </div>
           <div className="form-floating mb-3">

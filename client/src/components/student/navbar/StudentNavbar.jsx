@@ -1,8 +1,17 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import "./StudentNavbar.css";
 
 function StudentNavbar() {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.clear();
+    setTimeout(() => {
+      navigate("/guest/login");
+    }, 2000);
+  };
+
   return (
     <nav
       className="navbar navbar-expand-lg student-navbar"
@@ -107,7 +116,7 @@ function StudentNavbar() {
             </li>
 
             <li className="nav-item" style={{ marginLeft: "7px" }}>
-              <NavLink to="/guest/login" className="nav-link logout-btn">
+              <NavLink onClick={handleLogout} className="nav-link logout-btn">
                 Logout
               </NavLink>
             </li>

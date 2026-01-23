@@ -49,13 +49,14 @@ function AddedCourses() {
                 <div className="card mb-3 ">
                   <img
                     className="card-img-top "
-                    src={data.image}
+                    src={data.thumbnail}
                     alt="Card image cap"
                     height={"150px"}
+        
                   />
                   <div className="card-body">
-                    <h5 className="card-title">{data.courseName}</h5>
-                    <p className="card-text">{data.courseDesc}</p>
+                    <h5 className="card-title">{data.title}</h5>
+                    <p className="card-text">{data.description}</p>
 
                     <div className="buttons">
                       <div>
@@ -63,7 +64,7 @@ function AddedCourses() {
                           type="button"
                           className="btn btn-primary show-section-button"
                           onClick={() => {
-                            handleShowSections(data.courseName);
+                            handleShowSections(data.title);
                           }}
                         >
                           Show Sections

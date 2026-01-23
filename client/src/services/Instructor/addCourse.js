@@ -2,9 +2,11 @@ import axios from "axios";
 
 
 export async function addCourse( formData) {
-    const response = await axios.post('http://localhost:5193/addCourse', formData,
+    const response = await axios.post('http://localhost:8080/api/v1/instructor/addCourse', formData,
         {
-            headers: { "Content-Type": "multipart/form-data" }
+            headers: { 
+            Authorization: `Bearer ${localStorage.getItem("token")}`
+        } 
         }
     )
     return response;

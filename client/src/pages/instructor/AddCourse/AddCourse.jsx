@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import './AddCourse.css'
 import { addCourse } from '../../../services/Instructor/addCourse';
+import { toast } from "react-toastify";
 
 function AddCourse() {
+
 
     const [ courseName, setCourseName ] = useState("");
     const [ courseDesc, setCourseDesc ] = useState("");
@@ -11,7 +13,8 @@ function AddCourse() {
     const [ image, setImage ] = useState(null);
     const [ video, setVideo ] = useState(null);
     const [ hour, setHour ] = useState("");
-    const [ min, setMin ] = useState("");
+  
+
 
     async function handleAddCourse()
     {
@@ -21,12 +24,20 @@ function AddCourse() {
         formData.append("fees", fees);
         formData.append("discountPercentage", discountPercentage);
         formData.append("hour", hour);
-        formData.append("min", min);
         formData.append("image", image);
         formData.append("video", video);
 
         const response =  await addCourse(formData)
-        console.log(response)
+        console.log(response);
+        if(response.data.success)
+        {
+            toast.success("Course Registered Successfully")
+            
+        }
+        else
+        {
+            toast.error("Course Not Added")
+        }
 
     }
 
@@ -105,13 +116,8 @@ function AddCourse() {
                         <input type="number" className="form-control" placeholder="Hours" min={0} max={23} name="hours" onChange={(e) => {
                             setHour(e.target.value)
                         }} />
-                        <span className="input-group-text">:</span>
-                        <input type="number" className="form-control" placeholder="Minutes" min={0} max={59} name="minutes"
-                            onChange={(e) => {
-                                setMin(e.target.value)
-                            }}
-
-                        />
+                
+                      
                     </div>
                 </div>
 

@@ -36,6 +36,7 @@ import AnalyticsLayout from "./pages/analytics/AnalyticsLayout";
 import CourseAnalyticsPage from "./pages/analytics/course/CourseAnalyticsPage";
 import StudentAnalyticsPage from "./pages/analytics/student/StudentAnalyticsPage";
 import InstructorAnalyticsPage from "./pages/analytics/instructors/InstructorAnalyticsPage";
+import NotificationPage from "./pages/admin/Notifications/NotificationPage";
 
 function App() {
   return (
@@ -98,7 +99,7 @@ function App() {
               path="instructor-requests"
               element={<InstructorRequests />}
             />
-            <Route path="notifications" element={<AdminNotifications />} />
+            <Route path="notifications" element={<NotificationPage />} />
             <Route path="analytics" element={<AnalyticsLayout />}>
               <Route path="course" element={<CourseAnalyticsPage />} />
               <Route path="student" element={<StudentAnalyticsPage />} />

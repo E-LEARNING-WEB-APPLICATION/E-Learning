@@ -1,3 +1,4 @@
+import "./Dashboard.css";
 import StudentDashboardCategoryCourse from "@/components/student/studentDashboard/StudentDashboardCategoryCourse";
 import StudentDashboardCategorySection from "@/components/student/studentDashboard/StudentDashboardCategorySection";
 import StudentDashboardHeroSection from "@/components/student/studentDashboard/StudentDashboardHeroSection";

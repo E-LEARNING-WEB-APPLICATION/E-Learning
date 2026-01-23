@@ -1,3 +1,4 @@
+import "./InstructorProfile.css";
 import AboutCard from "@/components/student/studentProfile/aboutCard/aboutCard";
 import ContactCard from "@/components/student/studentProfile/contactCard/ContactCard";
 import EducationCard from "@/components/student/studentProfile/educationCard/EducationCard";
@@ -29,11 +30,12 @@ const InstructorProfile = () => {
         name: "John Doe",
         bio: "Senior Instructor | Expert in Computer Science",
         location: "Pune, Maharashtra",
+        role: "instructor",
         email: "john@example.com",
         phone: "+91 98765 43210",
         specialization: ["Machine Learning", "Data Science", "Cloud Computing"],
         experience: "3-5",
-        dob: "1990-05-12", 
+        dob: "1990-05-12",
         gender: "female",
         photo: "https://i.pravatar.cc/160",
     });
@@ -90,6 +92,7 @@ const InstructorProfile = () => {
                             page={"instructor"}
                             skills={instructor.specialization}
                             allSkills={allSpecializations}
+                            role={instructor.role}
                             onSave={(updatedSpecializations) =>
                                 setInstructor((prev) => ({
                                     ...prev,

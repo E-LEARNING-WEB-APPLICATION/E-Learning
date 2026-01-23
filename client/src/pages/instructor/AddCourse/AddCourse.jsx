@@ -1,9 +1,16 @@
-import React, { useState } from 'react'
+import React, {useState } from 'react'
 import './AddCourse.css'
 import { addCourse } from '../../../services/Instructor/addCourse';
+import { toast } from "react-toastify";
+import { useRef } from "react";
+import Loader from '@/components/shared/Loader';
+import { useNavigate } from 'react-router-dom';
+import Form from './../../../components/contactus/form/Form';
 
 function AddCourse() {
 
+
+    const buttonRef = useRef(null);
     const [ courseName, setCourseName ] = useState("");
     const [ courseDesc, setCourseDesc ] = useState("");
     const [ fees, setFees ] = useState(0);
@@ -11,22 +18,39 @@ function AddCourse() {
     const [ image, setImage ] = useState(null);
     const [ video, setVideo ] = useState(null);
     const [ hour, setHour ] = useState("");
-    const [ min, setMin ] = useState("");
+    const [load,setLoad] = useState(false)
+    const navigate = useNavigate()
+  
 
-    async function handleAddCourse()
+    async function handleAddCourse(e)
     {
+
+         e.preventDefault();
+        buttonRef.current.disabled = true;
+        setLoad(true)
         const formData = new FormData();
         formData.append("courseName", courseName);
         formData.append("courseDesc", courseDesc);
         formData.append("fees", fees);
         formData.append("discountPercentage", discountPercentage);
         formData.append("hour", hour);
-        formData.append("min", min);
         formData.append("image", image);
         formData.append("video", video);
 
         const response =  await addCourse(formData)
-        console.log(response)
+        console.log(response);
+        if(response.data.success)
+        {
+            toast.success("Course Registered Successfully")
+            
+        }
+        else
+        {
+            toast.error("Course Not Added")
+        }
+        buttonRef.current.disabled = false;
+        setLoad(false)
+        navigate("/instructor/AddedCourses")
 
     }
 
@@ -36,19 +60,20 @@ function AddCourse() {
 
         <div className='add-course-main'>
             <h1>Add Course</h1>
+ 
+            <form onSubmit={handleAddCourse}>
 
-            
 
                 <div className="form-group mb-3">
                     <label htmlFor="courseName">Course Name</label>
-                    <input type="text" className="form-control" id="courseName" onChange={(e) => {
+                    <input type="text" required className="form-control" id="courseName" onChange={(e) => {
                         setCourseName(e.target.value)
                     }} />
 
                 </div>
                 <div className="form-group mb-3">
                     <label htmlFor="courseDesc">Course Description</label>
-                    <textarea className="form-control" id="courseDesc" rows="3"
+                    <textarea required className="form-control" id="courseDesc" rows="3"
                         onChange={(e) => {
                             setCourseDesc(e.target.value)
                         }}
@@ -57,7 +82,7 @@ function AddCourse() {
 
                 <div className="form-group mb-3">
                     <label htmlFor="fees">Fees</label>
-                    <input type="number" step="0.01" className="form-control" id="fees"
+                    <input required type="number" step="1" className="form-control" id="fees"
                         onChange={(e) => {
                             setFees(e.target.value)
                         }}
@@ -67,7 +92,7 @@ function AddCourse() {
 
                 <div className="form-group mb-3">
                     <label htmlFor="discount">Discount %</label>
-                    <input type="number" className="form-control" id="discount"
+                    <input required type="number" className="form-control" id="discount"
                         onChange={(e) => {
                             setDiscountPercentage(e.target.value)
                         }}
@@ -77,7 +102,7 @@ function AddCourse() {
 
                 <div className=" form-group mb-3">
                     <label htmlFor="formFile" className="form-label">Upload Image</label>
-                    <input className="form-control" type="file" id="formFile" accept="image/*"
+                    <input  required className="form-control" type="file" id="formFile" accept="image/*"
 
                         onChange={(e) => {
                             setImage(e.target.files[0])
@@ -87,7 +112,7 @@ function AddCourse() {
 
                 <div className="form-group mb-3">
                     <label htmlFor="introVideo" className="form-label">Choose Intro Video</label>
-                    <input
+                    <input 
                         type="file"
                         className="form-control"
                         id="introVideo"
@@ -102,22 +127,27 @@ function AddCourse() {
                 <div className="mb-3">
                     <label className="form-label">Course Duration (Hours &amp; Minutes)</label>
                     <div className="input-group">
-                        <input type="number" className="form-control" placeholder="Hours" min={0} max={23} name="hours" onChange={(e) => {
+                        <input required type="number" className="form-control" placeholder="Hours" min={0} max={23} name="hours" onChange={(e) => {
                             setHour(e.target.value)
                         }} />
-                        <span className="input-group-text">:</span>
-                        <input type="number" className="form-control" placeholder="Minutes" min={0} max={59} name="minutes"
-                            onChange={(e) => {
-                                setMin(e.target.value)
-                            }}
-
-                        />
+                
+                      
                     </div>
                 </div>
 
-                <button type="submit" className="btn btn-primary mb-3" onClick={handleAddCourse}>Submit</button>
+               {load && <Loader text="Adding Course" />}
+              
+
+                    <button
+                        ref={buttonRef}
+                        type="submit"
+                        className="btn btn-primary mb-3"
+                    >
+                        Submit
+                    </button>
+
             
-     
+     </form>
 
         </div>
 

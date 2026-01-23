@@ -1,0 +1,170 @@
+/* -----------------------------------
+   Instructor Navbar — Soft Blue Theme
+------------------------------------ */
+
+.instructor-navbar {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  padding: 12px 25px;
+
+  background: linear-gradient(90deg, #eef6ff, #dbe9ff);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  border-bottom: 1px solid rgba(0, 50, 120, 0.12);
+  box-shadow: 0 2px 6px rgba(0, 40, 110, 0.08);
+  z-index: 999;
+}
+
+/* Brand */
+.instructor-brand {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  text-decoration: none !important;
+  padding-bottom: 2px;
+  animation: brandFloat 4s ease-in-out infinite;
+  position: relative;
+}
+
+@keyframes brandFloat {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-2px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.instructor-brand .brand-text {
+  font-size: 1.55rem;
+  font-weight: 700;
+  letter-spacing: 0.7px;
+  color: #1f3b73 !important;
+  transition: 0.3s ease;
+}
+
+.instructor-brand i {
+  font-size: 1.35rem;
+  color: #1f3b73 !important;
+}
+
+.instructor-brand:hover .brand-text {
+  filter: drop-shadow(0px 2px 6px rgba(80, 120, 200, 0.45));
+}
+
+.instructor-brand::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0%;
+  height: 2px;
+  background: #3c7dff;
+  border-radius: 4px;
+  transition: 0.35s ease;
+}
+
+.instructor-brand:hover::after {
+  width: 60%;
+}
+
+/* Links */
+.instructor-links .nav-link {
+  color: #33527a !important;
+  font-weight: 500;
+  font-size: 0.97rem;
+  position: relative;
+  transition: 0.25s ease;
+}
+
+.instructor-links .nav-link::after {
+  content: "";
+  position: absolute;
+  bottom: 3px;
+  left: 50%;
+  width: 0%;
+  height: 2px;
+  background: #3c7dff;
+  transform: translateX(-50%);
+  transition: 0.25s ease;
+  border-radius: 4px;
+}
+
+.instructor-links .nav-link:hover::after {
+  width: 70%;
+}
+
+.instructor-links .nav-link:hover {
+  color: #1a3d8f !important;
+}
+
+/* Active link */
+.instructor-links .active-link {
+  position: relative;
+  font-weight: 700 !important;
+  color: #0b1730 !important;
+
+  background: rgba(3, 22, 60, 0.18);
+  padding: 8px 18px !important;
+  border-radius: 20px;
+
+  transform: scale(1.05);
+  transition: 0.3s ease;
+  animation: activeFloat 3s infinite ease-in-out;
+}
+
+@keyframes activeFloat {
+  0% {
+    transform: scale(1.05) translateY(0);
+  }
+  50% {
+    transform: scale(1.1) translateY(-2px);
+  }
+  100% {
+    transform: scale(1.05) translateY(0);
+  }
+}
+
+.instructor-links .active-link::after {
+  width: 70% !important;
+  background: #0b1730 !important;
+}
+
+/* Logout */
+.logout-btn {
+  background: rgba(200, 60, 60, 0.15);
+  border: 1px solid rgba(200, 60, 60, 0.35);
+  border-radius: 6px;
+  padding: 8px 16px !important;
+  font-weight: 600;
+  color: #b13434 !important;
+  transition: 0.25s ease;
+}
+
+.logout-btn:hover {
+  background: rgba(200, 60, 60, 0.25);
+  color: #7d1b1b !important;
+}
+
+/* Toggler */
+.instructor-toggler {
+  border: 1px solid rgba(15, 44, 95, 0.5) !important;
+  border-radius: 6px;
+}
+
+/* Mobile */
+@media (max-width: 992px) {
+  .instructor-links .nav-link {
+    margin: 6px 0;
+    text-align: center;
+  }
+  .logout-btn {
+    margin-top: 6px;
+  }
+}

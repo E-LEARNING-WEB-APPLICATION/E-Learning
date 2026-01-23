@@ -9,17 +9,17 @@ import {
 } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { registerStudent } from "@/services/authService";
 
 const StudentRegistration = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    fname: "",
-    lname: "",
+    firstName: "",
+    lastName: "",
     email: "",
     password: "",
     confirmPassword: "",
-    phone: "",
-    role: "student",
+    phoneNo: "",
   });
 
   const handleChange = (e) => {
@@ -29,16 +29,23 @@ const StudentRegistration = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (formData.password != formData.confirmPassword) {
       toast.warning("Password and Confirm Password Did not Match !!");
       return;
     }
     console.log(formData);
-    setTimeout(() => {
-      navigate("/guest/login");
-    }, 1000);
+    const response = await registerStudent(formData);
+    console.log(response);
+    if (response.success) {
+      toast.success(response.message);
+      setTimeout(() => {
+        navigate("/guest/login");
+      }, 1000);
+    } else {
+      toast.error(response.message);
+    }
   };
 
   return (
@@ -57,7 +64,7 @@ const StudentRegistration = () => {
                 type="text"
                 onChange={handleChange}
                 className="form-control"
-                id="fname"
+                id="firstName"
                 placeholder="First Name"
                 required
               />
@@ -71,7 +78,7 @@ const StudentRegistration = () => {
                 type="text"
                 onChange={handleChange}
                 className="form-control"
-                id="lname"
+                id="lastName"
                 placeholder="Last Name"
                 required
               />
@@ -132,7 +139,7 @@ const StudentRegistration = () => {
               type="tel"
               onChange={handleChange}
               className="form-control"
-              id="phone"
+              id="phoneNo"
               placeholder="Phone Number"
               required
             />

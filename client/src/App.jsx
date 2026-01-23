@@ -37,6 +37,7 @@ import CourseAnalyticsPage from "./pages/analytics/course/CourseAnalyticsPage";
 import StudentAnalyticsPage from "./pages/analytics/student/StudentAnalyticsPage";
 import InstructorAnalyticsPage from "./pages/analytics/instructors/InstructorAnalyticsPage";
 import NotificationPage from "./pages/admin/Notifications/NotificationPage";
+import ProfileView from "./pages/profileView/ProfileView";
 
 function App() {
   return (
@@ -44,6 +45,7 @@ function App() {
       <div>
         <ToastContainer />
         <Routes>
+          {/* Redirect root to /guest */}
           <Route path="/" element={<Navigate to="/guest" />} />
           <Route path="/guest" element={<GuestLayout />}>
             <Route
@@ -55,7 +57,11 @@ function App() {
               element={<StudentRegistration />}
             />
             <Route path="login" element={<Login />} />
+            <Route path="aboutus" element={<AboutUs />} />
+            <Route path="contactus" element={<ContactUs />} />
+            <Route path="profile-view" element={<ProfileView />} />
           </Route>
+          {/* Student Routes */}
           <Route path="/student" element={<StudentLayout />}>
             <Route path="dashboard" element={<StudentDashboard />} />
             <Route path="course-details" element={<CourseDetails />} />
@@ -64,17 +70,21 @@ function App() {
             <Route path="aboutus" element={<AboutUs />} />
             <Route path="contactus" element={<ContactUs />} />
             <Route path="profile" element={<StudentProfile />} />
+            <Route path="profile-view" element={<ProfileView />} />
             <Route
               path="enrolled-course-details"
               element={<CourseEnrolledPage />}
             />
           </Route>
+          {/* Instructor Routes */}
           <Route path="/instructor" element={<InstructorLayout />}>
             <Route path="dashboard" element={<InstructorDashboard />} />
             <Route path="addCourse" element={<AddCourse />} />
             <Route path="addedCourses" element={<AddedCourses />} />
             <Route path="addedCourses/add-section" element={<AddSection />} />
             <Route path="profile" element={<InstructorProfile />} />
+            <Route path="aboutus" element={<AboutUs />} />
+            <Route path="profile-view" element={<ProfileView />} />
             <Route
               path="addedCourses/show-sections"
               element={<ShowSection />}
@@ -88,6 +98,7 @@ function App() {
               element={<ShowTopic />}
             />
           </Route>
+          {/* Admin Routes */}
           <Route path="/admin" element={<AdminLayout />}>
             <Route path="dashboard" element={<AdminDashboard />} />
             <Route path="courses/:courseId" element={<AdminCourseDetails />} />
@@ -105,6 +116,12 @@ function App() {
               <Route path="student" element={<StudentAnalyticsPage />} />
               <Route path="instructor" element={<InstructorAnalyticsPage />} />
             </Route>
+            <Route path="profile-view" element={<ProfileView />} />
+            <Route
+              path="instructor-requests"
+              element={<InstructorRequests />}
+            />
+            <Route path="notifications" element={<AdminNotifications />} />
           </Route>
         </Routes>
       </div>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import NotificationStats from "./_components/NotificationStats";
 import NotificationFilters from "./_components/NotificationFilters";
 import NotificationTable from "./_components/NotificationTable";
@@ -8,7 +8,6 @@ const NotificationPage = () => {
   const [search, setSearch] = useState("");
   const [filters, setFilters] = useState({});
   const [selected, setSelected] = useState([]);
-  const [filteredNotifications, setFilteredNotifications] = useState([]);
   const notifications = [
     {
       id: 1,
@@ -34,23 +33,19 @@ const NotificationPage = () => {
     },
   ];
 
-  useEffect(() => {
-    const filtered = notifications.filter((notification) => {
-      const matchesType = !filters.type || filters.type === notification.type;
+  const filteredNotifications = notifications.filter((notification) => {
+    const matchesType = !filters.type || filters.type === notification.type;
 
-      const matchesPriority =
-        !filters.priority || filters.priority === notification.priority;
+    const matchesPriority =
+      !filters.priority || filters.priority === notification.priority;
 
-      const matchesSearch =
-        !search ||
-        notification.title.toLowerCase().includes(search.toLowerCase()) ||
-        notification.message.toLowerCase().includes(search.toLowerCase());
+    const matchesSearch =
+      !search ||
+      notification.title.toLowerCase().includes(search.toLowerCase()) ||
+      notification.message.toLowerCase().includes(search.toLowerCase());
 
-      return matchesType && matchesPriority && matchesSearch;
-    });
-
-    setFilteredNotifications(filtered);
-  }, [filters, search, notifications]);
+    return matchesType && matchesPriority && matchesSearch;
+  });
 
   return (
     <div className="container py-4">

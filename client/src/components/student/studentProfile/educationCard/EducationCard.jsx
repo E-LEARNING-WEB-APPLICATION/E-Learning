@@ -22,8 +22,9 @@ const EducationCard = ({ education, openAdd, openEdit,page }) => {
                     className="edu-item p-3 mb-3 rounded-3 d-flex justify-content-between">
                     <div>
                         <h6 className="fw-semibold">{edu.degree}</h6>
-                        <p className="text-muted mb-0">{edu.college}</p>
-                        <small>{edu.year}</small>
+                        <p className="text-muted mb-0">{edu.institute}</p>
+                        <p className="text-muted mb-0">{edu.fieldOfStudy}</p>
+                        <small>{edu.passingYear}</small>
                     </div>
                     {page === "viewOnly" ? null : (
                     <button

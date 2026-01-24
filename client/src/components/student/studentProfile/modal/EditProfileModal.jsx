@@ -8,14 +8,28 @@ const EditProfileModal = ({ show, onClose, profile, onSave, page }) => {
     }, [profile, show]);
 
     const handleChange = (e) => {
-        setForm({ ...form, [e.target.name]: e.target.value });
+        const { name, value } = e.target;
+
+        // Handle nested address fields
+        if (name.startsWith("address.")) {
+            const field = name.split(".")[1];
+            setForm((prev) => ({
+                ...prev,
+                address: {
+                    ...prev.address,
+                    [field]: value,
+                },
+            }));
+        } else {
+            setForm((prev) => ({
+                ...prev,
+                [name]: value,
+            }));
+        }
     };
 
     const handleSave = () => {
-        const updatedForm = {
-            ...form,
-        };
-        onSave(updatedForm);
+        onSave(form);
         onClose();
     };
 
@@ -32,73 +46,144 @@ const EditProfileModal = ({ show, onClose, profile, onSave, page }) => {
                             <h5 className="modal-title">Edit Profile</h5>
                             <button
                                 className="btn-close"
-                                onClick={onClose}></button>
+                                onClick={onClose}
+                            />
                         </div>
 
                         <div className="modal-body">
-                            {/* Name */}
-                            <label className="fw-semibold">Name</label>
+                            {/* First Name */}
+                            <label className="fw-semibold">First Name</label>
                             <input
                                 type="text"
-                                name="name"
+                                name="firstName"
                                 className="form-control mb-3"
-                                value={form.name}
+                                value={form.firstName || ""}
                                 onChange={handleChange}
                             />
-                            {/* About Me */}
-                            <label className="fw-semibold">About Me</label>
-                            <textarea
-                                name="bio"
+
+                            {/* Last Name */}
+                            <label className="fw-semibold">Last Name</label>
+                            <input
+                                type="text"
+                                name="lastName"
                                 className="form-control mb-3"
-                                rows="3"
-                                value={form.bio}
-                                onChange={handleChange}></textarea>
-                            {/* Experience Only for instructor */}
-                            {page == "instructor" ? (
-                                <div className="mb-3">
-                                    <label className="form-label fw-semibold">
-                                        Experience
+                                value={form.lastName || ""}
+                                onChange={handleChange}
+                            />
+
+                            {/* Date of Birth */}
+                            <label className="fw-semibold">Date of Birth</label>
+                            <input
+                                type="date"
+                                name="dob"
+                                className="form-control mb-3"
+                                value={form.dob || ""}
+                                onChange={handleChange}
+                            />
+
+                            {/* Instructor-only fields */}
+                            {page === "instructor" && (
+                                <>
+                                    <label className="fw-semibold">
+                                        About Me
                                     </label>
-                                    <select
+                                    <textarea
+                                        name="bio"
+                                        className="form-control mb-3"
+                                        rows="3"
+                                        value={form.bio || ""}
+                                        onChange={handleChange}
+                                    />
+
+                                    <label className="fw-semibold">
+                                        Experience (Years)
+                                    </label>
+                                    <input
+                                        type="number"
                                         name="experience"
-                                        className="form-select"
-                                        value={form.experience}
-                                        onChange={handleChange}>
-                                        <option value="">
-                                            Select experience
-                                        </option>
-                                        <option value="0-1">0-1 years</option>
-                                        <option value="2-3">2–3 years</option>
-                                        <option value="4-5">4–5 years</option>
-                                        <option value="5+">5+ years</option>
-                                    </select>
-                                </div>
-                            ) : null}
+                                        className="form-control mb-3"
+                                        value={form.experience || ""}
+                                        onChange={handleChange}
+                                    />
+                                </>
+                            )}
+
                             {/* Address */}
-                            <label className="fw-semibold">Address</label>
+                            <label className="fw-semibold">
+                                Address Line 1
+                            </label>
                             <input
                                 type="text"
-                                name="location"
+                                name="address.addressLine1"
                                 className="form-control mb-3"
-                                value={form.location}
+                                value={form.address?.addressLine1 || ""}
                                 onChange={handleChange}
                             />
+
+                            <label className="fw-semibold">
+                                Address Line 2
+                            </label>
+                            <input
+                                type="text"
+                                name="address.addressLine2"
+                                className="form-control mb-3"
+                                value={form.address?.addressLine2 || ""}
+                                onChange={handleChange}
+                            />
+
+                            <label className="fw-semibold">City</label>
+                            <input
+                                type="text"
+                                name="address.city"
+                                className="form-control mb-3"
+                                value={form.address?.city || ""}
+                                onChange={handleChange}
+                            />
+
+                            <label className="fw-semibold">State</label>
+                            <input
+                                type="text"
+                                name="address.state"
+                                className="form-control mb-3"
+                                value={form.address?.state || ""}
+                                onChange={handleChange}
+                            />
+
+                            <label className="fw-semibold">Pincode</label>
+                            <input
+                                type="text"
+                                name="address.pinCode"
+                                className="form-control mb-3"
+                                value={form.address?.pinCode || ""}
+                                onChange={handleChange}
+                            />
+
+                            <label className="fw-semibold">Country</label>
+                            <input
+                                type="text"
+                                name="address.country"
+                                className="form-control mb-3"
+                                value={form.address?.country || ""}
+                                onChange={handleChange}
+                            />
+
                             {/* Email */}
                             <label className="fw-semibold">Email</label>
                             <input
                                 type="email"
                                 name="email"
                                 className="form-control mb-3"
-                                value={form.email}
-                                onChange={handleChange}
+                                value={form.email || ""}
+                                disabled
                             />
+
                             {/* Phone */}
                             <label className="fw-semibold">Phone</label>
                             <input
                                 type="text"
-                                name="phone"
+                                name="phoneNo"
                                 className="form-control mb-3"
-                                value={form.phone}
+                                value={form.phoneNo || ""}
                                 onChange={handleChange}
                             />
                         </div>

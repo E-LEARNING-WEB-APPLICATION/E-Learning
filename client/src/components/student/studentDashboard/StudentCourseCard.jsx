@@ -1,6 +1,8 @@
 import React from "react";
 
 const StudentCourseCard = ({ course }) => {
+
+    
     return (
         <div
             className="col-md-3"
@@ -46,7 +48,7 @@ const StudentCourseCard = ({ course }) => {
                         )}
                     </p>
 
-                    <button className="btn btn-primary w-100 mb-1">
+                    <button className="btn btn-primary w-100 mb-1" >
                         View Course
                     </button>
                 </div>

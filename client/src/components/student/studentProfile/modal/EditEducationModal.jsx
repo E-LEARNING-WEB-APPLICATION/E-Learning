@@ -1,7 +1,13 @@
 import React, { useEffect, useState } from "react";
 
 const EditEducationModal = ({ show, onClose, data, onSave, onDelete }) => {
-    const empty = { degree: "", college: "", year: "" };
+    const empty = {
+        degree: "",
+        fieldOfStudy: "",
+        institute: "",
+        passingYear: "",
+    };
+
     const [form, setForm] = useState(empty);
 
     useEffect(() => {
@@ -9,13 +15,24 @@ const EditEducationModal = ({ show, onClose, data, onSave, onDelete }) => {
         else setForm(empty);
     }, [data, show]);
 
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setForm((prev) => ({
+            ...prev,
+            [name]: value,
+        }));
+    };
+
     const handleSave = () => {
-        onSave(form);
+        onSave({
+            ...form,
+            passingYear: Number(form.passingYear), // ✅ ensure number
+        });
         onClose();
     };
 
     const handleDelete = () => {
-        onDelete(data); // pass the object to parent
+        onDelete(data);
         onClose();
     };
 
@@ -23,52 +40,56 @@ const EditEducationModal = ({ show, onClose, data, onSave, onDelete }) => {
 
     return (
         <>
-            <div
-                className="modal fade show d-block"
-                tabIndex="-1">
+            <div className="modal fade show d-block" tabIndex="-1">
                 <div className="modal-dialog modal-dialog-centered">
                     <div className="modal-content">
+
                         <div className="modal-header">
                             <h5 className="modal-title">
                                 {data ? "Edit Education" : "Add Education"}
                             </h5>
-                            <button
-                                className="btn-close"
-                                onClick={onClose}></button>
+                            <button className="btn-close" onClick={onClose} />
                         </div>
 
                         <div className="modal-body">
+                            {/* Degree */}
+                            <label className="fw-semibold">Degree</label>
                             <input
                                 type="text"
+                                name="degree"
                                 className="form-control mb-3"
-                                placeholder="Degree"
                                 value={form.degree}
-                                onChange={(e) =>
-                                    setForm({ ...form, degree: e.target.value })
-                                }
+                                onChange={handleChange}
                             />
 
+                            {/* Field of Study */}
+                            <label className="fw-semibold">Field of Study</label>
                             <input
                                 type="text"
+                                name="fieldOfStudy"
                                 className="form-control mb-3"
-                                placeholder="College"
-                                value={form.college}
-                                onChange={(e) =>
-                                    setForm({
-                                        ...form,
-                                        college: e.target.value,
-                                    })
-                                }
+                                value={form.fieldOfStudy}
+                                onChange={handleChange}
                             />
 
+                            {/* Institute */}
+                            <label className="fw-semibold">Institute</label>
                             <input
                                 type="text"
+                                name="institute"
                                 className="form-control mb-3"
-                                placeholder="Passing Year"
-                                value={form.year}
-                                onChange={(e) =>
-                                    setForm({ ...form, year: e.target.value })
-                                }
+                                value={form.institute}
+                                onChange={handleChange}
+                            />
+
+                            {/* Passing Year */}
+                            <label className="fw-semibold">Passing Year</label>
+                            <input
+                                type="number"
+                                name="passingYear"
+                                className="form-control mb-3"
+                                value={form.passingYear}
+                                onChange={handleChange}
                             />
                         </div>
 
@@ -76,7 +97,8 @@ const EditEducationModal = ({ show, onClose, data, onSave, onDelete }) => {
                             {data && (
                                 <button
                                     className="btn btn-danger"
-                                    onClick={handleDelete}>
+                                    onClick={handleDelete}
+                                >
                                     Delete
                                 </button>
                             )}
@@ -84,16 +106,19 @@ const EditEducationModal = ({ show, onClose, data, onSave, onDelete }) => {
                             <div>
                                 <button
                                     className="btn btn-secondary me-2"
-                                    onClick={onClose}>
+                                    onClick={onClose}
+                                >
                                     Cancel
                                 </button>
                                 <button
                                     className="btn btn-primary"
-                                    onClick={handleSave}>
+                                    onClick={handleSave}
+                                >
                                     Save
                                 </button>
                             </div>
                         </div>
+
                     </div>
                 </div>
             </div>

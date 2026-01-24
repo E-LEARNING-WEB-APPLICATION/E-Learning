@@ -3,11 +3,11 @@ import NotificationRow from "./NotificationRow";
 
 const NotificationTable = ({ notifications, selected, setSelected }) => {
   const toggleSelect = (id) => {
-    if (selected.includes(id)) {
-      setSelected(selected.filter((i) => i !== id));
-    } else {
-      setSelected([...selected, id]);
-    }
+    setSelected(
+      selected.includes(id)
+        ? selected.filter((i) => i !== id)
+        : [...selected, id],
+    );
   };
 
   return (
@@ -19,20 +19,16 @@ const NotificationTable = ({ notifications, selected, setSelected }) => {
               <th>
                 <input
                   type="checkbox"
-                  onChange={(e) => {
-                    if (e.target.checked)
-                      setSelected(notifications.map((n) => n.id));
-                    else setSelected([]);
-                  }}
                   checked={selected.length === notifications.length}
+                  onChange={(e) =>
+                    setSelected(
+                      e.target.checked ? notifications.map((n) => n.id) : [],
+                    )
+                  }
                 />
               </th>
-              <th>Title</th>
-              <th>Type</th>
-              <th>User</th>
-              <th>Course</th>
+              <th>Notification</th>
               <th>Priority</th>
-              <th>Created</th>
               <th>Actions</th>
             </tr>
           </thead>

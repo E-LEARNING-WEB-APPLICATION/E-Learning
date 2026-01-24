@@ -36,7 +36,6 @@ import AnalyticsLayout from "./pages/analytics/AnalyticsLayout";
 import CourseAnalyticsPage from "./pages/analytics/course/CourseAnalyticsPage";
 import StudentAnalyticsPage from "./pages/analytics/student/StudentAnalyticsPage";
 import InstructorAnalyticsPage from "./pages/analytics/instructors/InstructorAnalyticsPage";
-import NotificationPage from "./pages/admin/Notifications/NotificationPage";
 import ProfileView from "./pages/profileView/ProfileView";
 import CategoryCourses from "./pages/student/categorycourses/CategoryCourses";
 import AddAdminPage from "./pages/admin/RegisterAdmin/AddAdminPage";

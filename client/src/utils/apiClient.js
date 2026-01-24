@@ -8,6 +8,7 @@ const apiClient = axios.create({
   },
 });
 
+export const API_URL = "http://localhost:8080/";
 export const ADMIN_BASE_PATH = "api/v1/admin";
 export const API_BASE_PATH = "api/v1";
 export default apiClient;

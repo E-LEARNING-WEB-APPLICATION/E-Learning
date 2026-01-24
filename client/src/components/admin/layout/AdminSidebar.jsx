@@ -14,6 +14,8 @@ import {
 import { IoMdNotifications } from "react-icons/io";
 import { Link, useLocation } from "react-router-dom";
 import "./layout.css";
+import { useUnreadCount } from "@/hooks/useUnreadCount";
+import { Badge } from "react-bootstrap";
 
 const Sidebar = ({ onToggle }) => {
   const [collapsed, setCollapsed] = useState(false);
@@ -22,6 +24,9 @@ const Sidebar = ({ onToggle }) => {
   const [openCourses, setOpenCourses] = useState(false);
   const [openInstructors, setOpenInstructors] = useState(false);
   const [openAnalytics, setOpenAnalytics] = useState(false);
+
+  //unread notification count
+  const { data: unreadCount } = useUnreadCount();
 
   // Profile popup
   //   const [showProfileMenu, setShowProfileMenu] = useState(false);
@@ -167,6 +172,7 @@ const Sidebar = ({ onToggle }) => {
         >
           <IoMdNotifications className="icon" />
           {!collapsed && <span>Notifications</span>}
+          <Badge bg="info">{unreadCount > 0 && `(${unreadCount})`}</Badge>
         </Link>
         {/* Add admin */}
         <Link

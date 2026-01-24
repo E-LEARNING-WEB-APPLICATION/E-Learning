@@ -39,8 +39,10 @@ import InstructorAnalyticsPage from "./pages/analytics/instructors/InstructorAna
 import NotificationPage from "./pages/admin/Notifications/NotificationPage";
 import ProfileView from "./pages/profileView/ProfileView";
 import AddAdminPage from "./pages/admin/RegisterAdmin/AddAdminPage";
+import { useNotificationSSE } from "./hooks/useNotificationSse";
 
 function App() {
+  useNotificationSSE();
   return (
     <>
       <div>

@@ -31,7 +31,7 @@ import CourseDetails from "./pages/student/coursedetails/CourseDetails";
 import CourseEnrolledPage from "./pages/student/enrolledcoursedetails/CourseEnrolledPage";
 import InstructorProfile from "./pages/instructor/instructorProfile/InstructorProfile";
 import AdminCourseDetails from "./pages/admin/CoursesView/AdminCourseDetails";
-import AdminCategoryPage from "./pages/admin/CoursesView/AdminCategoryPage";
+import AdminCategoryPage from "./pages/admin/AddCategory/AdminCategoryPage";
 import AnalyticsLayout from "./pages/analytics/AnalyticsLayout";
 import CourseAnalyticsPage from "./pages/analytics/course/CourseAnalyticsPage";
 import StudentAnalyticsPage from "./pages/analytics/student/StudentAnalyticsPage";

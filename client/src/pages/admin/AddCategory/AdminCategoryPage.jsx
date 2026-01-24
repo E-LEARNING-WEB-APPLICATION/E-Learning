@@ -1,5 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./AdminCategoryPage.css";
+import { toast } from "react-toastify";
+import {
+  createCategory,
+  fetchCategories,
+} from "@/services/admin/categoryService";
+import Loader from "@/components/shared/Loader";
 
 const AdminCategoryPage = () => {
   const [categoryForm, setCategoryForm] = useState({
@@ -10,6 +16,7 @@ const AdminCategoryPage = () => {
   });
 
   const [previewImg, setPreviewImg] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const [categories, setCategories] = useState([
     {
@@ -39,32 +46,48 @@ const AdminCategoryPage = () => {
     if (file) setPreviewImg(URL.createObjectURL(file));
   };
 
-  const handleAddCategory = (e) => {
+  const handleAddCategory = async (e) => {
     e.preventDefault();
 
-    const newCategory = {
-      id: Date.now(),
-      name: categoryForm.name,
-      description: categoryForm.description,
-      keywords: categoryForm.keywords,
-      image: previewImg || "https://via.placeholder.com/80",
-    };
+    if (!categoryForm.image) {
+      toast.warn("Please select an image");
+      return;
+    }
 
-    setCategories([...categories, newCategory]);
+    try {
+      setLoading(true);
+      const savedCategory = await createCategory(categoryForm);
+      console.log("Category created:", savedCategory);
+      toast.info("Category created successfully");
+      fetchCategories().then((data) => setCategories(data));
 
-    // Reset form
-    setCategoryForm({
-      name: "",
-      description: "",
-      keywords: "",
-      image: null,
-    });
-    setPreviewImg(null);
+      // reset form
+      setCategoryForm({
+        name: "",
+        description: "",
+        keywords: "",
+        image: null,
+      });
+    } catch (error) {
+      console.error(error);
+      toast.error(error.response?.data?.message || "Failed to create category");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleDelete = (id) => {
     setCategories(categories.filter((cat) => cat.id !== id));
   };
+
+  useEffect(() => {
+    fetchCategories()
+      .then((data) => setCategories(data))
+      .catch((err) => console.error(err))
+      .finally(() => setLoading(false));
+  }, []);
+
+  if (loading) return <Loader text="page loading..." />;
 
   return (
     <div className="container py-4 category-page">
@@ -170,7 +193,7 @@ const AdminCategoryPage = () => {
             <tr>
               <th>#</th>
               <th>Image</th>
-              <th>Name</th>
+              <th>Title</th>
               <th>Description</th>
               <th>Keywords</th>
               <th>Actions</th>
@@ -183,13 +206,13 @@ const AdminCategoryPage = () => {
                 <td>{i + 1}</td>
                 <td>
                   <img
-                    src={cat.image}
-                    alt={cat.name}
+                    src={cat.categoryImageUr}
+                    alt={cat.title}
                     width="60"
                     className="rounded"
                   />
                 </td>
-                <td>{cat.name}</td>
+                <td>{cat.title}</td>
                 <td>{cat.description}</td>
                 <td>{cat.keywords}</td>
                 <td>

@@ -8,22 +8,15 @@ import EducationCard from "../../../components/student/studentProfile/educationC
 
 import EditProfileModal from "../../../components/student/studentProfile/modal/EditProfileModal";
 import EditEducationModal from "../../../components/student/studentProfile/modal/EditEducationModal";
-import { getStudentDetail } from "@/services/Student/profileService";
+import {
+    getAllSkills,
+    getStudentDetail,
+    updateProfilePic,
+} from "@/services/Student/profileService";
+import { toast } from "react-toastify";
 
 const StudentProfile = () => {
-    const allSkills = [
-        "React.js",
-        "Node.js",
-        "MongoDB",
-        "JavaScript",
-        "UI/UX Design",
-        "C++",
-        "Express.js",
-        "Python",
-        "HTML",
-        "CSS",
-    ];
-
+    const [allSkills, setAllSkills] = useState([]);
     const [profile, setProfile] = useState({
         firstName: "",
         lastName: "",
@@ -31,7 +24,7 @@ const StudentProfile = () => {
         phoneNo: "",
         dob: "",
         gender: "",
-        profilePic: null, 
+        profilePic: null,
         skills: [],
         address: {
             addressLine1: "",
@@ -49,8 +42,7 @@ const StudentProfile = () => {
         const fetchProfile = async () => {
             try {
                 const data = await getStudentDetail();
-                console.log("API DATA:", data);
-
+                console.log(data);
                 setProfile({
                     firstName: data.firstName ?? "",
                     lastName: data.lastName ?? "",
@@ -58,7 +50,7 @@ const StudentProfile = () => {
                     phoneNo: data.phoneNo ?? "",
                     dob: data.dob ?? "",
                     gender: data.gender ?? "",
-                    profilePic: data.profilePic || null, 
+                    profilePic: data.profilePic || null,
                     skills: data.skills ?? [],
                     address: {
                         addressLine1: data.address?.addressLine1 ?? "",
@@ -70,26 +62,47 @@ const StudentProfile = () => {
                     },
                 });
 
-                setEducation(
-                    (data.educations ?? []).map((edu) => ({
-                        degree: edu.degree ?? "",
-                        fieldOfStudy: edu.fieldOfStudy ?? "",
-                        institute: edu.institute ?? "",
-                        passingYear: edu.passingYear ?? "",
-                    }))
-                );
+                setEducation(data.educations);
             } catch (error) {
-                console.error("Failed to fetch profile:", error);
+                toast.error(error.message)
+            }
+        };
+
+        const getSkill = async () => {
+            try {
+                const data = await getAllSkills();
+                setAllSkills(data.data);
+            } catch (error) {
+                toast.error(error.message);
             }
         };
 
         fetchProfile();
+        getSkill();
     }, []);
 
-    const handleProfilePhotoUpload = (file) => {
-        const previewURL = URL.createObjectURL(file);
-        setProfile((prev) => ({ ...prev, profilePic: previewURL })); 
-    };
+    const handleProfilePhotoUpload = async (file) => {
+
+    // Preview
+    const previewURL = URL.createObjectURL(file);
+    setProfile((prev) => ({
+        ...prev,
+        profilePic: previewURL,
+    }));
+
+    // Upload
+    try {
+        const response = await updateProfilePic(file);
+        if (response.data.success) {
+                toast.success(response.data.message)
+            } else {
+                toast.error(response.data.message);
+            }
+    } catch (error) {
+        toast.error(error.message);
+    }
+};
+
 
     const [showProfileModal, setShowProfileModal] = useState(false);
     const [showEduModal, setShowEduModal] = useState(false);
@@ -98,8 +111,8 @@ const StudentProfile = () => {
     return (
         <div className="student-profile profilebody">
             <ProfileHeader
-                page="student"
                 profile={profile}
+                page="student"
                 openProfileModal={() => setShowProfileModal(true)}
                 onPhotoUpload={handleProfilePhotoUpload}
             />
@@ -135,9 +148,9 @@ const StudentProfile = () => {
                         />
 
                         <ContactCard
-                            address={profile.address}   
+                            address={profile.address}
                             email={profile.email}
-                            phone={profile.phoneNo}     
+                            phone={profile.phoneNo}
                         />
                     </div>
                 </div>
@@ -154,17 +167,23 @@ const StudentProfile = () => {
             <EditEducationModal
                 show={showEduModal}
                 onClose={() => setShowEduModal(false)}
-                data={selectedEdu}
+                educationData={selectedEdu}
                 onSave={(newEdu) => {
-                    if (selectedEdu) {
+                    if (selectedEdu?.id) {
+                        // EDIT existing education (by id)
                         setEducation((prev) =>
-                            prev.map((e) =>
-                                e.degree === selectedEdu.degree ? newEdu : e
-                            )
+                            prev.map((e) => (e.id === newEdu.id ? newEdu : e)),
                         );
                     } else {
+                        // ADD new education
                         setEducation((prev) => [...prev, newEdu]);
                     }
+                }}
+                onDelete={(eduToDelete) => {
+                    // DELETE education (by id)
+                    setEducation((prev) =>
+                        prev.filter((e) => e.id !== eduToDelete.id),
+                    );
                 }}
             />
         </div>

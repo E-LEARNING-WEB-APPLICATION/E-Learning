@@ -3,13 +3,17 @@ import { FaCamera } from "react-icons/fa";
 import { PiGenderFemaleFill, PiGenderMaleFill } from "react-icons/pi";
 
 const ProfileHeader = ({ profile, openProfileModal, onPhotoUpload, page }) => {
-    const fileInputRef = useRef();
+    const fileInputRef = useRef(null);
 
-    const openFilePicker = () => fileInputRef.current.click();
+    const openFilePicker = () => {
+        fileInputRef.current.click();
+    };
 
     const handleFileChange = (e) => {
         const file = e.target.files[0];
-        if (file) onPhotoUpload(file);
+        if (file) {
+            onPhotoUpload(file); // delegate to parent
+        }
     };
 
     return (
@@ -23,7 +27,7 @@ const ProfileHeader = ({ profile, openProfileModal, onPhotoUpload, page }) => {
             <div className="profile-info text-center">
                 <div className="profile-pic-wrapper">
                     <img
-                        src={profile.profilePic || "https://i.pravatar.cc/160"} // ✅ FIXED
+                        src={profile.profilePic || "https://i.pravatar.cc/160"}
                         alt="Profile"
                         className="profile-pic shadow-lg"
                     />

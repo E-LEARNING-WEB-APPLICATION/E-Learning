@@ -39,6 +39,7 @@ import InstructorAnalyticsPage from "./pages/analytics/instructors/InstructorAna
 import ProfileView from "./pages/profileView/ProfileView";
 import CategoryCourses from "./pages/student/categorycourses/CategoryCourses";
 import AddAdminPage from "./pages/admin/RegisterAdmin/AddAdminPage";
+import NotificationPage from "./pages/admin/notifications/NotificationPage";
 
 function App() {
   return (

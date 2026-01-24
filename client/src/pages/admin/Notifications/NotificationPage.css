@@ -1,0 +1,156 @@
+/*******************************
+  MATERIAL DESIGN THEME TOKENS
+*******************************/
+:root {
+  --m-shadow-light: 0px 2px 4px rgba(0, 0, 0, 0.08);
+  --m-shadow-hover: 0px 4px 12px rgba(0, 0, 0, 0.12);
+  --m-bg-card: #ffffff;
+  --m-border-radius: 14px;
+
+  --m-text-primary: #1f1f1f;
+  --m-text-secondary: #5a5a5a;
+
+  --m-surface-hover: #f8fafc;
+  --m-border-light: #e5e7eb;
+
+  --m-row-hover: #f1f5f9;
+}
+
+/********************************************
+  CARD WRAPPER (AROUND TABLE, FILTERS ETC.)
+********************************************/
+.material-card {
+  background: var(--m-bg-card);
+  border-radius: var(--m-border-radius);
+  box-shadow: var(--m-shadow-light);
+  padding: 1.2rem 1.5rem;
+  border: none;
+  transition: 0.25s ease;
+}
+
+.material-card:hover {
+  box-shadow: var(--m-shadow-hover);
+}
+
+/********************************************
+  TABLE WRAPPER
+********************************************/
+.material-table-wrapper {
+  border-radius: var(--m-border-radius);
+  overflow: hidden; /* Keeps table rounded */
+  box-shadow: var(--m-shadow-light);
+  background: white;
+  transition: 0.3s ease;
+}
+
+/********************************************
+  TABLE HEADER
+********************************************/
+.material-table thead {
+  background: #f4f6f8;
+}
+
+.material-table thead th {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--m-text-secondary);
+  letter-spacing: 0.4px;
+  padding: 14px 16px !important;
+  background: #f7f7f9;
+  border-bottom: 1px solid var(--m-border-light);
+}
+
+/********************************************
+  TABLE ROWS
+********************************************/
+.material-table tbody tr {
+  transition: 0.18s ease;
+}
+
+.material-table tbody tr:hover {
+  background: var(--m-row-hover);
+  transform: translateY(-1px);
+}
+
+/********************************************
+  TABLE CELLS
+********************************************/
+.material-table tbody td {
+  padding: 14px 16px !important;
+  color: var(--m-text-primary);
+  vertical-align: middle;
+  font-size: 0.95rem;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+/********************************************
+  CHECKBOX STYLING (Material-like)
+********************************************/
+.material-checkbox {
+  transform: scale(1.2);
+  cursor: pointer;
+}
+
+/********************************************
+  BADGE (Priority Chips)
+********************************************/
+.material-chip {
+  border-radius: 20px !important;
+  padding: 6px 12px !important;
+  font-size: 0.75rem !important;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+/********************************************
+  ACTION ICONS
+********************************************/
+.material-action-icon {
+  cursor: pointer;
+  opacity: 0.8;
+  transition: 0.2s;
+}
+
+.material-action-icon:hover {
+  opacity: 1;
+  transform: scale(1.15);
+}
+
+/********************************************
+  TABLE ROW DIVIDER REMOVAL FOR LAST CHILD
+********************************************/
+.material-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/********************************************
+  SEARCH + FILTERS BAR (Material Look)
+********************************************/
+.material-input {
+  background: #f9fafb !important;
+  border-radius: 12px !important;
+  border: 1px solid var(--m-border-light) !important;
+  padding: 10px 14px !important;
+  transition: 0.2s ease;
+}
+
+.material-input:focus {
+  background: white !important;
+  box-shadow: 0px 0px 0px 3px rgba(59, 130, 246, 0.25);
+  border-color: #3b82f6 !important;
+}
+
+/********************************************
+  SELECT DROPDOWN
+********************************************/
+.material-select {
+  border-radius: 12px !important;
+  padding: 9px 12px !important;
+  border: 1px solid var(--m-border-light) !important;
+}
+
+.material-select:focus {
+  box-shadow: 0px 0px 0px 3px rgba(59, 130, 246, 0.25);
+  border-color: #3b82f6 !important;
+}

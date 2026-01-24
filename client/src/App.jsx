@@ -32,8 +32,14 @@ import CourseEnrolledPage from "./pages/student/enrolledcoursedetails/CourseEnro
 import InstructorProfile from "./pages/instructor/instructorProfile/InstructorProfile";
 import AdminCourseDetails from "./pages/admin/CoursesView/AdminCourseDetails";
 import AdminCategoryPage from "./pages/admin/CoursesView/AdminCategoryPage";
+import AnalyticsLayout from "./pages/analytics/AnalyticsLayout";
+import CourseAnalyticsPage from "./pages/analytics/course/CourseAnalyticsPage";
+import StudentAnalyticsPage from "./pages/analytics/student/StudentAnalyticsPage";
+import InstructorAnalyticsPage from "./pages/analytics/instructors/InstructorAnalyticsPage";
+import NotificationPage from "./pages/admin/Notifications/NotificationPage";
 import ProfileView from "./pages/profileView/ProfileView";
 import CategoryCourses from "./pages/student/categorycourses/CategoryCourses";
+import AddAdminPage from "./pages/admin/RegisterAdmin/AddAdminPage";
 
 function App() {
   return (
@@ -44,8 +50,14 @@ function App() {
           {/* Redirect root to /guest */}
           <Route path="/" element={<Navigate to="/guest" />} />
           <Route path="/guest" element={<GuestLayout />}>
-            <Route path="instructor-registration" element={<InstructorRegistration />}/>
-            <Route path="student-registration" element={<StudentRegistration />} />
+            <Route
+              path="instructor-registration"
+              element={<InstructorRegistration />}
+            />
+            <Route
+              path="student-registration"
+              element={<StudentRegistration />}
+            />
             <Route path="login" element={<Login />} />
             <Route path="aboutus" element={<AboutUs />} />
             <Route path="contactus" element={<ContactUs />} />
@@ -73,9 +85,18 @@ function App() {
             <Route path="profile" element={<InstructorProfile />} />
             <Route path="aboutus" element={<AboutUs />} />
             <Route path="profile-view" element={<ProfileView />} />
-            <Route path="addedCourses/show-sections" element={<ShowSection />}/>
-            <Route path="addedCourses/show-sections/add-topic" element={<AddTopic />}/>
-            <Route path="addedCourses/show-sections/show-topics" element={<ShowTopic />}/>
+            <Route
+              path="addedCourses/show-sections"
+              element={<ShowSection />}
+            />
+            <Route
+              path="addedCourses/show-sections/add-topic"
+              element={<AddTopic />}
+            />
+            <Route
+              path="addedCourses/show-sections/show-topics"
+              element={<ShowTopic />}
+            />
           </Route>
           {/* Admin Routes */}
           <Route path="/admin" element={<AdminLayout />}>
@@ -85,8 +106,22 @@ function App() {
             <Route path="courses" element={<AdminCourses />} />
             <Route path="instructors" element={<InstructorsList />} />
             <Route path="instructor-courses" element={<InstructorCourses />} />
+            <Route
+              path="instructor-requests"
+              element={<InstructorRequests />}
+            />
+            <Route path="notifications" element={<NotificationPage />} />
+            <Route path="add-admin" element={<AddAdminPage />} />
+            <Route path="analytics" element={<AnalyticsLayout />}>
+              <Route path="course" element={<CourseAnalyticsPage />} />
+              <Route path="student" element={<StudentAnalyticsPage />} />
+              <Route path="instructor" element={<InstructorAnalyticsPage />} />
+            </Route>
             <Route path="profile-view" element={<ProfileView />} />
-            <Route path="instructor-requests" element={<InstructorRequests />} />
+            <Route
+              path="instructor-requests"
+              element={<InstructorRequests />}
+            />
             <Route path="notifications" element={<AdminNotifications />} />
           </Route>
         </Routes>

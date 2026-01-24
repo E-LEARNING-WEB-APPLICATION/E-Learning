@@ -4,7 +4,9 @@ const apiClient = axios.create({
   baseURL: "http://localhost:8080/",
   headers: {
     "Content-Type": "application/json",
+    Authorization: `Bearer ${localStorage.getItem("token")}`,
   },
 });
 
+export const ADMIN_BASE_PATH = "api/v1/admin";
 export default apiClient;

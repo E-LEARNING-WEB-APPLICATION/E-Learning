@@ -38,6 +38,7 @@ import StudentAnalyticsPage from "./pages/analytics/student/StudentAnalyticsPage
 import InstructorAnalyticsPage from "./pages/analytics/instructors/InstructorAnalyticsPage";
 import NotificationPage from "./pages/admin/Notifications/NotificationPage";
 import ProfileView from "./pages/profileView/ProfileView";
+import AddAdminPage from "./pages/admin/RegisterAdmin/AddAdminPage";
 
 function App() {
   return (
@@ -111,6 +112,7 @@ function App() {
               element={<InstructorRequests />}
             />
             <Route path="notifications" element={<NotificationPage />} />
+            <Route path="add-admin" element={<AddAdminPage />} />
             <Route path="analytics" element={<AnalyticsLayout />}>
               <Route path="course" element={<CourseAnalyticsPage />} />
               <Route path="student" element={<StudentAnalyticsPage />} />

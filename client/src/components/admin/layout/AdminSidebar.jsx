@@ -9,6 +9,7 @@ import {
   FaChevronDown,
   FaChevronRight,
   FaUserCircle,
+  FaUserPlus,
 } from "react-icons/fa";
 import { IoMdNotifications } from "react-icons/io";
 import { Link, useLocation } from "react-router-dom";
@@ -166,6 +167,14 @@ const Sidebar = ({ onToggle }) => {
         >
           <IoMdNotifications className="icon" />
           {!collapsed && <span>Notifications</span>}
+        </Link>
+        {/* Add admin */}
+        <Link
+          className={`menu-item ${isActive("/admin/add-admin") ? "active" : ""}`}
+          to="/admin/add-admin"
+        >
+          <FaUserPlus className="icon" />
+          {!collapsed && <span>Add new Admin</span>}
         </Link>
 
         {/* Settings */}

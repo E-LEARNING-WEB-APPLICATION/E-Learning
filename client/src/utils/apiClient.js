@@ -9,4 +9,5 @@ const apiClient = axios.create({
 });
 
 export const ADMIN_BASE_PATH = "api/v1/admin";
+export const API_BASE_PATH = "api/v1";
 export default apiClient;

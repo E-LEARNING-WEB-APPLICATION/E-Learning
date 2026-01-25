@@ -5,7 +5,8 @@ import StudentDashboardHeroSection from "@/components/student/studentDashboard/S
 import StudentDashboardInstructor from "@/components/student/studentDashboard/StudentDashboardInstructor";
 import StudentDashboardTestimonials from "@/components/student/studentDashboard/StudentDashboardTestimonials";
 import StudentDashboardTopCourses from "@/components/student/studentDashboard/StudentDashboardTopCourses";
-import React from "react";
+import { fetchCategoriesNormalized } from "@/services/admin/categoryService";
+import React, { useEffect, useState } from "react";
 import {
     FaCode,
     FaChartBar,
@@ -20,6 +21,7 @@ import {
     FaBug,
     FaShieldAlt,
 } from "react-icons/fa";
+import { toast } from "react-toastify";
 
 const Dashboard = () => {
     const iconColors = [
@@ -119,9 +121,7 @@ const Dashboard = () => {
         // 1
         {
             id: 1,
-            instructorId: 101,
             title: "HTML & CSS Fundamentals",
-            desc: "Core building blocks of web development: semantic HTML and modern CSS.",
             fees: 99.99,
             discount: 0,
             category: "web-dev",
@@ -129,8 +129,7 @@ const Dashboard = () => {
             reviews: 1250,
             duration: "1 month",
             thumbnail: "https://picsum.photos/seed/course1/640/360",
-            intro_video: "https://example.com/videos/html-css-intro.mp4",
-            sections: 6,
+            
         },
         // 2
         {
@@ -758,45 +757,59 @@ const Dashboard = () => {
             sections: 7,
         },
     ];
-const sampleTestimonials = [
-    {
-        id: 1,
-        name: "Aarav Sharma",
-        course: "React for Beginners",
-        review: "The course was extremely well structured and easy to follow. The instructor explained concepts clearly and the projects were very practical!",
-        rating: 5,
-        image: "https://randomuser.me/api/portraits/men/75.jpg",
-    },
-    {
-        id: 2,
-        name: "Riya Sen",
-        course: "Data Science Fundamentals",
-        review: "Amazing content! The instructor made complex data topics very simple. The hands-on exercises were the best part!",
-        rating: 4,
-        image: "https://randomuser.me/api/portraits/women/65.jpg",
-    },
-    {
-        id: 3,
-        name: "Kunal Patil",
-        course: "Android Development with Kotlin",
-        review: "Best Android course I have taken! Very clear explanations and well-structured modules. Highly recommended.",
-        rating: 5,
-        image: "https://randomuser.me/api/portraits/men/20.jpg",
-    },
-    {
-        id: 4,
-        name: "Sneha Kapoor",
-        course: "UI/UX Design Essentials",
-        review: "Loved the creative examples and Figma practice tasks. The instructor made UI/UX very fun to learn!",
-        rating: 5,
-        image: "https://randomuser.me/api/portraits/women/55.jpg",
-    },
-];
+
+    const [category, setCategory] = useState([]);
+    useEffect(() => {
+        const fetchCategory = async () => {
+            try {
+                const data = await fetchCategoriesNormalized();
+                console.log(data);
+                setCategory(data);
+            } catch (error) {
+                toast.error(error.message);
+            }
+        };
+        fetchCategory();
+    }, []);
+    const sampleTestimonials = [
+        {
+            id: 1,
+            name: "Aarav Sharma",
+            course: "React for Beginners",
+            review: "The course was extremely well structured and easy to follow. The instructor explained concepts clearly and the projects were very practical!",
+            rating: 5,
+            image: "https://randomuser.me/api/portraits/men/75.jpg",
+        },
+        {
+            id: 2,
+            name: "Riya Sen",
+            course: "Data Science Fundamentals",
+            review: "Amazing content! The instructor made complex data topics very simple. The hands-on exercises were the best part!",
+            rating: 4,
+            image: "https://randomuser.me/api/portraits/women/65.jpg",
+        },
+        {
+            id: 3,
+            name: "Kunal Patil",
+            course: "Android Development with Kotlin",
+            review: "Best Android course I have taken! Very clear explanations and well-structured modules. Highly recommended.",
+            rating: 5,
+            image: "https://randomuser.me/api/portraits/men/20.jpg",
+        },
+        {
+            id: 4,
+            name: "Sneha Kapoor",
+            course: "UI/UX Design Essentials",
+            review: "Loved the creative examples and Figma practice tasks. The instructor made UI/UX very fun to learn!",
+            rating: 5,
+            image: "https://randomuser.me/api/portraits/women/55.jpg",
+        },
+    ];
 
     return (
         <div>
             <StudentDashboardHeroSection courses={courses} />
-            <StudentDashboardCategorySection categories={categories} />
+            <StudentDashboardCategorySection categories={category} />
             <StudentDashboardTopCourses courses={courses} />
             <StudentDashboardCategoryCourse
                 courses={courses}
@@ -804,7 +817,6 @@ const sampleTestimonials = [
             />
             <StudentDashboardInstructor
                 instructors={instructors}
-                courses={courses}
             />
             <StudentDashboardTestimonials
                 sampleTestimonials={sampleTestimonials}

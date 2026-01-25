@@ -1,7 +1,7 @@
 import React from "react";
 import { FaGraduationCap, FaPlus } from "react-icons/fa";
 
-const EducationCard = ({ education, openAdd, openEdit,page }) => {
+const EducationCard = ({ education, openAdd, openEdit, page }) => {
     return (
         <div className="card p-4 shadow-sm border-0 rounded-4">
             <div className="d-flex justify-content-between align-items-center mb-3">
@@ -18,12 +18,14 @@ const EducationCard = ({ education, openAdd, openEdit,page }) => {
 
             {education.map((edu, i) => (
                 <div
+                    
                     key={i}
                     className="edu-item p-3 mb-3 rounded-3 d-flex justify-content-between">
                     <div>
                         <h6 className="fw-semibold">{edu.degree}</h6>
-                        <p className="text-muted mb-0">{edu.college}</p>
-                        <small>{edu.year}</small>
+                        <p className="text-muted mb-0">{edu.institute}</p>
+                        <p className="text-muted mb-0">{edu.fieldOfStudy}</p>
+                        <small>{edu.passingYear}</small>
                     </div>
                     {page === "viewOnly" ? null : (
                     <button

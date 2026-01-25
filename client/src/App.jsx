@@ -31,16 +31,19 @@ import CourseDetails from "./pages/student/coursedetails/CourseDetails";
 import CourseEnrolledPage from "./pages/student/enrolledcoursedetails/CourseEnrolledPage";
 import InstructorProfile from "./pages/instructor/instructorProfile/InstructorProfile";
 import AdminCourseDetails from "./pages/admin/CoursesView/AdminCourseDetails";
-import AdminCategoryPage from "./pages/admin/CoursesView/AdminCategoryPage";
+import AdminCategoryPage from "./pages/admin/AddCategory/AdminCategoryPage";
 import AnalyticsLayout from "./pages/analytics/AnalyticsLayout";
 import CourseAnalyticsPage from "./pages/analytics/course/CourseAnalyticsPage";
 import StudentAnalyticsPage from "./pages/analytics/student/StudentAnalyticsPage";
 import InstructorAnalyticsPage from "./pages/analytics/instructors/InstructorAnalyticsPage";
 import ProfileView from "./pages/profileView/ProfileView";
+import CategoryCourses from "./pages/student/categorycourses/CategoryCourses";
 import AddAdminPage from "./pages/admin/RegisterAdmin/AddAdminPage";
+import { useNotificationSSE } from "./hooks/useNotificationSse";
 import NotificationPage from "./pages/admin/notifications/NotificationPage";
 
 function App() {
+  useNotificationSSE();
   return (
     <>
       <div>
@@ -75,6 +78,10 @@ function App() {
             <Route
               path="enrolled-course-details"
               element={<CourseEnrolledPage />}
+            />
+            <Route
+              path="courses/category/:categoryId"
+              element={<CategoryCourses />}
             />
           </Route>
           {/* Instructor Routes */}

@@ -4,7 +4,7 @@ import { FaEnvelope, FaLock } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { signIn } from "@/services/authService";
 import { toast } from "react-toastify";
-import { jwtDecode } from "jwt-decode";
+import {jwtDecode}  from 'jwt-decode';
 
 const Login = () => {
   const navigate = useNavigate();

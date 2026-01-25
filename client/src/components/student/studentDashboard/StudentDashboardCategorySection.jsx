@@ -1,6 +1,8 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const StudentDashboardCategorySection = ({ categories }) => {
+    const navigate = useNavigate();
     return (
         <section className="py-5 bg-light">
             <div className="container">
@@ -11,7 +13,9 @@ const StudentDashboardCategorySection = ({ categories }) => {
                         <div
                             className="col-6 col-md-4 col-lg-3"
                             key={cat.id}>
-                            <div className="card border-0 shadow-sm h-100 category-card p-3 text-center">
+                            <div className="card border-0 shadow-sm h-100 category-card p-3 text-center"
+                            onClick={()=> navigate(`/student/courses/category/${cat.id}`)}
+                            style={{ cursor: "pointer" }}>
                                 <div className="icon-box mb-3">
                                     <div
                                         style={{

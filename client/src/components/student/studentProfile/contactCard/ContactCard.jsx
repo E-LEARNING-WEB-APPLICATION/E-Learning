@@ -1,7 +1,10 @@
 import React from "react";
 import { FaEnvelope, FaPhone, FaMapMarkerAlt } from "react-icons/fa";
 import { BrowserRouter } from "react-router-dom";
-const ContactCard = ({ address, email, phone }) => {
+import { FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
+
+const ContactCard = ({ address, email, phone, gitHubUrl, linkedInUrl, twitterUrl }) => {
+    
     return (
         <div className="card p-4 shadow-sm border-0 rounded-4">
             <h5 className="fw-bold text-primary mb-3">Address & Contact</h5>
@@ -34,6 +37,41 @@ const ContactCard = ({ address, email, phone }) => {
             <p className="text-muted">
                 <FaPhone className="me-2 text-success" /> {phone}
             </p>
+            { gitHubUrl!= undefined && linkedInUrl!= undefined &&  twitterUrl!= undefined && (
+                <div className="d-flex align-items-center gap-3">
+                    {gitHubUrl != "" && (
+                        <a
+                            href={gitHubUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="social-icon text-dark"
+                            aria-label="GitHub">
+                            <FaGithub size={20} />
+                        </a>
+                    )}
+
+                    {linkedInUrl != "" && (
+                        <a
+                            href={linkedInUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="social-icon text-primary"
+                            aria-label="LinkedIn">
+                            <FaLinkedin size={20} />
+                        </a>
+                    )}
+
+                    {twitterUrl != "" && (
+                        <a
+                            href={twitterUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="social-icon text-info"
+                            aria-label="Twitter">
+                            <FaTwitter size={20} />
+                        </a>
+                    )}
+                </div>)}
         </div>
     );
 };

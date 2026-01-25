@@ -75,8 +75,14 @@ function App() {
             <Route path="contactus" element={<ContactUs />} />
             <Route path="profile" element={<StudentProfile />} />
             <Route path="profile-view" element={<ProfileView />} />
-            <Route path="enrolled-course-details" element={<CourseEnrolledPage />} />
-            <Route path="courses/category/:categoryId" element={<CategoryCourses />} />
+            <Route
+              path="enrolled-course-details"
+              element={<CourseEnrolledPage />}
+            />
+            <Route
+              path="courses/category/:categoryId"
+              element={<CategoryCourses />}
+            />
           </Route>
           {/* Instructor Routes */}
           <Route path="/instructor" element={<InstructorLayout />}>

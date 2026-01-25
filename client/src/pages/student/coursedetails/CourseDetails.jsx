@@ -6,23 +6,29 @@ import ActionSection from "@/components/student/coursedetails/actionsection/Acti
 import CourseContent from "@/components/student/coursedetails/coursecontent/CourseContent";
 import InstructorSection from "@/components/student/coursedetails/instructorsection/InstructorSection";
 import { useLocation } from "react-router-dom";
-import { getCourseById } from "@/api/api";
 import Loader from "@/components/shared/Loader";
+import { getCourseById } from "@/services/courseService";
 
 const CourseDetails = () => {
   const location = useLocation();
   const { courseId } = location.state || {};
+  // As of Now Later will remove onoce got the id from dashboard
+  const HARD_CODED_COURSE_ID = "9dd20574-1552-4981-ab78-fbdc7a9e936a";
+  const finalCourseId = courseId || HARD_CODED_COURSE_ID;
+
   console.log(courseId);
   console.log(location.state);
+  console.log(finalCourseId);
 
   const [course, setCourse] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchCourse = async () => {
-      if (!courseId) return;
+      // if (!courseId) return;
       try {
-        const courseData = await getCourseById(courseId);
+        const courseData = await getCourseById(finalCourseId);
+        console.log(courseData);
         setCourse(courseData);
       } catch (error) {
         console.error("Failed to fetch course details:", error);
@@ -73,10 +79,11 @@ const CourseDetails = () => {
         </div>
       </div>
 
+      {/*  Commented For Testing Purpose Only  */}
       {/* Course Section */}
-      <CourseContent course={course} />
+      {/* <CourseContent course={course} /> */}
       {/* Instructor Section */}
-      <InstructorSection course={course} />
+      {/* <InstructorSection course={course} /> */}
     </div>
   );
 };

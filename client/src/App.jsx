@@ -39,7 +39,7 @@ import ProfileView from "./pages/profileView/ProfileView";
 import CategoryCourses from "./pages/student/categorycourses/CategoryCourses";
 import AddAdminPage from "./pages/admin/RegisterAdmin/AddAdminPage";
 import { useNotificationSSE } from "./hooks/useNotificationSse";
-import NotificationPage from "./pages/admin/Notifications/NotificationPage";
+import NotificationPage from "./pages/admin/notifications/NotificationPage";
 
 function App() {
   useNotificationSSE();

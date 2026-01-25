@@ -1,8 +1,31 @@
+import { getCourseStatusById } from "@/services/courseService";
 import React from "react";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const StudentCourseCard = ({ course }) => {
-
-    
+    const navigate = useNavigate();
+    const handleView = async () => {
+        try {
+            const response = await getCourseStatusById(course.id);
+            console.log(response);
+            if (!response.success) {
+                navigate("/student/course-details", {
+                    state: {
+                        courseId: course.id,
+                    },
+                });
+            } else {
+                navigate("/student/enrolled-course-details", {
+                    state: {
+                        courseId: course.id,
+                    },
+                });
+            }
+        } catch (error) {
+            toast.error(error.message);
+        }
+    };
     return (
         <div
             className="col-md-3"
@@ -28,7 +51,9 @@ const StudentCourseCard = ({ course }) => {
                         <h5 className="fw-bold">{course.title}</h5>
                     </div>
 
-                    <p className="text-muted small mb-1">Total Hours : {course.duration} </p>
+                    <p className="text-muted small mb-1">
+                        Total Hours : {course.duration}{" "}
+                    </p>
 
                     <p className="text-warning mb-2">
                         ⭐ {course.rating} ({course.reviews} reviews)
@@ -42,12 +67,14 @@ const StudentCourseCard = ({ course }) => {
                                 ₹
                                 {Math.round(
                                     course.fees *
-                                        (100 / (100 - course.discount))
+                                        (100 / (100 - course.discount)),
                                 )}
                             </span>
                         )}
                     </p>
-                    <button className="btn btn-primary w-100 mb-1" >
+                    <button
+                        className="btn btn-primary w-100 mb-1"
+                        onClick={handleView}>
                         View Course
                     </button>
                 </div>

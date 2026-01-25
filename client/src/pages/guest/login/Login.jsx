@@ -23,8 +23,6 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    window.alert(JSON.stringify(formData));
-
     const response = await signIn(formData);
 
     if (response.success) {

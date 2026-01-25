@@ -6,7 +6,8 @@ import {
   fetchPendingInstructors,
   fetchPendingInstructorsCount,
   rejectInstructor,
-} from "@/services/admin/instructorApproval";
+} from "@/services/admin/instructorService";
+import { FiExternalLink } from "react-icons/fi";
 
 const InstructorRequests = () => {
   const [instructors, setInstructors] = useState([]);
@@ -147,17 +148,17 @@ const InstructorRequests = () => {
                           to={`/admin/instructors/${ins.instructorId}`}
                           className="small text-primary text-decoration-underline"
                         >
-                          View Profile
+                          <FiExternalLink />
                         </Link>
                       </div>
                     </div>
                   </td>
 
-                  <td>{ins.dob}</td>
+                  <td>{ins.dob ? ins.dob : "-"}</td>
                   <td>{ins.email}</td>
-                  <td>{ins.phnoneNo}</td>
+                  <td>{ins.phoneNo}</td>
                   <td>
-                    {ins.educations[0]?.degree}
+                    {ins.education ? ins.educations[0]?.degree : "-"}
                     {ins.educations[0]?.fieldOfStudy && (
                       <> ({ins.educations[0].fieldOfStudy})</>
                     )}

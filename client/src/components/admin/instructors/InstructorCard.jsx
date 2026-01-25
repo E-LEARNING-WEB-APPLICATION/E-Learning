@@ -7,16 +7,23 @@ import { FaRegTrashAlt } from "react-icons/fa";
 const InstructorCard = ({ user, onDelete }) => {
   const navigate = useNavigate();
 
-  const { fname, lname, education, email, mobile, profile_pic, isApproved } =
-    user;
-
+  const {
+    firstName,
+    lastName,
+    educations,
+    email,
+    phoneNo,
+    profilePic,
+    status,
+  } = user;
+  const isApproved = status == "APPROVED" ? true : false;
   const handleProfileClick = (e) => {
     e.stopPropagation();
-    navigate(`/instructor/${user.id}`);
+    navigate(`/instructor/${user.instructorId}`);
   };
 
   const handleCardClick = () => {
-    navigate(`/admin/instructor-courses`, { state: user.id });
+    navigate(`/admin/instructor-courses`, { state: user.instructorId });
   };
 
   return (
@@ -24,7 +31,7 @@ const InstructorCard = ({ user, onDelete }) => {
       <div className="card-header">
         {/* Image Wrapper */}
         <div className="image-wrapper" onClick={handleProfileClick}>
-          <img src={profile_pic} alt="Profile" className="profile-image" />
+          <img src={profilePic} alt="Profile" className="profile-image" />
 
           {/* Badge now inside wrapper */}
           <div
@@ -37,13 +44,13 @@ const InstructorCard = ({ user, onDelete }) => {
         {/* Info Section */}
         <div className="instructor-info ellipsis">
           <h5>
-            {fname} {lname}
+            {firstName} {lastName}
           </h5>
-          <p className="education ellipsis">
-            {education.degree} - {education.field}
+          <p className="educations ellipsis">
+            {educations?.degree} - {educations?.field}
           </p>
           <p className="email ellipsis">{email}</p>
-          <p className="mobile ellipsis">{mobile}</p>
+          <p className="mobile ellipsis">{phoneNo}</p>
         </div>
       </div>
 
@@ -52,7 +59,7 @@ const InstructorCard = ({ user, onDelete }) => {
           className="delete-btn"
           onClick={(e) => {
             e.stopPropagation();
-            onDelete(user.id);
+            onDelete(user.instructorId);
           }}
         >
           <FaRegTrashAlt /> Delete

@@ -7,6 +7,7 @@ import EditProfileModal from "@/components/student/studentProfile/modal/EditProf
 import ProfileHeader from "@/components/student/studentProfile/profileHeader/ProfileHeader";
 import SkillsCard from "@/components/student/studentProfile/skillsCard/SkillsCard";
 import { getAllSpecialization, getInstructorDetail } from "@/services/Profile/profileService";
+import { updateProfilePic } from "@/services/Student/profileService";
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { toast } from "react-toastify";

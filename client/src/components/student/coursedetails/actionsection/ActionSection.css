@@ -116,3 +116,39 @@
   font-size: 0.85rem;
   margin-top: 1.2rem !important;
 }
+
+.toast-card {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.toast-icon {
+  font-size: 28px;
+  line-height: 1;
+}
+
+.toast-title {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.toast-text {
+  margin: 2px 0 0;
+  font-size: 13px;
+  color: #555;
+}
+
+.toast-icon.success {
+  color: #198754;
+}
+.toast-icon.error {
+  color: #dc3545;
+}
+.toast-icon.info {
+  color: #0dcaf0;
+}
+.toast-icon.warn {
+  color: #ffc107;
+}

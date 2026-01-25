@@ -1,40 +1,50 @@
 import React, { useEffect, useState } from "react";
-import { getInstructors } from "@/api/api";
 import { Link } from "react-router-dom";
 import { FaCheck, FaTimes, FaSearch } from "react-icons/fa";
+import {
+  approveInstructor,
+  fetchPendingInstructors,
+  fetchPendingInstructorsCount,
+  rejectInstructor,
+} from "@/services/admin/instructorApproval";
 
 const InstructorRequests = () => {
   const [instructors, setInstructors] = useState([]);
+  const [pendingInstructorsCount, setPendingInstructorsCount] = useState(0);
   const [search, setSearch] = useState("");
   const [sortBy, setSortBy] = useState("name");
 
-  const fetchInstructors = () => {
-    getInstructors().then((data) => {
-      const pending = data.filter((i) => !i.isApproved);
-      setInstructors(pending);
-    });
-  };
-
   useEffect(() => {
-    fetchInstructors();
+    fetchPendingInstructors().then((data) => setInstructors(data));
+    fetchPendingInstructorsCount().then((res) =>
+      setPendingInstructorsCount(res.data),
+    );
   }, []);
 
-  const handleApprove = (id) => {
-    console.log("approve", id);
+  const handleApprove = async (instructorId) => {
+    await approveInstructor({ instructorId });
+    fetchPendingInstructors().then((data) => setInstructors(data));
+    fetchPendingInstructorsCount().then((res) =>
+      setPendingInstructorsCount(res.data),
+    );
   };
 
-  const handleReject = (id) => {
-    console.log("reject", id);
+  const handleReject = async (instructorId) => {
+    await rejectInstructor({ instructorId });
+    fetchPendingInstructors().then((data) => setInstructors(data));
+    fetchPendingInstructorsCount().then((res) =>
+      setPendingInstructorsCount(res.data),
+    );
   };
 
   // Sorting logic
   const applySorting = (list) => {
     return list.slice().sort((a, b) => {
-      if (sortBy === "name") return a.fname.localeCompare(b.fname);
-      if (sortBy === "id") return a.id.localeCompare(b.id);
+      if (sortBy === "name") return a.firstName.localeCompare(b.firstName);
+      if (sortBy === "id") return a.instructorId.localeCompare(b.instructorId);
       if (sortBy === "dob") return new Date(a.dob) - new Date(b.dob);
-      if (sortBy === "education")
-        return a.education.degree.localeCompare(b.education.degree);
+      if (sortBy === "educations")
+        return a.educations[0]?.degree.localeCompare(b.educations[0]?.degree);
       return 0;
     });
   };
@@ -43,34 +53,33 @@ const InstructorRequests = () => {
     instructors.filter((i) => {
       const term = search.toLowerCase();
       return (
-        i.fname.toLowerCase().includes(term) ||
+        i.firstName.toLowerCase().includes(term) ||
         i.email.toLowerCase().includes(term) ||
-        i.mobile.includes(term)
+        i.phoneNo.includes(term)
       );
-    })
+    }),
   );
 
   return (
     <div className="container py-4">
-
       {/* ---------- TOP HEADER ---------- */}
       <div className="row mb-4 align-items-center">
-        
         {/* Pending Approvals Card */}
         <div className="col-md-4 mb-3">
           <div className="card border-warning shadow-sm">
             <div className="card-body">
               <h5 className="card-title mb-1">Pending Instructor Approvals</h5>
-              <h2 className="text-warning fw-bold">{instructors.length}</h2>
+              <h2 className="text-warning fw-bold">
+                {pendingInstructorsCount}
+              </h2>
             </div>
           </div>
         </div>
 
         {/* Search + Sort */}
         <div className="col-md-8 d-flex gap-3 justify-content-end">
-
           {/* Search */}
-          <div className="input-group" style={{ maxWidth: "280px" }}>
+          <div className="input-group" style={{ maxWinstructorIdth: "280px" }}>
             <span className="input-group-text bg-white">
               <FaSearch />
             </span>
@@ -86,13 +95,13 @@ const InstructorRequests = () => {
           {/* Sort dropdown */}
           <select
             className="form-select"
-            style={{ maxWidth: "200px" }}
+            style={{ maxWinstructorIdth: "200px" }}
             onChange={(e) => setSortBy(e.target.value)}
           >
             <option value="name">Sort by Name</option>
-            <option value="id">Sort by ID</option>
+            <option value="instructorId">Sort by ID</option>
             <option value="dob">Sort by DOB</option>
-            <option value="education">Sort by Education</option>
+            <option value="educations">Sort by Education</option>
           </select>
         </div>
       </div>
@@ -100,7 +109,7 @@ const InstructorRequests = () => {
       {/* ----------- TABLE ---------- */}
       <div className="card shadow-sm">
         <div className="table-responsive">
-          <table className="table table-hover align-middle mb-0">
+          <table className="table table-hover align-minstructorIddle mb-0">
             <thead className="table-light">
               <tr>
                 <th>Instructor</th>
@@ -114,25 +123,28 @@ const InstructorRequests = () => {
 
             <tbody>
               {filteredData.map((ins) => (
-                <tr key={ins.id}>
-                  
+                <tr key={ins.instructorId}>
                   {/* Profile + Name */}
                   <td>
                     <div className="d-flex align-items-center">
                       <img
-                        src={ins.profile_pic}
-                        alt={ins.fname}
+                        src={ins.profilePic}
+                        alt={ins.firstName}
                         className="rounded-circle border"
-                        style={{ width: "50px", height: "50px", objectFit: "cover" }}
+                        style={{
+                          winstructorIdth: "50px",
+                          height: "50px",
+                          objectFit: "cover",
+                        }}
                       />
                       <div className="ms-3">
                         <strong>
-                          {ins.fname} {ins.lname}
+                          {ins.firstName} {ins.lastName}
                         </strong>
-                        <div className="small text-muted">{ins.title}</div>
+                        {/* <div className="small text-muted">{ins.title}</div> */}
 
                         <Link
-                          to={`/admin/instructors/${ins.id}`}
+                          to={`/admin/instructors/${ins.instructorId}`}
                           className="small text-primary text-decoration-underline"
                         >
                           View Profile
@@ -143,17 +155,19 @@ const InstructorRequests = () => {
 
                   <td>{ins.dob}</td>
                   <td>{ins.email}</td>
-                  <td>{ins.mobile}</td>
+                  <td>{ins.phnoneNo}</td>
                   <td>
-                    {ins.education.degree} ({ins.education.field})
+                    {ins.educations[0]?.degree}
+                    {ins.educations[0]?.fieldOfStudy && (
+                      <> ({ins.educations[0].fieldOfStudy})</>
+                    )}
                   </td>
 
                   {/* Action buttons */}
                   <td className="text-center">
-
                     <button
                       className="btn btn-sm btn-success me-2"
-                      onClick={() => handleApprove(ins.id)}
+                      onClick={() => handleApprove(ins.instructorId)}
                     >
                       <FaCheck className="me-1" />
                       Approve
@@ -161,12 +175,11 @@ const InstructorRequests = () => {
 
                     <button
                       className="btn btn-sm btn-danger"
-                      onClick={() => handleReject(ins.id)}
+                      onClick={() => handleReject(ins.instructorId)}
                     >
                       <FaTimes className="me-1" />
                       Reject
                     </button>
-
                   </td>
                 </tr>
               ))}
@@ -178,12 +191,10 @@ const InstructorRequests = () => {
                   </td>
                 </tr>
               )}
-
             </tbody>
           </table>
         </div>
       </div>
-
     </div>
   );
 };

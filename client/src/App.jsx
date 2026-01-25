@@ -24,7 +24,6 @@ import AdminDashboard from "./pages/admin/Dashboard/AdminDashboard";
 import AdminCourses from "./pages/admin/CoursesView/AdminCourses";
 import InstructorsList from "./pages/admin/InstructorsView/InstructorsList";
 import InstructorRequests from "./pages/admin/InstrcutorRequests/InstructorRequest";
-import AdminNotifications from "./pages/admin/notifications/AdminNotifications";
 import StudentProfile from "./pages/student/studentProfile/StudentProfile";
 import InstructorCourses from "./pages/admin/InstructorsView/InstructorCourses";
 import CourseDetails from "./pages/student/coursedetails/CourseDetails";
@@ -40,7 +39,7 @@ import ProfileView from "./pages/profileView/ProfileView";
 import CategoryCourses from "./pages/student/categorycourses/CategoryCourses";
 import AddAdminPage from "./pages/admin/RegisterAdmin/AddAdminPage";
 import { useNotificationSSE } from "./hooks/useNotificationSse";
-import NotificationPage from "./pages/admin/notifications/NotificationPage";
+import NotificationPage from "./pages/admin/Notifications/NotificationPage";
 
 function App() {
   useNotificationSSE();
@@ -130,7 +129,6 @@ function App() {
               path="instructor-requests"
               element={<InstructorRequests />}
             />
-            <Route path="notifications" element={<AdminNotifications />} />
           </Route>
         </Routes>
       </div>

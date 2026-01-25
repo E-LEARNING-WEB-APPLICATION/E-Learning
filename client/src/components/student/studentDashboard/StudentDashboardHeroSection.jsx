@@ -78,11 +78,6 @@ const StudentDashboardHeroSection = ({ courses }) => {
                                                     {course.title}
                                                 </h4>
 
-                                                <p className="small">
-                                                    {course.desc.slice(0, 90)}
-                                                    ...
-                                                </p>
-
                                                 <div className="d-flex justify-content-center align-items-center gap-3">
                                                     {/* Final price */}
                                                     <span className="fw-bold fs-5 text-warning">
@@ -104,7 +99,6 @@ const StudentDashboardHeroSection = ({ courses }) => {
                                                         </>
                                                     )}
                                                 </div>
-/////////////////////////////////////////////////////////////////---Redirection button for enroll
                                                 <a
                                                     href="#"
                                                     className="btn btn-warning btn-sm mt-3 fw-semibold">

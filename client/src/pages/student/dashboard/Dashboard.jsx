@@ -6,6 +6,7 @@ import StudentDashboardInstructor from "@/components/student/studentDashboard/St
 import StudentDashboardTestimonials from "@/components/student/studentDashboard/StudentDashboardTestimonials";
 import StudentDashboardTopCourses from "@/components/student/studentDashboard/StudentDashboardTopCourses";
 import { fetchCategoriesNormalized } from "@/services/admin/categoryService";
+import { getAllDashboardCourses } from "@/services/courseService";
 import React, { useEffect, useState } from "react";
 import {
     FaCode,
@@ -759,6 +760,7 @@ const Dashboard = () => {
     ];
 
     const [category, setCategory] = useState([]);
+    const [course, setCourse] = useState([]);
     useEffect(() => {
         const fetchCategory = async () => {
             try {
@@ -769,6 +771,17 @@ const Dashboard = () => {
                 toast.error(error.message);
             }
         };
+        const fetchCourses = async () => {
+            try {
+                const data = await getAllDashboardCourses();
+                console.log(data);
+                setCourse(data);
+            } catch (error) {
+                toast.error(error.message);
+            }
+        }
+        
+        fetchCourses();
         fetchCategory();
     }, []);
     const sampleTestimonials = [
@@ -808,12 +821,12 @@ const Dashboard = () => {
 
     return (
         <div>
-            <StudentDashboardHeroSection courses={courses} />
+            <StudentDashboardHeroSection courses={course} />
             <StudentDashboardCategorySection categories={category} />
-            <StudentDashboardTopCourses courses={courses} />
+            <StudentDashboardTopCourses courses={course} />
             <StudentDashboardCategoryCourse
-                courses={courses}
-                categories={categories}
+                courses={course}
+                categories={category}
             />
             <StudentDashboardInstructor
                 instructors={instructors}

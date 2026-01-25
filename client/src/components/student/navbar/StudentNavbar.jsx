@@ -1,15 +1,33 @@
 import React from "react";
 import { NavLink, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { resetWishlist } from "@/slices/wishlist/wishlistSlice";
 import "./StudentNavbar.css";
+import { toast } from "react-toastify";
 
 function StudentNavbar() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const wishlistCount = useSelector((state) => state.wishlist.value.count);
 
   const handleLogout = () => {
-    localStorage.clear();
-    setTimeout(() => {
-      navigate("/guest/login");
-    }, 2000);
+    // Clear Redux state
+    dispatch(resetWishlist());
+
+    // Clear auth data
+    localStorage.removeItem("token");
+
+    // Show feedback
+    toast.success("Logged out successfully", {
+      position: "top-right",
+      autoClose: 1500,
+      pauseOnHover: false,
+      closeOnClick: true,
+    });
+
+    // Redirect immediately
+    navigate("/guest/login", { replace: true });
   };
 
   return (
@@ -60,14 +78,22 @@ function StudentNavbar() {
               </NavLink>
             </li>
 
-            <li className="nav-item" style={{ marginLeft: "7px" }}>
+            <li
+              className="nav-item position-relative"
+              style={{ marginLeft: "7px" }}
+            >
               <NavLink
                 to="/student/wishlist"
                 className={({ isActive }) =>
-                  isActive ? "nav-link active-link" : "nav-link"
+                  isActive
+                    ? "nav-link active-link d-flex align-items-center gap-1"
+                    : "nav-link d-flex align-items-center gap-1"
                 }
               >
                 Wishlist
+                {wishlistCount > 0 && (
+                  <span className="wishlist-badge">{wishlistCount}</span>
+                )}
               </NavLink>
             </li>
 

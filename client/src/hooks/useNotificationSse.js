@@ -6,6 +6,9 @@ export function useNotificationSSE() {
   const queryClient = useQueryClient();
 
   useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) return;
+
     const eventSource = new EventSource(
       `${API_URL}${API_BASE_PATH}/notifications/stream?token=${localStorage.getItem("token")}`,
     );

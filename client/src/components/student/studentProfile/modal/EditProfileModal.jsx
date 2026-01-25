@@ -186,7 +186,6 @@ const EditProfileModal = ({ show, onClose, profile, onSave, page }) => {
                                 <option value="">Select Gender</option>
                                 <option value="MALE">Male</option>
                                 <option value="FEMALE">Female</option>
-                                <option value="OTHER">Other</option>
                             </select>
                             {errors.gender && <div className="invalid-feedback">{errors.gender}</div>}
 

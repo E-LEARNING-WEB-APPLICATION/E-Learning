@@ -1,5 +1,8 @@
+import {
+    updateInstructorProfileDetails,
+    updateStudentProfileDetails,
+} from "@/services/Profile/profileService";
 import React, { useEffect, useState } from "react";
-import { updateProfileDetails } from "@/services/Student/profileService";
 import { toast } from "react-toastify";
 
 /**
@@ -10,7 +13,6 @@ import { toast } from "react-toastify";
  * - ALL API-required fields are validated
  */
 const EditProfileModal = ({ show, onClose, profile, onSave, page }) => {
-
     const [form, setForm] = useState(profile);
     const [errors, setErrors] = useState({});
 
@@ -54,24 +56,32 @@ const EditProfileModal = ({ show, onClose, profile, onSave, page }) => {
 
         // Core required fields'
         //✅ Is the trimmed value empty, null, or undefined?
-        if (!form.firstName?.trim()) newErrors.firstName = "First name is required";
-        if (!form.lastName?.trim()) newErrors.lastName = "Last name is required";
+        if (!form.firstName?.trim())
+            newErrors.firstName = "First name is required";
+        if (!form.lastName?.trim())
+            newErrors.lastName = "Last name is required";
         if (!form.dob) newErrors.dob = "Date of birth is required";
         if (!form.gender) newErrors.gender = "Gender is required";
-        if (!form.phoneNo?.trim()) newErrors.phoneNo = "Phone number is required";
+        if (!form.phoneNo?.trim())
+            newErrors.phoneNo = "Phone number is required";
 
         // Address (ALL mandatory)
-        if (!form.address?.addressLine1?.trim()) newErrors.addressLine1 = "Address Line 1 is required";
-        if (!form.address?.addressLine2?.trim()) newErrors.addressLine2 = "Address Line 2 is required";
+        if (!form.address?.addressLine1?.trim())
+            newErrors.addressLine1 = "Address Line 1 is required";
+        if (!form.address?.addressLine2?.trim())
+            newErrors.addressLine2 = "Address Line 2 is required";
         if (!form.address?.city?.trim()) newErrors.city = "City is required";
         if (!form.address?.state?.trim()) newErrors.state = "State is required";
-        if (!form.address?.pinCode?.trim()) newErrors.pinCode = "Pincode is required";
-        if (!form.address?.country?.trim()) newErrors.country = "Country is required";
+        if (!form.address?.pinCode?.trim())
+            newErrors.pinCode = "Pincode is required";
+        if (!form.address?.country?.trim())
+            newErrors.country = "Country is required";
 
         // Instructor-only UI validation (if needed later)
         if (page === "instructor") {
             if (!form.bio?.trim()) newErrors.bio = "Bio is required";
-            if (!form.experience) newErrors.experience = "Experience is required";
+            if (!form.experience)
+                newErrors.experience = "Experience is required";
         }
 
         setErrors(newErrors);
@@ -102,11 +112,23 @@ const EditProfileModal = ({ show, onClose, profile, onSave, page }) => {
             },
         };
 
-        try {
-            const response = await updateProfileDetails(payload);
+        if (page === "instructor") {
+            payload.bio = form.bio;
+            payload.experience = form.experience;
+            payload.gitHubUrl = form.gitHubUrl;
+            payload.linkedInUrl = form.linkedInUrl;
+            payload.twitterUrl = form.twitterUrl;
+        }
 
+        try {
+            let response = null;
+            if (page == "student") {
+                response = await updateStudentProfileDetails(payload);
+            } else {
+                response = await updateInstructorProfileDetails(payload);
+            }
             if (response.data.success) {
-                toast.success(response.data.message)
+                toast.success(response.data.message);
                 // Update UI state without refetch
                 onSave((prev) => ({
                     ...prev,
@@ -125,19 +147,22 @@ const EditProfileModal = ({ show, onClose, profile, onSave, page }) => {
 
     return (
         <>
-            <div className="modal fade show d-block" tabIndex="-1">
+            <div
+                className="modal fade show d-block"
+                tabIndex="-1">
                 <div className="modal-dialog modal-dialog-centered modal-lg">
                     <div className="modal-content">
-
                         {/* Header */}
                         <div className="modal-header">
                             <h5 className="modal-title">Edit Profile</h5>
-                            <button className="btn-close" onClick={onClose} />
+                            <button
+                                className="btn-close"
+                                onClick={onClose}
+                            />
                         </div>
 
                         {/* Body */}
                         <div className="modal-body">
-
                             {/* First Name */}
                             <label className="fw-semibold">First Name *</label>
                             <input
@@ -148,7 +173,11 @@ const EditProfileModal = ({ show, onClose, profile, onSave, page }) => {
                                 onChange={handleChange}
                                 required
                             />
-                            {errors.firstName && <div className="invalid-feedback">{errors.firstName}</div>}
+                            {errors.firstName && (
+                                <div className="invalid-feedback">
+                                    {errors.firstName}
+                                </div>
+                            )}
 
                             {/* Last Name */}
                             <label className="fw-semibold">Last Name *</label>
@@ -160,10 +189,16 @@ const EditProfileModal = ({ show, onClose, profile, onSave, page }) => {
                                 onChange={handleChange}
                                 required
                             />
-                            {errors.lastName && <div className="invalid-feedback">{errors.lastName}</div>}
+                            {errors.lastName && (
+                                <div className="invalid-feedback">
+                                    {errors.lastName}
+                                </div>
+                            )}
 
                             {/* DOB */}
-                            <label className="fw-semibold">Date of Birth *</label>
+                            <label className="fw-semibold">
+                                Date of Birth *
+                            </label>
                             <input
                                 type="date"
                                 name="dob"
@@ -172,7 +207,11 @@ const EditProfileModal = ({ show, onClose, profile, onSave, page }) => {
                                 onChange={handleChange}
                                 required
                             />
-                            {errors.dob && <div className="invalid-feedback">{errors.dob}</div>}
+                            {errors.dob && (
+                                <div className="invalid-feedback">
+                                    {errors.dob}
+                                </div>
+                            )}
 
                             {/* Gender */}
                             <label className="fw-semibold">Gender *</label>
@@ -181,41 +220,90 @@ const EditProfileModal = ({ show, onClose, profile, onSave, page }) => {
                                 className={`form-control mb-1 ${errors.gender ? "is-invalid" : ""}`}
                                 value={form.gender || ""}
                                 onChange={handleChange}
-                                required
-                            >
+                                required>
                                 <option value="">Select Gender</option>
                                 <option value="MALE">Male</option>
                                 <option value="FEMALE">Female</option>
                             </select>
-                            {errors.gender && <div className="invalid-feedback">{errors.gender}</div>}
+                            {errors.gender && (
+                                <div className="invalid-feedback">
+                                    {errors.gender}
+                                </div>
+                            )}
 
                             {/* Instructor-only UI fields */}
                             {page === "instructor" && (
                                 <>
-                                    <label className="fw-semibold">About Me *</label>
+                                    {/* Bio */}
+                                    <label className="fw-semibold">Bio *</label>
                                     <textarea
                                         name="bio"
-                                        className={`form-control mb-1 ${errors.bio ? "is-invalid" : ""}`}
+                                        className="form-control mb-3"
+                                        rows="3"
                                         value={form.bio || ""}
                                         onChange={handleChange}
+                                        required
                                     />
-                                    {errors.bio && <div className="invalid-feedback">{errors.bio}</div>}
 
-                                    <label className="fw-semibold">Experience (Years) *</label>
+                                    {/* Experience */}
+                                    <label className="fw-semibold">
+                                        Experience *
+                                    </label>
                                     <input
-                                        type="number"
+                                        type="text"
                                         name="experience"
-                                        className={`form-control mb-3 ${errors.experience ? "is-invalid" : ""}`}
+                                        className="form-control mb-3"
                                         value={form.experience || ""}
                                         onChange={handleChange}
+                                        required
                                     />
-                                    {errors.experience && <div className="invalid-feedback">{errors.experience}</div>}
+
+                                    {/* GitHub */}
+                                    <label className="fw-semibold">
+                                        GitHub Profile
+                                    </label>
+                                    <input
+                                        type="url"
+                                        name="gitHubUrl"
+                                        className="form-control mb-3"
+                                        placeholder="https://github.com/username"
+                                        value={form.gitHubUrl || ""}
+                                        onChange={handleChange}
+                                    />
+
+                                    {/* LinkedIn */}
+                                    <label className="fw-semibold">
+                                        LinkedIn Profile
+                                    </label>
+                                    <input
+                                        type="url"
+                                        name="linkedInUrl"
+                                        className="form-control mb-3"
+                                        placeholder="https://linkedin.com/in/username"
+                                        value={form.linkedInUrl || ""}
+                                        onChange={handleChange}
+                                    />
+
+                                    {/* Twitter */}
+                                    <label className="fw-semibold">
+                                        Twitter Profile
+                                    </label>
+                                    <input
+                                        type="url"
+                                        name="twitterUrl"
+                                        className="form-control mb-3"
+                                        placeholder="https://twitter.com/username"
+                                        value={form.twitterUrl || ""}
+                                        onChange={handleChange}
+                                    />
                                 </>
                             )}
 
                             {/* Address (ALL required) */}
                             {/* Address Line 1 */}
-                            <label className="fw-semibold">Address Line 1 *</label>
+                            <label className="fw-semibold">
+                                Address Line 1 *
+                            </label>
                             <input
                                 type="text"
                                 name="address.addressLine1"
@@ -224,10 +312,16 @@ const EditProfileModal = ({ show, onClose, profile, onSave, page }) => {
                                 onChange={handleChange}
                                 required
                             />
-                            {errors.addressLine1 && <div className="invalid-feedback">{errors.addressLine1}</div>}
+                            {errors.addressLine1 && (
+                                <div className="invalid-feedback">
+                                    {errors.addressLine1}
+                                </div>
+                            )}
 
                             {/* Address Line 2 */}
-                            <label className="fw-semibold">Address Line 2 *</label>
+                            <label className="fw-semibold">
+                                Address Line 2 *
+                            </label>
                             <input
                                 type="text"
                                 name="address.addressLine2"
@@ -236,7 +330,11 @@ const EditProfileModal = ({ show, onClose, profile, onSave, page }) => {
                                 onChange={handleChange}
                                 required
                             />
-                            {errors.addressLine2 && <div className="invalid-feedback">{errors.addressLine2}</div>}
+                            {errors.addressLine2 && (
+                                <div className="invalid-feedback">
+                                    {errors.addressLine2}
+                                </div>
+                            )}
 
                             {/* City */}
                             <label className="fw-semibold">City *</label>
@@ -248,7 +346,11 @@ const EditProfileModal = ({ show, onClose, profile, onSave, page }) => {
                                 onChange={handleChange}
                                 required
                             />
-                            {errors.city && <div className="invalid-feedback">{errors.city}</div>}
+                            {errors.city && (
+                                <div className="invalid-feedback">
+                                    {errors.city}
+                                </div>
+                            )}
 
                             {/* State */}
                             <label className="fw-semibold">State *</label>
@@ -260,7 +362,11 @@ const EditProfileModal = ({ show, onClose, profile, onSave, page }) => {
                                 onChange={handleChange}
                                 required
                             />
-                            {errors.state && <div className="invalid-feedback">{errors.state}</div>}
+                            {errors.state && (
+                                <div className="invalid-feedback">
+                                    {errors.state}
+                                </div>
+                            )}
 
                             {/* Pincode */}
                             <label className="fw-semibold">Pincode *</label>
@@ -272,7 +378,11 @@ const EditProfileModal = ({ show, onClose, profile, onSave, page }) => {
                                 onChange={handleChange}
                                 required
                             />
-                            {errors.pinCode && <div className="invalid-feedback">{errors.pinCode}</div>}
+                            {errors.pinCode && (
+                                <div className="invalid-feedback">
+                                    {errors.pinCode}
+                                </div>
+                            )}
 
                             {/* Country */}
                             <label className="fw-semibold">Country *</label>
@@ -284,7 +394,11 @@ const EditProfileModal = ({ show, onClose, profile, onSave, page }) => {
                                 onChange={handleChange}
                                 required
                             />
-                            {errors.country && <div className="invalid-feedback">{errors.country}</div>}
+                            {errors.country && (
+                                <div className="invalid-feedback">
+                                    {errors.country}
+                                </div>
+                            )}
 
                             {/* Email (read-only) */}
                             <label className="fw-semibold">Email *</label>
@@ -305,19 +419,26 @@ const EditProfileModal = ({ show, onClose, profile, onSave, page }) => {
                                 onChange={handleChange}
                                 required
                             />
-                            {errors.phoneNo && <div className="invalid-feedback">{errors.phoneNo}</div>}
+                            {errors.phoneNo && (
+                                <div className="invalid-feedback">
+                                    {errors.phoneNo}
+                                </div>
+                            )}
                         </div>
 
                         {/* Footer */}
                         <div className="modal-footer">
-                            <button className="btn btn-secondary" onClick={onClose}>
+                            <button
+                                className="btn btn-secondary"
+                                onClick={onClose}>
                                 Cancel
                             </button>
-                            <button className="btn btn-primary" onClick={handleSave}>
+                            <button
+                                className="btn btn-primary"
+                                onClick={handleSave}>
                                 Save Changes
                             </button>
                         </div>
-
                     </div>
                 </div>
             </div>

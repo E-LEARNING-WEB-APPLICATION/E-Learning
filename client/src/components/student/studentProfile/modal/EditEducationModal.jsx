@@ -3,7 +3,7 @@ import {
     addEducation,
     updateEducation,
     deleteEducation,
-} from "@/services/Student/profileService";
+} from "@/services/Profile/profileService";
 import { toast } from "react-toastify";
 
 /**

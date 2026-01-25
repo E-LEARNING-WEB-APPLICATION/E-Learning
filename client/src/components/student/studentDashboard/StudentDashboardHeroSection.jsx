@@ -104,7 +104,7 @@ const StudentDashboardHeroSection = ({ courses }) => {
                                                         </>
                                                     )}
                                                 </div>
-
+/////////////////////////////////////////////////////////////////---Redirection button for enroll
                                                 <a
                                                     href="#"
                                                     className="btn btn-warning btn-sm mt-3 fw-semibold">

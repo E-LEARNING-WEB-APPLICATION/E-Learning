@@ -59,7 +59,11 @@ const ProfileHeader = ({ profile, openProfileModal, onPhotoUpload, page }) => {
                 <h3 className="fw-bold mt-2 mb-1 text-dark">
                     {profile.firstName} {profile.lastName}
                 </h3>
-
+                {profile.experience != null && (
+                    <p className="small text-secondary mb-0">
+                    {profile.experience} years of Teaching experience
+                </p>
+                )}
                 <p className="small text-secondary mb-0">
                     {profile.dob} {" | "}
                     {profile.gender === "MALE" ? (

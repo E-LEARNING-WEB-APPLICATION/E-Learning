@@ -12,7 +12,7 @@ import {
     getAllSkills,
     getStudentDetail,
     updateProfilePic,
-} from "@/services/Student/profileService";
+} from "@/services/Profile/profileService";
 import { toast } from "react-toastify";
 
 const StudentProfile = () => {

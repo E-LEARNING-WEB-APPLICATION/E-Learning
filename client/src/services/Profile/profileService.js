@@ -105,10 +105,10 @@ export const deleteEducation = async (data) => {
   }
 };
 
-export const updateProfileDetails = async (data) => {
+export const updateStudentProfileDetails = async (data) => {
   try {
     const response = await apiClient.put(
-      "/profile/updateProfile",
+      "/profile/updateStudentProfile",
       data,
     );
     return response;
@@ -136,4 +136,77 @@ export const updateProfilePic = async (file) => {
             },
         }
     );
+};
+
+export const getInstructorDetail = async () => {
+    try {
+        const response = await apiClient.get("profile/instructor");
+        return response.data;
+    } catch (error) {
+        if (error.response) {
+            return error.response.data;
+        }
+        return {
+            success: false,
+            message: "Server error. Please try again.",
+        };
+    }
+};
+
+
+export const getAllSpecialization = async () => {
+    try {
+
+        const response = await apiClient.get("/profile/getAllSpecialization");
+
+        return response.data;
+    } catch (error) {
+        if (error.response) {
+            return error.response;
+        }
+        return {
+            success: false,
+            message: "Server error, Please try again. ",
+        };
+    }
+};
+
+export const updateSpecialization = async (data) => {
+    try {
+        const response = await apiClient.put(
+            "/profile/updateSpecialization",
+          {
+              specializations : data,
+            },
+      );
+      return response;
+    } catch (error) {
+        if (error.response) {
+            return error.response;
+        }
+        return {
+            success: false,
+            message: "Server error, Please try again. ",
+        };
+    }
+};
+
+
+
+export const updateInstructorProfileDetails = async (data) => {
+  try {
+    const response = await apiClient.put(
+      "/profile/updateInstructorProfile",
+      data,
+    );
+    return response;
+  } catch (error) {
+    if (error.response) {
+      return error.response;
+    }
+    return {
+      success: false,
+      message: "Server error, Please try again. ",
+    };
+  }
 };

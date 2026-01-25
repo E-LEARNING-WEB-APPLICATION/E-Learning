@@ -47,7 +47,7 @@ const StudentCourseCard = ({ course }) => {
                             </span>
                         )}
                     </p>
-
+/////////////////////////////////////////////////////////////////---Redirection button for view Course
                     <button className="btn btn-primary w-100 mb-1" >
                         View Course
                     </button>

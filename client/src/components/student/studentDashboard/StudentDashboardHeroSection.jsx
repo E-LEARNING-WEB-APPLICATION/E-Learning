@@ -1,8 +1,33 @@
+import { getCourseStatusById } from "@/services/courseService";
 import React from "react";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const StudentDashboardHeroSection = ({ courses }) => {
     const discounted = courses.filter((c) => c.discount > 0);
     const heroCourses = discounted.length > 0 ? discounted : courses;
+    const navigate = useNavigate();
+    const handleView = async (courseId) => {
+        try {
+            const response = await getCourseStatusById(courseId);
+            console.log(response);
+            if (!response.success) {
+                navigate("/student/course-details", {
+                    state: {
+                        courseId: courseId,
+                    },
+                });
+            } else {
+                navigate("/student/enrolled-course-details", {
+                    state: {
+                        courseId: courseId,
+                    },
+                });
+            }
+        } catch (error) {
+            toast.error(error.message);
+        }
+    };
     return (
         <section
             className="py-5 text-white"
@@ -78,11 +103,6 @@ const StudentDashboardHeroSection = ({ courses }) => {
                                                     {course.title}
                                                 </h4>
 
-                                                <p className="small">
-                                                    {course.desc.slice(0, 90)}
-                                                    ...
-                                                </p>
-
                                                 <div className="d-flex justify-content-center align-items-center gap-3">
                                                     {/* Final price */}
                                                     <span className="fw-bold fs-5 text-warning">
@@ -104,9 +124,8 @@ const StudentDashboardHeroSection = ({ courses }) => {
                                                         </>
                                                     )}
                                                 </div>
-/////////////////////////////////////////////////////////////////---Redirection button for enroll
                                                 <a
-                                                    href="#"
+                                                    onClick={() => { handleView(course.id) }}
                                                     className="btn btn-warning btn-sm mt-3 fw-semibold">
                                                     Enroll Now
                                                 </a>

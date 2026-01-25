@@ -158,3 +158,14 @@
     background: rgba(0, 0, 0, 0.7);
     transform: scale(1.1);
 }
+
+.social-icon {
+    display: inline-flex;
+    align-items: center;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.social-icon:hover {
+    transform: scale(1.15);
+    opacity: 0.85;
+}

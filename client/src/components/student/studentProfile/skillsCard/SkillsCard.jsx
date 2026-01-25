@@ -1,4 +1,4 @@
-import { updateSkill } from "@/services/Student/profileService";
+import { updateSkill, updateSpecialization } from "@/services/Profile/profileService";
 import React, { useState, useEffect } from "react";
 import { FaPencilAlt } from "react-icons/fa";
 import { toast } from "react-toastify";
@@ -16,10 +16,9 @@ import { toast } from "react-toastify";
 const SkillsCard = ({ skills, allSkills, onSave, page, role }) => {
     // Controls whether the card is in edit mode or view mode
     const [editMode, setEditMode] = useState(false);
-
     // Stores the currently selected skills (used in edit mode)
     const [selectedSkills, setSelectedSkills] = useState([]);
-
+    
     /**
      * Sync local state with incoming skills
      * Ensures checkboxes are correctly pre-selected
@@ -46,7 +45,12 @@ const SkillsCard = ({ skills, allSkills, onSave, page, role }) => {
     };
     const upgradeSkill = async (data) => {
         try {
-            const response = await updateSkill(data);
+            let response = null;
+            if (page == "student") {
+                response = await updateSkill(data);
+            } else {
+                response = await updateSpecialization(data);
+            }
             if (response.data.success) {
                 toast.success(response.data.message)
                 onSave(selectedSkills);

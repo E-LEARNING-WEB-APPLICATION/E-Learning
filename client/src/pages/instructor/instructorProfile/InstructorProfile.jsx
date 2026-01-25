@@ -6,53 +6,114 @@ import EditEducationModal from "@/components/student/studentProfile/modal/EditEd
 import EditProfileModal from "@/components/student/studentProfile/modal/EditProfileModal";
 import ProfileHeader from "@/components/student/studentProfile/profileHeader/ProfileHeader";
 import SkillsCard from "@/components/student/studentProfile/skillsCard/SkillsCard";
+import { getAllSpecialization, getInstructorDetail } from "@/services/Profile/profileService";
+import { updateProfilePic } from "@/services/Student/profileService";
 import React, { useState } from "react";
+import { useEffect } from "react";
+import { toast } from "react-toastify";
 
 const InstructorProfile = () => {
-    const allSpecializations = [
-        "Machine Learning",
-        "Data Science",
-        "Artificial Intelligence",
-        "Cloud Computing",
-        "Cyber Security",
-        "DevOps",
-        "Full-Stack Development",
-        "Backend Engineering",
-        "Frontend Engineering",
-        "Software Architecture",
-        "Database Management",
-        "Blockchain",
-        "Mobile App Development",
-        "IoT (Internet of Things)",
-    ];
-
+    const [allSpecialization, setAllSpecializations] = useState();
+    const [education, setEducation] = useState([]);
     const [instructor, setInstructor] = useState({
-        name: "John Doe",
-        bio: "Senior Instructor | Expert in Computer Science",
-        location: "Pune, Maharashtra",
-        role: "instructor",
-        email: "john@example.com",
-        phone: "+91 98765 43210",
-        specialization: ["Machine Learning", "Data Science", "Cloud Computing"],
-        experience: "3-5",
-        dob: "1990-05-12",
-        gender: "female",
-        photo: "https://i.pravatar.cc/160",
+        firstName: "",
+        lastName: "",
+        email: "",
+        phoneNo: "",
+        dob: "",
+        gender: "",
+        profilePic: null,
+
+        bio: "",
+        experience: "",
+        gitHubUrl: "",
+        linkedInUrl: "",
+        twitterUrl: "",
+
+        specialization: [],
+
+        address: {
+            addressLine1: "",
+            addressLine2: "",
+            city: "",
+            state: "",
+            pinCode: "",
+            country: "",
+        },
     });
 
-    const handleProfilePhotoUpload = (file) => {
-        const previewURL = URL.createObjectURL(file);
-        setInstructor((prev) => ({ ...prev, photo: previewURL }));
-    };
+    useEffect(() => {
+        const fetchInstructor = async () => {
+            try {
+                const data = await getInstructorDetail();
+               
+                setInstructor({
+                    firstName: data.firstName ?? "",
+                    lastName: data.lastName ?? "",
+                    email: data.email ?? "",
+                    phoneNo: data.phoneNo ?? "",
+                    dob: data.dob ?? "",
+                    gender: data.gender ?? "",
+                    profilePic: data.profilePic || null,
 
-    const [education, setEducation] = useState([
-        { degree: "B.Tech", college: "PCCOE", year: "2025" },
-        { degree: "HSC", college: "Modern College", year: "2021" },
-    ]);
+                    bio: data.bio ?? "",
+                    experience: data.experience ?? "",
+                    gitHubUrl: data.gitHubUrl ?? "",
+                    linkedInUrl: data.linkedInUrl ?? "",
+                    twitterUrl: data.twitterUrl ?? "",
+
+                    specialization: data.specializations ?? [],
+
+                    address: {
+                        addressLine1: data.address?.addressLine1 ?? "",
+                        addressLine2: data.address?.addressLine2 ?? "",
+                        city: data.address?.city ?? "",
+                        state: data.address?.state ?? "",
+                        pinCode: data.address?.pinCode ?? "",
+                        country: data.address?.country ?? "",
+                    },
+                });
+
+                setEducation(data.educations ?? []);
+            } catch (error) {
+                toast.error(error.response?.data?.message || error.message);
+            }
+        };
+
+        const getSpecialization = async () => {
+                    try {
+                        const data = await getAllSpecialization();
+                        setAllSpecializations(data.data);
+                    } catch (error) {
+                        toast.error(error.message);
+                    }
+        };
+        getSpecialization();
+        fetchInstructor();
+    }, []);
+
+    const handleProfilePhotoUpload = async (file) => {
+        const previewURL = URL.createObjectURL(file);
+        setInstructor((prev) => ({
+            ...prev,
+            profilePic: previewURL,
+        }));
+
+        try {
+            const response = await updateProfilePic(file);
+            if (response.data.success) {
+                toast.success(response.data.message);
+            } else {
+                toast.error(response.data.message);
+            }
+        } catch (error) {
+            toast.error(error.message);
+        }
+    };
 
     const handleDeleteEducation = (eduToDelete) => {
         setEducation((prev) =>
-            prev.filter((edu) => edu.degree !== eduToDelete.degree)
+            prev.filter((edu) => edu.degree !== eduToDelete.degree),
         );
     };
 
@@ -91,8 +152,8 @@ const InstructorProfile = () => {
                         <SkillsCard
                             page={"instructor"}
                             skills={instructor.specialization}
-                            allSkills={allSpecializations}
-                            role={instructor.role}
+                            allSkills={allSpecialization}
+                            role={"instructor"}
                             onSave={(updatedSpecializations) =>
                                 setInstructor((prev) => ({
                                     ...prev,
@@ -102,9 +163,12 @@ const InstructorProfile = () => {
                         />
 
                         <ContactCard
-                            location={instructor.location}
+                            address={instructor.address}
                             email={instructor.email}
-                            phone={instructor.phone}
+                            phone={instructor.phoneNo}
+                            gitHubUrl={instructor.gitHubUrl}
+                            linkedInUrl={instructor.linkedInUrl}
+                            twitterUrl={instructor.twitterUrl}
                         />
                     </div>
                 </div>
@@ -127,8 +191,8 @@ const InstructorProfile = () => {
                     if (selectedEdu) {
                         setEducation((prev) =>
                             prev.map((e) =>
-                                e.degree === selectedEdu.degree ? newEdu : e
-                            )
+                                e.degree === selectedEdu.degree ? newEdu : e,
+                            ),
                         );
                     } else {
                         setEducation((prev) => [...prev, newEdu]);

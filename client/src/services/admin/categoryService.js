@@ -1,4 +1,4 @@
-import apiClient, { API_BASE_PATH } from "@/utils/apiClient";
+  import apiClient, { API_BASE_PATH } from "@/utils/apiClient";
 
 export const createCategory = async (categoryForm) => {
   const formData = new FormData();

@@ -5,7 +5,9 @@ import StudentDashboardHeroSection from "@/components/student/studentDashboard/S
 import StudentDashboardInstructor from "@/components/student/studentDashboard/StudentDashboardInstructor";
 import StudentDashboardTestimonials from "@/components/student/studentDashboard/StudentDashboardTestimonials";
 import StudentDashboardTopCourses from "@/components/student/studentDashboard/StudentDashboardTopCourses";
-import React from "react";
+import { fetchCategoriesNormalized } from "@/services/admin/categoryService";
+import { getAllDashboardCourses } from "@/services/courseService";
+import React, { useEffect, useState } from "react";
 import {
     FaCode,
     FaChartBar,
@@ -20,39 +22,10 @@ import {
     FaBug,
     FaShieldAlt,
 } from "react-icons/fa";
+import { toast } from "react-toastify";
 
 const Dashboard = () => {
-    const iconColors = [
-        "#ff6b6b",
-        "#4dabf7",
-        "#51cf66",
-        "#845ef7",
-        "#f59f00",
-        "#20c997",
-        "#fcc419",
-        "#e64980",
-        "#5c7cfa",
-        "#15aabf",
-        "#d6336c",
-        "#82c91e",
-    ];
-    const categories = [
-        { id: "web-dev", title: "Web Development", icon: FaCode },
-        { id: "data-science", title: "Data Science", icon: FaChartBar },
-        { id: "mobile-dev", title: "Mobile Development", icon: FaMobileAlt },
-        { id: "programming", title: "Programming", icon: FaTerminal },
-        { id: "dev-tools", title: "Development Tools", icon: FaTools },
-        { id: "backend", title: "Backend Development", icon: FaNetworkWired },
-        { id: "database", title: "Database Management", icon: FaDatabase },
-        { id: "ai-ml", title: "AI & Machine Learning", icon: FaRobot },
-        { id: "ui-ux", title: "UI/UX & Design", icon: FaPaintBrush },
-        { id: "cloud", title: "Cloud Computing", icon: FaCloud },
-        { id: "testing", title: "Software Testing", icon: FaBug },
-        { id: "security", title: "Cybersecurity", icon: FaShieldAlt },
-    ].map((cat, index) => ({
-        ...cat,
-        color: iconColors[index % iconColors.length],
-    }));
+
     const instructors = [
         {
             id: 101,
@@ -115,696 +88,79 @@ const Dashboard = () => {
             },
         },
     ];
-    const courses = [
-        // 1
+
+
+    const [category, setCategory] = useState([]);
+    const [course, setCourse] = useState([]);
+    useEffect(() => {
+        const fetchCategory = async () => {
+            try {
+                const data = await fetchCategoriesNormalized();
+                console.log(data);
+                setCategory(data);
+            } catch (error) {
+                toast.error(error.message);
+            }
+        };
+        const fetchCourses = async () => {
+            try {
+                const data = await getAllDashboardCourses();
+                console.log(data);
+                setCourse(data);
+            } catch (error) {
+                toast.error(error.message);
+            }
+        }
+        
+        fetchCourses();
+        fetchCategory();
+    }, []);
+    const sampleTestimonials = [
         {
             id: 1,
-            instructorId: 101,
-            title: "HTML & CSS Fundamentals",
-            desc: "Core building blocks of web development: semantic HTML and modern CSS.",
-            fees: 99.99,
-            discount: 0,
-            category: "web-dev",
-            rating: 4.6,
-            reviews: 1250,
-            duration: "1 month",
-            thumbnail: "https://picsum.photos/seed/course1/640/360",
-            intro_video: "https://example.com/videos/html-css-intro.mp4",
-            sections: 6,
+            name: "Aarav Sharma",
+            course: "React for Beginners",
+            review: "The course was extremely well structured and easy to follow. The instructor explained concepts clearly and the projects were very practical!",
+            rating: 5,
+            image: "https://randomuser.me/api/portraits/men/75.jpg",
         },
-        // 2
         {
             id: 2,
-            instructorId: 102,
-            title: "JavaScript Essentials",
-            desc: "Make pages interactive and learn core JavaScript concepts and DOM manipulation.",
-            fees: 149.99,
-            discount: 10,
-            category: "web-dev",
-            rating: 4.7,
-            reviews: 980,
-            duration: "1.5 months",
-            thumbnail: "https://picsum.photos/seed/course2/640/360",
-            intro_video: "https://example.com/videos/js-intro.mp4",
-            sections: 8,
+            name: "Riya Sen",
+            course: "Data Science Fundamentals",
+            review: "Amazing content! The instructor made complex data topics very simple. The hands-on exercises were the best part!",
+            rating: 4,
+            image: "https://randomuser.me/api/portraits/women/65.jpg",
         },
-        // 3
         {
             id: 3,
-            instructorId: 103,
-            title: "React for Beginners",
-            desc: "Component-driven UI, JSX, state and props, and building reusable components.",
-            fees: 199.99,
-            discount: 15,
-            category: "web-dev",
-            rating: 4.8,
-            reviews: 1540,
-            duration: "2 months",
-            thumbnail: "https://picsum.photos/seed/course3/640/360",
-            intro_video: "https://example.com/videos/react-beginners.mp4",
-            sections: 10,
+            name: "Kunal Patil",
+            course: "Android Development with Kotlin",
+            review: "Best Android course I have taken! Very clear explanations and well-structured modules. Highly recommended.",
+            rating: 5,
+            image: "https://randomuser.me/api/portraits/men/20.jpg",
         },
-        // 4
         {
             id: 4,
-            instructorId: 101,
-            title: "Intro to Data Science",
-            desc: "Data acquisition, cleaning, exploration and visualization fundamentals.",
-            fees: 199.99,
-            discount: 10,
-            category: "data-science",
-            rating: 4.7,
-            reviews: 890,
-            duration: "2 months",
-            thumbnail: "https://picsum.photos/seed/course4/640/360",
-            intro_video: "https://example.com/videos/data-science-intro.mp4",
-            sections: 9,
-        },
-        // 5
-        {
-            id: 5,
-            instructorId: 101,
-            title: "Data Visualization with Tableau",
-            desc: "Design effective dashboards and interactive visuals with Tableau.",
-            fees: 249.99,
-            discount: 20,
-            category: "data-science",
-            rating: 4.9,
-            reviews: 1320,
-            duration: "2 months",
-            thumbnail: "https://picsum.photos/seed/course5/640/360",
-            intro_video: "https://example.com/videos/tableau-intro.mp4",
-            sections: 7,
-        },
-        // 6
-        {
-            id: 6,
-            instructorId: 102,
-            title: "Android Development with Kotlin",
-            desc: "Modern Android apps using Kotlin and Android Studio best practices.",
-            fees: 299.99,
-            discount: 15,
-            category: "mobile-dev",
-            rating: 4.8,
-            reviews: 1120,
-            duration: "3 months",
-            thumbnail: "https://picsum.photos/seed/course6/640/360",
-            intro_video: "https://example.com/videos/kotlin-android.mp4",
-            sections: 12,
-        },
-        // 7
-        {
-            id: 7,
-            instructorId: 101,
-            title: "Flutter for Beginners",
-            desc: "Create cross-platform mobile apps with Flutter and Dart.",
-            fees: 249.99,
-            discount: 25,
-            category: "mobile-dev",
-            rating: 4.6,
-            reviews: 970,
-            duration: "2.5 months",
-            thumbnail: "https://picsum.photos/seed/course7/640/360",
-            intro_video: "https://example.com/videos/flutter-intro.mp4",
-            sections: 9,
-        },
-        // 8
-        {
-            id: 8,
-            instructorId: 104,
-            title: "Python for Absolute Beginners",
-            desc: "Start coding with Python: syntax, control flow, and basic data structures.",
-            fees: 0,
-            discount: 0,
-            category: "programming",
-            rating: 4.8,
-            reviews: 2100,
-            duration: "1.5 months",
-            thumbnail: "https://picsum.photos/seed/course8/640/360",
-            intro_video: "https://example.com/videos/python-intro.mp4",
-            sections: 7,
-        },
-        // 9
-        {
-            id: 9,
-            instructorId: 101,
-            title: "Git & GitHub Essentials",
-            desc: "Version control fundamentals and collaborative workflows with Git and GitHub.",
-            fees: 0,
-            discount: 0,
-            category: "dev-tools",
-            rating: 4.7,
-            reviews: 1750,
-            duration: "1 month",
-            thumbnail: "https://picsum.photos/seed/course9/640/360",
-            intro_video: "https://example.com/videos/git-intro.mp4",
-            sections: 5,
-        },
-        // 10
-        {
-            id: 10,
-            instructorId: 102,
-            title: "Node.js Fundamentals",
-            desc: "Build fast backend services with Node.js, npm and asynchronous patterns.",
-            fees: 0,
-            discount: 0,
-            category: "backend",
-            rating: 4.8,
-            reviews: 1280,
-            duration: "2 months",
-            thumbnail: "https://picsum.photos/seed/course10/640/360",
-            intro_video: "https://example.com/videos/nodejs-intro.mp4",
-            sections: 8,
-        },
-        // 11
-        {
-            id: 11,
-            instructorId: 104,
-            title: "Intro to SQL & Databases",
-            desc: "Relational database fundamentals and SQL querying techniques.",
-            fees: 0,
-            discount: 0,
-            category: "database",
-            rating: 4.6,
-            reviews: 990,
-            duration: "1.5 months",
-            thumbnail: "https://picsum.photos/seed/course11/640/360",
-            intro_video: "https://example.com/videos/sql-intro.mp4",
-            sections: 6,
-        },
-        // 12
-        {
-            id: 12,
-            instructorId: 103,
-            title: "Spring Boot Crash Course",
-            desc: "Quickstart for REST APIs using Spring Boot and Java.",
-            fees: 0,
-            discount: 0,
-            category: "backend",
-            rating: 4.9,
-            reviews: 1860,
-            duration: "2 months",
-            thumbnail: "https://picsum.photos/seed/course12/640/360",
-            intro_video: "https://example.com/videos/springboot-intro.mp4",
-            sections: 9,
-        },
-
-        // 13
-        {
-            id: 13,
-            instructorId: 101,
-            title: "Advanced CSS: Layouts & Animations",
-            desc: "Grid, Flexbox, responsive patterns and CSS animations for modern sites.",
-            fees: 119.99,
-            discount: 10,
-            category: "web-dev",
-            rating: 4.7,
-            reviews: 680,
-            duration: "1.5 months",
-            thumbnail: "https://picsum.photos/seed/course13/640/360",
-            intro_video: "https://example.com/videos/css-adv.mp4",
-            sections: 7,
-        },
-        // 14
-        {
-            id: 14,
-            instructorId: 102,
-            title: "TypeScript from Zero to Hero",
-            desc: "Type-safe JavaScript with TypeScript: types, generics, and real projects.",
-            fees: 129.99,
-            discount: 15,
-            category: "web-dev",
-            rating: 4.8,
-            reviews: 720,
-            duration: "2 months",
-            thumbnail: "https://picsum.photos/seed/course14/640/360",
-            intro_video: "https://example.com/videos/ts-intro.mp4",
-            sections: 9,
-        },
-        // 15
-        {
-            id: 15,
-            instructorId: 103,
-            title: "Machine Learning Foundations",
-            desc: "Supervised and unsupervised learning concepts, model evaluation and pipelines.",
-            fees: 249.99,
-            discount: 20,
-            category: "data-science",
-            rating: 4.7,
-            reviews: 1340,
-            duration: "3 months",
-            thumbnail: "https://picsum.photos/seed/course15/640/360",
-            intro_video: "https://example.com/videos/ml-intro.mp4",
-            sections: 11,
-        },
-        // 16
-        {
-            id: 16,
-            instructorId: 103,
-            title: "Pandas & Data Wrangling",
-            desc: "Practical data cleaning, transformation and feature engineering with pandas.",
-            fees: 79.99,
-            discount: 5,
-            category: "data-science",
-            rating: 4.6,
-            reviews: 540,
-            duration: "1 month",
-            thumbnail: "https://picsum.photos/seed/course16/640/360",
-            intro_video: "https://example.com/videos/pandas.mp4",
-            sections: 6,
-        },
-        // 17
-        {
-            id: 17,
-            instructorId: 104,
-            title: "iOS Development with Swift",
-            desc: "Build native iOS apps using Swift and Xcode, from UI to networking.",
-            fees: 279.99,
-            discount: 10,
-            category: "mobile-dev",
-            rating: 4.7,
-            reviews: 830,
-            duration: "3 months",
-            thumbnail: "https://picsum.photos/seed/course17/640/360",
-            intro_video: "https://example.com/videos/swift-intro.mp4",
-            sections: 12,
-        },
-        // 18
-        {
-            id: 18,
-            instructorId: 102,
-            title: "Kotlin Coroutines & Flow",
-            desc: "Asynchronous programming patterns for Android with coroutines and Flow.",
-            fees: 149.99,
-            discount: 10,
-            category: "mobile-dev",
-            rating: 4.6,
-            reviews: 410,
-            duration: "1.5 months",
-            thumbnail: "https://picsum.photos/seed/course18/640/360",
-            intro_video: "https://example.com/videos/kotlin-advanced.mp4",
-            sections: 7,
-        },
-        // 19
-        {
-            id: 19,
-            instructorId: 101,
-            title: "Advanced Python: OOP & Modules",
-            desc: "Deep dive into object-oriented design, packaging and modules in Python.",
-            fees: 89.99,
-            discount: 0,
-            category: "programming",
-            rating: 4.7,
-            reviews: 980,
-            duration: "1.5 months",
-            thumbnail: "https://picsum.photos/seed/course19/640/360",
-            intro_video: "https://example.com/videos/python-adv.mp4",
-            sections: 8,
-        },
-        // 20
-        {
-            id: 20,
-            instructorId: 103,
-            title: "Docker & Containerization",
-            desc: "Containerize applications with Docker and basic orchestration patterns.",
-            fees: 119.99,
-            discount: 10,
-            category: "dev-tools",
-            rating: 4.8,
-            reviews: 720,
-            duration: "1 month",
-            thumbnail: "https://picsum.photos/seed/course20/640/360",
-            intro_video: "https://example.com/videos/docker.mp4",
-            sections: 6,
-        },
-        // 21
-        {
-            id: 21,
-            instructorId: 101,
-            title: "RESTful APIs with Express.js",
-            desc: "Design and build REST APIs using Express, middleware, and routing.",
-            fees: 59.99,
-            discount: 5,
-            category: "backend",
-            rating: 4.6,
-            reviews: 610,
-            duration: "1.5 months",
-            thumbnail: "https://picsum.photos/seed/course21/640/360",
-            intro_video: "https://example.com/videos/express.mp4",
-            sections: 7,
-        },
-        // 22
-        {
-            id: 22,
-            instructorId: 102,
-            title: "GraphQL: Query Language for APIs",
-            desc: "Learn GraphQL fundamentals, schema design, and resolvers with practical examples.",
-            fees: 129.99,
-            discount: 15,
-            category: "backend",
-            rating: 4.8,
-            reviews: 540,
-            duration: "1.5 months",
-            thumbnail: "https://picsum.photos/seed/course22/640/360",
-            intro_video: "https://example.com/videos/graphql.mp4",
-            sections: 8,
-        },
-        // 23
-        {
-            id: 23,
-            instructorId: 104,
-            title: "Database Design & Normalization",
-            desc: "Relational modeling, normalization, indexes and query optimization basics.",
-            fees: 79.99,
-            discount: 0,
-            category: "database",
-            rating: 4.6,
-            reviews: 430,
-            duration: "1 month",
-            thumbnail: "https://picsum.photos/seed/course23/640/360",
-            intro_video: "https://example.com/videos/db-design.mp4",
-            sections: 6,
-        },
-        // 24
-        {
-            id: 24,
-            instructorId: 103,
-            title: "Deep Learning with TensorFlow",
-            desc: "Neural networks, CNNs, and practical TensorFlow model building.",
-            fees: 299.99,
-            discount: 20,
-            category: "ai-ml",
-            rating: 4.8,
-            reviews: 1450,
-            duration: "3 months",
-            thumbnail: "https://picsum.photos/seed/course24/640/360",
-            intro_video: "https://example.com/videos/tensorflow.mp4",
-            sections: 12,
-        },
-        // 25
-        {
-            id: 25,
-            instructorId: 104,
-            title: "Figma UI/UX Design Essentials",
-            desc: "Design user interfaces with Figma: components, prototyping and handoff.",
-            fees: 89.99,
-            discount: 10,
-            category: "ui-ux",
-            rating: 4.9,
-            reviews: 980,
-            duration: "1.5 months",
-            thumbnail: "https://picsum.photos/seed/course25/640/360",
-            intro_video: "https://example.com/videos/figma.mp4",
-            sections: 7,
-        },
-        // 26
-        {
-            id: 26,
-            instructorId: 101,
-            title: "Cloud Fundamentals (AWS)",
-            desc: "Intro to cloud computing, core AWS services and deployment basics.",
-            fees: 149.99,
-            discount: 15,
-            category: "cloud",
-            rating: 4.7,
-            reviews: 820,
-            duration: "2 months",
-            thumbnail: "https://picsum.photos/seed/course26/640/360",
-            intro_video: "https://example.com/videos/aws-intro.mp4",
-            sections: 8,
-        },
-        // 27
-        {
-            id: 27,
-            instructorId: 103,
-            title: "Intro to Cybersecurity",
-            desc: "Foundations of cybersecurity: threats, mitigation and secure design.",
-            fees: 99.99,
-            discount: 0,
-            category: "security",
-            rating: 4.6,
-            reviews: 610,
-            duration: "1 month",
-            thumbnail: "https://picsum.photos/seed/course27/640/360",
-            intro_video: "https://example.com/videos/cybersec.mp4",
-            sections: 6,
-        },
-        // 28
-        {
-            id: 28,
-            instructorId: 102,
-            title: "Selenium & Automated Testing",
-            desc: "Automated browser testing and test automation workflows using Selenium.",
-            fees: 79.99,
-            discount: 5,
-            category: "testing",
-            rating: 4.5,
-            reviews: 420,
-            duration: "1 month",
-            thumbnail: "https://picsum.photos/seed/course28/640/360",
-            intro_video: "https://example.com/videos/selenium.mp4",
-            sections: 5,
-        },
-        // 29
-        {
-            id: 29,
-            instructorId: 101,
-            title: "Advanced Node.js Patterns",
-            desc: "Event-driven architecture, streams, clustering and performance tuning.",
-            fees: 139.99,
-            discount: 10,
-            category: "backend",
-            rating: 4.7,
-            reviews: 510,
-            duration: "2 months",
-            thumbnail: "https://picsum.photos/seed/course29/640/360",
-            intro_video: "https://example.com/videos/node-adv.mp4",
-            sections: 8,
-        },
-        // 30
-        {
-            id: 30,
-            instructorId: 103,
-            title: "Data Engineering with Kafka",
-            desc: "Real-time streaming fundamentals with Kafka and stream processing patterns.",
-            fees: 199.99,
-            discount: 15,
-            category: "data-science",
-            rating: 4.7,
-            reviews: 760,
-            duration: "2 months",
-            thumbnail: "https://picsum.photos/seed/course30/640/360",
-            intro_video: "https://example.com/videos/kafka.mp4",
-            sections: 9,
-        },
-        // 31
-        {
-            id: 31,
-            instructorId: 104,
-            title: "Design Systems & Component Libraries",
-            desc: "Create scalable design systems, tokens, and component libraries for teams.",
-            fees: 99.99,
-            discount: 10,
-            category: "ui-ux",
-            rating: 4.6,
-            reviews: 480,
-            duration: "1.5 months",
-            thumbnail: "https://picsum.photos/seed/course31/640/360",
-            intro_video: "https://example.com/videos/design-systems.mp4",
-            sections: 6,
-        },
-        // 32
-        {
-            id: 32,
-            instructorId: 101,
-            title: "Modern DevOps Practices",
-            desc: "CI/CD, infrastructure as code, monitoring and best practices for delivery.",
-            fees: 159.99,
-            discount: 20,
-            category: "dev-tools",
-            rating: 4.8,
-            reviews: 920,
-            duration: "2 months",
-            thumbnail: "https://picsum.photos/seed/course32/640/360",
-            intro_video: "https://example.com/videos/devops.mp4",
-            sections: 10,
-        },
-        // 33
-        {
-            id: 33,
-            instructorId: 102,
-            title: "Vue 3 - The Progressive Framework",
-            desc: "Build reactive UI with Vue 3, Composition API, and modern tooling.",
-            fees: 129.99,
-            discount: 15,
-            category: "web-dev",
-            rating: 4.6,
-            reviews: 430,
-            duration: "1.5 months",
-            thumbnail: "https://picsum.photos/seed/course33/640/360",
-            intro_video: "https://example.com/videos/vue3.mp4",
-            sections: 7,
-        },
-        // 34
-        {
-            id: 34,
-            instructorId: 103,
-            title: "NLP with Python",
-            desc: "Text processing, word embeddings, transformers and NLP pipelines.",
-            fees: 219.99,
-            discount: 20,
-            category: "ai-ml",
-            rating: 4.8,
-            reviews: 860,
-            duration: "3 months",
-            thumbnail: "https://picsum.photos/seed/course34/640/360",
-            intro_video: "https://example.com/videos/nlp.mp4",
-            sections: 11,
-        },
-        // 35
-        {
-            id: 35,
-            instructorId: 101,
-            title: "Accessibility (a11y) for Web Developers",
-            desc: "Build accessible, inclusive web experiences following WCAG best practices.",
-            fees: 69.99,
-            discount: 5,
-            category: "web-dev",
-            rating: 4.7,
-            reviews: 310,
-            duration: "3 weeks",
-            thumbnail: "https://picsum.photos/seed/course35/640/360",
-            intro_video: "https://example.com/videos/a11y.mp4",
-            sections: 4,
-        },
-        // 36
-        {
-            id: 36,
-            instructorId: 104,
-            title: "Prototyping & User Testing",
-            desc: "Rapid prototyping techniques and moderating user tests to validate designs.",
-            fees: 89.99,
-            discount: 0,
-            category: "ui-ux",
-            rating: 4.6,
-            reviews: 420,
-            duration: "1 month",
-            thumbnail: "https://picsum.photos/seed/course36/640/360",
-            intro_video: "https://example.com/videos/prototyping.mp4",
-            sections: 6,
-        },
-        // 37
-        {
-            id: 37,
-            instructorId: 103,
-            title: "Big Data Analytics with Spark",
-            desc: "Distributed processing with Apache Spark for large-scale data analytics.",
-            fees: 249.99,
-            discount: 20,
-            category: "data-science",
-            rating: 4.8,
-            reviews: 980,
-            duration: "3 months",
-            thumbnail: "https://picsum.photos/seed/course37/640/360",
-            intro_video: "https://example.com/videos/spark.mp4",
-            sections: 12,
-        },
-        // 38
-        {
-            id: 38,
-            instructorId: 102,
-            title: "SEO & Content Marketing Strategy",
-            desc: "Drive traffic and conversion with SEO best practices and content planning.",
-            fees: 47.99,
-            discount: 10,
-            category: "marketing",
-            rating: 4.9,
-            reviews: 52000,
-            duration: "39h",
-            thumbnail: "https://picsum.photos/seed/course38/640/360",
-            intro_video: "https://example.com/videos/seo.mp4",
-            sections: 6,
-        },
-        // 39
-        {
-            id: 39,
-            instructorId: 101,
-            title: "Ethical Hacking Basics",
-            desc: "Intro to penetration testing, recon, and vulnerability assessment.",
-            fees: 129.99,
-            discount: 15,
-            category: "security",
-            rating: 4.6,
-            reviews: 760,
-            duration: "2 months",
-            thumbnail: "https://picsum.photos/seed/course39/640/360",
-            intro_video: "https://example.com/videos/ethical-hacking.mp4",
-            sections: 8,
-        },
-        // 40
-        {
-            id: 40,
-            instructorId: 104,
-            title: "Product Management Essentials",
-            desc: "Roadmapping, stakeholder management, and delivering customer value.",
-            fees: 89.99,
-            discount: 5,
-            category: "business",
-            rating: 4.7,
-            reviews: 4300,
-            duration: "6 weeks",
-            thumbnail: "https://picsum.photos/seed/course40/640/360",
-            intro_video: "https://example.com/videos/product-mgmt.mp4",
-            sections: 7,
+            name: "Sneha Kapoor",
+            course: "UI/UX Design Essentials",
+            review: "Loved the creative examples and Figma practice tasks. The instructor made UI/UX very fun to learn!",
+            rating: 5,
+            image: "https://randomuser.me/api/portraits/women/55.jpg",
         },
     ];
-const sampleTestimonials = [
-    {
-        id: 1,
-        name: "Aarav Sharma",
-        course: "React for Beginners",
-        review: "The course was extremely well structured and easy to follow. The instructor explained concepts clearly and the projects were very practical!",
-        rating: 5,
-        image: "https://randomuser.me/api/portraits/men/75.jpg",
-    },
-    {
-        id: 2,
-        name: "Riya Sen",
-        course: "Data Science Fundamentals",
-        review: "Amazing content! The instructor made complex data topics very simple. The hands-on exercises were the best part!",
-        rating: 4,
-        image: "https://randomuser.me/api/portraits/women/65.jpg",
-    },
-    {
-        id: 3,
-        name: "Kunal Patil",
-        course: "Android Development with Kotlin",
-        review: "Best Android course I have taken! Very clear explanations and well-structured modules. Highly recommended.",
-        rating: 5,
-        image: "https://randomuser.me/api/portraits/men/20.jpg",
-    },
-    {
-        id: 4,
-        name: "Sneha Kapoor",
-        course: "UI/UX Design Essentials",
-        review: "Loved the creative examples and Figma practice tasks. The instructor made UI/UX very fun to learn!",
-        rating: 5,
-        image: "https://randomuser.me/api/portraits/women/55.jpg",
-    },
-];
 
     return (
         <div>
-            <StudentDashboardHeroSection courses={courses} />
-            <StudentDashboardCategorySection categories={categories} />
-            <StudentDashboardTopCourses courses={courses} />
+            <StudentDashboardHeroSection courses={course} />
+            <StudentDashboardCategorySection categories={category} />
+            <StudentDashboardTopCourses courses={course} />
             <StudentDashboardCategoryCourse
-                courses={courses}
-                categories={categories}
+                courses={course}
+                categories={category}
             />
             <StudentDashboardInstructor
                 instructors={instructors}
-                courses={courses}
             />
             <StudentDashboardTestimonials
                 sampleTestimonials={sampleTestimonials}

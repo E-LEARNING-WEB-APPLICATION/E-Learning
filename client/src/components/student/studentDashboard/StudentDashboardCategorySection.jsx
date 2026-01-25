@@ -13,22 +13,33 @@ const StudentDashboardCategorySection = ({ categories }) => {
                         <div
                             className="col-6 col-md-4 col-lg-3"
                             key={cat.id}>
-                            <div className="card border-0 shadow-sm h-100 category-card p-3 text-center"
-                            onClick={()=> navigate(`/student/courses/category/${cat.id}`)}
-                            style={{ cursor: "pointer" }}>
-                                <div className="icon-box mb-3">
-                                    <div
-                                        style={{
-                                            color: cat.color,
-                                            fontSize: "2.6rem",
-                                        }}>
-                                        <cat.icon />
-                                    </div>
+                            <div
+                                className="category-card card border-0 h-100 text-center p-3"
+                                onClick={() =>
+                                    navigate(
+                                        `/student/courses/category/${cat.id}`,
+                                        {
+                                            state: { categoryName: cat.title },
+                                        },
+                                    )
+                                }>
+                                {/* Image box */}
+                                <div className="category-image-wrapper mb-3">
+                                    <img
+                                        src={cat.categoryImageUrl}
+                                        alt={cat.title}
+                                        className="category-image"
+                                    />
                                 </div>
 
-                                <h6 className="fw-semibold">{cat.title}</h6>
+                                {/* Title */}
+                                <h6 className="fw-semibold mb-1">
+                                    {cat.title}
+                                </h6>
+
+                                {/* Description */}
                                 <small className="text-muted">
-                                    Explore courses
+                                    {cat.description || "Explore courses"}
                                 </small>
                             </div>
                         </div>

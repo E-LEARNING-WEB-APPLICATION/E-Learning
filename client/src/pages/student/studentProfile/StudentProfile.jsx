@@ -1,57 +1,108 @@
 import "./StudentProfile.css";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import ProfileHeader from "../../../components/student/studentProfile/profileHeader/ProfileHeader";
-import AboutCard from "../../../components/student/studentProfile/aboutCard/aboutCard";
 import SkillsCard from "../../../components/student/studentProfile/skillsCard/SkillsCard";
 import ContactCard from "../../../components/student/studentProfile/contactCard/ContactCard";
 import EducationCard from "../../../components/student/studentProfile/educationCard/EducationCard";
 
 import EditProfileModal from "../../../components/student/studentProfile/modal/EditProfileModal";
 import EditEducationModal from "../../../components/student/studentProfile/modal/EditEducationModal";
+import {
+    getAllSkills,
+    getStudentDetail,
+    updateProfilePic,
+} from "@/services/Student/profileService";
+import { toast } from "react-toastify";
 
 const StudentProfile = () => {
-    const allSkills = [
-        "React.js",
-        "Node.js",
-        "MongoDB",
-        "JavaScript",
-        "UI/UX Design",
-        "C++",
-        "Express.js",
-        "Python",
-        "HTML",
-        "CSS",
-    ];
-
+    const [allSkills, setAllSkills] = useState([]);
     const [profile, setProfile] = useState({
-        name: "Sanket Raut",
-        bio: "Full-Stack Developer",
-        location: "Pune, Maharashtra",
-        role: "student",
-        email: "sanket@example.com",
-        phone: "+91 98765 43210",
-        skills: ["React.js", "Node.js", "MongoDB", "JavaScript"],
-        dob: "2003-25-1",
-        gender: "male",
-        photo: "https://i.pravatar.cc/160",
+        firstName: "",
+        lastName: "",
+        email: "",
+        phoneNo: "",
+        dob: "",
+        gender: "",
+        profilePic: null,
+        skills: [],
+        address: {
+            addressLine1: "",
+            addressLine2: "",
+            city: "",
+            state: "",
+            pinCode: "",
+            country: "",
+        },
     });
 
-    const handleProfilePhotoUpload = (file) => {
-        const previewURL = URL.createObjectURL(file);
-        setProfile((prev) => ({ ...prev, photo: previewURL }));
-    };
+    const [education, setEducation] = useState([]);
 
-    const [education, setEducation] = useState([
-        { degree: "B.Tech", college: "PCCOE", year: "2025" },
-        { degree: "HSC", college: "Modern College", year: "2021" },
-    ]);
+    useEffect(() => {
+        const fetchProfile = async () => {
+            try {
+                const data = await getStudentDetail();
+                console.log(data);
+                setProfile({
+                    firstName: data.firstName ?? "",
+                    lastName: data.lastName ?? "",
+                    email: data.email ?? "",
+                    phoneNo: data.phoneNo ?? "",
+                    dob: data.dob ?? "",
+                    gender: data.gender ?? "",
+                    profilePic: data.profilePic || null,
+                    skills: data.skills ?? [],
+                    address: {
+                        addressLine1: data.address?.addressLine1 ?? "",
+                        addressLine2: data.address?.addressLine2 ?? "",
+                        city: data.address?.city ?? "",
+                        state: data.address?.state ?? "",
+                        pinCode: data.address?.pinCode ?? "",
+                        country: data.address?.country ?? "",
+                    },
+                });
 
-    const handleDeleteEducation = (eduToDelete) => {
-        setEducation((prev) =>
-            prev.filter((edu) => edu.degree !== eduToDelete.degree)
-        );
-    };
+                setEducation(data.educations);
+            } catch (error) {
+                toast.error(error.message)
+            }
+        };
+
+        const getSkill = async () => {
+            try {
+                const data = await getAllSkills();
+                setAllSkills(data.data);
+            } catch (error) {
+                toast.error(error.message);
+            }
+        };
+
+        fetchProfile();
+        getSkill();
+    }, []);
+
+    const handleProfilePhotoUpload = async (file) => {
+
+    // Preview
+    const previewURL = URL.createObjectURL(file);
+    setProfile((prev) => ({
+        ...prev,
+        profilePic: previewURL,
+    }));
+
+    // Upload
+    try {
+        const response = await updateProfilePic(file);
+        if (response.data.success) {
+                toast.success(response.data.message)
+            } else {
+                toast.error(response.data.message);
+            }
+    } catch (error) {
+        toast.error(error.message);
+    }
+};
+
 
     const [showProfileModal, setShowProfileModal] = useState(false);
     const [showEduModal, setShowEduModal] = useState(false);
@@ -60,8 +111,8 @@ const StudentProfile = () => {
     return (
         <div className="student-profile profilebody">
             <ProfileHeader
-                page={"student"}
                 profile={profile}
+                page="student"
                 openProfileModal={() => setShowProfileModal(true)}
                 onPhotoUpload={handleProfilePhotoUpload}
             />
@@ -69,8 +120,6 @@ const StudentProfile = () => {
             <div className="container py-5">
                 <div className="row g-4">
                     <div className="col-lg-8">
-                        <AboutCard bio={profile.bio} />
-
                         <EducationCard
                             education={education}
                             openAdd={() => {
@@ -86,10 +135,10 @@ const StudentProfile = () => {
 
                     <div className="col-lg-4">
                         <SkillsCard
-                            page={"student"}
+                            page="student"
                             skills={profile.skills}
                             allSkills={allSkills}
-                            role={profile.role}
+                            role="student"
                             onSave={(updatedSkills) =>
                                 setProfile((prev) => ({
                                     ...prev,
@@ -99,17 +148,16 @@ const StudentProfile = () => {
                         />
 
                         <ContactCard
-                            location={profile.location}
+                            address={profile.address}
                             email={profile.email}
-                            phone={profile.phone}
+                            phone={profile.phoneNo}
                         />
                     </div>
                 </div>
             </div>
 
-            {/* Bootstrap Modals */}
             <EditProfileModal
-                page={"student"}
+                page="student"
                 show={showProfileModal}
                 onClose={() => setShowProfileModal(false)}
                 profile={profile}
@@ -119,19 +167,24 @@ const StudentProfile = () => {
             <EditEducationModal
                 show={showEduModal}
                 onClose={() => setShowEduModal(false)}
-                data={selectedEdu}
+                educationData={selectedEdu}
                 onSave={(newEdu) => {
-                    if (selectedEdu) {
+                    if (selectedEdu?.id) {
+                        // EDIT existing education (by id)
                         setEducation((prev) =>
-                            prev.map((e) =>
-                                e.degree === selectedEdu.degree ? newEdu : e
-                            )
+                            prev.map((e) => (e.id === newEdu.id ? newEdu : e)),
                         );
                     } else {
+                        // ADD new education
                         setEducation((prev) => [...prev, newEdu]);
                     }
                 }}
-                onDelete={handleDeleteEducation}
+                onDelete={(eduToDelete) => {
+                    // DELETE education (by id)
+                    setEducation((prev) =>
+                        prev.filter((e) => e.id !== eduToDelete.id),
+                    );
+                }}
             />
         </div>
     );

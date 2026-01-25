@@ -36,10 +36,11 @@ import AnalyticsLayout from "./pages/analytics/AnalyticsLayout";
 import CourseAnalyticsPage from "./pages/analytics/course/CourseAnalyticsPage";
 import StudentAnalyticsPage from "./pages/analytics/student/StudentAnalyticsPage";
 import InstructorAnalyticsPage from "./pages/analytics/instructors/InstructorAnalyticsPage";
-import NotificationPage from "./pages/admin/Notifications/NotificationPage";
 import ProfileView from "./pages/profileView/ProfileView";
+import CategoryCourses from "./pages/student/categorycourses/CategoryCourses";
 import AddAdminPage from "./pages/admin/RegisterAdmin/AddAdminPage";
 import { useNotificationSSE } from "./hooks/useNotificationSse";
+import NotificationPage from "./pages/admin/notifications/NotificationPage";
 
 function App() {
   useNotificationSSE();
@@ -74,10 +75,8 @@ function App() {
             <Route path="contactus" element={<ContactUs />} />
             <Route path="profile" element={<StudentProfile />} />
             <Route path="profile-view" element={<ProfileView />} />
-            <Route
-              path="enrolled-course-details"
-              element={<CourseEnrolledPage />}
-            />
+            <Route path="enrolled-course-details" element={<CourseEnrolledPage />} />
+            <Route path="courses/category/:categoryId" element={<CategoryCourses />} />
           </Route>
           {/* Instructor Routes */}
           <Route path="/instructor" element={<InstructorLayout />}>

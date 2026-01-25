@@ -13,8 +13,8 @@ const CourseDetails = () => {
   const location = useLocation();
   const { courseId } = location.state || {};
   // As of Now Later will remove onoce got the id from dashboard
-  const HARD_CODED_COURSE_ID = "9dd20574-1552-4981-ab78-fbdc7a9e936a";
-  const finalCourseId = courseId || HARD_CODED_COURSE_ID;
+  const HARD_CODED_COURSE_ID = "0c1c8908-8c2f-4524-8962-f2fe8b4944e6";
+  const finalCourseId = HARD_CODED_COURSE_ID;
 
   console.log(courseId);
   console.log(location.state);
@@ -38,7 +38,7 @@ const CourseDetails = () => {
     };
 
     fetchCourse();
-  }, [courseId]);
+  }, [finalCourseId]);
 
   if (loading) {
     return (

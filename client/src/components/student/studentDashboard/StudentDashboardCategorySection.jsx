@@ -18,6 +18,9 @@ const StudentDashboardCategorySection = ({ categories }) => {
                                 onClick={() =>
                                     navigate(
                                         `/student/courses/category/${cat.id}`,
+                                        {
+                                            state: { categoryName: cat.title },
+                                        },
                                     )
                                 }>
                                 {/* Image box */}

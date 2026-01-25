@@ -24,11 +24,11 @@ const StudentCourseCard = ({ course }) => {
                 />
 
                 <div className="card-body">
-                    <div style={{ height: 60 }}>
+                    <div style={{ height: 40 }}>
                         <h5 className="fw-bold">{course.title}</h5>
                     </div>
 
-                    <p className="text-muted small mb-1">{course.duration}</p>
+                    <p className="text-muted small mb-1">Total Hours : {course.duration} </p>
 
                     <p className="text-warning mb-2">
                         ⭐ {course.rating} ({course.reviews} reviews)

@@ -154,3 +154,52 @@
   box-shadow: 0px 0px 0px 3px rgba(59, 130, 246, 0.25);
   border-color: #3b82f6 !important;
 }
+
+.notification-row.unread {
+  background-color: #f5f9ff;
+}
+
+.notification-cell {
+  min-width: 400px;
+}
+
+.notification-icon {
+  font-size: 18px;
+  margin-top: 2px;
+}
+
+.notification-timestamp {
+  font-size: 11px;
+  color: #888;
+  margin-top: 4px;
+  text-align: right;
+}
+
+.material-chip {
+  border-radius: 12px;
+  padding: 4px 10px;
+  font-size: 12px;
+  text-transform: capitalize;
+}
+
+.material-action-icon {
+  cursor: pointer;
+  font-size: 18px; /* ⬅️ bigger icons */
+  margin-right: 10px; /* ⬅️ more horizontal gap */
+  transition:
+    transform 0.15s ease,
+    opacity 0.15s ease;
+}
+
+.material-action-icon:last-child {
+  margin-right: 0;
+}
+
+.material-action-icon:hover {
+  transform: scale(1.35); /* slightly stronger hover */
+  opacity: 0.85;
+}
+
+.material-table tr.hover-light:hover {
+  background-color: #f8f9fa;
+}

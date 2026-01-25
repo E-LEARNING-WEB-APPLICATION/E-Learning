@@ -3,35 +3,24 @@ import NotificationStats from "./_components/NotificationStats";
 import NotificationFilters from "./_components/NotificationFilters";
 import NotificationTable from "./_components/NotificationTable";
 import "./NotificationPage.css";
+import { useNotifications } from "@/hooks/useNotifications";
+import { toast } from "react-toastify";
 
 const NotificationPage = () => {
   const [search, setSearch] = useState("");
   const [filters, setFilters] = useState({});
   const [selected, setSelected] = useState([]);
-  const notifications = [
-    {
-      id: 1,
-      title: "New User Registered",
-      message: "A new student has joined the platform.",
-      type: "user",
-      userName: "Rahul Sharma",
-      courseTitle: "-",
-      priority: "high",
-      createdAt: "2025-12-08 14:32",
-      readAt: null,
-    },
-    {
-      id: 2,
-      title: "Course Uploaded",
-      message: "New course submitted for review.",
-      type: "course",
-      userName: "Instructor John",
-      courseTitle: "MERN Stack Bootcamp",
-      priority: "medium",
-      createdAt: "2025-12-07 10:15",
-      readAt: "2025-12-07 11:00",
-    },
-  ];
+
+  const [isRead, setIsRead] = useState(false);
+
+  const {
+    data: notifications = [],
+    isLoading,
+    isError,
+  } = useNotifications(isRead);
+
+  if (isLoading) return <div>Loading...</div>;
+  if (isError) return toast("some error occured while fetching notifications");
 
   const filteredNotifications = notifications.filter((notification) => {
     const matchesType = !filters.type || filters.type === notification.type;
@@ -51,6 +40,22 @@ const NotificationPage = () => {
     <div className="container py-4">
       {/* Summary Cards */}
       <NotificationStats notifications={notifications} />
+
+      <div className="d-flex gap-2 mb-3">
+        <button
+          className={`btn ${!isRead ? "btn-primary" : "btn-outline-primary"}`}
+          onClick={() => setIsRead(false)}
+        >
+          Unread
+        </button>
+
+        <button
+          className={`btn ${isRead ? "btn-primary" : "btn-outline-primary"}`}
+          onClick={() => setIsRead(true)}
+        >
+          All
+        </button>
+      </div>
 
       {/* Filter + Search Section */}
       <NotificationFilters

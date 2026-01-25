@@ -35,9 +35,9 @@ const NotificationFilters = ({ search, setSearch, setFilters }) => {
             }
           >
             <option value="">Priority</option>
-            <option value="high">High</option>
-            <option value="medium">Medium</option>
-            <option value="low">Low</option>
+            <option value="HIGH">High</option>
+            <option value="MEDIUM">Medium</option>
+            <option value="LOW">Low</option>
           </select>
         </div>
       </div>

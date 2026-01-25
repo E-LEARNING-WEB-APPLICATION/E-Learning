@@ -3,43 +3,73 @@ import "./CourseDetails.css";
 import CourseHeader from "@/components/student/coursedetails/courseheader/CourseHeader";
 import CoursePreview from "@/components/student/coursedetails/coursepreview/CoursePreview";
 import ActionSection from "@/components/student/coursedetails/actionsection/ActionSection";
-import CourseContent from "@/components/student/coursedetails/coursecontent/CourseContent";
-import InstructorSection from "@/components/student/coursedetails/instructorsection/InstructorSection";
 import { useLocation } from "react-router-dom";
 import Loader from "@/components/shared/Loader";
 import { getCourseById } from "@/services/courseService";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addCourseToWishlist,
+  removeCourseFromWishlist,
+} from "@/slices/wishlist/wishlistSlice";
+import { addToWishlist, removeFromWishlist } from "@/services/wishlist";
 
 const CourseDetails = () => {
+  /* ---------- Routing ---------- */
   const location = useLocation();
   const { courseId } = location.state || {};
-  // As of Now Later will remove onoce got the id from dashboard
-  const HARD_CODED_COURSE_ID = "0c1c8908-8c2f-4524-8962-f2fe8b4944e6";
-  const finalCourseId = HARD_CODED_COURSE_ID;
 
-  console.log(courseId);
-  console.log(location.state);
-  console.log(finalCourseId);
+  const HARD_CODED_COURSE_ID = "9dd20574-1552-4981-ab78-fbdc7a9e936a";
+  const finalCourseId = courseId || HARD_CODED_COURSE_ID;
 
+  /* ---------- Redux ---------- */
+  const dispatch = useDispatch();
+
+  const wishlistCourseIds = useSelector(
+    (state) => state.wishlist.value.courseIds,
+  );
+
+  /* ---------- Derived State ---------- */
+  const isWishlisted = wishlistCourseIds.includes(finalCourseId);
+
+  /* ---------- Local State ---------- */
   const [course, setCourse] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  /* ---------- Effects ---------- */
   useEffect(() => {
     const fetchCourse = async () => {
       // if (!courseId) return;
       try {
         const courseData = await getCourseById(finalCourseId);
-        console.log(courseData);
         setCourse(courseData);
       } catch (error) {
         console.error("Failed to fetch course details:", error);
       } finally {
-        setLoading(false); // Stop loader once done
+        setLoading(false);
       }
     };
 
     fetchCourse();
   }, [finalCourseId]);
 
+  /* ---------- Wishlist Toggle ---------- */
+  const handleWishlistToggle = async () => {
+    if (!finalCourseId) return;
+
+    if (isWishlisted) {
+      const response = await removeFromWishlist(finalCourseId);
+      if (response?.success) {
+        dispatch(removeCourseFromWishlist(finalCourseId));
+      }
+    } else {
+      const response = await addToWishlist(finalCourseId);
+      if (response?.success) {
+        dispatch(addCourseToWishlist(finalCourseId));
+      }
+    }
+  };
+
+  /* ---------- UI ---------- */
   if (loading) {
     return (
       <div
@@ -64,16 +94,17 @@ const CourseDetails = () => {
 
   return (
     <div className="course-details-page container my-4">
-      <CourseHeader course={course} />
+      <CourseHeader
+        course={course}
+        isWishlisted={isWishlisted}
+        onWishlistToggle={handleWishlistToggle}
+      />
 
-      {/* Main Layout */}
       <div className="row mt-4 g-4">
-        {/* Left: Course Preview */}
         <div className="col-md-8">
           <CoursePreview course={course} />
         </div>
 
-        {/* Right: Action Section */}
         <div className="col-md-4">
           <ActionSection course={course} />
         </div>

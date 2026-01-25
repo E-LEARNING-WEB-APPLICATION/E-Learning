@@ -7,3 +7,67 @@
 .course-header h2 {
   color: #222;
 }
+
+/* ===== Wishlist Pill Button ===== */
+
+.wishlist-pill-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 8px 18px;
+  border-radius: 999px;
+
+  background: #ffffff;
+  border: 1.5px solid #ff5a7a;
+
+  color: #ff5a7a;
+  font-weight: 600;
+  font-size: 14px;
+
+  box-shadow: 0 6px 18px rgba(255, 90, 122, 0.12);
+  transition: all 0.3s ease;
+
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+/* Heart icon */
+.wishlist-icon {
+  font-size: 16px;
+  transition: transform 0.3s ease;
+}
+
+/* Hover = subtle luxury */
+.wishlist-pill-btn:hover {
+  background: linear-gradient(135deg, #ff5a7a, #ff7b9c);
+  color: #ffffff;
+  box-shadow: 0 10px 26px rgba(255, 90, 122, 0.35);
+}
+
+/* Icon micro-animation */
+.wishlist-pill-btn:hover .wishlist-icon {
+  transform: scale(1.15);
+}
+
+/* Click feedback */
+.wishlist-pill-btn:active {
+  transform: scale(0.96);
+}
+
+/* Mobile: icon-only */
+@media (max-width: 576px) {
+  .wishlist-text {
+    display: none;
+  }
+
+  .wishlist-pill-btn {
+    padding: 8px 12px;
+  }
+}
+
+.wishlist-pill-btn.wishlisted {
+  background: linear-gradient(135deg, #ff5a7a, #ff7b9c);
+  color: #ffffff;
+  border-color: transparent;
+}

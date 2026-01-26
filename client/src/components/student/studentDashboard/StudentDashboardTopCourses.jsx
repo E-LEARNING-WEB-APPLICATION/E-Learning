@@ -2,7 +2,7 @@ import React from "react";
 import CourseCard from "./StudentCourseCard";
 import StudentCourseCard from "./StudentCourseCard";
 
-const StudentDashboardTopCourses = ({ courses = [] }) => {
+const StudentDashboardTopCourses = ({ courses = [],page }) => {
     if (!Array.isArray(courses) || courses.length === 0) return null;
 
     // Sort top-rated courses
@@ -40,7 +40,7 @@ const StudentDashboardTopCourses = ({ courses = [] }) => {
                                     {group.map((course) => {
 
                                         return (
-                                            <StudentCourseCard course={course} />
+                                            <StudentCourseCard course={course} page={page} />
                                         );
                                     })}
                                 </div>

@@ -9,7 +9,7 @@ import { toast } from "react-toastify";
 const CategoryCourses = () => {
     const { categoryId } = useParams();
     const { state } = useLocation();
-
+    const page = state?.page;
     const categoryName = state?.categoryName;
     const [courses, setCourses] = useState([]);
 
@@ -124,7 +124,7 @@ const CategoryCourses = () => {
             <div className="row g-4">
                 {categoryCourses.length > 0 ? (
                     categoryCourses.map((course) => (
-                        <StudentCourseCard course={course} />
+                        <StudentCourseCard course={course} page={page} />
                     ))
                 ) : (
                     <p>No courses available for this category.</p>

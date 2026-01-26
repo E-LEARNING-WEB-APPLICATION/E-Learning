@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-const StudentDashboardCategorySection = ({ categories }) => {
+const StudentDashboardCategorySection = ({ categories,page }) => {
     const navigate = useNavigate();
     return (
         <section className="py-5 bg-light">
@@ -15,13 +15,29 @@ const StudentDashboardCategorySection = ({ categories }) => {
                             key={cat.id}>
                             <div
                                 className="category-card card border-0 h-100 text-center p-3"
-                                onClick={() =>
-                                    navigate(
-                                        `/student/courses/category/${cat.id}`,
-                                        {
-                                            state: { categoryName: cat.title },
-                                        },
-                                    )
+                                onClick={() => {
+                                    if (page === "guest") {
+                                        console.log(1);
+                                        navigate(
+                                            `/guest/courses/category/${cat.id}`,
+                                            {
+                                                state: {
+                                                    categoryName: cat.title,
+                                                    page: { page }
+                                                },
+                                            },
+                                        )
+                                    } else {
+                                        navigate(
+                                            `/student/courses/category/${cat.id}`,
+                                            {
+                                                state: {
+                                                    categoryName: cat.title
+                                                },
+                                            },
+                                        )
+                                    }
+                                }
                                 }>
                                 {/* Image box */}
                                 <div className="category-image-wrapper mb-3">

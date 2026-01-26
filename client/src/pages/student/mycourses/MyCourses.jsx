@@ -2,38 +2,64 @@ import React, { useEffect, useState } from "react";
 import "./MyCourses.css";
 import { FaRegStarHalf, FaStar } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import { getAllCourses } from "@/api/api";
+import Loader from "@/components/shared/Loader";
+import { getEnrolledCourses } from "@/services/courseService";
 
 const MyCourses = () => {
   const [isPaid, setIsPaid] = useState(true);
   const [enrolledCourses, setEnrolledCourses] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
-
-  const fetchCourses = async () => {
-    const data = await getAllCourses();
-    if (data) {
-      setEnrolledCourses(data.courses);
-    }
-  };
-
-  useEffect(() => {
-    fetchCourses();
-  }, []);
+  const [loading, setLoading] = useState(true);
 
   const navigate = useNavigate();
 
-  const handleNavigate = (course) => {
-    console.log(course);
-    navigate("/student/enrolled-course-details/", {
-      state: { courseId: course.courseId },
+  const fetchEnrolledCourses = async () => {
+    setLoading(true);
+    const data = await getEnrolledCourses();
+
+    if (Array.isArray(data)) {
+      console.log(data);
+      setEnrolledCourses(data);
+    } else {
+      setEnrolledCourses([]);
+    }
+
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    fetchEnrolledCourses();
+  }, []);
+
+  const handleNavigate = (courseId) => {
+    navigate("/student/enrolled-course-details", {
+      state: { courseId },
     });
   };
 
-  const filteredCourses = enrolledCourses.filter(
-    (course) =>
-      (isPaid ? course.fees > 0 : course.fees === 0) &&
-      course.course_name.toLowerCase().includes(searchTerm)
-  );
+  const filteredCourses = enrolledCourses.filter((course) => {
+  const title = course.courseTitle || "";
+
+  const matchesSearch = title
+    .toLowerCase()
+    .includes(searchTerm);
+
+  const matchesToggle = isPaid
+    ? course.coursePrice > 0
+    : course.coursePrice === 0;
+
+  return matchesSearch && matchesToggle;
+});
+
+
+  if (loading) {
+    return (
+      <Loader
+        text="Fetching your enrolled courses..."
+        size={36}
+      />
+    );
+  }
 
   return (
     <div className="container my-5">
@@ -69,22 +95,33 @@ const MyCourses = () => {
           filteredCourses.map((course) => (
             <div className="col" key={course.courseId}>
               <div className="course-card">
-                <img src={course.course_thumbnail} alt={course.course_name} />
+                <img
+                  src={course.courseThumbnail}
+                  alt={course.courseTitle}
+                />
 
-                <span className="badge-category">{course.category}</span>
+                <span className="badge-category">
+                  {course.categoryName}
+                </span>
                 <span
                   className={`badge-fee ${
-                    course.fees === 0 ? "bg-success" : "bg-warning"
+                    course.coursePrice === 0
+                      ? "bg-success"
+                      : "bg-warning"
                   }`}
                 >
-                  {course.fees === 0 ? "Free" : `₹${course.fees}`}
+                  {course.coursePrice === 0
+                    ? "Free"
+                    : `₹${course.coursePrice}`}
                 </span>
 
                 <div className="course-info">
-                  <h5 className="fw-bold">{course.course_name}</h5>
+                  <h5 className="fw-bold">
+                    {course.courseTitle}
+                  </h5>
 
                   <div className="d-flex justify-content-between align-items-center">
-                    <small>{course.course_duration}</small>
+                    <small>{course.courseDuration}</small>
 
                     <div className="rating d-flex align-items-center">
                       <FaStar className="text-warning me-1" />
@@ -99,7 +136,7 @@ const MyCourses = () => {
                   <button
                     className="btn btn-primary mt-3 fw-semibold w-100"
                     onClick={() => {
-                      handleNavigate(course);
+                      handleNavigate(course.courseId);
                     }}
                   >
                     Start Learning →

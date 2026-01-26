@@ -30,7 +30,7 @@ const CourseHeader = ({ course, isWishlisted, onWishlistToggle }) => {
         >
           <FiHeart className="wishlist-icon" />
           <span className="wishlist-text">
-            {isWishlisted ? "In Wishlist" : "Add to Wishlist"}
+            {isWishlisted ? "Remove From Wishlist" : "Add to Wishlist"}
           </span>
         </button>
       </div>

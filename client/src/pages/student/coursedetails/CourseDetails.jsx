@@ -18,7 +18,7 @@ const CourseDetails = () => {
   const location = useLocation();
   const { courseId } = location.state || {};
 
-  const HARD_CODED_COURSE_ID = "9dd20574-1552-4981-ab78-fbdc7a9e936a";
+  const HARD_CODED_COURSE_ID = "fb219566-17ad-48f9-b504-9bbaf2b87669";
   const finalCourseId = courseId || HARD_CODED_COURSE_ID;
 
   /* ---------- Redux ---------- */

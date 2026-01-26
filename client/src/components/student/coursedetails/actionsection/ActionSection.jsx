@@ -35,7 +35,7 @@ const ActionSection = ({ course }) => {
 
     try {
       setIsLoading(true);
-      console.log(course);
+
       const booking = await createBooking({
         courseId: course.courseId,
         instructorId: course.iid,

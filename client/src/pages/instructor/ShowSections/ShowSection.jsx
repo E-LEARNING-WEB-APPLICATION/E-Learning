@@ -1,135 +1,182 @@
-import { useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import "./ShowSections.css";
-import { useDispatch, useSelector } from "react-redux";
-import { addTopic } from "../../../services/Instructor/topic";
-import { add } from "../../../slices/topics/topicSlice";
+
+import { fetchSectionData } from "@/services/Instructor/sectionService";
+import { addTopicToSection } from "@/services/Instructor/topicService";
+import Loader from "@/components/shared/Loader";
 
 function ShowSection() {
-  const inputRefTopicNumber = useRef(null);
-  const inputRefTopicName = useRef(null);
-  const inputRefTopicDesc = useRef(null);
-  const inputRefTopicVideo = useRef(null);
-  const inputRefTopicHour = useRef(null);
-  const inputRefTopicMin = useRef(null);
+  const navigate = useNavigate();
+  const { state } = useLocation();
+  const { courseData } = state;
 
-  const topics = useSelector((state) => state.topics.value);
-  const sectionData = useSelector((store) => store.sections.value);
+  const [sections, setSections] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [creatingTopic, setCreatingTopic] = useState(false);
 
-  const dispatch = useDispatch();
-  const location = useLocation();
-  const Navigate = useNavigate();
-
-  const data = location.state;
-  const courseName = data.courseName;
-
-  // This holds the section user clicked "Add Topic"
+  // Modal
   const [selectedSection, setSelectedSection] = useState(null);
 
-  const [topicNumber, setTopicNumber] = useState(0);
-  const [topicName, setTopicName] = useState("");
-  const [topicDesc, setTopicDesc] = useState("");
-  const [video, setVideo] = useState(null);
-  const [hour, setHour] = useState(0);
-  const [min, setMin] = useState(0);
+  // Topic form (aligned with backend)
+  const [topicForm, setTopicForm] = useState({
+    topicName: "",
+    topicDesc: "",
+    notes: "",
+    video: null,
+    hour: "",
+    min: "",
+  });
 
-  function handleAddTopic(sectionNumber, sectionTitle) {
-    const formData = new FormData();
-    formData.append("courseName", data.courseName);
-    formData.append("sectionNumber", sectionNumber);
-    formData.append("sectionName", sectionTitle);
-    formData.append("topicNumber", topicNumber);
-    formData.append("topicName", topicName);
-    formData.append("topicDesc", topicDesc);
-    formData.append("hour", hour);
-    formData.append("min", min);
-    formData.append("video", video);
+  const loadSections = async () => {
+    setLoading(true);
+    const res = await fetchSectionData(courseData.courseId);
 
-    const response = addTopic(formData);
+    if (res.success) {
+      setSections(res.data);
+    } else {
+      toast.error(res.message || "Failed to load sections");
+    }
+    setLoading(false);
+  };
 
-    const topicData = {
-      courseName: response.get("courseName"),
-      sectionNumber: response.get("sectionNumber"),
-      sectionName: response.get("sectionName"),
-      topicNumber: response.get("topicNumber"),
-      topicName: response.get("topicName"),
-      topicDesc: response.get("topicDesc"),
-      hour: response.get("hour"),
-      min: response.get("min"),
-      video: URL.createObjectURL(response.get("video")),
-    };
+  /* =========================
+     FETCH SECTIONS
+     ========================= */
+  useEffect(() => {
+    loadSections();
+  }, [courseData.courseId]);
 
-    dispatch(add([...topics, topicData]));
+  /* =========================
+     FORM HANDLERS
+     ========================= */
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setTopicForm((prev) => ({ ...prev, [name]: value }));
+  };
 
-    inputRefTopicNumber.current.value = null;
-    inputRefTopicName.current.value = "";
-    inputRefTopicDesc.current.value = "";
-    inputRefTopicVideo.current.value = null;
-    inputRefTopicHour.current.value = null;
-    inputRefTopicMin.current.value = null;
-  }
+  const handleFileChange = (e) => {
+    setTopicForm((prev) => ({
+      ...prev,
+      video: e.target.files[0],
+    }));
+  };
 
-  function handleShowTopics(sectionNumber, sectionTitle) {
-    Navigate("show-topics", {
-      state: { sectionNumber, sectionTitle, courseName },
+  const resetTopicForm = () => {
+    setTopicForm({
+      topicName: "",
+      topicDesc: "",
+      notes: "",
+      video: null,
+      hour: "",
+      min: "",
     });
-  }
+  };
+
+  /* =========================
+     ADD TOPIC
+     ========================= */
+  const handleAddTopic = async () => {
+    if (!selectedSection) return;
+
+    if (!topicForm.topicName || !topicForm.video) {
+      toast.error("Topic name and video are required");
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("title", topicForm.topicName);
+    formData.append("description", topicForm.topicDesc);
+    formData.append("notes", topicForm.notes);
+    formData.append("hour", topicForm.hour);
+    formData.append("min", topicForm.min);
+    formData.append("video", topicForm.video);
+
+    /*
+      POST /sections/{sectionId}/topics
+    */
+    setCreatingTopic(true);
+    const res = await addTopicToSection(selectedSection.sectionId, formData);
+
+    if (res.success) {
+      toast.success("Topic added successfully");
+      resetTopicForm();
+    } else {
+      toast.error(res.message || "Failed to add topic");
+    }
+    setCreatingTopic(false);
+    loadSections();
+  };
+
+  /* =========================
+     NAVIGATION
+     ========================= */
+  const handleShowTopics = (section) => {
+    navigate("show-topics", {
+      state: {
+        sectionId: section.sectionId,
+      },
+    });
+  };
 
   return (
     <div>
       <h1 className="page-title">
-        Sections for the Course {sectionData.courseName}
+        Sections for the Course: {courseData.title}
       </h1>
 
+      {loading && <p>Loading sections...</p>}
+      {creatingTopic && <Loader text="creating topic..." />}
 
-  
-      {sectionData &&
-        sectionData.map((data, index) => (
-          data.courseName === courseName && (
-            <div className= 'most-outer-div' key={index}>
-              <div className="card">
-                <div className="card-header section-header">
-                  <h4>Section No - {data.sectionNumber}</h4>
-                </div>
+      {!loading && sections.length === 0 && (
+        <p>No sections found for this course.</p>
+      )}
 
-                <div className="card-body">
-                  <h3 className="card-title">{data.sectionTitle}</h3>
-                  <p className="card-text">{data.sectionDesc}</p>
-
-                  <button
-                    type="button"
-                    className="btn btn-primary sections-buttons"
-                    onClick={() =>
-                      handleShowTopics(data.sectionNumber, data.sectionTitle)
-                    }
-                  >
-                    Show Topics
-                  </button>
-
-                  
-                  <button
-                    type="button"
-                    className="btn btn-primary sections-buttons"
-                    data-bs-toggle="modal"
-                    data-bs-target="#addTopicModal"
-                    onClick={() => setSelectedSection(data)}
-                  >
-                    Add Topics
-                  </button>
-
-                  <button type="button" className="btn btn-secondary sections-buttons">
-                    Edit Section
-                  </button>
-
-                  <button type="button" className="btn btn-danger sections-buttons">
-                    Delete Section
-                  </button>
-                </div>
-              </div>
+      {sections.map((section) => (
+        <div className="most-outer-div" key={section.sectionId}>
+          <div className="card">
+            <div className="card-header section-header">
+              <h4>Section No - {section.sectionNumber}</h4>
             </div>
-          )
-        ))}
 
+            <div className="card-body">
+              <h3 className="card-title">{section.title}</h3>
+              <p className="card-text">{section.description}</p>
+              <p>Total Topics: {section.totalTopics}</p>
+              <p>Total Time: {section.totalTime}</p>
+
+              <button
+                className="btn btn-primary sections-buttons"
+                onClick={() => handleShowTopics(section)}
+              >
+                Show Topics
+              </button>
+
+              <button
+                className="btn btn-primary sections-buttons"
+                data-bs-toggle="modal"
+                data-bs-target="#addTopicModal"
+                onClick={() => setSelectedSection(section)}
+              >
+                Add Topic
+              </button>
+
+              <button className="btn btn-secondary sections-buttons">
+                Edit Section
+              </button>
+
+              <button className="btn btn-danger sections-buttons">
+                Delete Section
+              </button>
+            </div>
+          </div>
+        </div>
+      ))}
+
+      {/* =========================
+          ADD TOPIC MODAL
+         ========================= */}
       {selectedSection && (
         <div
           className="modal fade"
@@ -137,117 +184,92 @@ function ShowSection() {
           tabIndex="-1"
           aria-hidden="true"
         >
-          <div className="modal-dialog">
+          <div className="modal-dialog modal-lg">
             <div className="modal-content">
-
               <div className="modal-header">
                 <h2 className="modal-title">Add Topic</h2>
-                <button type="button" className="btn-close" data-bs-dismiss="modal"></button>
+                <button
+                  type="button"
+                  className="btn-close"
+                  data-bs-dismiss="modal"
+                />
               </div>
 
-              <div className="modal-body topic-modal-body">
-                <center>
-                  <h1>{selectedSection.courseName}</h1>
-                  <h3>
-                    Section {selectedSection.sectionNumber} -{" "}
-                    {selectedSection.sectionTitle}
-                  </h3>
-                </center>
+              <div className="modal-body">
+                <h5 className="mb-3">
+                  Section {selectedSection.sectionNumber} –{" "}
+                  {selectedSection.title}
+                </h5>
 
-                <div className="form-group mb-3">
-                  <label>Topic Number</label>
+                <input
+                  name="topicName"
+                  type="text"
+                  className="form-control mb-3"
+                  placeholder="Topic Title"
+                  value={topicForm.topicName}
+                  onChange={handleInputChange}
+                />
+
+                <textarea
+                  name="topicDesc"
+                  className="form-control mb-3"
+                  placeholder="Topic Description"
+                  rows={3}
+                  value={topicForm.topicDesc}
+                  onChange={handleInputChange}
+                />
+
+                <textarea
+                  name="notes"
+                  className="form-control mb-3"
+                  placeholder="Additional Notes (optional)"
+                  rows={3}
+                  value={topicForm.notes}
+                  onChange={handleInputChange}
+                />
+
+                <input
+                  type="file"
+                  className="form-control mb-3"
+                  accept="video/*"
+                  onChange={handleFileChange}
+                />
+
+                <div className="input-group mb-4">
                   <input
-                    ref={inputRefTopicNumber}
+                    name="hour"
                     type="number"
                     className="form-control"
-                    onChange={(e) => setTopicNumber(e.target.value)}
+                    placeholder="Hours"
+                    min="0"
+                    value={topicForm.hour}
+                    onChange={handleInputChange}
                   />
-                </div>
-
-                <div className="form-group mb-3">
-                  <label>Topic Name</label>
+                  <span className="input-group-text">:</span>
                   <input
-                    ref={inputRefTopicName}
-                    type="text"
+                    name="min"
+                    type="number"
                     className="form-control"
-                    onChange={(e) => setTopicName(e.target.value)}
+                    placeholder="Minutes"
+                    min="0"
+                    max="59"
+                    value={topicForm.min}
+                    onChange={handleInputChange}
                   />
-                </div>
-
-                <div className="form-group mb-3">
-                  <label>Topic Description</label>
-                  <textarea
-                    ref={inputRefTopicDesc}
-                    className="form-control"
-                    rows="3"
-                    onChange={(e) => setTopicDesc(e.target.value)}
-                  ></textarea>
-                </div>
-
-                <div className="form-group mb-3">
-                  <label>Choose Topic Video</label>
-                  <input
-                    ref={inputRefTopicVideo}
-                    type="file"
-                    className="form-control"
-                    accept="video/*"
-                    onChange={(e) => setVideo(e.target.files[0])}
-                  />
-                </div>
-
-                <div className="mb-3">
-                  <label>Video Duration (Hours & Minutes)</label>
-                  <div className="input-group">
-                    <input
-                      ref={inputRefTopicHour}
-                      type="number"
-                      className="form-control"
-                      placeholder="Hours"
-                      min="0"
-                      max="23"
-                      onChange={(e) => setHour(e.target.value)}
-                    />
-                    <span className="input-group-text">:</span>
-                    <input
-                      ref={inputRefTopicMin}
-                      type="number"
-                      className="form-control"
-                      placeholder="Minutes"
-                      min="0"
-                      max="59"
-                      onChange={(e) => setMin(e.target.value)}
-                    />
-                  </div>
                 </div>
 
                 <button
-                  type="submit"
-                  className="btn btn-primary m-3"
+                  className="btn btn-primary"
                   data-bs-dismiss="modal"
-                  onClick={() =>
-                    handleAddTopic(
-                      selectedSection.sectionNumber,
-                      selectedSection.sectionTitle
-                    )
-                  }
+                  onClick={handleAddTopic}
                 >
                   Submit
                 </button>
-
-                <button
-                  type="button"
-                  className="btn btn-danger"
-                  data-bs-dismiss="modal"
-                >
-                  Close
-                </button>
-
               </div>
             </div>
           </div>
         </div>
       )}
-
     </div>
   );
 }

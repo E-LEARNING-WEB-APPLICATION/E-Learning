@@ -10,7 +10,7 @@ const GuestNavbar = () => {
     >
       <div className="container-fluid">
         {/* Brand */}
-        <NavLink to="/guest/dashboard" className="student-brand">
+        <NavLink to="/guest" className="student-brand">
           <i className="bi bi-mortarboard-fill me-2"></i>
           <span className="brand-text">E-Learning</span>
         </NavLink>

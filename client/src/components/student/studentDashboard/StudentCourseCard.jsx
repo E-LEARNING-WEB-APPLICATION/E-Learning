@@ -3,27 +3,37 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
-const StudentCourseCard = ({ course }) => {
+const StudentCourseCard = ({ course, page }) => {
+  const pageType = typeof page === "string" ? page : page?.page;
   const navigate = useNavigate();
+  
   const handleView = async () => {
-    try {
-      const response = await getCourseStatusById(course.id);
-      console.log(response);
-      if (!response.success) {
-        navigate("/student/course-details", {
-          state: {
-            courseId: course.id,
-          },
-        });
-      } else {
-        navigate("/student/enrolled-course-details", {
-          state: {
-            courseId: course.id,
-          },
-        });
+    if (pageType === "guest") {
+      toast.warn("Please Login to explore course");
+      setTimeout(() => {
+        navigate("/guest/login");
+      }, 2000);
+    } else {
+      try {
+        console.log(1);
+        const response = await getCourseStatusById(course.id);
+        console.log(response);
+        if (!response.success) {
+          navigate("/student/course-details", {
+            state: {
+              courseId: course.id,
+            },
+          });
+        } else {
+          navigate("/student/enrolled-course-details", {
+            state: {
+              courseId: course.id,
+            },
+          });
+        }
+      } catch (error) {
+        toast.error(error.message);
       }
-    } catch (error) {
-      toast.error(error.message);
     }
   };
   return (

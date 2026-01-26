@@ -43,6 +43,7 @@ import { useEffect } from "react";
 import { getWishlistCount } from "./services/wishlist";
 import { setWishlistCount } from "./slices/wishlist/wishlistSlice";
 import NotificationPage from "./pages/admin/Notifications/NotificationPage";
+import GuestDashboard from "./pages/guest/dashboard/GuestDashboard";
 
 function App() {
   useNotificationSSE();
@@ -71,6 +72,14 @@ function App() {
           {/* Redirect root to /guest */}
           <Route path="/" element={<Navigate to="/guest" />} />
           <Route path="/guest" element={<GuestLayout />}>
+            <Route
+              path=""
+              element={<GuestDashboard />}
+            />
+            <Route
+              path="courses/category/:categoryId"
+              element={<CategoryCourses />}
+            />
             <Route
               path="instructor-registration"
               element={<InstructorRegistration />}

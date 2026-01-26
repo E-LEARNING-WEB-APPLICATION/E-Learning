@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import "./InstructorSection.css";
 import { FaLinkedin, FaTwitter, FaGithub } from "react-icons/fa";
-import { getInstructorById } from "@/api/api";
 import Loader from "@/components/shared/Loader";
+import { getInstructorById } from "@/services/admin/instructorService";
 
 const InstructorSection = ({ course }) => {
-  const id = course[0]?.iId;
+  const id = course.iid;
   const [instructor, setInstructor] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -13,7 +13,7 @@ const InstructorSection = ({ course }) => {
     const fetchInstructor = async () => {
       try {
         const data = await getInstructorById(id);
-        setInstructor(data[0]);
+        setInstructor(data.data);
       } catch (error) {
         console.error("Error fetching instructor:", error);
       } finally {
@@ -48,9 +48,9 @@ const InstructorSection = ({ course }) => {
         <div className="col-md-3 text-center">
           <div className="profile-frame mx-auto">
             <img
-              src={instructor.profile_pic}
+              src={instructor.profilePic}
               alt={`${instructor.fname} ${instructor.lname}`}
-              className="instructor-img img-fluid rounded-circle"
+              className="instructor-img"
             />
           </div>
         </div>
@@ -60,7 +60,9 @@ const InstructorSection = ({ course }) => {
           <h3 className="instructor-name mb-1">
             {instructor.fname} {instructor.lname}
           </h3>
-          <p className="instructor-title mb-3">{instructor.title}</p>
+          <p className="instructor-title mb-3">
+            Experience -- {instructor.experience} Years
+          </p>
 
           <p className="instructor-bio text-secondary mb-4">{instructor.bio}</p>
 

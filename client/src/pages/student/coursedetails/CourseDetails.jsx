@@ -12,6 +12,8 @@ import {
   removeCourseFromWishlist,
 } from "@/slices/wishlist/wishlistSlice";
 import { addToWishlist, removeFromWishlist } from "@/services/wishlist";
+import CourseContent from "@/components/student/coursedetails/coursecontent/CourseContent";
+import InstructorSection from "@/components/student/coursedetails/instructorsection/InstructorSection";
 
 const CourseDetails = () => {
   /* ---------- Routing ---------- */
@@ -110,11 +112,10 @@ const CourseDetails = () => {
         </div>
       </div>
 
-      {/*  Commented For Testing Purpose Only  */}
       {/* Course Section */}
-      {/* <CourseContent course={course} /> */}
+      <CourseContent course={course} />
       {/* Instructor Section */}
-      {/* <InstructorSection course={course} /> */}
+      <InstructorSection course={course} />
     </div>
   );
 };

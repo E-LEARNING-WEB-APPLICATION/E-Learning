@@ -1,17 +1,27 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import StudentCourseCard from "./StudentCourseCard";
 
 export function StudentDashboardCategoryCourse({
     categories = [],
     courses = [],
 }) {
-
-    const normalize = (str) => String(str).toLowerCase().replace(/\s+/g, "-");
-
-    // Only first 4 categories
+    // Take only first 4 categories
     const limitedCategories = categories.slice(0, 4);
 
-    const [activeTab, setActiveTab] = useState(limitedCategories[0].id);
+    // Active category tab
+    const [activeTab, setActiveTab] = useState(null);
+
+    // Set first category as active once categories arrive
+    useEffect(() => {
+        if (!activeTab && limitedCategories.length > 0) {
+            setActiveTab(limitedCategories[0].id);
+        }
+    }, [limitedCategories, activeTab]);
+
+    // Filter courses by selected category
+    const filteredCourses = activeTab
+        ? courses.filter((course) => course.categoryId === activeTab)
+        : [];
 
     return (
         <section className="py-5 bg-light">
@@ -24,7 +34,7 @@ export function StudentDashboardCategoryCourse({
                     </p>
                 </div>
 
-                {/* Tabs */}
+                {/* Category Tabs */}
                 <ul className="nav nav-tabs justify-content-center mb-4">
                     {limitedCategories.map((cat) => (
                         <li
@@ -41,29 +51,21 @@ export function StudentDashboardCategoryCourse({
                     ))}
                 </ul>
 
-                {/* Course Grid */}
+                {/* Courses Grid */}
                 <div className="row g-4">
-                    {courses
-                        .filter(
-                            (course) =>
-                                normalize(course.category) ===
-                                normalize(activeTab)
-                        )
-                        .slice(0, 4)
-                        .map((course) => (
-                            <StudentCourseCard course={course}/>
-                        ))}
+                    {filteredCourses.length > 0 ? (
+                        filteredCourses.slice(0, 4).map((course) => (
+                            <StudentCourseCard
+                                key={course.id}
+                                course={course}
+                            />
+                        ))
+                    ) : (
+                        <p className="text-center text-muted">
+                            No courses found.
+                        </p>
+                    )}
                 </div>
-
-                {/* No Courses */}
-                {courses.filter(
-                    (course) =>
-                        normalize(course.category) === normalize(activeTab)
-                ).length === 0 && (
-                    <p className="text-center text-muted mt-4">
-                        No courses found.
-                    </p>
-                )}
             </div>
         </section>
     );

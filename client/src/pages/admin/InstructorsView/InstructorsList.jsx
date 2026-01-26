@@ -4,16 +4,14 @@ import { LuTableOfContents } from "react-icons/lu";
 
 import InstructorTableView from "@/components/admin/instructors/InstructorTableView";
 import InstructorGridView from "@/components/admin/instructors/InstructorGridView";
-import { getInstructors } from "@/api/api";
-
-
+import { fetchAllInstructors } from "@/services/admin/instructorService";
 
 const InstructorsList = () => {
   const [instructors, setInstructors] = useState([]);
   const [view, setView] = useState("grid");
 
   const fetchInstructors = () => {
-    getInstructors().then((data) => setInstructors(data));
+    fetchAllInstructors().then((data) => setInstructors(data));
   };
 
   const handleViewToggle = (view) => {

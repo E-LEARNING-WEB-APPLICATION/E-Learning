@@ -105,9 +105,9 @@ function AddedCourses() {
                     Edit Course
                   </button>
 
-                  <button className="btn btn-success w-100" disabled>
+                  {/* <button className="btn btn-success w-100" disabled>
                     Publish Course
-                  </button>
+                  </button> */}
                 </div>
               </div>
             </div>

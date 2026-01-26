@@ -39,11 +39,11 @@ import ProfileView from "./pages/profileView/ProfileView";
 import CategoryCourses from "./pages/student/categorycourses/CategoryCourses";
 import AddAdminPage from "./pages/admin/RegisterAdmin/AddAdminPage";
 import { useNotificationSSE } from "./hooks/useNotificationSse";
-import NotificationPage from "./pages/admin/notifications/NotificationPage";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { getWishlistCount } from "./services/wishlist";
 import { setWishlistCount } from "./slices/wishlist/wishlistSlice";
+import NotificationPage from "./pages/admin/Notifications/NotificationPage";
 
 function App() {
   useNotificationSSE();

@@ -5,6 +5,11 @@ export async function addCourse(formData) {
     const response = await apiClient.post(
       `${API_BASE_PATH}/instructor/addCourse`,
       formData,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      },
     );
     const data = await response.data;
     return {

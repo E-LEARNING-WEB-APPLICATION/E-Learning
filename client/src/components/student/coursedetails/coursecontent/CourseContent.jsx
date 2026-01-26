@@ -5,7 +5,7 @@ import { FaChevronDown, FaChevronUp, FaBookOpen } from "react-icons/fa";
 const CourseContent = ({ course }) => {
   const [openSectionId, setOpenSectionId] = useState(null);
 
-  const sections = Array.isArray(course[0].sections) ? course[0].sections : [];
+  const sections = Array.isArray(course.sections) ? course.sections : [];
 
   const toggleSection = (sId) => {
     setOpenSectionId((prev) => (prev === sId ? null : sId));
@@ -13,7 +13,7 @@ const CourseContent = ({ course }) => {
 
   const totalTopics = sections.reduce(
     (acc, s) => acc + (Array.isArray(s.topics) ? s.topics.length : 0),
-    0
+    0,
   );
 
   return (
@@ -31,7 +31,7 @@ const CourseContent = ({ course }) => {
       {/* ===== Accordion ===== */}
       <div className="accordion" id="courseContentAccordion">
         {sections.map((section) => {
-          const isOpen = openSectionId === section.sId;
+          const isOpen = openSectionId === section.sid;
           const topics = Array.isArray(section.topics) ? section.topics : [];
 
           return (
@@ -39,17 +39,17 @@ const CourseContent = ({ course }) => {
               className={`card section-card mb-3 ${
                 isOpen ? "active-section" : ""
               }`}
-              key={section.sId}
+              key={section.sid}
             >
               {/* Section Header */}
               <div
                 className="card-header d-flex justify-content-between align-items-center"
-                onClick={() => toggleSection(section.sId)}
+                onClick={() => toggleSection(section.sid)}
                 style={{ cursor: "pointer" }}
               >
                 <div>
                   <h6 className="mb-1 fw-bold text-dark">
-                    {section.sId}. {section.section_name}
+                    {section.sectionName}
                   </h6>
                   <small className="text-muted">{topics.length} Topics</small>
                 </div>
@@ -72,12 +72,9 @@ const CourseContent = ({ course }) => {
                   {topics.map((topic) => (
                     <li
                       className="list-group-item d-flex align-items-center"
-                      key={topic.t_id}
+                      key={topic.tid}
                     >
-                      <span className="topic-id text-primary fw-semibold me-2">
-                        {topic.t_id}.
-                      </span>
-                      <span className="topic-title">{topic.topic_name}</span>
+                      <span className="topic-title">{topic.topicName}</span>
                     </li>
                   ))}
                 </ul>

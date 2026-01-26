@@ -1,10 +1,10 @@
-import { getCourseById } from "@/api/api";
 import Loader from "@/components/shared/Loader";
 import CourseHeader from "@/components/student/coursedetails/courseheader/CourseHeader";
 import CoursePreview from "@/components/student/coursedetails/coursepreview/CoursePreview";
 import InstructorSection from "@/components/student/coursedetails/instructorsection/InstructorSection";
 import CourseContentSidebar from "@/components/student/enrolledcoursedetails/coursecontentsidebar/CourseContentSidebar";
 import CourseTabs from "@/components/student/enrolledcoursedetails/coursetabs/CourseTabs";
+import { getCourseById } from "@/services/courseService";
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 
@@ -65,14 +65,14 @@ const CourseEnrolledPage = () => {
         <div className="col-md-8">
           <CourseHeader course={course} />
           <CoursePreview course={course} />
-          <CourseTabs course={course} />
-          <InstructorSection course={course} />
+          {/* <CourseTabs course={course} />
+          <InstructorSection course={course} /> */}
         </div>
 
         {/* Right: Course Content Section */}
-        <div className="col-md-4 mt-3">
+        {/* <div className="col-md-4 mt-3">
           <CourseContentSidebar course={course} />
-        </div>
+        </div> */}
       </div>
     </div>
   );

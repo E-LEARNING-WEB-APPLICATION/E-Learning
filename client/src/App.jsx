@@ -11,7 +11,6 @@ import AddedCourses from "./pages/instructor/AddedCourses/AddedCourses";
 import AddSection from "./pages/instructor/AddSection/AddSection";
 import ShowSection from "./pages/instructor/ShowSections/ShowSection";
 import ShowTopic from "./pages/instructor/ShowTopics/ShowTopic";
-import AddTopic from "./pages/instructor/AddTopics/AddTopic";
 import GuestLayout from "./components/guest/layout/GuestLayout";
 import InstructorRegistration from "./pages/guest/instructorRegister/InstructorRegistration";
 import StudentRegistration from "./pages/guest/studentRegister/StudentRegistration";
@@ -116,10 +115,6 @@ function App() {
             <Route
               path="addedCourses/show-sections"
               element={<ShowSection />}
-            />
-            <Route
-              path="addedCourses/show-sections/add-topic"
-              element={<AddTopic />}
             />
             <Route
               path="addedCourses/show-sections/show-topics"

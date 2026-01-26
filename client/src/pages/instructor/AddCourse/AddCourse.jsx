@@ -1,109 +1,129 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "./AddCourse.css";
-import { addCourse } from "../../../services/Instructor/courseService";
+import { addCourse } from "@/services/Instructor/courseService";
+import { fetchCategoriesNormalized } from "@/services/admin/categoryService";
 import { toast } from "react-toastify";
-import { useRef } from "react";
 import Loader from "@/components/shared/Loader";
 import { useNavigate } from "react-router-dom";
-import Form from "./../../../components/contactus/form/Form";
-import { fetchCategoriesNormalized } from "@/services/admin/categoryService";
 
 function AddCourse() {
-  const [category, setCategory] = useState([]);
-
-  const buttonRef = useRef(null);
-  const [courseName, setCourseName] = useState("");
-  const [courseDesc, setCourseDesc] = useState("");
-  const [fees, setFees] = useState(0);
-  const [discountPercentage, setDiscountPercentage] = useState(0);
-  const [image, setImage] = useState(null);
-  const [video, setVideo] = useState(null);
-  const [categoryId, setCategoryId] = useState("");
-  const [hour, setHour] = useState("");
-  const [load, setLoad] = useState(false);
   const navigate = useNavigate();
 
+  /* =========================
+     STATE
+     ========================= */
+  const [categories, setCategories] = useState([]);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const [form, setForm] = useState({
+    courseName: "",
+    courseDesc: "",
+    fees: "",
+    discountPercentage: "",
+    categoryId: "",
+    hour: "",
+    image: null,
+    video: null,
+  });
+
+  /* =========================
+     FETCH CATEGORIES
+     ========================= */
   useEffect(() => {
-    const fetch = async () => {
-      try {
-        const data = await fetchCategoriesNormalized();
-        console.log(data);
-        setCategory(data);
-      } catch (error) {
-        toast.error(error.message);
+    const loadCategories = async () => {
+      const res = await fetchCategoriesNormalized();
+      if (res.success) {
+        setCategories(res.data || []);
+      } else {
+        toast.error("Failed to load categories");
       }
     };
 
-    fetch();
+    loadCategories();
   }, []);
 
-  async function handleAddCourse(e) {
+  /* =========================
+     HANDLERS
+     ========================= */
+  const handleChange = (e) => {
+    const { name, value, files } = e.target;
+
+    setForm((prev) => ({
+      ...prev,
+      [name]: files ? files[0] : value,
+    }));
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    buttonRef.current.disabled = true;
-    setLoad(true);
+
+    setIsSubmitting(true);
+
     const formData = new FormData();
-    formData.append("courseName", courseName);
-    formData.append("courseDesc", courseDesc);
-    formData.append("fees", fees);
-    formData.append("categoryId", categoryId);
-    formData.append("discountPercentage", discountPercentage);
-    formData.append("hour", hour);
-    formData.append("image", image);
-    formData.append("video", video);
+    Object.entries(form).forEach(([key, value]) => {
+      formData.append(key, value);
+    });
 
-    const response = await addCourse(formData);
-    if (response.success) {
-      toast.success("Course Registered Successfully");
+    const res = await addCourse(formData);
+
+    if (res.success) {
+      toast.success("Course created successfully");
+      navigate("/instructor/AddedCourses");
     } else {
-      toast.error("Course Not Added");
+      toast.error(res.message || "Failed to add course");
     }
-    buttonRef.current.disabled = false;
-    setLoad(false);
-    navigate("/instructor/AddedCourses");
-  }
 
+    setIsSubmitting(false);
+  };
+
+  /* =========================
+     UI
+     ========================= */
   return (
     <div className="container">
       <div className="add-course-main">
-        <h1>Add Course</h1>
+        <h1 className="page-title">Add New Course</h1>
 
-        <form onSubmit={handleAddCourse}>
+        <form
+          onSubmit={handleSubmit}
+          className={isSubmitting ? "disabled" : ""}
+        >
+          {/* Course Name */}
           <div className="form-group mb-3">
-            <label htmlFor="courseName">Course Name</label>
+            <label>Course Name</label>
             <input
               type="text"
+              name="courseName"
               required
               className="form-control"
-              id="courseName"
-              onChange={(e) => {
-                setCourseName(e.target.value);
-              }}
+              onChange={handleChange}
             />
           </div>
+
+          {/* Description */}
           <div className="form-group mb-3">
-            <label htmlFor="courseDesc">Course Description</label>
+            <label>Description</label>
             <textarea
+              name="courseDesc"
               required
               className="form-control"
-              id="courseDesc"
               rows="3"
-              onChange={(e) => {
-                setCourseDesc(e.target.value);
-              }}
-            ></textarea>
+              onChange={handleChange}
+            />
           </div>
+
+          {/* Category */}
           <div className="form-group mb-3">
-            <label htmlFor="category">Category</label>
+            <label>Category</label>
             <select
-              id="category"
-              className="form-control"
+              name="categoryId"
               required
-              value={categoryId}
-              onChange={(e) => setCategoryId(e.target.value)}
+              className="form-control"
+              value={form.categoryId}
+              onChange={handleChange}
             >
               <option value="">-- Select Category --</option>
-
-              {category.map((cat) => (
+              {categories.map((cat) => (
                 <option key={cat.id} value={cat.id}>
                   {cat.title}
                 </option>
@@ -111,93 +131,80 @@ function AddCourse() {
             </select>
           </div>
 
-          <div className="form-group mb-3">
-            <label htmlFor="fees">Fees</label>
-            <input
-              required
-              type="number"
-              step="1"
-              className="form-control"
-              id="fees"
-              onChange={(e) => {
-                setFees(e.target.value);
-              }}
-            />
-          </div>
-
-          <div className="form-group mb-3">
-            <label htmlFor="discount">Discount %</label>
-            <input
-              required
-              type="number"
-              className="form-control"
-              id="discount"
-              onChange={(e) => {
-                setDiscountPercentage(e.target.value);
-              }}
-            />
-          </div>
-
-          <div className=" form-group mb-3">
-            <label htmlFor="formFile" className="form-label">
-              Upload Image
-            </label>
-            <input
-              required
-              className="form-control"
-              type="file"
-              id="formFile"
-              accept="image/*"
-              onChange={(e) => {
-                setImage(e.target.files[0]);
-              }}
-            />
-          </div>
-
-          <div className="form-group mb-3">
-            <label htmlFor="introVideo" className="form-label">
-              Choose Intro Video
-            </label>
-            <input
-              type="file"
-              className="form-control"
-              id="introVideo"
-              accept="video/*"
-              required
-              onChange={(e) => {
-                setVideo(e.target.files[0]);
-              }}
-            />
-          </div>
-
-          <div className="mb-3">
-            <label className="form-label">
-              Course Duration (Hours &amp; Minutes)
-            </label>
-            <div className="input-group">
+          {/* Fees & Discount */}
+          <div className="row">
+            <div className="col-md-6 mb-3">
+              <label>Fees</label>
               <input
-                required
                 type="number"
+                name="fees"
+                required
                 className="form-control"
-                placeholder="Hours"
-                min={0}
-                max={23}
-                name="hours"
-                onChange={(e) => {
-                  setHour(e.target.value);
-                }}
+                onChange={handleChange}
+              />
+            </div>
+
+            <div className="col-md-6 mb-3">
+              <label>Discount %</label>
+              <input
+                type="number"
+                name="discountPercentage"
+                required
+                className="form-control"
+                onChange={handleChange}
               />
             </div>
           </div>
 
-          {load && <Loader text="Adding Course" />}
+          {/* Image */}
+          <div className="mb-3">
+            <label>Course Thumbnail</label>
+            <input
+              type="file"
+              name="image"
+              accept="image/*"
+              required
+              className="form-control"
+              onChange={handleChange}
+            />
+          </div>
 
+          {/* Video */}
+          <div className="mb-3">
+            <label>Intro Video</label>
+            <input
+              type="file"
+              name="video"
+              accept="video/*"
+              required
+              className="form-control"
+              onChange={handleChange}
+            />
+          </div>
+
+          {/* Duration */}
+          <div className="mb-4">
+            <label>Course Duration (Hours)</label>
+            <input
+              type="number"
+              name="hour"
+              min={0}
+              required
+              className="form-control"
+              onChange={handleChange}
+            />
+          </div>
+
+          {/* Loader */}
+          {isSubmitting && <Loader text="Creating course..." />}
+
+          {/* Submit */}
           <button
-            ref={buttonRef}
             type="submit"
-            className="btn btn-primary mb-3"
+            className="btn btn-primary w-100"
+            disabled={isSubmitting}
           >
-            Submit
+            {isSubmitting ? "Submitting..." : "Create Course"}
           </button>
         </form>
       </div>
@@ -206,15 +213,3 @@ function AddCourse() {
 }
 
 export default AddCourse;
-
-// courseId           INT PRIMARY KEY AUTO_INCREMENT
-// c_id               INT REFERENCES category(cId)
-// iId                INT REFERENCES instructor_details(iId)
-// course_name        VARCHAR(100)
-// course_desc        TEXT
-// fees               DECIMAL(10,2)
-// discount_percentage DECIMAL(5,2)
-// course_thumbnail   VARCHAR(255)
-// course_intro_video VARCHAR(255)
-// course_duration    VARCHAR(50)
-// created_at         DATETIME DEFAULT CURRENT_TIMESTAMP

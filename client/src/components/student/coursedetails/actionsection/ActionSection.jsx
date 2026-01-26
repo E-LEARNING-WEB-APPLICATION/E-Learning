@@ -41,15 +41,32 @@ const ActionSection = ({ course }) => {
         instructorId: course.iid,
       });
 
-      setBookingContext(booking);
+      setBookingContext(booking.data);
+
+      if (!booking.success) {
+        toast.warn(
+          <div className="toast-card">
+            <div className="toast-icon warn">🎓</div>
+            <div>
+              <h6 className="toast-title">Already Enrolled</h6>
+              <p className="toast-text">
+                You already have access to this course.
+              </p>
+            </div>
+          </div>,
+        );
+
+        setIsEnrolled(true);
+        return;
+      }
 
       console.log("Booking created successfully:", booking);
 
       const options = {
         key: "rzp_test_S7JIma01VWtilE",
-        amount: booking.amount, // paise
-        currency: booking.currency,
-        order_id: booking.razorpayOrderId,
+        amount: booking.data.amount, // paise
+        currency: booking.data.currency,
+        order_id: booking.data.razorpayOrderId,
 
         name: "LearnEase",
         description: "Course Enrollment",
@@ -58,19 +75,40 @@ const ActionSection = ({ course }) => {
           try {
             setIsVerifying(true);
 
+            console.log(response);
+
             await verifyPayment({
-              bookingId: booking.bookingId,
+              bookingId: booking.data.bookingId,
               razorpayOrderId: response.razorpay_order_id,
               razorpayPaymentId: response.razorpay_payment_id,
               razorpaySignature: response.razorpay_signature,
             });
 
-            toast.success("Payment verified successfully 🎉");
+            toast.success(
+              <div className="toast-card">
+                <div className="toast-icon success">🎉</div>
+                <div>
+                  <h6 className="toast-title">Enrollment Successful</h6>
+                  <p className="toast-text">
+                    You now have lifetime access to this course.
+                  </p>
+                </div>
+              </div>,
+            );
+
             setIsEnrolled(true);
-          } catch (error) {
+          } catch {
             toast.error(
-              error?.response?.data?.message ||
-                "Payment verification failed. Please contact support.",
+              <div className="toast-card">
+                <div className="toast-icon error">❌</div>
+                <div>
+                  <h6 className="toast-title">Payment Failed</h6>
+                  <p className="toast-text">
+                    Verification failed. If money was deducted, please contact
+                    support.
+                  </p>
+                </div>
+              </div>,
             );
           } finally {
             setIsVerifying(false);
@@ -80,7 +118,17 @@ const ActionSection = ({ course }) => {
         modal: {
           ondismiss: function () {
             console.log("Payment popup closed by user");
-            toast.info("Payment cancelled. You can retry anytime.");
+            toast.info(
+              <div className="toast-card">
+                <div className="toast-icon info">⏳</div>
+                <div>
+                  <h6 className="toast-title">Payment Incomplete</h6>
+                  <p className="toast-text">
+                    Payment was not completed. You can retry anytime.
+                  </p>
+                </div>
+              </div>,
+            );
           },
         },
 
@@ -91,9 +139,18 @@ const ActionSection = ({ course }) => {
 
       const razorpay = new window.Razorpay(options);
       razorpay.open();
-    } catch (error) {
+    } catch {
       toast.error(
-        error?.response?.data?.message || "Failed to initiate payment",
+        <div className="toast-card">
+          <div className="toast-icon error">❌</div>
+          <div>
+            <h6 className="toast-title">Payment Failed</h6>
+            <p className="toast-text">
+              Verification failed. If money was deducted, please contact
+              support.
+            </p>
+          </div>
+        </div>,
       );
     } finally {
       setIsLoading(false);

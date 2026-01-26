@@ -92,18 +92,16 @@ const Dashboard = () => {
   const [course, setCourse] = useState([]);
   useEffect(() => {
     const fetchCategory = async () => {
-      try {
-        const data = await fetchCategoriesNormalized();
-        console.log(data);
-        setCategory(data);
-      } catch (error) {
-        toast.error(error.message);
+      const res = await fetchCategoriesNormalized();
+      if (res.success) {
+        setCategory(res.data);
+      } else {
+        toast.error(res.message);
       }
     };
     const fetchCourses = async () => {
       try {
         const data = await getAllDashboardCourses();
-        console.log(data);
         setCourse(data);
       } catch (error) {
         toast.error(error.message);

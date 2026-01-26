@@ -1,106 +1,109 @@
-import React, { useState } from 'react'
-import './AddSections.css'
-import { useLocation, useNavigate } from 'react-router-dom'
-import { addTheSection } from './../../../services/Instructor/section'
-import { useDispatch, useSelector } from 'react-redux'
-import { add } from './../../../slices/section/sectionSlice'
+import { useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import "./AddSections.css";
 
-
-
+import { createSection } from "@/services/Instructor/sectionService";
 
 function AddSection() {
+  const navigate = useNavigate();
+  const { state } = useLocation();
+  const { courseData } = state;
 
+  const [form, setForm] = useState({
+    title: "",
+    description: "",
+  });
 
-    const sections = useSelector((store)=>
-    {
-        return store.sections.value
-    })
+  const [loading, setLoading] = useState(false);
 
-    const dispatch = useDispatch()
-   // console.log("Sections in Add Section - ",sections)
-    const navigate = useNavigate()
-    const location = useLocation()
-    const { courseName } = location.state
-    const [sectionNumber,setSectionNumber] = useState(0);
-    const [sectionTitle , setSectionTitle] = useState("")
-    const [sectionDesc,setSectionDesc] = useState("")
+  /* =========================
+     FORM HANDLERS
+     ========================= */
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setForm((prev) => ({ ...prev, [name]: value }));
+  };
 
-   
-
-    function onSectionAdd()
-    {
-        const data = 
-        {
-            courseName,
-            sectionNumber,
-            sectionTitle,
-            sectionDesc
-        }
-       const sectionData =  addTheSection(data)
-       if(sectionData != null)
-       {   
-          const newData = [...sections,sectionData]
-        //  console.log("New data in add section ",newData)
-          dispatch(add(newData))
-        window.alert("Section Added Successfully")
-        navigate(-1)
-       }
-       else
-       {
-        window.alert("Error while adding Section")
-       }
-        
+  /* =========================
+     CREATE SECTION
+     ========================= */
+  const handleAddSection = async () => {
+    if (!form.title.trim()) {
+      toast.error("Section title is required");
+      return;
     }
 
+    setLoading(true);
 
-    return (
-        <div className="add-section-container">
+    const res = await createSection(courseData.courseId, {
+      title: form.title,
+      description: form.description,
+    });
 
-            <h1 className="section-heading">
-                Add Section for {courseName} Course
-            </h1>
+    setLoading(false);
 
+    if (res.success) {
+      toast.success("Section created successfully");
 
-            <div className="form-group">
-                <label htmlFor="sectionNumber">Enter Section Number</label>
-                <input type="number" className="form-control" id="sectionNumber" 
-                onChange={(e) =>
-                {
-                    setSectionNumber(e.target.value)
-                }} 
+      // Navigate back to sections page
+      navigate(-1);
+    } else {
+      toast.error(res.message || "Failed to create section");
+    }
+  };
 
-                />
-            </div>
-            <div className="form-group">
-                <label htmlFor="sectionTitle">Enter Section Title</label>
-                <input type="text" className="form-control" id="sectionTitle" 
-                onChange={(e) =>
-                {
-                    setSectionTitle(e.target.value)
-                    
-                }} 
+  return (
+    <div className="add-section-page">
+      <div className="add-section-card">
+        <h2 className="card-title">
+          Add Section to <span>{courseData.title}</span>
+        </h2>
 
-                />
-            </div>
-           
-            
-            <div className="form-group">
-                <label htmlFor="sectionDesc">Enter Section Description</label>
-                <textarea className="form-control text-area" id="sectionDesc" rows={3} defaultValue={""}
-                onChange={(e) =>
-                {
-                    setSectionDesc(e.target.value)
-                    
-                }} 
-                 />
-            </div>
-            <div>
-                <button type="button" className="btn btn-primary" onClick={onSectionAdd}>Add Section</button>
-
-            </div>
+        <div className="form-group mb-3">
+          <label className="form-label">Section Title</label>
+          <input
+            name="title"
+            type="text"
+            className="form-control"
+            placeholder="e.g. Introduction to Spring Boot"
+            value={form.title}
+            onChange={handleChange}
+          />
         </div>
 
-    )
+        <div className="form-group mb-4">
+          <label className="form-label">Section Description</label>
+          <textarea
+            name="description"
+            className="form-control"
+            rows={4}
+            placeholder="Brief overview of what this section covers"
+            value={form.description}
+            onChange={handleChange}
+          />
+        </div>
+
+        <div className="d-flex gap-2">
+          <button
+            className="btn btn-primary"
+            onClick={handleAddSection}
+            disabled={loading}
+          >
+            {loading ? "Creating..." : "Add Section"}
+          </button>
+
+          <button
+            className="btn btn-outline-secondary"
+            onClick={() => navigate(-1)}
+            disabled={loading}
+          >
+            Cancel
+          </button>
+        </div>
+      </div>
+    </div>
+  );
 }
 
-export default AddSection
+export default AddSection;

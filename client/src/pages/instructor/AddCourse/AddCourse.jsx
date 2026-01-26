@@ -1,224 +1,215 @@
-import React, {  useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "./AddCourse.css";
-import { addCourse } from "../../../services/Instructor/addCourse";
+import { addCourse } from "@/services/Instructor/courseService";
+import { fetchCategoriesNormalized } from "@/services/admin/categoryService";
 import { toast } from "react-toastify";
-import { useRef } from "react";
 import Loader from "@/components/shared/Loader";
 import { useNavigate } from "react-router-dom";
-import Form from "./../../../components/contactus/form/Form";
-import { fetchCategoriesNormalized } from "@/services/admin/categoryService";
 
 function AddCourse() {
-    const [category, setCategory] = useState([]);
+  const navigate = useNavigate();
 
-    const buttonRef = useRef(null);
-    const [courseName, setCourseName] = useState("");
-    const [courseDesc, setCourseDesc] = useState("");
-    const [fees, setFees] = useState(0);
-    const [discountPercentage, setDiscountPercentage] = useState(0);
-    const [image, setImage] = useState(null);
-    const [video, setVideo] = useState(null);
-    const [categoryId, setCategoryId] = useState("");
-    const [hour, setHour] = useState("");
-    const [load, setLoad] = useState(false);
-    const navigate = useNavigate();
+  /* =========================
+     STATE
+     ========================= */
+  const [categories, setCategories] = useState([]);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-    useEffect(() => {
-        const fetch = async () => {
-            try {
-                const data = await fetchCategoriesNormalized();
-                console.log(data);
-                setCategory(data);
-            } catch (error) {
-                toast.error(error.message);
-            }
-        };
+  const [form, setForm] = useState({
+    courseName: "",
+    courseDesc: "",
+    fees: "",
+    discountPercentage: "",
+    categoryId: "",
+    hour: "",
+    image: null,
+    video: null,
+  });
 
-        fetch();
-    }, []);
+  /* =========================
+     FETCH CATEGORIES
+     ========================= */
+  useEffect(() => {
+    const loadCategories = async () => {
+      const res = await fetchCategoriesNormalized();
+      if (res.success) {
+        setCategories(res.data || []);
+      } else {
+        toast.error("Failed to load categories");
+      }
+    };
 
-    async function handleAddCourse(e) {
-        e.preventDefault();
-        buttonRef.current.disabled = true;
-        setLoad(true);
-        const formData = new FormData();
-        formData.append("courseName", courseName);
-        formData.append("courseDesc", courseDesc);
-        formData.append("fees", fees);
-        formData.append("categoryId", categoryId);
-        formData.append("discountPercentage", discountPercentage);
-        formData.append("hour", hour);
-        formData.append("image", image);
-        formData.append("video", video);
+    loadCategories();
+  }, []);
 
-        const response = await addCourse(formData);
-        console.log(response);
-        if (response.data.success) {
-            toast.success("Course Registered Successfully");
-        } else {
-            toast.error("Course Not Added");
-        }
-        buttonRef.current.disabled = false;
-        setLoad(false);
-        navigate("/instructor/AddedCourses");
+  /* =========================
+     HANDLERS
+     ========================= */
+  const handleChange = (e) => {
+    const { name, value, files } = e.target;
+
+    setForm((prev) => ({
+      ...prev,
+      [name]: files ? files[0] : value,
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    setIsSubmitting(true);
+
+    const formData = new FormData();
+    Object.entries(form).forEach(([key, value]) => {
+      formData.append(key, value);
+    });
+
+    const res = await addCourse(formData);
+
+    if (res.success) {
+      toast.success("Course created successfully");
+      navigate("/instructor/AddedCourses");
+    } else {
+      toast.error(res.message || "Failed to add course");
     }
 
-    return (
-        <div className="container">
-            <div className="add-course-main">
-                <h1>Add Course</h1>
+    setIsSubmitting(false);
+  };
 
-                <form onSubmit={handleAddCourse}>
-                    <div className="form-group mb-3">
-                        <label htmlFor="courseName">Course Name</label>
-                        <input
-                            type="text"
-                            required
-                            className="form-control"
-                            id="courseName"
-                            onChange={(e) => {
-                                setCourseName(e.target.value);
-                            }}
-                        />
-                    </div>
-                    <div className="form-group mb-3">
-                        <label htmlFor="courseDesc">Course Description</label>
-                        <textarea
-                            required
-                            className="form-control"
-                            id="courseDesc"
-                            rows="3"
-                            onChange={(e) => {
-                                setCourseDesc(e.target.value);
-                            }}></textarea>
-                    </div>
-                    <div className="form-group mb-3">
-                        <label htmlFor="category">Category</label>
-                        <select
-                            id="category"
-                            className="form-control"
-                            required
-                            value={categoryId}
-                            onChange={(e) => setCategoryId(e.target.value)}>
-                            <option value="">-- Select Category --</option>
+  /* =========================
+     UI
+     ========================= */
+  return (
+    <div className="container">
+      <div className="add-course-main">
+        <h1 className="page-title">Add New Course</h1>
 
-                            {category.map((cat) => (
-                                <option
-                                    key={cat.id}
-                                    value={cat.id}>
-                                    {cat.title}
-                                </option>
-                            ))}
-                        </select>
-                    </div>
+        <form
+          onSubmit={handleSubmit}
+          className={isSubmitting ? "disabled" : ""}
+        >
+          {/* Course Name */}
+          <div className="form-group mb-3">
+            <label>Course Name</label>
+            <input
+              type="text"
+              name="courseName"
+              required
+              className="form-control"
+              onChange={handleChange}
+            />
+          </div>
 
-                    <div className="form-group mb-3">
-                        <label htmlFor="fees">Fees</label>
-                        <input
-                            required
-                            type="number"
-                            step="1"
-                            className="form-control"
-                            id="fees"
-                            onChange={(e) => {
-                                setFees(e.target.value);
-                            }}
-                        />
-                    </div>
+          {/* Description */}
+          <div className="form-group mb-3">
+            <label>Description</label>
+            <textarea
+              name="courseDesc"
+              required
+              className="form-control"
+              rows="3"
+              onChange={handleChange}
+            />
+          </div>
 
-                    <div className="form-group mb-3">
-                        <label htmlFor="discount">Discount %</label>
-                        <input
-                            required
-                            type="number"
-                            className="form-control"
-                            id="discount"
-                            onChange={(e) => {
-                                setDiscountPercentage(e.target.value);
-                            }}
-                        />
-                    </div>
+          {/* Category */}
+          <div className="form-group mb-3">
+            <label>Category</label>
+            <select
+              name="categoryId"
+              required
+              className="form-control"
+              value={form.categoryId}
+              onChange={handleChange}
+            >
+              <option value="">-- Select Category --</option>
+              {categories.map((cat) => (
+                <option key={cat.id} value={cat.id}>
+                  {cat.title}
+                </option>
+              ))}
+            </select>
+          </div>
 
-                    <div className=" form-group mb-3">
-                        <label
-                            htmlFor="formFile"
-                            className="form-label">
-                            Upload Image
-                        </label>
-                        <input
-                            required
-                            className="form-control"
-                            type="file"
-                            id="formFile"
-                            accept="image/*"
-                            onChange={(e) => {
-                                setImage(e.target.files[0]);
-                            }}
-                        />
-                    </div>
-
-                    <div className="form-group mb-3">
-                        <label
-                            htmlFor="introVideo"
-                            className="form-label">
-                            Choose Intro Video
-                        </label>
-                        <input
-                            type="file"
-                            className="form-control"
-                            id="introVideo"
-                            accept="video/*"
-                            required
-                            onChange={(e) => {
-                                setVideo(e.target.files[0]);
-                            }}
-                        />
-                    </div>
-
-                    <div className="mb-3">
-                        <label className="form-label">
-                            Course Duration (Hours &amp; Minutes)
-                        </label>
-                        <div className="input-group">
-                            <input
-                                required
-                                type="number"
-                                className="form-control"
-                                placeholder="Hours"
-                                min={0}
-                                max={23}
-                                name="hours"
-                                onChange={(e) => {
-                                    setHour(e.target.value);
-                                }}
-                            />
-                        </div>
-                    </div>
-
-                    {load && <Loader text="Adding Course" />}
-
-                    <button
-                        ref={buttonRef}
-                        type="submit"
-                        className="btn btn-primary mb-3">
-                        Submit
-                    </button>
-                </form>
+          {/* Fees & Discount */}
+          <div className="row">
+            <div className="col-md-6 mb-3">
+              <label>Fees</label>
+              <input
+                type="number"
+                name="fees"
+                required
+                className="form-control"
+                onChange={handleChange}
+              />
             </div>
-        </div>
-    );
+
+            <div className="col-md-6 mb-3">
+              <label>Discount %</label>
+              <input
+                type="number"
+                name="discountPercentage"
+                required
+                className="form-control"
+                onChange={handleChange}
+              />
+            </div>
+          </div>
+
+          {/* Image */}
+          <div className="mb-3">
+            <label>Course Thumbnail</label>
+            <input
+              type="file"
+              name="image"
+              accept="image/*"
+              required
+              className="form-control"
+              onChange={handleChange}
+            />
+          </div>
+
+          {/* Video */}
+          <div className="mb-3">
+            <label>Intro Video</label>
+            <input
+              type="file"
+              name="video"
+              accept="video/*"
+              required
+              className="form-control"
+              onChange={handleChange}
+            />
+          </div>
+
+          {/* Duration */}
+          <div className="mb-4">
+            <label>Course Duration (Hours)</label>
+            <input
+              type="number"
+              name="hour"
+              min={0}
+              required
+              className="form-control"
+              onChange={handleChange}
+            />
+          </div>
+
+          {/* Loader */}
+          {isSubmitting && <Loader text="Creating course..." />}
+
+          {/* Submit */}
+          <button
+            type="submit"
+            className="btn btn-primary w-100"
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? "Submitting..." : "Create Course"}
+          </button>
+        </form>
+      </div>
+    </div>
+  );
 }
 
 export default AddCourse;
-
-// courseId           INT PRIMARY KEY AUTO_INCREMENT
-// c_id               INT REFERENCES category(cId)
-// iId                INT REFERENCES instructor_details(iId)
-// course_name        VARCHAR(100)
-// course_desc        TEXT
-// fees               DECIMAL(10,2)
-// discount_percentage DECIMAL(5,2)
-// course_thumbnail   VARCHAR(255)
-// course_intro_video VARCHAR(255)
-// course_duration    VARCHAR(50)
-// created_at         DATETIME DEFAULT CURRENT_TIMESTAMP

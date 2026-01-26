@@ -1,56 +1,60 @@
 .add-course-main {
-    width: 100%;
-    max-width: 600px;        
-    margin: 40px auto;
-    background: #ffffff;
-    padding: 25px;
-    border-radius: 10px;      
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1); 
+  width: 100%;
+  max-width: 600px;
+  margin: 40px auto;
+  background: #ffffff;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .add-course-main h1 {
-    text-align: center;
-    margin-bottom: 25px;
-    font-size: 35px;
-    font-weight: 600;
-    color: rgba(0, 0, 0, 0.685);
+  text-align: center;
+  margin-bottom: 25px;
+  font-size: 35px;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.685);
 }
 
 .add-course-main label {
-    font-weight: 500;
-    color: #035170;
-    margin-bottom: 5px;
+  font-weight: 500;
+  color: #035170;
+  margin-bottom: 5px;
 }
 
 .add-course-main input,
 .add-course-main textarea {
-    border-radius: 6px;
-    padding: 10px;
-    font-size: 15px;
-    transition:0.5s;
-    
+  border-radius: 6px;
+  padding: 10px;
+  font-size: 15px;
+  transition: 0.5s;
 }
-
 
 .add-course-main input:focus,
 .add-course-main textarea:focus {
-    outline: none;
-    border-color: #0d6efd;
-    box-shadow: 0 0 4px rgba(13,110,253,0.3);
+  outline: none;
+  border-color: #0d6efd;
+  box-shadow: 0 0 4px rgba(13, 110, 253, 0.3);
 }
 
 .input-group input {
-    text-align: center;
+  text-align: center;
 }
 
 .add-course-main .btn-primary {
-    width: 100%;
-    padding: 12px;
-    font-size: 16px;
-    border-radius: 6px;
-    margin-top: 10px;
-    
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 6px;
+  margin-top: 10px;
 }
 
+form.disabled {
+  pointer-events: none;
+  opacity: 0.6;
+}
 
-
+.page-title {
+  margin-bottom: 24px;
+  font-weight: 600;
+}

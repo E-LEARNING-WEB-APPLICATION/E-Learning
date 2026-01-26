@@ -1,4 +1,4 @@
-  import apiClient, { API_BASE_PATH } from "@/utils/apiClient";
+import apiClient, { API_BASE_PATH } from "@/utils/apiClient";
 
 export const createCategory = async (categoryForm) => {
   const formData = new FormData();
@@ -62,6 +62,20 @@ export const fetchCategories = async (params = {}) => {
 };
 
 export const fetchCategoriesNormalized = async (params = {}) => {
-  const data = await fetchCategories(params);
-  return Array.isArray(data) ? data : [data];
+  try {
+    const res = await fetchCategories(params);
+    return {
+      success: true,
+      data: Array.isArray(res) ? res : [res],
+    };
+  } catch (error) {
+    if (error.response?.data) {
+      return error.response.data;
+    }
+
+    return {
+      success: false,
+      message: "Server error. Please try again.",
+    };
+  }
 };

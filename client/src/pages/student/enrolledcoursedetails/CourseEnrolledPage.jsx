@@ -16,6 +16,14 @@ const CourseEnrolledPage = () => {
   const [course, setCourse] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  const [activeVideoUrl, setActiveVideoUrl] = useState(null);
+  const [activeTopicId, setActiveTopicId] = useState(null);
+
+  const handleTopicPlay = (topic) => {
+    setActiveTopicId(topic.tid);
+    setActiveVideoUrl(topic.topicVideo);
+  };
+
   useEffect(() => {
     const fetchCourse = async () => {
       if (!courseId) return;
@@ -64,15 +72,19 @@ const CourseEnrolledPage = () => {
         {/* Left: Course Preview and Details */}
         <div className="col-md-8">
           <CourseHeader course={course} />
-          <CoursePreview course={course} />
-          {/* <CourseTabs course={course} />
-          <InstructorSection course={course} /> */}
+          <CoursePreview course={course} activeVideoUrl={activeVideoUrl} />
+          <CourseTabs course={course} />
+          <InstructorSection course={course} />
         </div>
 
         {/* Right: Course Content Section */}
-        {/* <div className="col-md-4 mt-3">
-          <CourseContentSidebar course={course} />
-        </div> */}
+        <div className="col-md-4 mt-3">
+          <CourseContentSidebar
+            course={course}
+            activeTopic={activeTopicId}
+            onTopicPlay={handleTopicPlay}
+          />
+        </div>
       </div>
     </div>
   );

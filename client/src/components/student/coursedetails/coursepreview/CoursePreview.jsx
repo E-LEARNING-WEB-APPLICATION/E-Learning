@@ -1,7 +1,7 @@
 import React from "react";
 import "./CoursePreview.css";
 
-const CoursePreview = ({ course }) => {
+const CoursePreview = ({ course, activeVideoUrl }) => {
   if (!course) return null;
 
   return (
@@ -9,13 +9,18 @@ const CoursePreview = ({ course }) => {
       {/* ==== Video Section ==== */}
       <div className="video-wrapper border rounded-4 overflow-hidden shadow-sm">
         <video
+          key={activeVideoUrl || course.courseIntroVideo} // 🔥 forces reload
           className="course-video"
           controls
-          controlsList="nodownload" //  hides the download button
-          preload="metadata" // loads only metadata initially
-          poster={course.courseThumbnail} // optional thumbnail
+          autoPlay
+          controlsList="nodownload"
+          preload="metadata"
+          poster={course.courseThumbnail}
         >
-          <source src={course.courseIntroVideo} type="video/mp4" />
+          <source
+            src={activeVideoUrl || course.courseIntroVideo}
+            type="video/mp4"
+          />
           Your browser does not support the video tag.
         </video>
       </div>

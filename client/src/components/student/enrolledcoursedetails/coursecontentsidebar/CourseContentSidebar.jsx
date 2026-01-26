@@ -2,8 +2,7 @@ import React, { useState } from "react";
 import { FaPlay, FaCheck } from "react-icons/fa";
 import "./CourseContentSidebar.css";
 
-const CourseContentSidebar = ({ course }) => {
-  const [activeTopic, setActiveTopic] = useState(null);
+const CourseContentSidebar = ({ course, activeTopic, onTopicPlay }) => {
   const [activeSection, setActiveSection] = useState(null);
   console.log(course);
   return (
@@ -14,21 +13,21 @@ const CourseContentSidebar = ({ course }) => {
       <h6 className="sidebar-title">Course Content</h6>
 
       <div className="accordion" id="courseAccordion">
-        {course[0].sections.map((sec, index) => (
-          <div className="accordion-item custom-accordion-item" key={sec.sId}>
+        {course.sections.map((sec, index) => (
+          <div className="accordion-item custom-accordion-item" key={sec.sid}>
             <h2
               className={`accordion-header ${
-                activeSection === sec.sId ? "section-active" : ""
+                activeSection === sec.sid ? "section-active" : ""
               }`}
             >
               <button
                 className={`accordion-button custom-accordion-btn collapsed`}
                 data-bs-toggle="collapse"
-                data-bs-target={`#sec${sec.sId}`}
-                onClick={() => setActiveSection(sec.sId)}
+                data-bs-target={`#sec${sec.sid}`}
+                onClick={() => setActiveSection(sec.sid)}
               >
                 <div>
-                  <p className="section-title">{sec.section_name}</p>
+                  <p className="section-title">{sec.sectionName}</p>
                   <small className="section-sub">
                     {index + 1}/{sec.topics.length} • {sec.topics.length * 10}
                     min Total
@@ -38,7 +37,7 @@ const CourseContentSidebar = ({ course }) => {
             </h2>
 
             <div
-              id={`sec${sec.sId}`}
+              id={`sec${sec.sid}`}
               className={`accordion-collapse collapse ${
                 index === 0 ? "show" : ""
               }`}
@@ -46,13 +45,13 @@ const CourseContentSidebar = ({ course }) => {
             >
               <div className="accordion-body topics-wrapper">
                 {sec.topics.map((topic, i) => {
-                  const isActive = activeTopic === topic.t_id;
+                  const isActive = activeTopic === topic.tid;
 
                   return (
                     <div
-                      key={topic.t_id}
+                      key={topic.tid}
                       className={`topic-item ${isActive ? "active" : ""}`}
-                      onClick={() => setActiveTopic(topic.t_id)}
+                      onClick={() => onTopicPlay(topic)}
                     >
                       <div
                         className={`left-indicator ${isActive ? "active" : ""}`}
@@ -61,14 +60,12 @@ const CourseContentSidebar = ({ course }) => {
                       <div className="topic-text">
                         <div className="d-flex justify-content-between align-items-center w-100">
                           <p className="topic-title mb-0">
-                            {i + 1}. {topic.topic_name}
+                            {i + 1}. {topic.topicName}
                           </p>
-
-                          <small className="text-muted">23m</small>
                         </div>
 
                         <small className="topic-duration">
-                          {topic.topic_desc ? topic.topic_desc : "Completed"}
+                          {topic.topicDesc ? topic.topicDesc : "Completed"}
                         </small>
                       </div>
 

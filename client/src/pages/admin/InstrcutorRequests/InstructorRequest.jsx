@@ -145,7 +145,7 @@ const InstructorRequests = () => {
                         {/* <div className="small text-muted">{ins.title}</div> */}
 
                         <Link
-                          to={`/admin/instructors/${ins.instructorId}`}
+                          to={`/admin/profile-view/${ins.instructorId}`}
                           className="small text-primary text-decoration-underline"
                         >
                           <FiExternalLink />

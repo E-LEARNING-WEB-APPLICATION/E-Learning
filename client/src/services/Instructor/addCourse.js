@@ -11,35 +11,21 @@ export async function addCourse( formData) {
 }
 
 export async function getAddedCourses() {
+  try {
+    const response = await axios.get(
+      `http://localhost:5193/instructor/getAllInstructorCourses`,
+    );
 
-    const data = [
-        {
-        courseName : "React",
-        courseDesc : "This is the Courses Description of React.This is the Courses Description of React.This is the Courses Description of React.This is the Courses Description of React.This is the Courses Description of React.",
-        image : "./../../../public/images/react.png"
-        },
+    const data = await response.data;
+    return { success: true, data };
+  } catch (error) {
+    if (error.response?.data) {
+      return error.response.data;
+    }
 
-        {
-        courseName : "NodeJs",
-        courseDesc : "This is the Courses Description of React.This is the Courses Description of NodeJs.This is the Courses Description of NodeJs.This is the Courses Description of React.This is the Courses Description of NodeJs.",
-        image : "./../../../public/images/node.png"
-        },
-
-        {
-        courseName : "Java",
-        courseDesc : "This is the Courses Description of Java.This is the Courses Description of Java.This is the Courses Description of Java.This is the Courses Description of Java.This is the Courses Description of Java.",
-        image : "./../../../public/images/java.png"
-        },
-
-        {
-        courseName : "SpringBoot",
-        courseDesc : "This is the Courses Description of SpringBoot.This is the Courses Description of SpringBoot.This is the Courses Description of SpringBoot.This is the Courses Description of SpringBoot.This is the Courses Description of SpringBoot.",
-        image : "./../../../public/images/spring.png"
-        },
-
-]
-
-return data
-
-    
+    return {
+      success: false,
+      message: "Server error. Please try again.",
+    };
+  }
 }

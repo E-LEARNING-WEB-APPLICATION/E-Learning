@@ -14,7 +14,7 @@ const AdminDashboard = () => {
 
   useEffect(() => {
     fetchTopCoursesByEnrollments({ top: 10 })
-      .then((res) => setTopCourses(res.data))
+      .then((res) => setTopCourses(res))
       .finally(() => setLoadingCourses(false));
   }, []);
 

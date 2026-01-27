@@ -1,53 +1,41 @@
-import React, { useState, useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import { FaSort, FaSortUp, FaSortDown } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import "./CourseTableView.css";
 
 const TableView = ({ courses }) => {
+  console.log(courses);
   const [search, setSearch] = useState("");
-  const [sortField, setSortField] = useState(null);
+  const [sortField, setSortField] = useState("revenueRank");
   const [sortOrder, setSortOrder] = useState("asc");
-  const [currentPage, setCurrentPage] = useState(1);
 
-  const rowsPerPage = 8;
-
-  // ---- SEARCH ----
-  const filteredCourses = useMemo(() => {
+  // ---------- SEARCH ----------
+  const filtered = useMemo(() => {
+    const q = search.toLowerCase();
     return courses.filter(
       (c) =>
-        c.course_name.toLowerCase().includes(search.toLowerCase()) ||
-        c.category.toLowerCase().includes(search.toLowerCase())
+        c.courseName.toLowerCase().includes(q) ||
+        c.categoryName.toLowerCase().includes(q) ||
+        c.instructorName.toLowerCase().includes(q),
     );
   }, [courses, search]);
 
-  // ---- SORT ----
-  const sortedCourses = useMemo(() => {
-    if (!sortField) return filteredCourses;
+  // ---------- SORT ----------
+  const sorted = useMemo(() => {
+    return [...filtered].sort((a, b) => {
+      const v1 = a[sortField];
+      const v2 = b[sortField];
 
-    return [...filteredCourses].sort((a, b) => {
-      const aVal = a[sortField];
-      const bVal = b[sortField];
-
-      if (typeof aVal === "string") {
+      if (typeof v1 === "string") {
         return sortOrder === "asc"
-          ? aVal.localeCompare(bVal)
-          : bVal.localeCompare(aVal);
+          ? v1.localeCompare(v2)
+          : v2.localeCompare(v1);
       }
-
-      return sortOrder === "asc" ? aVal - bVal : bVal - aVal;
+      return sortOrder === "asc" ? v1 - v2 : v2 - v1;
     });
-  }, [filteredCourses, sortField, sortOrder]);
+  }, [filtered, sortField, sortOrder]);
 
-  const totalPages = Math.ceil(sortedCourses.length / rowsPerPage);
-
-  const paginatedCourses = sortedCourses.slice(
-    (currentPage - 1) * rowsPerPage,
-    currentPage * rowsPerPage
-  );
-
-  // ---- HANDLE SORT CHANGE ----
   const toggleSort = (field) => {
-    if (sortField === field) {
+    if (field === sortField) {
       setSortOrder(sortOrder === "asc" ? "desc" : "asc");
     } else {
       setSortField(field);
@@ -55,140 +43,150 @@ const TableView = ({ courses }) => {
     }
   };
 
-  const renderSortIcon = (field) => {
-    if (sortField !== field) return <FaSort className="text-muted" />;
+  const sortIcon = (field) =>
+    sortField !== field ? (
+      <FaSort className="ms-1 text-muted" />
+    ) : sortOrder === "asc" ? (
+      <FaSortUp className="ms-1" />
+    ) : (
+      <FaSortDown className="ms-1" />
+    );
 
-    return sortOrder === "asc" ? <FaSortUp /> : <FaSortDown />;
-  };
+  // ---------- SUMMARY ----------
+  const totalRevenue = courses.reduce((a, c) => a + c.totalRevenue, 0);
 
   return (
-    <div className="container mt-4 course-page">
-      {/* -------- SUMMARY CARDS -------- */}
+    <div className="mt-4">
+      {/* ---- SUMMARY CARDS ---- */}
       <div className="row mb-4">
         <div className="col-md-4">
-          <div className="summary-card shadow-sm">
-            <h6>Total Courses</h6>
-            <h2>{courses.length}</h2>
+          <div className="card shadow-sm">
+            <div className="card-body">
+              <h6>Total Courses</h6>
+              <h3 className="fw-bold">{courses.length}</h3>
+            </div>
           </div>
         </div>
 
         <div className="col-md-4">
-          <div className="summary-card shadow-sm">
-            <h6>Categories</h6>
-            <h2>{new Set(courses.map((c) => c.category)).size}</h2>
+          <div className="card shadow-sm">
+            <div className="card-body">
+              <h6>Total Revenue</h6>
+              <h3 className="fw-bold text-success">₹{totalRevenue}</h3>
+            </div>
           </div>
         </div>
 
         <div className="col-md-4">
-          <div className="summary-card shadow-sm">
-            <h6>Total Revenue</h6>
-            <h2>₹{courses.reduce((a, b) => a + b.fees, 0)}</h2>
+          <div className="card shadow-sm">
+            <div className="card-body">
+              <h6>Categories</h6>
+              <h3 className="fw-bold">
+                {new Set(courses.map((c) => c.categoryId)).size}
+              </h3>
+            </div>
           </div>
         </div>
       </div>
 
-      {/* -------- SEARCH BAR -------- */}
-      <div className="d-flex justify-content-between mb-3">
-        <input
-          type="text"
-          className="form-control w-50"
-          placeholder="Search by course or category..."
-          value={search}
-          onChange={(e) => {
-            setCurrentPage(1);
-            setSearch(e.target.value);
-          }}
-        />
-      </div>
+      {/* ---- SEARCH ---- */}
+      <input
+        className="form-control mb-3"
+        placeholder="Search course, category, instructor…"
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+      />
 
-      {/* -------- TABLE -------- */}
+      {/* ---- TABLE ---- */}
       <div className="table-responsive shadow-sm rounded">
         <table className="table table-hover align-middle">
           <thead className="table-light">
             <tr>
-              <th onClick={() => toggleSort("courseId")} className="sortable">
-                ID {renderSortIcon("courseId")}
+              <th onClick={() => toggleSort("revenueRank")}>
+                Rank {sortIcon("revenueRank")}
               </th>
-              <th
-                onClick={() => toggleSort("course_name")}
-                className="sortable"
-              >
-                Course Name {renderSortIcon("course_name")}
+              <th>Course</th>
+              <th>Category</th>
+              <th>Instructor</th>
+              <th onClick={() => toggleSort("effectivePrice")}>
+                Price {sortIcon("effectivePrice")}
               </th>
-              <th onClick={() => toggleSort("category")} className="sortable">
-                Category {renderSortIcon("category")}
+              <th onClick={() => toggleSort("totalEnrollments")}>
+                Enrollments {sortIcon("totalEnrollments")}
               </th>
-              <th onClick={() => toggleSort("iId")} className="sortable">
-                Instructor {renderSortIcon("iId")}
+              <th onClick={() => toggleSort("totalRevenue")}>
+                Revenue {sortIcon("totalRevenue")}
               </th>
-              <th onClick={() => toggleSort("fees")} className="sortable">
-                Price {renderSortIcon("fees")}
+              <th onClick={() => toggleSort("avgRating")}>
+                Rating {sortIcon("avgRating")}
               </th>
             </tr>
           </thead>
 
           <tbody>
-            {paginatedCourses.map((course) => (
-              <tr key={course.courseId}>
-                <td>{course.courseId}</td>
-
-                {/* course link */}
+            {sorted.map((c) => (
+              <tr key={c.courseId}>
                 <td>
-                  <Link
-                    to={`/admin/courses/${course.courseId}`}
-                    className="course-link"
-                  >
-                    {course.course_name}
-                  </Link>
+                  <span className="badge bg-primary">#{c.revenueRank}</span>
                 </td>
 
-                <td>{course.category}</td>
-                <td>{course.iId}</td>
-                <td>₹{course.fees}</td>
+                <td>
+                  <Link
+                    to={`/admin/courses/${c.courseId}`}
+                    className="fw-semibold text-decoration-none"
+                  >
+                    {c.courseName}
+                  </Link>
+                  <div className="small text-muted">
+                    Created {new Date(c.createdAt).toLocaleDateString()}
+                  </div>
+                </td>
+
+                <td>{c.categoryName}</td>
+                <td>{c.instructorName}</td>
+
+                <td>
+                  ₹{c.effectivePrice}
+                  {c.discount > 0 && (
+                    <div className="small text-muted">
+                      <del>₹{c.price}</del> ({c.discount}% off)
+                    </div>
+                  )}
+                </td>
+
+                <td>
+                  {c.totalEnrollments}
+                  <div className="small text-muted">
+                    +{c.recentEnrollments} recent
+                  </div>
+                </td>
+
+                <td className="fw-bold text-success">
+                  ₹{c.totalRevenue}
+                  <div className="small text-muted">
+                    Avg ₹{c.avgRevenuePerStudent}/student
+                  </div>
+                </td>
+
+                <td>
+                  ⭐ {c.avgRating.toFixed(1)}
+                  <div className="small text-muted">
+                    {c.totalFeedbacks} reviews
+                  </div>
+                </td>
               </tr>
             ))}
+
+            {sorted.length === 0 && (
+              <tr>
+                <td colSpan="8" className="text-center text-muted py-3">
+                  No courses found
+                </td>
+              </tr>
+            )}
           </tbody>
         </table>
       </div>
-
-      {/* -------- PAGINATION -------- */}
-      <nav className="mt-3">
-        <ul className="pagination justify-content-center">
-          <li className={`page-item ${currentPage === 1 && "disabled"}`}>
-            <button
-              className="page-link"
-              onClick={() => setCurrentPage((p) => p - 1)}
-            >
-              Previous
-            </button>
-          </li>
-
-          {Array.from({ length: totalPages }, (_, i) => (
-            <li
-              key={i}
-              className={`page-item ${currentPage === i + 1 ? "active" : ""}`}
-            >
-              <button
-                className="page-link"
-                onClick={() => setCurrentPage(i + 1)}
-              >
-                {i + 1}
-              </button>
-            </li>
-          ))}
-
-          <li
-            className={`page-item ${currentPage === totalPages && "disabled"}`}
-          >
-            <button
-              className="page-link"
-              onClick={() => setCurrentPage((p) => p + 1)}
-            >
-              Next
-            </button>
-          </li>
-        </ul>
-      </nav>
     </div>
   );
 };

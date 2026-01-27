@@ -1,4 +1,5 @@
 import apiClient, { API_BASE_PATH } from "@/utils/apiClient";
+import { apiRequest } from "../apiHelper";
 
 export const createCategory = async (categoryForm) => {
   const formData = new FormData();
@@ -78,4 +79,10 @@ export const fetchCategoriesNormalized = async (params = {}) => {
       message: "Server error. Please try again.",
     };
   }
+};
+
+export const fetchCategoryCount = () => {
+  return apiRequest(() =>
+    apiClient.get(`${API_BASE_PATH}/statistics/category/count`),
+  );
 };

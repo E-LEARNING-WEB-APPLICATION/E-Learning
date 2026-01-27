@@ -96,3 +96,25 @@ export const fetchTopCoursesByEnrollments = (params) => {
     }),
   );
 };
+
+export const fetchCourseEnrolledStudents = (courseId, params) => {
+  return apiRequest(() =>
+    apiClient.get(`${ADMIN_BASE_PATH}/course/${courseId}/enrollments`, {
+      params,
+    }),
+  );
+};
+
+export const fetchStudentEnrolledTrendByMonthByCourse = (
+  courseId,
+  duration,
+) => {
+  return apiRequest(() =>
+    apiClient.get(`${ADMIN_BASE_PATH}/student/enrolled/monthly`, {
+      params: {
+        duration, // number default 6
+        courseId,
+      },
+    }),
+  );
+};

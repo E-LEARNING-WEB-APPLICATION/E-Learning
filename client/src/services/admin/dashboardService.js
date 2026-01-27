@@ -67,7 +67,7 @@ params : {
 */
 export const fetchInstructorsLeaderboard = (params) => {
   return apiRequest(() =>
-    apiClient.get(`${ADMIN_BASE_PATH}/student/revenue/by-month`, {
+    apiClient.get(`${ADMIN_BASE_PATH}/instructors/leaderboard`, {
       params,
     }),
   );

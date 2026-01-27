@@ -10,7 +10,7 @@ function InstructorNavbar() {
     >
       <div className="container-fluid">
         {/* Brand */}
-        <Link to="/student/dashboard" className="instructor-brand">
+        <Link to="/student/addCourse" className="instructor-brand">
           <i className="bi bi-easel-fill me-2"></i>
           <span className="brand-text">E-Learning</span>
         </Link>
@@ -30,7 +30,7 @@ function InstructorNavbar() {
           <ul className="navbar-nav ms-auto mb-2 mb-lg-0 instructor-links">
             <li className="nav-item" style={{ marginLeft: "7px" }}>
               <NavLink
-                to="/student/dashboard"
+                to="/student/addCourse"
                 className={({ isActive }) =>
                   isActive ? "nav-link active-link" : "nav-link"
                 }

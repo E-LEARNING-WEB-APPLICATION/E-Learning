@@ -36,14 +36,12 @@ export const fetchTotalStudentsActiveInLast = (duration) => {
 };
 
 export const fetchTotalRevenue = () => {
-  return apiRequest(() =>
-    apiClient.get(`${ADMIN_BASE_PATH}/statistics/revenue`),
-  );
+  return apiRequest(() => apiClient.get(`${API_BASE_PATH}/statistics/revenue`));
 };
 
 export const fetchRevenueTrendByMonth = (duration) => {
   return apiRequest(() =>
-    apiClient.get(`${ADMIN_BASE_PATH}/student/revenue/by-month`, {
+    apiClient.get(`${API_BASE_PATH}/statistics/revenue/by-month`, {
       params: {
         duration, // string "3m", "6m", "1y"
       },
@@ -53,7 +51,7 @@ export const fetchRevenueTrendByMonth = (duration) => {
 
 export const fetchStudentEnrolledTrendByMonth = (duration) => {
   return apiRequest(() =>
-    apiClient.get(`${ADMIN_BASE_PATH}/student/revenue/by-month`, {
+    apiClient.get(`${ADMIN_BASE_PATH}/student/enrolled/monthly`, {
       params: {
         duration, // number default 6
       },
@@ -71,6 +69,30 @@ export const fetchInstructorsLeaderboard = (params) => {
   return apiRequest(() =>
     apiClient.get(`${ADMIN_BASE_PATH}/student/revenue/by-month`, {
       params,
+    }),
+  );
+};
+
+export const fetchCategoryDistribution = (params) => {
+  return apiRequest(() =>
+    apiClient.get(`${API_BASE_PATH}/statistics/category/distribution`, {
+      params,
+    }),
+  );
+};
+
+export const fetchTopCourseRatingOverview = (params) => {
+  return apiRequest(() =>
+    apiClient.get(`${API_BASE_PATH}/statistics/course/by-rating`, {
+      params,
+    }),
+  );
+};
+
+export const fetchTopCoursesByEnrollments = (params) => {
+  return apiRequest(() =>
+    apiClient.get(`${API_BASE_PATH}/statistics/course/enrollments`, {
+      params, // top: number
     }),
   );
 };

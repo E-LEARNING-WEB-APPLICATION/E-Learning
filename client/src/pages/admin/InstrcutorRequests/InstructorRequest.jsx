@@ -139,16 +139,13 @@ const InstructorRequests = () => {
                         }}
                       />
                       <div className="ms-3">
-                        <strong>
-                          {ins.firstName} {ins.lastName}
-                        </strong>
-                        {/* <div className="small text-muted">{ins.title}</div> */}
-
                         <Link
                           to={`/admin/profile-view/${ins.instructorId}`}
-                          className="small text-primary text-decoration-underline"
+                          className="text-primary text-decoration-none"
                         >
-                          <FiExternalLink />
+                          <strong>
+                            {ins.firstName} {ins.lastName}
+                          </strong>
                         </Link>
                       </div>
                     </div>

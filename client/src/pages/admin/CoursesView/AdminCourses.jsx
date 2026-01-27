@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
-import GridView from "@/components/admin/courses/GridView";
 import TableView from "@/components/admin/courses/TableView";
 import { LuTableOfContents } from "react-icons/lu";
 import { CiGrid41 } from "react-icons/ci";
-import { getAllCourses } from "@/api/api";
+import { fetchCourseOverviewData } from "@/services/admin/courseStatisticsService";
 
 const AdminCourses = () => {
   const [courses, setCourses] = useState([]);
@@ -13,8 +12,16 @@ const AdminCourses = () => {
     view === "grid" ? setView("grid") : setView("table");
   };
 
+  const getAllCourseOverview = async () => {
+    fetchCourseOverviewData().then((data) => {
+      console.log(data);
+      setCourses(data.content);
+    });
+  };
+
   useEffect(() => {
-    getAllCourses().then(({ courses }) => setCourses(courses));
+    // getAllCourses().then(({ courses }) => setCourses(courses));
+    getAllCourseOverview();
   }, []);
 
   return (
@@ -46,7 +53,7 @@ const AdminCourses = () => {
         <div>
           <h3 className="mb-4 fw-bold text-primary">All Courses</h3>
         </div>
-        {view == "grid" && <GridView courses={courses} />}
+        {/* {view == "grid" && <GridView courses={courses} />} */}
         {view == "table" && <TableView courses={courses} />}
       </div>
     </div>

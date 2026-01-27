@@ -4,6 +4,7 @@ import StudentCourseCard from "./StudentCourseCard";
 export function StudentDashboardCategoryCourse({
     categories = [],
     courses = [],
+    page
 }) {
     // Take only first 4 categories
     const limitedCategories = categories.slice(0, 4);
@@ -56,8 +57,8 @@ export function StudentDashboardCategoryCourse({
                     {filteredCourses.length > 0 ? (
                         filteredCourses.slice(0, 4).map((course) => (
                             <StudentCourseCard
-                                key={course.id}
                                 course={course}
+                                page={page}
                             />
                         ))
                     ) : (

@@ -152,7 +152,24 @@ export const getInstructorDetail = async () => {
         };
     }
 };
-
+export const getInstructorDetailById = async (instructorId) => {
+    try {
+      const response = await apiClient.get(`profile/instructor`, {
+        params: {
+          instructorId: instructorId,
+        },
+      });
+        return response.data;
+    } catch (error) {
+        if (error.response) {
+            return error.response.data;
+        }
+        return {
+            success: false,
+            message: "Server error. Please try again.",
+        };
+    }
+};
 
 export const getAllSpecialization = async () => {
     try {

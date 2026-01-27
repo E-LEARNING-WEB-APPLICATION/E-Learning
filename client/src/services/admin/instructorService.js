@@ -92,3 +92,20 @@ export const rejectInstructor = async (params) => {
     };
   }
 };
+
+export const getInstructorById = async (instructorId) => {
+  try {
+    const response = await apiClient.get(`/api/v1/instructor/${instructorId}`);
+
+    console.log(response);
+    return response.data;
+  } catch (error) {
+    if (error.response?.data) {
+      return error.response.data;
+    }
+    return {
+      success: false,
+      message: "Server error. Please try again.",
+    };
+  }
+};

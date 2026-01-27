@@ -3,29 +3,36 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
-const StudentDashboardHeroSection = ({ courses }) => {
+const StudentDashboardHeroSection = ({ courses, page }) => {
     const discounted = courses.filter((c) => c.discount > 0);
     const heroCourses = discounted.length > 0 ? discounted : courses;
     const navigate = useNavigate();
     const handleView = async (courseId) => {
-        try {
-            const response = await getCourseStatusById(courseId);
-            console.log(response);
-            if (!response.success) {
-                navigate("/student/course-details", {
-                    state: {
-                        courseId: courseId,
-                    },
-                });
-            } else {
-                navigate("/student/enrolled-course-details", {
-                    state: {
-                        courseId: courseId,
-                    },
-                });
+        if (page == "guest") {
+            toast.warn("Please Login to explore course");
+            setTimeout(() => {
+                navigate("/guest/login");
+            }, 2000);
+        } else {
+            try {
+                const response = await getCourseStatusById(courseId);
+                console.log(response);
+                if (!response.success) {
+                    navigate("/student/course-details", {
+                        state: {
+                            courseId: courseId,
+                        },
+                    });
+                } else {
+                    navigate("/student/enrolled-course-details", {
+                        state: {
+                            courseId: courseId,
+                        },
+                    });
+                }
+            } catch (error) {
+                toast.error(error.message);
             }
-        } catch (error) {
-            toast.error(error.message);
         }
     };
     return (
@@ -125,7 +132,9 @@ const StudentDashboardHeroSection = ({ courses }) => {
                                                     )}
                                                 </div>
                                                 <a
-                                                    onClick={() => { handleView(course.id) }}
+                                                    onClick={() => {
+                                                        handleView(course.id);
+                                                    }}
                                                     className="btn btn-warning btn-sm mt-3 fw-semibold">
                                                     Enroll Now
                                                 </a>

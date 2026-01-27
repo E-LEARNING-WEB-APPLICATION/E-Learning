@@ -43,6 +43,7 @@ import { useEffect } from "react";
 import { getWishlistCount } from "./services/wishlist";
 import { setWishlistCount } from "./slices/wishlist/wishlistSlice";
 import NotificationPage from "./pages/admin/Notifications/NotificationPage";
+import GuestDashboard from "./pages/guest/dashboard/GuestDashboard";
 
 function App() {
   useNotificationSSE();
@@ -72,6 +73,14 @@ function App() {
           <Route path="/" element={<Navigate to="/guest" />} />
           <Route path="/guest" element={<GuestLayout />}>
             <Route
+              path=""
+              element={<GuestDashboard />}
+            />
+            <Route
+              path="courses/category/:categoryId"
+              element={<CategoryCourses />}
+            />
+            <Route
               path="instructor-registration"
               element={<InstructorRegistration />}
             />
@@ -82,7 +91,6 @@ function App() {
             <Route path="login" element={<Login />} />
             <Route path="aboutus" element={<AboutUs />} />
             <Route path="contactus" element={<ContactUs />} />
-            <Route path="profile-view" element={<ProfileView />} />
           </Route>
           {/* Student Routes */}
           <Route path="/student" element={<StudentLayout />}>
@@ -93,7 +101,6 @@ function App() {
             <Route path="aboutus" element={<AboutUs />} />
             <Route path="contactus" element={<ContactUs />} />
             <Route path="profile" element={<StudentProfile />} />
-            <Route path="profile-view" element={<ProfileView />} />
             <Route
               path="enrolled-course-details"
               element={<CourseEnrolledPage />}
@@ -111,7 +118,6 @@ function App() {
             <Route path="addedCourses/add-section" element={<AddSection />} />
             <Route path="profile" element={<InstructorProfile />} />
             <Route path="aboutus" element={<AboutUs />} />
-            <Route path="profile-view" element={<ProfileView />} />
             <Route
               path="addedCourses/show-sections"
               element={<ShowSection />}
@@ -140,7 +146,7 @@ function App() {
               <Route path="student" element={<StudentAnalyticsPage />} />
               <Route path="instructor" element={<InstructorAnalyticsPage />} />
             </Route>
-            <Route path="profile-view" element={<ProfileView />} />
+            <Route path="profile-view/:instructorId" element={<ProfileView />} />
             <Route
               path="instructor-requests"
               element={<InstructorRequests />}

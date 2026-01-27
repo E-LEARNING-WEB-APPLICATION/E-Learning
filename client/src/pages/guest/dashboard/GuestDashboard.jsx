@@ -1,4 +1,4 @@
-import "./Dashboard.css";
+import "./GuestDashboard.css";
 import StudentDashboardCategoryCourse from "@/components/student/studentDashboard/StudentDashboardCategoryCourse";
 import StudentDashboardCategorySection from "@/components/student/studentDashboard/StudentDashboardCategorySection";
 import StudentDashboardHeroSection from "@/components/student/studentDashboard/StudentDashboardHeroSection";
@@ -11,7 +11,7 @@ import { getAllInstructor } from "@/services/instructorDetails";
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
-const Dashboard = () => {
+const GuestDashboard = () => {
     const [category, setCategory] = useState([]);
     const [course, setCourse] = useState([]);
     const [instructor, setInstructor] = useState({
@@ -99,14 +99,15 @@ const Dashboard = () => {
 
     return (
         <div>
-            <StudentDashboardHeroSection courses={course} />
-            <StudentDashboardCategorySection categories={category} />
-            <StudentDashboardTopCourses courses={course} />
+            <StudentDashboardHeroSection courses={course} page={"guest"}/>
+            <StudentDashboardCategorySection categories={category} page={"guest"} />
+            <StudentDashboardTopCourses courses={course} page={"guest"} />
             <StudentDashboardCategoryCourse
                 courses={course}
                 categories={category}
+                page={"guest"}
             />
-            <StudentDashboardInstructor instructors={instructor} />
+            <StudentDashboardInstructor instructors={instructor}/>
             <StudentDashboardTestimonials
                 sampleTestimonials={sampleTestimonials}
             />
@@ -114,4 +115,4 @@ const Dashboard = () => {
     );
 };
 
-export default Dashboard;
+export default GuestDashboard;

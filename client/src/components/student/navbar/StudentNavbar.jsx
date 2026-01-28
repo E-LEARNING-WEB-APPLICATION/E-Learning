@@ -79,15 +79,13 @@ function StudentNavbar() {
             </li>
 
             <li
-              className="nav-item position-relative"
+              className="nav-item"
               style={{ marginLeft: "7px" }}
             >
               <NavLink
                 to="/student/wishlist"
                 className={({ isActive }) =>
-                  isActive
-                    ? "nav-link active-link d-flex align-items-center gap-1"
-                    : "nav-link d-flex align-items-center gap-1"
+                  isActive ? "nav-link active-link" : "nav-link"
                 }
               >
                 Wishlist
@@ -97,7 +95,7 @@ function StudentNavbar() {
               </NavLink>
             </li>
 
-            <li className="nav-item" style={{ marginLeft: "7px" }}>
+            {/* <li className="nav-item" style={{ marginLeft: "7px" }}>
               <NavLink
                 to="/student/notification"
                 className={({ isActive }) =>
@@ -106,7 +104,7 @@ function StudentNavbar() {
               >
                 Notifications
               </NavLink>
-            </li>
+            </li> */}
 
             <li className="nav-item" style={{ marginLeft: "7px" }}>
               <NavLink

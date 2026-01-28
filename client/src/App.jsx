@@ -2,7 +2,7 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import "./App.css";
 import StudentLayout from "./components/student/layout/StudentLayout";
 import StudentDashboard from "./pages/student/dashboard/Dashboard";
-import InstructorDashboard from "./pages/instructor/dashboard/Dashboard";
+import InstructorDashboard from "./pages/instructor/dashboard/InstructorDashboard";
 import MyCourses from "./pages/student/mycourses/MyCourses";
 import WishList from "./pages/student/wishlist/WishList";
 import InstructorLayout from "./components/instructor/layout/InstructorLayout";

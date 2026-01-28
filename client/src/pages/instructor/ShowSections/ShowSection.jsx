@@ -102,8 +102,10 @@ function ShowSection() {
     if (res.success) {
       toast.success("Topic added successfully");
       resetTopicForm();
+      
     } else {
       toast.error(res.message || "Failed to add topic");
+      
     }
     setCreatingTopic(false);
     loadSections();

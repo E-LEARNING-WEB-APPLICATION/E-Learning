@@ -1,0 +1,221 @@
+.instructor-dashboard {
+  min-height: 100vh;
+  background: #f3f4f6;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Stats */
+.instructor-dashboard__stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.instructor-dashboard__stat-card {
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.instructor-dashboard__stat-label {
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+.instructor-dashboard__stat-value {
+  font-size: 26px;
+  font-weight: 700;
+  margin-top: 6px;
+}
+
+/* 4 × 2 KPI grid */
+.instructor-dashboard__stats-grid--8 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+/* Tablet */
+@media (max-width: 1024px) {
+  .instructor-dashboard__stats-grid--8 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Mobile */
+@media (max-width: 640px) {
+  .instructor-dashboard__stats-grid--8 {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Wallet */
+.instructor-dashboard__wallet-card {
+  background: #d3c7ff;
+  padding: 20px;
+  border-radius: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.instructor-dashboard__wallet-label {
+  font-size: 14px;
+  color: #374151;
+}
+
+.instructor-dashboard__wallet-value {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.instructor-dashboard__withdraw-btn {
+  background: #2563eb;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+}
+
+.instructor-dashboard__withdraw-btn:hover {
+  background: #1d4ed8;
+}
+
+/* Sections */
+.instructor-dashboard__section-card {
+  background: white;
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.instructor-dashboard__section-title {
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+/* Reviews */
+.instructor-dashboard__reviews-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.instructor-dashboard__review-select {
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  padding: 4px 8px;
+}
+
+.instructor-dashboard__reviews-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.instructor-dashboard__reviews-table th,
+.instructor-dashboard__reviews-table td {
+  padding: 10px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.instructor-dashboard__reviews-table thead {
+  background: #f9fafb;
+}
+
+.instructor-dashboard__reviews-table tr:hover {
+  background: #f9fafb;
+}
+
+.instructor-dashboard__course-name {
+  font-weight: 500;
+}
+
+
+/* Light Yellow – Total Students */
+.instructor-dashboard__stat-yellow {
+  background: #fff7cc;
+  color: #92400e;
+}
+
+/* Light Green – Total Courses */
+.instructor-dashboard__stat-green {
+  background: #e6f7ef;
+  color: #065f46;
+}
+
+/* Light Blue – Total Enrollments */
+.instructor-dashboard__stat-blue {
+  background: #e8f1ff;
+  color: #1e3a8a;
+}
+
+/* Light Purple – Total Revenue */
+.instructor-dashboard__stat-purple {
+  background: #f3e8ff;
+  color: #6b21a8;
+}
+
+/* Light Teal – Active Students */
+.instructor-dashboard__stat-teal {
+  background: #e6fffa;
+  color: #0f766e;
+}
+
+/* Light Orange – Avg Rating */
+.instructor-dashboard__stat-orange {
+  background: #fff7ed;
+  color: #9a3412;
+}
+
+/* Light Pink – This Month Revenue */
+.instructor-dashboard__stat-pink {
+  background: #fce7f3;
+  color: #9d174d;
+}
+
+/* Light Indigo – New Students */
+.instructor-dashboard__stat-indigo {
+  background: #eef2ff;
+  color: #3730a3;
+}
+
+/* ================================
+   Instructor Dashboard Header
+   ================================ */
+
+.instructor-dashboard__header {
+  width: 100%;
+  padding: 8px 0 16px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.instructor-dashboard__header-name {
+  font-size: 32px;        /* Bigger than dashboard title */
+  font-weight: 700;
+  color: #111827;
+  line-height: 1.2;
+}
+
+.instructor-dashboard__header-title {
+  font-size: 15px;
+  font-weight: 500;
+  color: #374151;
+  margin-top: 4px;
+}
+
+
+
+/* Mobile */
+@media (max-width: 768px) {
+  .instructor-dashboard__header-name {
+    font-size: 26px;
+  }
+}

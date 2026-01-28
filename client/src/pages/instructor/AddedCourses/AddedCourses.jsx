@@ -1,14 +1,10 @@
 import React, { useEffect, useState } from "react";
 import "../AddedCourses/AddedCourses.css";
 import { getAddedCourses } from "./../../../services/Instructor/addCourse.js";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function AddedCourses() {
   const navigator = useNavigate();
-  const location = useLocation();
-
-  const { sectionData } = location.state || {};
-
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -20,19 +16,19 @@ function AddedCourses() {
     setData(response);
   }
 
-  function goToAddSection(courseName) {
-    navigator("add-section", {
+  function goToAddSection(courseName,courseId) {
+    navigator(`add-section/${courseId}`, {
       state: {
         courseName,
       },
     });
   }
 
-  function handleShowSections(courseName) {
-    navigator("show-sections", {
+  function handleShowSections(courseName,courseId) {
+    console.log("1",courseId,typeof(courseId))
+    navigator(`show-sections/${courseId}`, {
       state: {
-        courseName,
-        sectionData,
+        courseName
       },
     });
   }
@@ -49,13 +45,14 @@ function AddedCourses() {
                 <div className="card mb-3 ">
                   <img
                     className="card-img-top "
-                    src={data.image}
+                    src={data.thumbnail}
                     alt="Card image cap"
                     height={"150px"}
+        
                   />
                   <div className="card-body">
-                    <h5 className="card-title">{data.courseName}</h5>
-                    <p className="card-text">{data.courseDesc}</p>
+                    <h5 className="card-title">{data.title}</h5>
+                    <p className="card-text">{data.description}</p>
 
                     <div className="buttons">
                       <div>
@@ -63,7 +60,7 @@ function AddedCourses() {
                           type="button"
                           className="btn btn-primary show-section-button"
                           onClick={() => {
-                            handleShowSections(data.courseName);
+                            handleShowSections(data.title,data.courseId);
                           }}
                         >
                           Show Sections
@@ -75,7 +72,7 @@ function AddedCourses() {
                           type="button"
                           className="btn btn-primary add-section-button"
                           onClick={() => {
-                            goToAddSection(data.courseName);
+                            goToAddSection(data.title,data.courseId);
                           }}
                         >
                           Add Sections

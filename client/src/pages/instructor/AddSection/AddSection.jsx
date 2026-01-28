@@ -1,54 +1,54 @@
 import React, { useState } from 'react'
 import './AddSections.css'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import { addTheSection } from './../../../services/Instructor/section'
-import { useDispatch, useSelector } from 'react-redux'
-import { add } from './../../../slices/section/sectionSlice'
-
+import { toast } from "react-toastify";
 
 
 
 function AddSection() {
 
+   
 
-    const sections = useSelector((store)=>
-    {
-        return store.sections.value
-    })
-
-    const dispatch = useDispatch()
-   // console.log("Sections in Add Section - ",sections)
-    const navigate = useNavigate()
+    const { courseId } = useParams();
     const location = useLocation()
-    const { courseName } = location.state
+    const courseName = location.state?.courseName;
+    
+
+    console.log(courseName)
+
     const [sectionNumber,setSectionNumber] = useState(0);
     const [sectionTitle , setSectionTitle] = useState("")
     const [sectionDesc,setSectionDesc] = useState("")
 
-   
+    const navigate = useNavigate()
 
-    function onSectionAdd()
+
+    async function onSectionAdd()
     {
         const data = 
         {
+            courseId,
             courseName,
             sectionNumber,
             sectionTitle,
             sectionDesc
         }
-       const sectionData =  addTheSection(data)
-       if(sectionData != null)
-       {   
-          const newData = [...sections,sectionData]
-        //  console.log("New data in add section ",newData)
-          dispatch(add(newData))
-        window.alert("Section Added Successfully")
-        navigate(-1)
-       }
-       else
-       {
-        window.alert("Error while adding Section")
-       }
+
+        try
+        {
+           const response = await addTheSection(data)
+           if(response.status === 201)
+            
+           toast.success("Section Added SuccessFully")
+           navigate(-1)
+        }
+        catch(error)
+        {
+            console.log(error)
+             toast.error("Failed to Add Section")
+        }
+       
         
     }
 

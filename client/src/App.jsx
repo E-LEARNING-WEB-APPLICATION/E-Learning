@@ -115,15 +115,15 @@ function App() {
             <Route path="dashboard" element={<InstructorDashboard />} />
             <Route path="addCourse" element={<AddCourse />} />
             <Route path="addedCourses" element={<AddedCourses />} />
-            <Route path="addedCourses/add-section" element={<AddSection />} />
+            <Route path="addedCourses/add-section/:courseId" element={<AddSection />} />
             <Route path="profile" element={<InstructorProfile />} />
             <Route path="aboutus" element={<AboutUs />} />
             <Route
-              path="addedCourses/show-sections"
+              path="addedCourses/show-sections/:courseId"
               element={<ShowSection />}
             />
             <Route
-              path="addedCourses/show-sections/show-topics"
+              path="addedCourses/show-sections/show-topics/:sectionId"
               element={<ShowTopic />}
             />
           </Route>

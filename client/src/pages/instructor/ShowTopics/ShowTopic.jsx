@@ -1,88 +1,74 @@
-import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
-import { toast } from "react-toastify";
-import "./ShowTopics.css";
-import { fetchTopicsBySection } from "@/services/Instructor/topicService";
+import { useEffect, useState } from 'react';
+import './ShowTopics.css'
+import { useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { getTopics } from '@/services/Instructor/topic';
 
-function ShowTopics() {
-  const { state } = useLocation();
-  const { sectionId } = state;
+function ShowTopic() {
 
-  const [topics, setTopics] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const sectionId = useParams("sectionId")
+  const [allTopics,setTopics] = useState([])
+  useEffect(()=>
+    {
+      getAllTopics(sectionId)
+    },[])
 
-  /* =========================
-     FETCH TOPICS
-     ========================= */
-  useEffect(() => {
-    if (!sectionId) return;
+    async function getAllTopics(sectionId)
+    {
+      try
+      {
+        const response =  await getTopics(sectionId)
+        setTopics(response.data)
+        
 
-    const loadTopics = async () => {
-      setLoading(true);
-
-      const res = await fetchTopicsBySection(sectionId);
-      console.log("topics: ");
-      console.log(res);
-      /*
-        Expected response:
-        {
-          success: boolean,
-          data: Topic[]
-        }
-      */
-      if (res.success) {
-        setTopics(res.data || []);
-      } else {
-        toast.error(res.message || "Failed to load topics");
+      }
+      catch(error)
+      {
+        console.log(error)
+        toast.error("Failed to Fetch Topics")
       }
 
-      setLoading(false);
-    };
+    }
+  
 
-    loadTopics();
-  }, [sectionId]);
+    return (
+        <div className="show-topics-container">
+  
+  <h1 className="course-title">{}</h1>
+  <h1 className="section-title">Section {} – {}</h1>
 
-  return (
-    <div className="show-topics-container">
-      <h1 className="page-title">Topics</h1>
+  <div className="topics-list">
 
-      {loading && <p className="text-center">Loading topics...</p>}
+    {allTopics.length > 0 &&
+      allTopics.map((data, index) => {
+        return (
+           (
+            <div className="topic-card" key={index}>
+              
+              <div className="card-body">
+                <h5 className="card-title">
+                  Topic {data.topicNumber} – {data.title}
+                </h5>
 
-      {!loading && topics.length === 0 && (
-        <p className="text-center text-muted">
-          No topics added for this section yet.
-        </p>
-      )}
+                <p className="card-text">{data.description}</p>
 
-      <div className="topics-list">
-        {topics.map((topic) => (
-          <div className="topic-card" key={topic.topicId}>
-            <div className="topic-video-wrapper">
-              <video className="topic-video" src={topic.videoUrl} controls />
+                <button type="button" className="btn btn-secondary update-btn">
+                  Update Topic
+                </button>
+              </div>
+
+              <video className="topic-video" src={data.videoUrl} controls></video>
             </div>
+          )
+        );
+      })}
 
-            <div className="topic-content">
-              <h5 className="topic-title">{topic.title}</h5>
+  </div>
 
-              <p className="topic-description">
-                {topic.description || "No description provided"}
-              </p>
+</div>
 
-              {(topic.hour || topic.min) && (
-                <p className="topic-duration">
-                  Duration: {topic.hour ?? 0}h {topic.min ?? 0}m
-                </p>
-              )}
-
-              <button className="btn btn-outline-secondary btn-sm" disabled>
-                Update Topic
-              </button>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
+    )
 }
 
-export default ShowTopics;
+export default ShowTopic
+

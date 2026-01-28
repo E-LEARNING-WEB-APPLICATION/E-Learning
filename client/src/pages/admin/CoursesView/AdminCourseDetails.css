@@ -9,6 +9,10 @@
   font-weight: 700;
 }
 
+.admin-course-details .course-title{
+  color: #1E88E5
+}
+
 .graph-card {
   height: 100%;
 }
@@ -16,4 +20,59 @@
 .clickable:hover {
   transform: translateY(-3px);
   transition: 0.2s;
+}
+
+.course-title-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #4a77f3, #6a93ff);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Metric cards */
+.metric-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  margin-right: 12px;
+  font-size: 18px;
+}
+
+.metric-blue {
+  background: linear-gradient(135deg, #4a77f3, #6a93ff);
+}
+.metric-green {
+  background: linear-gradient(135deg, #00b894, #2ecc71);
+}
+.metric-purple {
+  background: linear-gradient(135deg, #6c5ce7, #a29bfe);
+}
+.metric-orange {
+  background: linear-gradient(135deg, #f0932b, #f9ca24);
+}
+
+.metric-icon.blue {
+  background: #4a77f3;
+}
+.metric-icon.green {
+  background: #00b894;
+}
+.metric-icon.purple {
+  background: #6c5ce7;
+}
+.metric-icon.orange {
+  background: #f0932b;
+}
+
+.course-info-box {
+  background: #f8f9fc;
+  border-left: 4px solid #4a77f3;
 }

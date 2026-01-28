@@ -1,7 +1,10 @@
 export const apiRequest = async (requestFn) => {
   try {
     const response = await requestFn();
-    return response.data;
+    // return response.data;
+    if (response.data != undefined) {
+      return response.data;
+    } else return response;
   } catch (error) {
     const message =
       error?.response?.data?.message ||

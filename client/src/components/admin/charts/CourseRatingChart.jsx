@@ -1,28 +1,24 @@
-import React from "react";
-import { ResponsiveContainer, BarChart, Tooltip, Legend } from "recharts";
-
-import ChartContainer from "@/components/admin/atoms/ChartContainer";
-import ChartBarAtom from "@/components/admin/atoms/ChartBarAtom";
-import NoDataAtom from "@/components/admin/atoms/NoDataAtom";
-import LoadingSpinnerAtom from "@/components/admin/atoms/LoadingSpinnerAtom";
+import { BarChart, Legend, ResponsiveContainer } from "recharts";
+import ChartContainer from "../atoms/ChartContainer";
+import LoadingSpinnerAtom from "../atoms/LoadingSpinnerAtom";
+import NoDataAtom from "../atoms/NoDataAtom";
 import { ChartXAxisAtom, ChartYAxisAtom } from "../atoms/ChartAxisAtom";
 import ChartTooltipAtom from "../atoms/ChartTooltipAtom";
-
-const CourseRatingChart = ({ data, loading }) => {
+const CourseRatingChart = ({ data = [], loading }) => {
   return (
     <ChartContainer title="Course Rating Overview">
       {loading ? (
         <LoadingSpinnerAtom />
-      ) : !data || data.length === 0 ? (
+      ) : data.length === 0 ? (
         <NoDataAtom />
       ) : (
         <ResponsiveContainer width="100%" height={300}>
           <BarChart data={data}>
-            <ChartXAxisAtom />
-            <ChartYAxisAtom />
-            <Tooltip />
+            <ChartXAxisAtom dataKey="courseName" />
+            <ChartYAxisAtom domain={[0, 5]} />
+            <ChartTooltipAtom />
             <Legend />
-            <ChartBarAtom dataKey="rating" color="#4a77f3" />
+            <ChartBarAtom dataKey="avgRating" color="#4a77f3" />
           </BarChart>
         </ResponsiveContainer>
       )}

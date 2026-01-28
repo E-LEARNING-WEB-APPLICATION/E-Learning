@@ -44,6 +44,8 @@ import { getWishlistCount } from "./services/wishlist";
 import { setWishlistCount } from "./slices/wishlist/wishlistSlice";
 import NotificationPage from "./pages/admin/Notifications/NotificationPage";
 import GuestDashboard from "./pages/guest/dashboard/GuestDashboard";
+import { getToken } from "./utils/auth";
+import ProtectedRoute from "./components/auth/ProtectedRoute";
 
 function App() {
   useNotificationSSE();
@@ -52,7 +54,7 @@ function App() {
 
   useEffect(() => {
     const initWishlistCount = async () => {
-      const token = localStorage.getItem("token"); // or whatever key you use
+      const token = getToken();
       if (!token) return;
 
       const response = await getWishlistCount();
@@ -72,10 +74,7 @@ function App() {
           {/* Redirect root to /guest */}
           <Route path="/" element={<Navigate to="/guest" />} />
           <Route path="/guest" element={<GuestLayout />}>
-            <Route
-              path=""
-              element={<GuestDashboard />}
-            />
+            <Route path="" element={<GuestDashboard />} />
             <Route
               path="courses/category/:categoryId"
               element={<CategoryCourses />}
@@ -93,64 +92,82 @@ function App() {
             <Route path="contactus" element={<ContactUs />} />
           </Route>
           {/* Student Routes */}
-          <Route path="/student" element={<StudentLayout />}>
-            <Route path="dashboard" element={<StudentDashboard />} />
-            <Route path="course-details" element={<CourseDetails />} />
-            <Route path="mycourses" element={<MyCourses />} />
-            <Route path="wishlist" element={<WishList />} />
-            <Route path="aboutus" element={<AboutUs />} />
-            <Route path="contactus" element={<ContactUs />} />
-            <Route path="profile" element={<StudentProfile />} />
-            <Route
-              path="enrolled-course-details"
-              element={<CourseEnrolledPage />}
-            />
-            <Route
-              path="courses/category/:categoryId"
-              element={<CategoryCourses />}
-            />
+          <Route element={<ProtectedRoute allowedRoles={["STUDENT"]} />}>
+            <Route path="/student" element={<StudentLayout />}>
+              <Route path="dashboard" element={<StudentDashboard />} />
+              <Route path="course-details" element={<CourseDetails />} />
+              <Route path="mycourses" element={<MyCourses />} />
+              <Route path="wishlist" element={<WishList />} />
+              <Route path="aboutus" element={<AboutUs />} />
+              <Route path="contactus" element={<ContactUs />} />
+              <Route path="profile" element={<StudentProfile />} />
+              <Route
+                path="enrolled-course-details"
+                element={<CourseEnrolledPage />}
+              />
+              <Route
+                path="courses/category/:categoryId"
+                element={<CategoryCourses />}
+              />
+            </Route>
           </Route>
           {/* Instructor Routes */}
-          <Route path="/instructor" element={<InstructorLayout />}>
-            <Route path="dashboard" element={<InstructorDashboard />} />
-            <Route path="addCourse" element={<AddCourse />} />
-            <Route path="addedCourses" element={<AddedCourses />} />
-            <Route path="addedCourses/add-section/:courseId" element={<AddSection />} />
-            <Route path="profile" element={<InstructorProfile />} />
-            <Route path="aboutus" element={<AboutUs />} />
-            <Route
+          <Route element={<ProtectedRoute allowedRoles={["INSTRUCTOR"]} />}>
+            <Route path="/instructor" element={<InstructorLayout />}>
+              <Route path="dashboard" element={<InstructorDashboard />} />
+              <Route path="addCourse" element={<AddCourse />} />
+              <Route path="addedCourses" element={<AddedCourses />} />
+              <Route path="addedCourses/add-section/:courseId" element={<AddSection />} />
+              <Route path="profile" element={<InstructorProfile />} />
+              <Route path="aboutus" element={<AboutUs />} />
+              <Route
               path="addedCourses/show-sections/:courseId"
               element={<ShowSection />}
             />
-            <Route
+              <Route
               path="addedCourses/show-sections/show-topics/:sectionId"
               element={<ShowTopic />}
             />
+            </Route>
           </Route>
           {/* Admin Routes */}
-          <Route path="/admin" element={<AdminLayout />}>
-            <Route path="dashboard" element={<AdminDashboard />} />
-            <Route path="courses/:courseId" element={<AdminCourseDetails />} />
-            <Route path="course-categories" element={<AdminCategoryPage />} />
-            <Route path="courses" element={<AdminCourses />} />
-            <Route path="instructors" element={<InstructorsList />} />
-            <Route path="instructor-courses" element={<InstructorCourses />} />
-            <Route
-              path="instructor-requests"
-              element={<InstructorRequests />}
-            />
-            <Route path="notifications" element={<NotificationPage />} />
-            <Route path="add-admin" element={<AddAdminPage />} />
-            <Route path="analytics" element={<AnalyticsLayout />}>
-              <Route path="course" element={<CourseAnalyticsPage />} />
-              <Route path="student" element={<StudentAnalyticsPage />} />
-              <Route path="instructor" element={<InstructorAnalyticsPage />} />
+          <Route element={<ProtectedRoute allowedRoles={["ADMIN"]} />}>
+            <Route path="/admin" element={<AdminLayout />}>
+              <Route path="dashboard" element={<AdminDashboard />} />
+              <Route
+                path="courses/:courseId"
+                element={<AdminCourseDetails />}
+              />
+              <Route path="course-categories" element={<AdminCategoryPage />} />
+              <Route path="courses" element={<AdminCourses />} />
+              <Route path="instructors" element={<InstructorsList />} />
+              <Route
+                path="instructor-courses"
+                element={<InstructorCourses />}
+              />
+              <Route
+                path="instructor-requests"
+                element={<InstructorRequests />}
+              />
+              <Route path="notifications" element={<NotificationPage />} />
+              <Route path="add-admin" element={<AddAdminPage />} />
+              <Route path="analytics" element={<AnalyticsLayout />}>
+                <Route path="course" element={<CourseAnalyticsPage />} />
+                <Route path="student" element={<StudentAnalyticsPage />} />
+                <Route
+                  path="instructor"
+                  element={<InstructorAnalyticsPage />}
+                />
+              </Route>
+              <Route
+                path="profile-view/:instructorId"
+                element={<ProfileView />}
+              />
+              <Route
+                path="instructor-requests"
+                element={<InstructorRequests />}
+              />
             </Route>
-            <Route path="profile-view/:instructorId" element={<ProfileView />} />
-            <Route
-              path="instructor-requests"
-              element={<InstructorRequests />}
-            />
           </Route>
         </Routes>
       </div>

@@ -5,11 +5,15 @@ import { useDispatch } from "react-redux";
 import { resetWishlist } from "@/slices/wishlist/wishlistSlice";
 import "./StudentNavbar.css";
 import { toast } from "react-toastify";
+import { useUnreadCount } from "@/hooks/useUnreadCount";
+import { IoMdNotifications } from "react-icons/io";
+import { Badge } from "react-bootstrap";
 
 function StudentNavbar() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const wishlistCount = useSelector((state) => state.wishlist.value.count);
+  const { data: unreadCount } = useUnreadCount();
 
   const handleLogout = () => {
     // Clear Redux state
@@ -99,12 +103,13 @@ function StudentNavbar() {
 
             <li className="nav-item" style={{ marginLeft: "7px" }}>
               <NavLink
-                to="/student/notification"
+                to="/student/notifications"
                 className={({ isActive }) =>
                   isActive ? "nav-link active-link" : "nav-link"
                 }
               >
-                Notifications
+                <IoMdNotifications className="icon" />
+                <Badge bg="info">{unreadCount > 0 && `(${unreadCount})`}</Badge>
               </NavLink>
             </li>
 

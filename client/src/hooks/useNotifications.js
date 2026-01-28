@@ -6,6 +6,6 @@ export function useNotifications(isRead) {
     queryKey: ["notifications", { isRead }],
     queryFn: () => fetchNotifications(isRead),
     initialData: [],
-    // select: (page) => page.content,
+    refetchOnWindowFocus: false
   });
 }

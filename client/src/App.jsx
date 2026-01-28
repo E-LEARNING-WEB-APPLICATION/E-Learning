@@ -47,6 +47,7 @@ import GuestDashboard from "./pages/guest/dashboard/GuestDashboard";
 import { getToken } from "./utils/auth";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import StudentNotificationsPage from "./pages/student/notifications/StudentNotifications";
+import AdminSettings from "./pages/admin/Settings/AdminSettings";
 
 function App() {
   useNotificationSSE();
@@ -155,6 +156,7 @@ function App() {
                 element={<InstructorRequests />}
               />
               <Route path="notifications" element={<NotificationPage />} />
+              <Route path="settings" element={<AdminSettings />} />
               <Route path="add-admin" element={<AddAdminPage />} />
               <Route path="analytics" element={<AnalyticsLayout />}>
                 <Route path="course" element={<CourseAnalyticsPage />} />

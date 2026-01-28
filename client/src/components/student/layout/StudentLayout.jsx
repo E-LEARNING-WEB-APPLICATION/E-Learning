@@ -2,9 +2,10 @@ import React from "react";
 import { Navigate, Outlet, useLocation } from "react-router-dom";
 import Footer from "../../footer/Footer";
 import StudentNavbar from "../navbar/StudentNavbar";
+import { getToken } from "@/utils/auth";
 
 const StudentLayout = () => {
-  const token = localStorage.getItem("token");
+  const token = getToken();
   const location = useLocation();
 
   if (!token) {

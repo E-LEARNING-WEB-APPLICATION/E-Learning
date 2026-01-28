@@ -1,16 +1,17 @@
 import { useEffect } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { API_BASE_PATH, API_URL } from "@/utils/apiClient";
+import { getToken } from "@/utils/auth";
 
 export function useNotificationSSE() {
   const queryClient = useQueryClient();
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
+    const token = getToken();
     if (!token) return;
 
     const eventSource = new EventSource(
-      `${API_URL}${API_BASE_PATH}/notifications/stream?token=${localStorage.getItem("token")}`,
+      `${API_URL}${API_BASE_PATH}/notifications/stream?token=${token}`,
     );
 
     eventSource.addEventListener("notification", (event) => {

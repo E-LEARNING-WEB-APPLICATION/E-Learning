@@ -4,6 +4,9 @@ import { toast } from "react-toastify";
 import { createBooking, verifyPayment } from "@/services/booking";
 import Loader from "@/components/shared/Loader";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { removeFromWishlist } from "@/services/wishlist";
+import { removeCourseFromWishlist } from "@/slices/wishlist/wishlistSlice";
 
 const ActionSection = ({ course }) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -12,6 +15,7 @@ const ActionSection = ({ course }) => {
   const [isEnrolled, setIsEnrolled] = useState(false);
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   if (!course) return null;
 
   // ===== Price Calculation (UI ONLY) =====
@@ -99,6 +103,12 @@ const ActionSection = ({ course }) => {
             );
 
             setIsEnrolled(true);
+            try {
+              await removeFromWishlist(course.courseId);
+              dispatch(removeCourseFromWishlist(course.courseId));
+            } catch {
+              console.warn("Course was not in wishlist or already removed");
+            }
             navigate("/student/mycourses");
           } catch {
             toast.error(

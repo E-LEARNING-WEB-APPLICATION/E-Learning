@@ -3,6 +3,7 @@ import "./ActionSection.css";
 import { toast } from "react-toastify";
 import { createBooking, verifyPayment } from "@/services/booking";
 import Loader from "@/components/shared/Loader";
+import { useNavigate } from "react-router-dom";
 
 const ActionSection = ({ course }) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -10,6 +11,7 @@ const ActionSection = ({ course }) => {
   const [isVerifying, setIsVerifying] = useState(false);
   const [isEnrolled, setIsEnrolled] = useState(false);
 
+  const navigate = useNavigate();
   if (!course) return null;
 
   // ===== Price Calculation (UI ONLY) =====
@@ -97,6 +99,7 @@ const ActionSection = ({ course }) => {
             );
 
             setIsEnrolled(true);
+            navigate("/student/mycourses");
           } catch {
             toast.error(
               <div className="toast-card">

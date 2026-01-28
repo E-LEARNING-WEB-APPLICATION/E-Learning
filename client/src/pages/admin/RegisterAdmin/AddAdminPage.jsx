@@ -75,7 +75,7 @@ export default function AddAdminPage() {
     const formdata = buildFormData();
     const res = await registerAdmin(formdata);
     if (res.success) {
-      toast.success("Instructor registered");
+      toast.success("Admin registered");
     } else {
       toast.error(res.message);
     }
@@ -216,7 +216,6 @@ export default function AddAdminPage() {
     </div>
   );
 }
-
 
 function Section({ title, children }) {
   return (

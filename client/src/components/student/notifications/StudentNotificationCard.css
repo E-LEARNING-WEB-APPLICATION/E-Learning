@@ -1,0 +1,87 @@
+.notification-card {
+  transition: all 0.2s ease;
+  border: none;
+}
+
+.notification-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+.notification-card:active {
+  transform: scale(0.99);
+}
+
+/* Accent strip */
+.priority-accent {
+  position: absolute;
+  left: 0;
+  top: 10%;
+  width: 6px;
+  height: 80%;
+  border-radius: 0 8px 8px 0;
+  filter: blur(0.3px);
+}
+
+/* Gradient styles */
+.priority-accent.high {
+  background: linear-gradient(
+    180deg,
+    rgba(220, 53, 69, 0.9),
+    rgba(220, 53, 69, 0.4)
+  );
+}
+
+.priority-accent.medium {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 193, 7, 0.9),
+    rgba(255, 193, 7, 0.4)
+  );
+}
+
+.priority-accent.low {
+  background: linear-gradient(
+    180deg,
+    rgba(108, 117, 125, 0.9),
+    rgba(108, 117, 125, 0.4)
+  );
+}
+
+/* Icon bubble */
+.notification-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: rgba(13, 110, 253, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Unread emphasis */
+.notification-card.unread {
+  background: linear-gradient(90deg, rgba(13, 110, 253, 0.04), transparent);
+}
+
+@media (max-width: 576px) {
+  .notification-card .card-body {
+    gap: 0.75rem;
+  }
+
+  .notification-icon {
+    width: 36px;
+    height: 36px;
+    font-size: 1rem;
+  }
+
+  .notification-card {
+    border-radius: 18px;
+  }
+}
+
+.disabled-div {
+  pointer-events: none; /* Prevents all mouse events */
+  opacity: 0.5; /* Visually indicates the disabled state */
+  cursor: not-allowed; /* Changes the cursor on hover */
+}

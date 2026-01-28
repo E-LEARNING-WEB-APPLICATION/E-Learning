@@ -46,6 +46,8 @@ import NotificationPage from "./pages/admin/Notifications/NotificationPage";
 import GuestDashboard from "./pages/guest/dashboard/GuestDashboard";
 import { getToken } from "./utils/auth";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
+import StudentNotificationsPage from "./pages/student/notifications/StudentNotifications";
+import AdminSettings from "./pages/admin/Settings/AdminSettings";
 
 function App() {
   useNotificationSSE();
@@ -98,6 +100,10 @@ function App() {
               <Route path="course-details" element={<CourseDetails />} />
               <Route path="mycourses" element={<MyCourses />} />
               <Route path="wishlist" element={<WishList />} />
+              <Route
+                path="notifications"
+                element={<StudentNotificationsPage />}
+              />
               <Route path="aboutus" element={<AboutUs />} />
               <Route path="contactus" element={<ContactUs />} />
               <Route path="profile" element={<StudentProfile />} />
@@ -117,17 +123,17 @@ function App() {
               <Route path="dashboard" element={<InstructorDashboard />} />
               <Route path="addCourse" element={<AddCourse />} />
               <Route path="addedCourses" element={<AddedCourses />} />
-              <Route path="addedCourses/add-section" element={<AddSection />} />
+              <Route path="addedCourses/add-section/:courseId" element={<AddSection />} />
               <Route path="profile" element={<InstructorProfile />} />
               <Route path="aboutus" element={<AboutUs />} />
               <Route
-                path="addedCourses/show-sections"
-                element={<ShowSection />}
-              />
+              path="addedCourses/show-sections/:courseId"
+              element={<ShowSection />}
+            />
               <Route
-                path="addedCourses/show-sections/show-topics"
-                element={<ShowTopic />}
-              />
+              path="addedCourses/show-sections/show-topics/:sectionId"
+              element={<ShowTopic />}
+            />
             </Route>
           </Route>
           {/* Admin Routes */}
@@ -150,6 +156,7 @@ function App() {
                 element={<InstructorRequests />}
               />
               <Route path="notifications" element={<NotificationPage />} />
+              <Route path="settings" element={<AdminSettings />} />
               <Route path="add-admin" element={<AddAdminPage />} />
               <Route path="analytics" element={<AnalyticsLayout />}>
                 <Route path="course" element={<CourseAnalyticsPage />} />

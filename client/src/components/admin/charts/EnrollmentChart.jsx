@@ -21,11 +21,19 @@ const EnrollmentChart = ({ data, loading }) => {
       ) : (
         <ResponsiveContainer width="100%" height={300}>
           <LineChart data={data}>
-            <ChartXAxisAtom />
+            {/* expects: { label: "Jan 2025" } */}
+            <ChartXAxisAtom dataKey="label" />
             <ChartYAxisAtom />
+
             <Tooltip content={<ChartTooltipAtom />} />
             <Legend />
-            <ChartLineAtom dataKey="enrollments" color="#4a77f3" />
+
+            {/* expects: { enrollments: number } */}
+            <ChartLineAtom
+              dataKey="enrollments"
+              name="Enrollments"
+              color="#4a77f3"
+            />
           </LineChart>
         </ResponsiveContainer>
       )}

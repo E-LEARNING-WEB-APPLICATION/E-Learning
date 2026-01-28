@@ -1,0 +1,37 @@
+.top-courses-table th {
+  font-weight: 600;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  color: #6c757d;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.top-courses-table td {
+  vertical-align: middle;
+  font-size: 0.95rem;
+}
+
+.sortable {
+  cursor: pointer;
+  user-select: none;
+}
+
+.sort-icon {
+  margin-left: 6px;
+  font-size: 0.75rem;
+  opacity: 0.7;
+}
+
+.table-wrapper {
+  max-height: 320px;
+  overflow-y: auto;
+}
+
+.clickable-row {
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.clickable-row:hover {
+  background-color: #f8f9fa;
+}

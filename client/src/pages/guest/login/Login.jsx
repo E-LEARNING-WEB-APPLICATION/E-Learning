@@ -4,7 +4,7 @@ import { FaEnvelope, FaLock } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { signIn } from "@/services/authService";
 import { toast } from "react-toastify";
-import {jwtDecode}  from 'jwt-decode';
+import { jwtDecode } from "jwt-decode";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -83,7 +83,7 @@ const Login = () => {
           <p className="text-center mt-4">
             Don't have an account.?{" "}
             <button
-              type="submit"
+              type="button"
               className="text-decoration-underline fw-semibold btn btn-link"
               style={{ color: "#112d4e" }}
               onClick={() => {

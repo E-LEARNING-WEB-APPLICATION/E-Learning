@@ -12,12 +12,14 @@ import {
   FaUserPlus,
 } from "react-icons/fa";
 import { IoMdNotifications } from "react-icons/io";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import "./layout.css";
 import { useUnreadCount } from "@/hooks/useUnreadCount";
 import { Badge } from "react-bootstrap";
 
 const Sidebar = ({ onToggle }) => {
+  const navigate = useNavigate();
+
   const [collapsed, setCollapsed] = useState(false);
 
   // Submenus open/close
@@ -42,6 +44,11 @@ const Sidebar = ({ onToggle }) => {
   };
 
   const isActive = (path) => location.pathname.startsWith(path);
+
+  const logoutHandler = () => {
+    localStorage.clear();
+    navigate("/guest/login");
+  };
 
   return (
     <div className={`sidebar ${collapsed ? "collapsed" : ""}`}>
@@ -213,7 +220,11 @@ const Sidebar = ({ onToggle }) => {
               </span>
             </div>
             <div className="item">View Profile</div>
-            <div className="item" style={{ color: "red" }}>
+            <div
+              className="item"
+              style={{ color: "red" }}
+              onClick={logoutHandler}
+            >
               Logout
             </div>
           </div>

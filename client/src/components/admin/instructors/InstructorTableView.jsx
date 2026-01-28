@@ -185,18 +185,14 @@ const InstructorTableView = ({ instructors, handleRemove }) => {
                         }}
                       />
                       <div>
-                        <strong>
-                          {ins.firstName} {ins.lastName}
-                        </strong>
-
-                        <div>
-                          <Link
-                            to={`/admin/instructors/${ins.instructorId}`}
-                            className="small text-primary text-decoration-underline"
-                          >
-                            View Profile
-                          </Link>
-                        </div>
+                        <Link
+                          to={`/admin/profile-view/${ins.instructorId}`}
+                          className="text-primary text-decoration-none"
+                        >
+                          <strong>
+                            {ins.firstName} {ins.lastName}
+                          </strong>
+                        </Link>
                       </div>
                     </div>
                   </td>

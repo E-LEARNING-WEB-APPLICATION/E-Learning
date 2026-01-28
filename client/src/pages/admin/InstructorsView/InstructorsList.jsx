@@ -8,7 +8,7 @@ import { fetchAllInstructors } from "@/services/admin/instructorService";
 
 const InstructorsList = () => {
   const [instructors, setInstructors] = useState([]);
-  const [view, setView] = useState("grid");
+  const [view, setView] = useState("table");
 
   const fetchInstructors = () => {
     fetchAllInstructors().then((data) => setInstructors(data));

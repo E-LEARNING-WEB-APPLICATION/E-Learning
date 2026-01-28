@@ -10,8 +10,6 @@ import LoadingSpinnerAtom from "@/components/admin/atoms/LoadingSpinnerAtom";
 const COLORS = ["#4a77f3", "#ff7675", "#55efc4", "#ffeaa7", "#fd79a8"];
 
 const CategoryPieChart = ({ data, loading }) => {
-  console.log(data);
-  data.map((_, i) => console.log(i));
   return (
     <ChartContainer title="Category Distribution">
       {loading ? (
@@ -23,12 +21,16 @@ const CategoryPieChart = ({ data, loading }) => {
           <PieChart>
             <Tooltip content={<ChartTooltipAtom />} />
             <Legend />
+
+            {/* expects:
+                { category: "Frontend", value: 20 }
+            */}
             <ChartPieAtom
+              data={data}
               dataKey="value"
               nameKey="category"
-              data={data}
               colors={COLORS}
-            ></ChartPieAtom>
+            />
           </PieChart>
         </ResponsiveContainer>
       )}

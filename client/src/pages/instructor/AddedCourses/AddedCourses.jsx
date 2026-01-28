@@ -1,118 +1,107 @@
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+import React, { useEffect, useState } from "react";
 import "../AddedCourses/AddedCourses.css";
-
-import { fetchAddedCourses } from "@/services/Instructor/courseService";
+import { getAddedCourses } from "./../../../services/Instructor/addCourse.js";
+import { useNavigate } from "react-router-dom";
 
 function AddedCourses() {
-  const navigate = useNavigate();
+  const navigator = useNavigate();
+  const [data, setData] = useState([]);
 
-  const [courses, setCourses] = useState([]);
-  const [loading, setLoading] = useState(false);
-
-  /* =========================
-     FETCH COURSES
-     ========================= */
   useEffect(() => {
-    loadCourses();
+    displayAllCourses();
   }, []);
 
-  const loadCourses = async () => {
-    setLoading(true);
+  async function displayAllCourses() {
+    const response = await getAddedCourses();
+    setData(response);
+  }
 
-    const res = await fetchAddedCourses();
-
-    /*
-      Expected shape:
-      {
-        success: boolean,
-        data: Course[]
-      }
-    */
-    if (res?.success) {
-      setCourses(res.data || []);
-    } else {
-      toast.error(res?.message || "Failed to fetch courses");
-    }
-
-    setLoading(false);
-  };
-
-  /* =========================
-     NAVIGATION
-     ========================= */
-  const goToAddSection = (course) => {
-    navigate("add-section", {
-      state: { courseData: course },
+  function goToAddSection(courseName,courseId) {
+    navigator(`add-section/${courseId}`, {
+      state: {
+        courseName,
+      },
     });
-  };
+  }
 
-  const handleShowSections = (course) => {
-    navigate("show-sections", {
-      state: { courseData: course },
+  function handleShowSections(courseName,courseId) {
+    console.log("1",courseId,typeof(courseId))
+    navigator(`show-sections/${courseId}`, {
+      state: {
+        courseName
+      },
     });
-  };
+  }
 
   return (
-    <div className="container added-courses-page">
-      <h1 className="page-heading">My Courses</h1>
+    <div className="container">
+      <h1 className="page-heading">Added Courses</h1>
 
-      {loading && <p className="text-center">Loading courses...</p>}
+      <div className="myrow">
+        {data.map((data, index) => {
+          return (
+            <div className="outer-div">
+              <div key={index}>
+                <div className="card mb-3 ">
+                  <img
+                    className="card-img-top "
+                    src={data.thumbnail}
+                    alt="Card image cap"
+                    height={"150px"}
+        
+                  />
+                  <div className="card-body">
+                    <h5 className="card-title">{data.title}</h5>
+                    <p className="card-text">{data.description}</p>
 
-      {!loading && courses.length === 0 && (
-        <p className="text-center text-muted">
-          You haven’t added any courses yet.
-        </p>
-      )}
+                    <div className="buttons">
+                      <div>
+                        <button
+                          type="button"
+                          className="btn btn-primary show-section-button"
+                          onClick={() => {
+                            handleShowSections(data.title,data.courseId);
+                          }}
+                        >
+                          Show Sections
+                        </button>
+                      </div>
 
-      <div className="row">
-        {courses.map((course) => (
-          <div className="col-md-4 mb-4" key={course.courseId}>
-            <div className="card course-card h-100">
-              <img
-                className="card-img-top"
-                src={course.thumbnail || "/placeholder-course.png"}
-                alt={course.title}
-                height="180"
-              />
+                      <div>
+                        <button
+                          type="button"
+                          className="btn btn-primary add-section-button"
+                          onClick={() => {
+                            goToAddSection(data.title,data.courseId);
+                          }}
+                        >
+                          Add Sections
+                        </button>
+                      </div>
+                      <div>
+                        <button
+                          type="button"
+                          className="btn btn-secondary edit-course-button"
+                        >
+                          Edit Course
+                        </button>
+                      </div>
+                    </div>
 
-              <div className="card-body d-flex flex-column">
-                <h5 className="card-title">{course.title}</h5>
-                <p className="card-text text-muted">
-                  {course.description || "No description provided"}
-                </p>
-
-                <div className="mt-auto">
-                  <button
-                    className="btn btn-outline-primary w-100 mb-2"
-                    onClick={() => handleShowSections(course)}
-                  >
-                    Show Sections
-                  </button>
-
-                  <button
-                    className="btn btn-primary w-100 mb-2"
-                    onClick={() => goToAddSection(course)}
-                  >
-                    Add Section
-                  </button>
-
-                  <button
-                    className="btn btn-outline-secondary w-100 mb-2"
-                    disabled
-                  >
-                    Edit Course
-                  </button>
-
-                  {/* <button className="btn btn-success w-100" disabled>
-                    Publish Course
-                  </button> */}
+                    <div className="publish-button">
+                      <button
+                        type="button"
+                        className="btn btn-success publish-course-buttons"
+                      >
+                        Publish Course
+                      </button>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );

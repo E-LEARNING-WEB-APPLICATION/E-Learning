@@ -1,19 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { FaHeart, FaTrash } from "react-icons/fa";
-import "./WishList.css";
+import { FaHeart } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { getWishlist, removeFromWishlist } from "@/services/wishlist";
 import { removeCourseFromWishlist } from "@/slices/wishlist/wishlistSlice";
 import { toast } from "react-toastify";
 import Loader from "@/components/shared/Loader";
+import StudentCourseCard from "@/components/student/studentDashboard/StudentCourseCard";
 
 const WishList = () => {
   const [wishlistCourses, setWishlistCourses] = useState([]);
   const [loading, setLoading] = useState(true);
-
   const dispatch = useDispatch();
 
-  /* ---------- Fetch Wishlist ---------- */
   useEffect(() => {
     const fetchWishlist = async () => {
       try {
@@ -29,24 +27,19 @@ const WishList = () => {
     fetchWishlist();
   }, []);
 
-  /* ---------- Remove from Wishlist ---------- */
   const handleRemove = async (courseId) => {
     const response = await removeFromWishlist(courseId);
 
     if (response?.success) {
-      // Update UI
       setWishlistCourses((prev) =>
         prev.filter((course) => course.courseId !== courseId),
       );
 
-      // Update Redux (count + ids)
       dispatch(removeCourseFromWishlist(courseId));
-
       toast.success("Removed from wishlist");
     }
   };
 
-  /* ---------- Loading ---------- */
   if (loading) {
     return (
       <div
@@ -58,7 +51,6 @@ const WishList = () => {
     );
   }
 
-  /* ---------- Empty State ---------- */
   if (wishlistCourses.length === 0) {
     return (
       <div className="container text-center py-5">
@@ -72,54 +64,23 @@ const WishList = () => {
   }
 
   return (
-    <div className="wishlist-container container py-5">
-      <h2
-        className="text-center mb-4 wishlist-title"
-        style={{ textDecoration: "underline" }}
-      >
+    <div className="container py-5">
+      <h2 className="text-center mb-4">
         <FaHeart className="me-2 text-danger" /> My Wishlist
       </h2>
 
       <div className="row g-4">
         {wishlistCourses.map((course) => (
-          <div
-            className="col-12 col-sm-6 col-md-4 col-lg-3 mb-4"
+          <StudentCourseCard
             key={course.courseId}
-          >
-            <div className="card wishlist-card shadow-sm h-100">
-              <img
-                className="card-img-top"
-                src={course.thumbnail}
-                alt={course.title}
-              />
-
-              <div className="card-body d-flex flex-column">
-                <h5 className="card-title fw-semibold">{course.title}</h5>
-
-                <div className="mt-auto">
-                  {/* Description */}
-                  <p className="card-text text-muted small mb-2">
-                    {course.desc}
-                  </p>
-
-                  {/* Price + Remove */}
-                  <div className="d-flex justify-content-between align-items-center">
-                    <span className="fw-bold fs-6 text-primary">
-                      ₹{course.fees}
-                    </span>
-
-                    <button
-                      className="btn btn-outline-danger btn-sm d-flex align-items-center"
-                      onClick={() => handleRemove(course.courseId)}
-                    >
-                      <FaTrash className="me-2" />
-                      Remove
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+            course={{
+              ...course,
+              id: course.courseId, // normalize id
+            }}
+            page="wishlist"
+            showRemove
+            onRemove={handleRemove}
+          />
         ))}
       </div>
     </div>

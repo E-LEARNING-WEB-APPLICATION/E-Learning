@@ -1,10 +1,12 @@
 import React from "react";
+import { motion as Motion } from "framer-motion";
+
 
 const InstructorDashboardStatCards = ({ stats }) => {
     return (
         <div className="instructor-dashboard__stats-grid--8">
             {stats.map((s, i) => (
-                <motion.div
+                <Motion.div
                     key={i}
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -16,7 +18,7 @@ const InstructorDashboardStatCards = ({ stats }) => {
                     <h2 className="instructor-dashboard__stat-value">
                         {s.value}
                     </h2>
-                </motion.div>
+                </Motion.div>
             ))}
         </div>
     );

@@ -46,6 +46,7 @@ import NotificationPage from "./pages/admin/Notifications/NotificationPage";
 import GuestDashboard from "./pages/guest/dashboard/GuestDashboard";
 import { getToken } from "./utils/auth";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
+import StudentNotificationsPage from "./pages/student/notifications/StudentNotifications";
 
 function App() {
   useNotificationSSE();
@@ -98,6 +99,10 @@ function App() {
               <Route path="course-details" element={<CourseDetails />} />
               <Route path="mycourses" element={<MyCourses />} />
               <Route path="wishlist" element={<WishList />} />
+              <Route
+                path="notifications"
+                element={<StudentNotificationsPage />}
+              />
               <Route path="aboutus" element={<AboutUs />} />
               <Route path="contactus" element={<ContactUs />} />
               <Route path="profile" element={<StudentProfile />} />

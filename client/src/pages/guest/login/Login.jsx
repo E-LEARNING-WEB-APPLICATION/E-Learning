@@ -49,7 +49,7 @@ const Login = () => {
       localStorage.setItem("role", role);
 
       if (role === "ADMIN") navigate("/admin/dashboard");
-      else if (role === "INSTRUCTOR") navigate("/instructor/addedCourses");
+      else if (role === "INSTRUCTOR") navigate("/instructor/dashboard");
       else navigate("/student/dashboard");
     } else {
       toast.error(response.message);

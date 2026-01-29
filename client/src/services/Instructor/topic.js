@@ -30,3 +30,29 @@ export async function getTopics( sectionId )
 
 
 
+export async function getTopicById(topicId) {
+  return axios.get(
+    `http://localhost:8080/api/v1/instructor/getTopic/${topicId}`,
+    {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    }
+  );
+}
+
+export async function updateTopic(formData) {
+  return axios.put(
+    "http://localhost:8080/api/v1/instructor/updateTopic",
+    formData,
+    {
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    }
+  );
+}
+
+
+

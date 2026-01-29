@@ -33,6 +33,10 @@ function AddedCourses() {
     });
   }
 
+  function handleEdit(courseId) {
+    navigator(`editCourse/${courseId}`);
+  }
+
   return (
     <div className="container">
       <h1 className="page-heading">Added Courses</h1>
@@ -82,6 +86,10 @@ function AddedCourses() {
                         <button
                           type="button"
                           className="btn btn-secondary edit-course-button"
+                          onClick={()=>
+                          {
+                            handleEdit(data.courseId)
+                          }}
                         >
                           Edit Course
                         </button>

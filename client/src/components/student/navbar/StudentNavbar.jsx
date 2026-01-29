@@ -31,7 +31,7 @@ function StudentNavbar() {
     });
 
     // Redirect immediately
-    navigate("/guest/login", { replace: true });
+    navigate("/", { replace: true });
   };
 
   return (

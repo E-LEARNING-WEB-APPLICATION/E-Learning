@@ -49,6 +49,7 @@ import ProtectedRoute from "./components/auth/ProtectedRoute";
 import StudentNotificationsPage from "./pages/student/notifications/StudentNotifications";
 import AdminSettings from "./pages/admin/Settings/AdminSettings";
 import EditCourse from "./pages/instructor/EditCourse/EditCourse";
+import EditSection from "./pages/instructor/EditSection/EditSection";
 
 function App() {
   useNotificationSSE();
@@ -132,6 +133,11 @@ function App() {
               path="addedCourses/show-sections/:courseId"
               element={<ShowSection />}
             />
+            <Route
+              path="addedCourses/editSection/:sectionId"
+              element={<EditSection />}
+            />
+            instructor/addedCourses/editSection
               <Route
               path="addedCourses/show-sections/show-topics/:sectionId"
               element={<ShowTopic />}

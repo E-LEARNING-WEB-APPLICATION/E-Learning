@@ -37,7 +37,7 @@ function ShowSection() {
 
   async function loadSections() {
     try {
-      const response = await getAllSections(courseId);
+      const response = await getAllSections(courseId.courseId);
       setSectionData(response.data);
     } catch (error) {
       console.error(error);
@@ -119,6 +119,12 @@ function ShowSection() {
     setIsSubmitting(false);
   }
 
+  function handleSectionEdit(sectionId)
+  {
+      navigate(`/instructor/addedCourses/editSection/${sectionId}`)
+
+  }
+
   return (
     <div>
       <h1 className="page-title">Sections for the Course</h1>
@@ -152,7 +158,11 @@ function ShowSection() {
                 Add Topics
               </button>
 
-              <button className="btn btn-secondary sections-buttons">
+              <button 
+              onClick={()=>
+              {
+                handleSectionEdit(data.sectionId)
+              }} className="btn btn-secondary sections-buttons" >
                 Edit Section
               </button>
 

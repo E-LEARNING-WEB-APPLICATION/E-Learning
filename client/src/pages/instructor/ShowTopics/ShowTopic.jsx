@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
 import './ShowTopics.css'
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { getTopics } from '@/services/Instructor/topic';
 
 function ShowTopic() {
 
+  const navigate = useNavigate()
   const sectionId = useParams("sectionId")
   const [allTopics,setTopics] = useState([])
   useEffect(()=>
@@ -28,6 +29,12 @@ function ShowTopic() {
         toast.error("Failed to Fetch Topics")
       }
 
+    }
+
+
+    function handleEditTopic(topicId)
+    {
+      navigate(`/instructor/addedCourses/show-sections/update-topic/${topicId}`)
     }
   
 
@@ -52,7 +59,10 @@ function ShowTopic() {
 
                 <p className="card-text">{data.description}</p>
 
-                <button type="button" className="btn btn-secondary update-btn">
+                <button onClick={()=>
+                {
+                  handleEditTopic(data.topicId)
+                }} type="button" className="btn btn-secondary update-btn">
                   Update Topic
                 </button>
               </div>

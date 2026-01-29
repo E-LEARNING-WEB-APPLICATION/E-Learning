@@ -50,6 +50,7 @@ import StudentNotificationsPage from "./pages/student/notifications/StudentNotif
 import AdminSettings from "./pages/admin/Settings/AdminSettings";
 import EditCourse from "./pages/instructor/EditCourse/EditCourse";
 import EditSection from "./pages/instructor/EditSection/EditSection";
+import UpdateTopic from "./pages/instructor/UpdateTopic/UpdateTopic";
 
 function App() {
   useNotificationSSE();
@@ -142,6 +143,11 @@ function App() {
               path="addedCourses/show-sections/show-topics/:sectionId"
               element={<ShowTopic />}
             />
+              <Route
+                path="addedCourses/show-sections/update-topic/:topicId"
+                element={<UpdateTopic />}
+              />
+
             </Route>
           </Route>
           {/* Admin Routes */}

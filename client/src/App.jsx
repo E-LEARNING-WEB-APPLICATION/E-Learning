@@ -48,6 +48,7 @@ import { getToken } from "./utils/auth";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import StudentNotificationsPage from "./pages/student/notifications/StudentNotifications";
 import AdminSettings from "./pages/admin/Settings/AdminSettings";
+import EditCourse from "./pages/instructor/EditCourse/EditCourse";
 
 function App() {
   useNotificationSSE();
@@ -124,6 +125,7 @@ function App() {
               <Route path="addCourse" element={<AddCourse />} />
               <Route path="addedCourses" element={<AddedCourses />} />
               <Route path="addedCourses/add-section/:courseId" element={<AddSection />} />
+              <Route path="addedCourses/editCourse/:courseId" element={<EditCourse />} />
               <Route path="profile" element={<InstructorProfile />} />
               <Route path="aboutus" element={<AboutUs />} />
               <Route

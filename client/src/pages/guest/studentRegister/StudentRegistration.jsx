@@ -10,6 +10,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { registerStudent } from "@/services/authService";
+import OtpVerificationModal from "@/components/auth/OtpVerificationModal";
 
 const StudentRegistration = () => {
   const navigate = useNavigate();
@@ -22,6 +23,9 @@ const StudentRegistration = () => {
     phoneNo: "",
   });
 
+  const [showOtpModal, setShowOtpModal] = useState(false);
+  const [registeredEmail, setRegisteredEmail] = useState("");
+
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -31,18 +35,18 @@ const StudentRegistration = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (formData.password != formData.confirmPassword) {
-      toast.warning("Password and Confirm Password Did not Match !!");
+
+    if (formData.password !== formData.confirmPassword) {
+      toast.warning("Password and Confirm Password did not match !!");
       return;
     }
-    console.log(formData);
+
     const response = await registerStudent(formData);
-    console.log(response);
+
     if (response.success) {
-      toast.success(response.message);
-      setTimeout(() => {
-        navigate("/guest/login");
-      }, 1000);
+      toast.success("OTP sent to your email , Please verify.");
+      setRegisteredEmail(formData.email);
+      setShowOtpModal(true);
     } else {
       toast.error(response.message);
     }
@@ -153,7 +157,7 @@ const StudentRegistration = () => {
             Register
           </button>
           <p className="text-center" style={{ color: "black" }}>
-            Don't have an account.?{" "}
+            Already have an Account.?{" "}
             <button
               type="submit"
               className="text-decoration-underline fw-semibold btn btn-link"
@@ -167,6 +171,16 @@ const StudentRegistration = () => {
           </p>
         </form>
       </div>
+      {showOtpModal && (
+        <OtpVerificationModal
+          email={registeredEmail}
+          onSuccess={() => {
+            toast.success("Email verified successfully");
+            navigate("/guest/login");
+          }}
+          onClose={() => setShowOtpModal(false)}
+        />
+      )}
     </div>
   );
 };

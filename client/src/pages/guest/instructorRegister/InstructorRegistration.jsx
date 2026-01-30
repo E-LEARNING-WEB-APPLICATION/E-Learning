@@ -11,6 +11,7 @@ import {
 } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import OtpVerificationModal from "@/components/auth/OtpVerificationModal";
 
 const InstructorRegistration = () => {
   const [formData, setFormData] = useState({
@@ -24,6 +25,9 @@ const InstructorRegistration = () => {
     bio: "",
   });
 
+  const [showOtpModal, setShowOtpModal] = useState(false);
+  const [registeredEmail, setRegisteredEmail] = useState("");
+
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -35,22 +39,21 @@ const InstructorRegistration = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     if (formData.password !== formData.confirmPassword) {
       toast.warning("Password and Confirm Password did not match!!");
       return;
     }
-    console.log(formData);
 
     const response = await registerInstructor(formData);
+
     if (response.success) {
-      toast.success(response.message);
-      setTimeout(() => {
-        navigate("/guest/login");
-      }, 1000);
+      toast.success("OTP sent to your email , Please verify.");
+      setRegisteredEmail(formData.email);
+      setShowOtpModal(true);
     } else {
       toast.error(response.message);
     }
-    console.log(response);
   };
 
   return (
@@ -188,7 +191,7 @@ const InstructorRegistration = () => {
             Register
           </button>
           <p className="text-center" style={{ color: "black" }}>
-            Don't have an account.?{" "}
+            Already have an Account.?{" "}
             <button
               type="submit"
               className="text-decoration-underline fw-semibold btn btn-link"
@@ -202,6 +205,18 @@ const InstructorRegistration = () => {
           </p>
         </form>
       </div>
+      {showOtpModal && (
+        <OtpVerificationModal
+          email={registeredEmail}
+          onSuccess={() => {
+            toast.success(
+              "Email verified successfully. Your account is pending admin approval.",
+            );
+            navigate("/guest/login");
+          }}
+          onClose={() => setShowOtpModal(false)}
+        />
+      )}
     </div>
   );
 };

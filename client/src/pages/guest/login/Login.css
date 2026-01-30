@@ -1,43 +1,71 @@
 .outer-container {
-    min-height: 100vh;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
 }
 
 .inner-container {
-    width: 100%;
-    max-width: 420px;
-    border-radius: 25px;
-    background: linear-gradient(135deg, rgba(24, 61, 157, 0.75), rgba(215, 213, 213, 0.95));
-    border: 1px solid (0, 0, 0, 0.05);
-    transition: all 0.3s ease-in-out;
-    box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+  width: 100%;
+  max-width: 420px;
+  border-radius: 25px;
+  background: linear-gradient(
+    135deg,
+    rgba(24, 61, 157, 0.75),
+    rgba(215, 213, 213, 0.95)
+  );
+  border: 1px solid (0, 0, 0, 0.05);
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
 }
 
 .inner-container:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 12px 40px rgba(74, 0, 224, 0.2);
+  transform: translateY(-10px);
+  box-shadow: 0 12px 40px rgba(74, 0, 224, 0.2);
 }
 
 .button-style {
-    padding: 10px 0;
-    background: linear-gradient(to right, #8e2de2, #5405f1);
-    color: #fff;
-    border-radius: 50px;
-    border: none;
-    font-size: 17px;
-    transition: all 0.3s ease-in-out;
+  padding: 10px 0;
+  background: linear-gradient(to right, #8e2de2, #5405f1);
+  color: #fff;
+  border-radius: 50px;
+  border: none;
+  font-size: 17px;
+  transition: all 0.3s ease-in-out;
 }
 
 .button-style:hover {
-    transform: scale(1.04);
-    box-shadow: 0 4px 20px rgba(74, 0, 224, 0.4);
+  transform: scale(1.04);
+  box-shadow: 0 4px 20px rgba(74, 0, 224, 0.4);
 }
 
 .button-style:active {
-    transform: scale(0.97);
-    box-shadow: 0 2px 10px rgba(74, 0, 224, 0.3);
+  transform: scale(0.97);
+  box-shadow: 0 2px 10px rgba(74, 0, 224, 0.3);
+}
+
+/* Top-aligned modal (Bootstrap override) */
+.modal-top {
+  margin: 0 auto;
+  margin-top: 2rem;
+  max-width: 420px;
+}
+
+/* Slide-down pop animation */
+.modal-pop-from-top {
+  animation: popFromTop 0.5s ease-out;
+}
+
+/* Animation keyframes */
+@keyframes popFromTop {
+  0% {
+    transform: translateY(-120%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }

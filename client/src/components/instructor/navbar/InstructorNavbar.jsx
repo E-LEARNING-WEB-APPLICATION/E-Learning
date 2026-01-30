@@ -63,6 +63,18 @@ function InstructorNavbar() {
 
             <li className="nav-item" style={{ marginLeft: "7px" }}>
               <NavLink
+                to="/instructor/Students/"
+                className={({ isActive }) =>
+                  isActive ? "nav-link active-link" : "nav-link"
+                }
+              >
+                Students
+              </NavLink>
+            </li>
+
+
+            <li className="nav-item" style={{ marginLeft: "7px" }}>
+              <NavLink
                 to="/instructor/profile"
                 className={({ isActive }) =>
                   isActive ? "nav-link active-link" : "nav-link"

@@ -35,6 +35,16 @@ const StudentDashboardHeroSection = ({ courses, page }) => {
             }
         }
     };
+
+    const handleExplore = () => {
+        if (page == "guest") {
+            navigate("/guest/courses/explore", {
+                state: { page },
+            });
+        } else {
+            navigate("/student/courses/explore");
+        }
+    };
     return (
         <section
             className="py-5 text-white"
@@ -57,7 +67,7 @@ const StudentDashboardHeroSection = ({ courses, page }) => {
 
                         <div className="d-flex gap-3">
                             <a
-                                href="#"
+                                onClick={handleExplore}
                                 className="btn btn-light btn-lg fw-semibold">
                                 Explore Courses
                             </a>

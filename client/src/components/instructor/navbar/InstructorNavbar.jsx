@@ -1,8 +1,25 @@
 import React from "react";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink, Link, useNavigate } from "react-router-dom";
 import "./InstructorNavbar.css";
+import { toast } from "react-toastify";
 
 function InstructorNavbar() {
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    // Clear auth data
+    localStorage.removeItem("token");
+
+    // Show feedback
+    toast.success("Logged out successfully", {
+      position: "top-right",
+      autoClose: 1500,
+      pauseOnHover: false,
+      closeOnClick: true,
+    });
+
+    // Redirect immediately
+    navigate("/", { replace: true });
+  };
   return (
     <nav
       className="navbar navbar-expand-lg instructor-navbar"
@@ -95,9 +112,13 @@ function InstructorNavbar() {
             </li>
 
             <li className="nav-item" style={{ marginLeft: "7px" }}>
-              <NavLink to="/guest/login" className="nav-link logout-btn">
+              <button
+                onClick={handleLogout}
+                className="nav-link logout-btn btn btn-link"
+                style={{ textDecoration: "none" }}
+              >
                 Logout
-              </NavLink>
+              </button>
             </li>
           </ul>
         </div>

@@ -50,7 +50,6 @@ import AdminSettings from "./pages/admin/Settings/AdminSettings";
 import EditCourse from "./pages/instructor/EditCourse/EditCourse";
 import EditSection from "./pages/instructor/EditSection/EditSection";
 import UpdateTopic from "./pages/instructor/UpdateTopic/UpdateTopic";
-import NotificationPage from "./pages/admin/notifications/NotificationPage";
 import Students from "./pages/instructor/Students/Students";
 import StudentList from "./pages/instructor/StudentList/StudentList";
 

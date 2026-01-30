@@ -3,13 +3,13 @@ import { Navigate, Outlet } from "react-router-dom";
 
 const ProtectedRoute = ({ allowedRoles }) => {
   if (!isAuthenticated()) {
-    return <Navigate to="/guest/login" replace />;
+    return <Navigate to="/" replace />;
   }
 
   const role = getUserRole();
 
   if (allowedRoles && !allowedRoles.includes(role)) {
-    return <Navigate to="/guest/login" replace />;
+    return <Navigate to="/" replace />;
   }
 
   return <Outlet />;

@@ -42,7 +42,6 @@ import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { getWishlistCount } from "./services/wishlist";
 import { setWishlistCount } from "./slices/wishlist/wishlistSlice";
-import NotificationPage from "./pages/admin/Notifications/NotificationPage";
 import GuestDashboard from "./pages/guest/dashboard/GuestDashboard";
 import { getToken } from "./utils/auth";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
@@ -51,6 +50,7 @@ import AdminSettings from "./pages/admin/Settings/AdminSettings";
 import EditCourse from "./pages/instructor/EditCourse/EditCourse";
 import EditSection from "./pages/instructor/EditSection/EditSection";
 import UpdateTopic from "./pages/instructor/UpdateTopic/UpdateTopic";
+import NotificationPage from "./pages/admin/notifications/NotificationPage";
 
 function App() {
   useNotificationSSE();
@@ -126,28 +126,33 @@ function App() {
               <Route path="dashboard" element={<InstructorDashboard />} />
               <Route path="addCourse" element={<AddCourse />} />
               <Route path="addedCourses" element={<AddedCourses />} />
-              <Route path="addedCourses/add-section/:courseId" element={<AddSection />} />
-              <Route path="addedCourses/editCourse/:courseId" element={<EditCourse />} />
+              <Route
+                path="addedCourses/add-section/:courseId"
+                element={<AddSection />}
+              />
+              <Route
+                path="addedCourses/editCourse/:courseId"
+                element={<EditCourse />}
+              />
               <Route path="profile" element={<InstructorProfile />} />
               <Route path="aboutus" element={<AboutUs />} />
               <Route
-              path="addedCourses/show-sections/:courseId"
-              element={<ShowSection />}
-            />
-            <Route
-              path="addedCourses/editSection/:sectionId"
-              element={<EditSection />}
-            />
-            instructor/addedCourses/editSection
+                path="addedCourses/show-sections/:courseId"
+                element={<ShowSection />}
+              />
               <Route
-              path="addedCourses/show-sections/show-topics/:sectionId"
-              element={<ShowTopic />}
-            />
+                path="addedCourses/editSection/:sectionId"
+                element={<EditSection />}
+              />
+              instructor/addedCourses/editSection
+              <Route
+                path="addedCourses/show-sections/show-topics/:sectionId"
+                element={<ShowTopic />}
+              />
               <Route
                 path="addedCourses/show-sections/update-topic/:topicId"
                 element={<UpdateTopic />}
               />
-
             </Route>
           </Route>
           {/* Admin Routes */}

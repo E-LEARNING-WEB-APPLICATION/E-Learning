@@ -9,7 +9,7 @@ const StudentLayout = () => {
   const location = useLocation();
 
   if (!token) {
-    return <Navigate to="/guest/login" replace state={{ from: location }} />;
+    return <Navigate to="/" replace state={{ from: location }} />;
   }
   return (
     <div>

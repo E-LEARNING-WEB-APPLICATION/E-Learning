@@ -31,7 +31,7 @@ function StudentNavbar() {
     });
 
     // Redirect immediately
-    navigate("/guest/login", { replace: true });
+    navigate("/", { replace: true });
   };
 
   return (
@@ -82,10 +82,7 @@ function StudentNavbar() {
               </NavLink>
             </li>
 
-            <li
-              className="nav-item"
-              style={{ marginLeft: "7px" }}
-            >
+            <li className="nav-item" style={{ marginLeft: "7px" }}>
               <NavLink
                 to="/student/wishlist"
                 className={({ isActive }) =>

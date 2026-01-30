@@ -71,3 +71,36 @@ export const signIn = async (data) => {
     };
   }
 };
+
+export const requestPasswordResetOtp = async (data) => {
+  try {
+    const response = await apiClient.post("user/auth/password/reset/otp", data);
+    return response.data;
+  } catch (error) {
+    if (error.response) {
+      return error.response.data;
+    }
+    return {
+      success: false,
+      message: "Server error. Please try again.",
+    };
+  }
+};
+
+export const resetPassword = async (data) => {
+  try {
+    const response = await apiClient.post(
+      "user/auth/password/reset/confirm",
+      data,
+    );
+    return response.data;
+  } catch (error) {
+    if (error.response) {
+      return error.response.data;
+    }
+    return {
+      success: false,
+      message: "Server error. Please try again.",
+    };
+  }
+};

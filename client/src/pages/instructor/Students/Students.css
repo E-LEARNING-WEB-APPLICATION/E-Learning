@@ -1,0 +1,54 @@
+
+.course-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+
+.course-text h5 {
+  font-size: 3rem;
+  letter-spacing: 0.3px;
+  color: #1f2937;
+  position: relative;
+}
+
+
+.course-text h5::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 80px;
+  height: 3px;
+  background: linear-gradient(90deg, #6366f1, #8b5cf6);
+  border-radius: 6px;
+}
+
+.course-text p {
+  font-size: 2rem;
+  color: #6b7280;
+  line-height: 1.4;
+  max-width: 320px;
+}
+
+
+
+
+.course-stats {
+  padding-right: 100px; 
+  
+}
+
+
+.course-stats h3 {
+    font-size: 3rem;  
+  letter-spacing: 0.5px;
+}
+
+
+.course-stats span {
+    font-size: 2rem; 
+  display: inline-block;
+  margin-top: 2px;
+}

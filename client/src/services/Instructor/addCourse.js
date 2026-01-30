@@ -54,3 +54,31 @@ export async function updateCourse(courseId, formData) {
   );
   return response.data;
 }
+
+
+
+export async function fetchCoursesData()
+{
+ const response = await axios.get("http://localhost:8080/api/v1/instructor/getData",
+    {
+      headers:
+      {
+        Authorization: `Bearer ${localStorage.getItem("token")}`
+      }
+    }
+  )
+  return response
+}
+
+
+export async function getStudents(courseId)
+{
+  const response = await axios.get(`http://localhost:8080/api/v1/instructor/getStudentsLists/${courseId}`,{
+    headers:
+    {
+      Authorization: `Bearer ${localStorage.getItem("token")}`
+    }
+  })
+
+  return response;
+}

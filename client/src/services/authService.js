@@ -104,3 +104,33 @@ export const resetPassword = async (data) => {
     };
   }
 };
+
+export const verifyEmailOtp = async (data) => {
+  try {
+    const response = await apiClient.post("user/auth/email/verify", data);
+    return response.data;
+  } catch (error) {
+    if (error.response) {
+      return error.response.data;
+    }
+    return {
+      success: false,
+      message: "Server error. Please try again.",
+    };
+  }
+};
+
+export const resendEmailVerificationOtp = async (data) => {
+  try {
+    const response = await apiClient.post("user/auth/email/verify/otp", data);
+    return response.data;
+  } catch (error) {
+    if (error.response) {
+      return error.response.data;
+    }
+    return {
+      success: false,
+      message: "Server error. Please try again.",
+    };
+  }
+};

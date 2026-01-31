@@ -1,0 +1,79 @@
+/* Backdrop */
+.otp-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.7);
+  backdrop-filter: blur(6px);
+  z-index: 1040;
+}
+
+/* Modal Container */
+.otp-modal-container {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1050;
+}
+
+/* Card */
+.otp-card {
+  width: 100%;
+  max-width: 420px;
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 28px;
+  animation: otpFadeIn 0.3s ease-in-out;
+}
+
+/* Header */
+.otp-header h4 {
+  color: #0f172a;
+}
+
+.otp-header p {
+  margin-bottom: 4px;
+}
+
+/* OTP Input */
+.otp-input {
+  font-size: 22px;
+  letter-spacing: 8px;
+  padding: 14px;
+  border-radius: 10px;
+  border: 1px solid #cbd5f5;
+  background-color: #f8fafc;
+}
+
+.otp-input:focus {
+  border-color: #6366f1;
+  box-shadow: 0 0 0 0.15rem rgba(99, 102, 241, 0.25);
+}
+
+/* Resend Link */
+.otp-resend {
+  color: #6366f1;
+  font-weight: 500;
+}
+
+.otp-resend:hover {
+  text-decoration: underline;
+}
+
+/* Footer */
+.otp-footer {
+  margin-top: 10px;
+}
+
+/* Animation */
+@keyframes otpFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}

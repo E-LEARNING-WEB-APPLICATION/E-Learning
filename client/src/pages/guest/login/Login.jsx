@@ -9,14 +9,17 @@ import {
 } from "@/services/authService";
 import { toast } from "react-toastify";
 import { jwtDecode } from "jwt-decode";
+import OtpVerificationModal from "@/components/auth/OtpVerificationModal";
 
 const Login = () => {
   const navigate = useNavigate();
 
   const [showForgotModal, setShowForgotModal] = useState(false);
   const [resetEmail, setResetEmail] = useState("");
+  const [showEmailOtpModal, setShowEmailOtpModal] = useState(false); //For Resending the otp to verify the email
+  const [unverifiedEmail, setUnverifiedEmail] = useState("");
 
-  const [showOtpModal, setShowOtpModal] = useState(false);
+  const [showOtpModal, setShowOtpModal] = useState(false); // for reset password otp
 
   const [formData, setFormData] = useState({
     email: "",
@@ -52,7 +55,17 @@ const Login = () => {
       else if (role === "INSTRUCTOR") navigate("/instructor/dashboard");
       else navigate("/student/dashboard");
     } else {
-      toast.error(response.message);
+      // Email not verified case
+      if (
+        response.message &&
+        response.message.toLowerCase().includes("verify your email")
+      ) {
+        toast.warning(response.message);
+        setUnverifiedEmail(formData.email);
+        setShowEmailOtpModal(true); // open OTP verification
+      } else {
+        toast.error(response.message);
+      }
     }
   };
 
@@ -297,6 +310,17 @@ const Login = () => {
             </div>
           </div>
         </>
+      )}
+      {showEmailOtpModal && (
+        <OtpVerificationModal
+          email={unverifiedEmail}
+          onSuccess={() => {
+            toast.success("Email verified successfully. Please login again.");
+            setShowEmailOtpModal(false);
+            setUnverifiedEmail("");
+          }}
+          onClose={() => setShowEmailOtpModal(false)}
+        />
       )}
     </div>
   );

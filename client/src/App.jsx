@@ -52,6 +52,7 @@ import EditSection from "./pages/instructor/EditSection/EditSection";
 import UpdateTopic from "./pages/instructor/UpdateTopic/UpdateTopic";
 import Students from "./pages/instructor/Students/Students";
 import StudentList from "./pages/instructor/StudentList/StudentList";
+import NotificationPage from "./pages/admin/notifications/NotificationPage";
 
 function App() {
   useNotificationSSE();
@@ -129,8 +130,14 @@ function App() {
               <Route path="addedCourses" element={<AddedCourses />} />
               <Route path="students" element={<Students />} />
               <Route path="students/:courseId" element={<StudentList />} />
-              <Route path="addedCourses/add-section/:courseId" element={<AddSection />} />
-              <Route path="addedCourses/editCourse/:courseId" element={<EditCourse />} />
+              <Route
+                path="addedCourses/add-section/:courseId"
+                element={<AddSection />}
+              />
+              <Route
+                path="addedCourses/editCourse/:courseId"
+                element={<EditCourse />}
+              />
               <Route
                 path="addedCourses/add-section/:courseId"
                 element={<AddSection />}

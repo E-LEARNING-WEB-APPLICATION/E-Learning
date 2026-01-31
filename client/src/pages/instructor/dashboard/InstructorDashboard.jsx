@@ -5,71 +5,100 @@ import InstructorDashboardCourseGraph from "./../../../components/instructor/das
 import InstructorDashboardWallet from "./../../../components/instructor/dashboard/InstructorDashboardWallet";
 import InstructorDashboardStatCards from "@/components/instructor/dashboard/InstructorDashboardStatCards";
 import InstructorDashboardHeader from "@/components/instructor/dashboard/InstructorDashboardHeader";
+import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
+import {
+    fetchCoursePerCategory,
+    fetchDashboardStat,
+    fetchStudentPerCourse,
+} from "@/services/Instructor/dashboardService";
+import Loader from "@/components/shared/Loader";
 
-const stats = [
+/**
+ * STAT_CONFIG
+ * -----------
+ * This configuration drives the Instructor Dashboard statistic cards.
+ *
+ * Each object in this array represents ONE stat card on the dashboard.
+ * The UI does NOT hardcode any values — instead, it maps backend data
+ * to cards using this config as the single source of truth.
+ *
+ * How it works:
+ * 1. `key`    → Must match a field name from the backend API response.
+ *               Example: backend returns { totalStudents: 10 }
+ *
+ * 2. `label`  → The human-readable title shown on the stat card UI.
+ *
+ * 3. `color`  → CSS class used to style the card (background / accent color).
+ *
+ * 4. `format` → A function that converts the raw backend value into
+ *               a UI-friendly display value (currency, stars, decimals, etc).
+ *
+ * Flow:
+ * Backend Response
+ *   → STAT_CONFIG.map(...)
+ *       → picks value using `key`
+ *       → formats it using `format`
+ *       → attaches label + color
+ *   → final `stats` array
+ *   → rendered by <InstructorDashboardStatCards />
+ *
+ * Benefits:
+ * - No hardcoded UI values
+ * - Easy to add / remove / reorder stat cards
+ * - Formatting logic is centralized
+ * - Backend and UI are loosely coupled
+ */
+
+const STAT_CONFIG = [
     {
+        key: "totalStudents",
         label: "Total Students",
-        value: 1240,
         color: "instructor-dashboard__stat-yellow",
+        format: (v) => v,
     },
     {
+        key: "totalCourse",
         label: "Total Courses",
-        value: 18,
         color: "instructor-dashboard__stat-green",
+        format: (v) => v,
     },
     {
+        key: "totalEnrollments",
         label: "Total Enrollments",
-        value: 3560,
         color: "instructor-dashboard__stat-blue",
+        format: (v) => v,
     },
     {
+        key: "totalRevenue",
         label: "Total Revenue",
-        value: "₹3,45,000",
         color: "instructor-dashboard__stat-purple",
-    },
-
-    {
-        label: "Active Students (30d)",
-        value: 420,
-        color: "instructor-dashboard__stat-teal",
+        format: (v) => `₹${Number(v).toLocaleString("en-IN")}`,
     },
     {
+        key: "averageRating",
         label: "Avg Rating",
-        value: "4.6 ⭐",
         color: "instructor-dashboard__stat-orange",
+        format: (v) => `${Number(v).toFixed(1)} ⭐`,
     },
     {
+        key: "totalReviews",
+        label: "Total Reviews",
+        color: "instructor-dashboard__stat-teal",
+        format: (v) => v,
+    },
+    {
+        key: "lastMonthRevenue",
         label: "This Month Revenue",
-        value: "₹48,500",
         color: "instructor-dashboard__stat-pink",
+        format: (v) => `₹${Number(v).toLocaleString("en-IN")}`,
     },
     {
+        key: "newStudent",
         label: "New Students (7d)",
-        value: 56,
         color: "instructor-dashboard__stat-indigo",
+        format: (v) => v,
     },
-];
-
-const studentsPerCourse = [
-    { course: "React", students: 120 },
-    { course: "Spring Boot", students: 95 },
-    { course: "Python", students: 150 },
-    { course: "Machine Learning", students: 80 },
-    { course: "Data Structures", students: 110 },
-    { course: "Algorithms", students: 90 },
-    { course: "DevOps", students: 70 },
-    { course: "Docker", students: 60 },
-    { course: "Kubernetes", students: 55 },
-    { course: "System Design", students: 85 },
-    { course: "UI/UX", students: 65 },
-    { course: "Cloud Basics", students: 75 },
-];
-
-const coursesPerCategory = [
-    { name: "Web Dev", value: 6 },
-    { name: "Backend", value: 4 },
-    { name: "AI/ML", value: 5 },
-    { name: "Design", value: 3 },
 ];
 
 const reviews = [
@@ -84,23 +113,90 @@ const reviews = [
 ];
 
 export default function InstructorDashboard() {
+    const [coursePerCategory, setCoursePerCategory] = useState([]);
+    const [studentPerCourse, setStudentPerCourse] = useState([]);
+    const [stats, setStats] = useState([]);
+    const [availableAmount, setAvailableAmount] = useState(0);
+    const [loading, setLoading] = useState(false);
+
+    useEffect(() => {
+        const fetchCPC = async () => {
+            try {
+                const data = await fetchCoursePerCategory();
+                setCoursePerCategory(data);
+            } catch (error) {
+                toast.error(error.message);
+            }
+        };
+
+        const fetchSPC = async () => {
+            try {
+                const data = await fetchStudentPerCourse();
+                console.log(data);
+                setStudentPerCourse(data);
+            } catch (error) {
+                toast.error(error.message);
+            }
+        };
+
+        const fetchStat = async () => {
+            try {
+                const data = await fetchDashboardStat();
+                console.log(data);
+
+                const mappedStats = STAT_CONFIG.map((stat) => ({
+                    label: stat.label,
+                    value: stat.format(data?.[stat.key] ?? 0),
+                    color: stat.color,
+                }));
+
+                setStats(mappedStats);
+                setAvailableAmount(data.availableAmount);
+            } catch (error) {
+                toast.error(error.message);
+            }
+        };
+
+        const loadData = async () => {
+            setLoading(true);
+            await fetchCPC();
+            await fetchSPC();
+            await fetchStat();
+            setLoading(false);
+        };
+
+        loadData();
+    }, [availableAmount]);
+
+    if (loading) {
+        return (
+            <div className="instructor-dashboard">
+                <Loader text="Loading dashboard..." />
+            </div>
+        );
+    }
+
     return (
-      <div className="instructor-dashboard">
-        <InstructorDashboardHeader name="Sanket Raut" />
+        <div className="instructor-dashboard">
+            <InstructorDashboardHeader name="Sanket Raut" />
+
             {/* Row 1 & 2: Stats (4 × 2 grid) */}
             <InstructorDashboardStatCards stats={stats} />
 
             {/* Wallet */}
-            <InstructorDashboardWallet wallet={"₹ 42,300"} />
+            <InstructorDashboardWallet
+                wallet={availableAmount}
+                onSave={(newAmount) => setAvailableAmount(newAmount)}
+            />
 
             {/* Students per Course */}
             <InstructorDashboardCourseGraph
-                studentsPerCourse={studentsPerCourse}
+                studentsPerCourse={studentPerCourse}
             />
 
             {/* Courses per Category */}
             <InstructorDashboardCategoryGraph
-                coursesPerCategory={coursesPerCategory}
+                coursesPerCategory={coursePerCategory}
             />
 
             {/* Reviews */}

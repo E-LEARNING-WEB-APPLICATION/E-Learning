@@ -78,3 +78,29 @@ export const getEnrolledCourses = async () => {
     };
   }
 };
+
+  export const fetchCourses = async (page,search,sortBy,categoryId) => {
+    try {
+      const params = new URLSearchParams({
+      page,
+      size: 8,
+    });
+
+    if (search) params.append("search", search);
+    if (sortBy) params.append("sortBy", sortBy);
+    if (categoryId) params.append("categoryId", categoryId);
+
+    const response = await apiClient.get(`/api/v1/courses/exploreCourses?${params.toString()}`);
+    console.log(response);
+    return response;
+    } catch (error) {
+      if (error.response) {
+      return error.response.data;
+    }
+    return {
+      success: false,
+      message: "Server error. Please try again.",
+    };
+    }
+  };
+

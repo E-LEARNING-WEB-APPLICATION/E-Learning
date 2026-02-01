@@ -151,3 +151,37 @@ export const fetchStudentEnrolledTrendByMonthByCourse = (
     }),
   );
 };
+
+
+//instructor analytics services
+/**
+ * Fetch all instructors for search dropdown
+ */
+export const fetchInstructorList = () => {
+  return apiRequest(() =>
+    apiClient.get(`${API_BASE_PATH}/instructor/list`)
+  );
+};
+
+/**
+ * Fetch top earning courses for an instructor
+ */
+export const fetchTopInstructorCourses = (instructorId, top = 5) => {
+  return apiRequest(() =>
+    apiClient.get(
+      `${API_BASE_PATH}/statistics/instructor/${instructorId}/course/top/revenue`,
+      { params: { top } }
+    )
+  );
+};
+
+/**
+ * Fetch rating distribution for an instructor
+ */
+export const fetchInstructorRatingDistribution = (instructorId) => {
+  return apiRequest(() =>
+    apiClient.get(
+      `${API_BASE_PATH}/statistics/instructor/${instructorId}/rating-distribution`
+    )
+  );
+};

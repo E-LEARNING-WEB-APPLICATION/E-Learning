@@ -127,7 +127,7 @@ function ShowSection() {
 
   return (
     <div>
-      <h1 className="page-title">Sections for the Course</h1>
+      <h1 className="page-title">Sections</h1>
 
       {sectionData.map((data, index) => (
         <div className="most-outer-div" key={index}>
@@ -201,6 +201,7 @@ function ShowSection() {
                     className="form-control mb-2"
                     placeholder="Topic Number"
                     onChange={(e) => setTopicNumber(e.target.value)}
+                    required
                   />
 
                   <input
@@ -209,6 +210,7 @@ function ShowSection() {
                     className="form-control mb-2"
                     placeholder="Topic Name"
                     onChange={(e) => setTopicName(e.target.value)}
+                    required
                   />
 
                   <textarea
@@ -216,6 +218,7 @@ function ShowSection() {
                     className="form-control mb-2"
                     placeholder="Topic Description"
                     onChange={(e) => setTopicDesc(e.target.value)}
+                    required
                   />
 
                   <input
@@ -224,6 +227,7 @@ function ShowSection() {
                     className="form-control mb-2"
                     accept="video/*"
                     onChange={(e) => setVideo(e.target.files[0])}
+                    required
                   />
 
                   <div className="input-group mb-3">
@@ -233,6 +237,7 @@ function ShowSection() {
                       className="form-control"
                       placeholder="Hours"
                       onChange={(e) => setHour(e.target.value)}
+                      required
                     />
                     <span className="input-group-text">:</span>
                     <input
@@ -241,6 +246,7 @@ function ShowSection() {
                       className="form-control"
                       placeholder="Minutes"
                       onChange={(e) => setMin(e.target.value)}
+                      required
                     />
                   </div>
                  

@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import "../AddedCourses/AddedCourses.css";
-import { getAddedCourses } from "./../../../services/Instructor/addCourse.js";
+import { getAddedCourses, setPublish } from "./../../../services/Instructor/addCourse.js";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 function AddedCourses() {
   const navigator = useNavigate();
@@ -11,8 +12,37 @@ function AddedCourses() {
     displayAllCourses();
   }, []);
 
+async function handlePublish(courseId, isPublished, index) {
+  try {
+    const response = await setPublish(courseId, isPublished);
+
+    if (response.status === 200) {
+      const updatedData = [...data];
+      updatedData[index].published = response.data; 
+      setData(updatedData);
+
+      if (response.data) {
+        toast.success("Course Published");
+      } else {
+        toast.success("Course Un-Published");
+      }
+    }
+  } catch (error) {
+    console.log(error);
+
+    if (isPublished) {
+      toast.error("Error in Publishing Course");
+    } else {
+      toast.error("Error in Un-Publishing Course");
+    }
+  }
+}
+
+
+
   async function displayAllCourses() {
     const response = await getAddedCourses();
+    console.log(response)
     setData(response);
   }
 
@@ -97,12 +127,32 @@ function AddedCourses() {
                     </div>
 
                     <div className="publish-button">
-                      <button
+                    
+                     
+                      {data.published ? ( <button
                         type="button"
                         className="btn btn-success publish-course-buttons"
+                        onClick={() => 
+                        {
+                          handlePublish(data.courseId,false,index)
+                          }
+                        }
+                      >
+                        Un-Publish Course
+                      </button>  )
+                      :
+                      (<button
+                        type="button"
+                        className="btn btn-success publish-course-buttons"
+                        onClick={() => 
+                        {
+                          handlePublish(data.courseId,true,index)
+                          }
+                        }
                       >
                         Publish Course
-                      </button>
+                      </button>)
+                      }
                     </div>
                   </div>
                 </div>

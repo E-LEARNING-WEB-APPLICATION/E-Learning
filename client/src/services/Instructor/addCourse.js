@@ -82,3 +82,24 @@ export async function getStudents(courseId)
 
   return response;
 }
+
+
+
+
+export async function setPublish(courseId, isPublished) {
+  const response = await axios.put(
+    `http://localhost:8080/api/v1/instructor/changePublish/${courseId}`,
+    null,
+    {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`
+      },
+      params: {
+        isPublished: isPublished
+      }
+    }
+  );
+
+  return response;
+}
+

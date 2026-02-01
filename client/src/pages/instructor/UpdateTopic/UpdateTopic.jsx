@@ -132,6 +132,7 @@ function UpdateTopic() {
               className="form-control mb-3"
               accept="video/*"
               onChange={(e) => setVideo(e.target.files[0])}
+              required
             />
 
             <div className="input-group mb-4">
@@ -141,6 +142,7 @@ function UpdateTopic() {
                 placeholder="Hours"
                 value={hour}
                 onChange={(e) => setHour(e.target.value)}
+                required
               />
               <span className="input-group-text">:</span>
               <input
@@ -149,6 +151,7 @@ function UpdateTopic() {
                 placeholder="Minutes"
                 value={min}
                 onChange={(e) => setMin(e.target.value)}
+                required
               />
             </div>
 

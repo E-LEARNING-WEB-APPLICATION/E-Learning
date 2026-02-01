@@ -54,53 +54,57 @@ function AddSection() {
 
 
     return (
-        <div className="add-section-container">
+  <div className="add-section-container">
+    <h1 className="section-heading">
+      Add Section for {courseName} Course
+    </h1>
 
-            <h1 className="section-heading">
-                Add Section for {courseName} Course
-            </h1>
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        onSectionAdd();
+      }}
+    >
+      <div className="form-group">
+        <label htmlFor="sectionNumber">Enter Section Number</label>
+        <input
+          type="number"
+          className="form-control"
+          id="sectionNumber"
+          required
+          onChange={(e) => setSectionNumber(e.target.value)}
+        />
+      </div>
 
+      <div className="form-group">
+        <label htmlFor="sectionTitle">Enter Section Title</label>
+        <input
+          type="text"
+          className="form-control"
+          id="sectionTitle"
+          required
+          onChange={(e) => setSectionTitle(e.target.value)}
+        />
+      </div>
 
-            <div className="form-group">
-                <label htmlFor="sectionNumber">Enter Section Number</label>
-                <input type="number" className="form-control" id="sectionNumber" 
-                onChange={(e) =>
-                {
-                    setSectionNumber(e.target.value)
-                }} 
+      <div className="form-group">
+        <label htmlFor="sectionDesc">Enter Section Description</label>
+        <textarea
+          className="form-control text-area"
+          id="sectionDesc"
+          rows={3}
+          required
+          onChange={(e) => setSectionDesc(e.target.value)}
+        />
+      </div>
 
-                />
-            </div>
-            <div className="form-group">
-                <label htmlFor="sectionTitle">Enter Section Title</label>
-                <input type="text" className="form-control" id="sectionTitle" 
-                onChange={(e) =>
-                {
-                    setSectionTitle(e.target.value)
-                    
-                }} 
+      <button type="submit" className="btn btn-primary">
+        Add Section
+      </button>
+    </form>
+  </div>
+);
 
-                />
-            </div>
-           
-            
-            <div className="form-group">
-                <label htmlFor="sectionDesc">Enter Section Description</label>
-                <textarea className="form-control text-area" id="sectionDesc" rows={3} defaultValue={""}
-                onChange={(e) =>
-                {
-                    setSectionDesc(e.target.value)
-                    
-                }} 
-                 />
-            </div>
-            <div>
-                <button type="button" className="btn btn-primary" onClick={onSectionAdd}>Add Section</button>
-
-            </div>
-        </div>
-
-    )
 }
 
 export default AddSection

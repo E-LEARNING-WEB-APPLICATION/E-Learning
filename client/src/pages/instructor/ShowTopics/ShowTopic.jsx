@@ -41,8 +41,6 @@ function ShowTopic() {
     return (
         <div className="show-topics-container">
   
-  <h1 className="course-title">{}</h1>
-  <h1 className="section-title">Section {} – {}</h1>
 
   <div className="topics-list">
 

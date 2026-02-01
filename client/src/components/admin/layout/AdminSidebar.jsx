@@ -15,13 +15,12 @@ import { IoMdNotifications } from "react-icons/io";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import "./layout.css";
 import { useUnreadCount } from "@/hooks/useUnreadCount";
-import { Badge } from "react-bootstrap";
+import "./AdminSidebar.css";
 
 const Sidebar = ({ onToggle }) => {
   const navigate = useNavigate();
 
   const [collapsed, setCollapsed] = useState(false);
-
   // Submenus open/close
   const [openCourses, setOpenCourses] = useState(false);
   const [openInstructors, setOpenInstructors] = useState(false);
@@ -153,22 +152,15 @@ const Sidebar = ({ onToggle }) => {
               Instructor Analytics
             </Link>
 
-            <Link className="submenu-item" to="/admin/analytics/student">
-              Student Analytics
+            <Link
+              className="submenu-item"
+              to="/admin/analytics/student"
+              onClick={(e) => e.preventDefault()}
+            >
+              Student Analytics <br /> (Coming Soon)
             </Link>
           </div>
         )}
-
-        {/* Analytics */}
-        {/* <Link
-          className={`menu-item ${
-            isActive("/admin/analytics") ? "active" : ""
-          }`}
-          to="/admin/analytics"
-        >
-          <FaChartPie className="icon" />
-          {!collapsed && <span>Analytics</span>}
-        </Link> */}
 
         {/* Notifications */}
         <Link
@@ -177,10 +169,16 @@ const Sidebar = ({ onToggle }) => {
           }`}
           to="/admin/notifications"
         >
-          <IoMdNotifications className="icon" />
+          <div className="notification-icon-wrapper">
+            <IoMdNotifications className="icon" />
+            {unreadCount > 0 && (
+              <span className="notification-badge">{unreadCount}</span>
+            )}
+          </div>
+
           {!collapsed && <span>Notifications</span>}
-          <Badge bg="info">{unreadCount > 0 && `(${unreadCount})`}</Badge>
         </Link>
+
         {/* Add admin */}
         <Link
           className={`menu-item ${isActive("/admin/add-admin") ? "active" : ""}`}

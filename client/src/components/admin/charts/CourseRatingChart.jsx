@@ -4,6 +4,7 @@ import LoadingSpinnerAtom from "../atoms/LoadingSpinnerAtom";
 import NoDataAtom from "../atoms/NoDataAtom";
 import { ChartXAxisAtom, ChartYAxisAtom } from "../atoms/ChartAxisAtom";
 import ChartTooltipAtom from "../atoms/ChartTooltipAtom";
+import ChartBarAtom from "../atoms/ChartBarAtom";
 const CourseRatingChart = ({ data = [], loading }) => {
   return (
     <ChartContainer title="Course Rating Overview">

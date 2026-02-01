@@ -47,9 +47,6 @@ const AdminDashboard = () => {
         <div className="row mt-4">
           <TopCoursesTable data={topCourses} loading={loadingCourses} />;
         </div>
-
-        {/* 6) Recent Enrollments + Recent Reviews */}
-        <div className="row mt-4">{/* <RecentPanels /> */}</div>
       </div>
     </div>
   );

@@ -7,6 +7,29 @@ import {
   fetchStudentEnrolledTrendByMonth,
 } from "@/services/admin/dashboardService";
 
+const MONTHS = [
+  "Jan",
+  "Feb",
+  "Mar",
+  "Apr",
+  "May",
+  "Jun",
+  "Jul",
+  "Aug",
+  "Sep",
+  "Oct",
+  "Nov",
+  "Dec",
+];
+
+const formatEnrollmentTrend = (apiData) => {
+  const formatted = apiData.map((item) => ({
+    label: `${MONTHS[item.month - 1]} ${item.year}`,
+    enrollments: item.enrolledCount,
+  }));
+  console.log("Formatted Enrollment Trend:", formatted);
+  return formatted;
+};
 const EnrollmentAndCategory = () => {
   const [duration, setDuration] = useState(6);
   const [enrollmentData, setEnrollmentData] = useState([]);
@@ -15,24 +38,18 @@ const EnrollmentAndCategory = () => {
   const [loadingCategories, setLoadingCategories] = useState(true);
 
   useEffect(() => {
-    loadEnrollmentTrend();
+    loadEnrollmentTrend(duration);
   }, [duration]);
 
   useEffect(() => {
     loadCategoryDistribution();
   }, []);
 
-  const loadEnrollmentTrend = async () => {
+  const loadEnrollmentTrend = async (duration) => {
     try {
       setLoadingEnrollments(true);
-      const response = await fetchStudentEnrolledTrendByMonth(duration);
-
-      const formatted = response.map((item) => ({
-        label: formatMonth(item.month, item.year),
-        enrollments: item.enrolledCount,
-      }));
-
-      setEnrollmentData(formatted);
+      const res = await fetchStudentEnrolledTrendByMonth(duration);
+      setEnrollmentData(formatEnrollmentTrend(res));
     } finally {
       setLoadingEnrollments(false);
     }
@@ -97,11 +114,3 @@ const EnrollmentAndCategory = () => {
 
 export default EnrollmentAndCategory;
 
-// ---- helpers ----
-const formatMonth = (month, year) => {
-  const date = new Date(year, month - 1);
-  return date.toLocaleString("default", {
-    month: "short",
-    year: "numeric",
-  });
-};

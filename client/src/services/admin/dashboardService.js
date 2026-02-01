@@ -49,11 +49,12 @@ export const fetchRevenueTrendByMonth = (duration) => {
   );
 };
 
-export const fetchStudentEnrolledTrendByMonth = (duration) => {
+export const fetchStudentEnrolledTrendByMonth = (params) => {
   return apiRequest(() =>
     apiClient.get(`${ADMIN_BASE_PATH}/student/enrolled/monthly`, {
       params: {
-        duration, // number default 6
+        months: params.duration, // number default 6
+        courseId: params.courseId,
       },
     }),
   );
@@ -89,6 +90,38 @@ export const fetchTopCourseRatingOverview = (params) => {
   );
 };
 
+export const fetchTopCoursesByRevenue = (params) => {
+  return apiRequest(() =>
+    apiClient.get(`${API_BASE_PATH}/statistics/course/by-revenue`, {
+      params,
+    }),
+  );
+};
+
+export const fetchCourseRatingDistribution = (params) => {
+  return apiRequest(() =>
+    apiClient.get(`${API_BASE_PATH}/statistics/course/rating-distribution`, {
+      params,
+    }),
+  );
+};
+
+export const fetchCourseConversionRate = (params) => {
+  return apiRequest(() =>
+    apiClient.get(`${API_BASE_PATH}/statistics/course/conversion-rate`, {
+      params,
+    }),
+  );
+};
+
+export const fetchTopCoursesByConversionRate = (params) => {
+  return apiRequest(() =>
+    apiClient.get(`${API_BASE_PATH}/statistics/course/top/conversion-rate`, {
+      params,
+    }),
+  );
+};
+
 export const fetchTopCoursesByEnrollments = (params) => {
   return apiRequest(() =>
     apiClient.get(`${API_BASE_PATH}/statistics/course/enrollments`, {
@@ -116,5 +149,39 @@ export const fetchStudentEnrolledTrendByMonthByCourse = (
         courseId,
       },
     }),
+  );
+};
+
+
+//instructor analytics services
+/**
+ * Fetch all instructors for search dropdown
+ */
+export const fetchInstructorList = () => {
+  return apiRequest(() =>
+    apiClient.get(`${API_BASE_PATH}/instructor/list`)
+  );
+};
+
+/**
+ * Fetch top earning courses for an instructor
+ */
+export const fetchTopInstructorCourses = (instructorId, top = 5) => {
+  return apiRequest(() =>
+    apiClient.get(
+      `${API_BASE_PATH}/statistics/instructor/${instructorId}/course/top/revenue`,
+      { params: { top } }
+    )
+  );
+};
+
+/**
+ * Fetch rating distribution for an instructor
+ */
+export const fetchInstructorRatingDistribution = (instructorId) => {
+  return apiRequest(() =>
+    apiClient.get(
+      `${API_BASE_PATH}/statistics/instructor/${instructorId}/rating-distribution`
+    )
   );
 };

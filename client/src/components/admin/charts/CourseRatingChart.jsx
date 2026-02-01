@@ -4,6 +4,7 @@ import LoadingSpinnerAtom from "../atoms/LoadingSpinnerAtom";
 import NoDataAtom from "../atoms/NoDataAtom";
 import { ChartXAxisAtom, ChartYAxisAtom } from "../atoms/ChartAxisAtom";
 import ChartTooltipAtom from "../atoms/ChartTooltipAtom";
+import ChartBarAtom from "../atoms/ChartBarAtom";
 const CourseRatingChart = ({ data = [], loading }) => {
   return (
     <ChartContainer title="Course Rating Overview">
@@ -14,11 +15,11 @@ const CourseRatingChart = ({ data = [], loading }) => {
       ) : (
         <ResponsiveContainer width="100%" height={300}>
           <BarChart data={data}>
-            <ChartXAxisAtom dataKey="courseName" />
-            <ChartYAxisAtom domain={[0, 5]} />
-            <ChartTooltipAtom />
+            <ChartXAxisAtom dataKey="name" />
+            <ChartYAxisAtom ticks={[1, 2, 3, 4, 5]} domain={[1, 5]} />
+            <ChartTooltipAtom formatter={(v) => v.toFixed(1)} />
             <Legend />
-            <ChartBarAtom dataKey="avgRating" color="#4a77f3" />
+            <ChartBarAtom dataKey="value" color="#4a77f3" />
           </BarChart>
         </ResponsiveContainer>
       )}

@@ -29,11 +29,10 @@ const TopInstructorsAndRatings = () => {
     // Fetch course ratings
     fetchTopCourseRatingOverview({ top: 10 })
       .then((res) => {
-        // API → chart expects { name, rating }
         console.log(res);
         const mapped = res.map((c) => ({
           name: c.title,
-          rating: c.rating,
+          value: c.rating,
         }));
         setCourseRatings(mapped);
       })

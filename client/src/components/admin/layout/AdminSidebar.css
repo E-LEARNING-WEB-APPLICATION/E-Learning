@@ -1,0 +1,17 @@
+.sidebar .notification-icon-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.sidebar .notification-badge {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  background: #0dcaf0;
+  color: #fff;
+  font-size: 10px;
+  padding: 2px 5px;
+  border-radius: 50%;
+  line-height: 1;
+}

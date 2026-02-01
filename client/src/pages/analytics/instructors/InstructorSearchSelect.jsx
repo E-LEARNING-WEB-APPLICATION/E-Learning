@@ -25,21 +25,19 @@ export default function InstructorSearchSelect({
   // Filter instructors (search on name + email)
   const filtered = instructors.filter(
     (i) =>
-      i.name.toLowerCase().includes(query.toLowerCase()) ||
+      i.instructorName.toLowerCase().includes(query.toLowerCase()) ||
       i.email.toLowerCase().includes(query.toLowerCase())
   );
-
-  const selected = instructors.find((i) => i.id === selectedInstructor);
 
   return (
     <div className="instructor-select-wrapper" ref={dropdownRef}>
       {/* Search input */}
       <div className="select-input" onClick={() => setOpen(!open)}>
-        {selected ? (
+        {selectedInstructor ? (
           <div className="selected-item">
             <div className="info">
-              <div className="name">{selected.name}</div>
-              <div className="email">{selected.email}</div>
+              <div className="name">{selectedInstructor.instructorName}</div>
+              <div className="email">{selectedInstructor.email}</div>
             </div>
           </div>
         ) : (
@@ -64,10 +62,10 @@ export default function InstructorSearchSelect({
 
             {filtered.map((i) => (
               <div
-                key={i.id}
+                key={i.instructorId}
                 className="dropdown-item p-1"
                 onClick={() => {
-                  onChange(i.id);
+                  onChange(i);
                   setOpen(false);
                   setQuery("");
                 }}
@@ -75,7 +73,7 @@ export default function InstructorSearchSelect({
                 <img src={i.profile_pic} alt="pic" className="avatar" />
 
                 <div className="info">
-                  <div className="name">{i.name}</div>
+                  <div className="name">{i.instructorName}</div>
                   <div className="email">{i.email}</div>
                 </div>
               </div>

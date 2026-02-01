@@ -129,6 +129,7 @@ function EditCourse() {
               className="form-control"
               value={form.courseName}
               onChange={handleChange}
+            
             />
           </div>
 
@@ -142,6 +143,7 @@ function EditCourse() {
               rows="3"
               value={form.courseDesc}
               onChange={handleChange}
+        
             />
           </div>
 
@@ -200,6 +202,7 @@ function EditCourse() {
               accept="image/*"
               className="form-control"
               onChange={handleChange}
+              required
             />
           </div>
 
@@ -212,6 +215,7 @@ function EditCourse() {
               accept="video/*"
               className="form-control"
               onChange={handleChange}
+              required
             />
           </div>
 

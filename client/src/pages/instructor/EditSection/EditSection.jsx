@@ -85,6 +85,7 @@ function EditSection() {
           id="sectionNumber"
           value={sectionNumber}
           onChange={(e) => setSectionNumber(e.target.value)}
+          required
         />
       </div>
 
@@ -96,6 +97,7 @@ function EditSection() {
           id="sectionTitle"
           value={sectionTitle}
           onChange={(e) => setSectionTitle(e.target.value)}
+          required
         />
       </div>
 
@@ -107,6 +109,7 @@ function EditSection() {
           rows={3}
           value={sectionDesc}
           onChange={(e) => setSectionDesc(e.target.value)}
+          required
         />
       </div>
 

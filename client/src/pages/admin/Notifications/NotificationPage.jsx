@@ -5,6 +5,13 @@ import NotificationTable from "./_components/NotificationTable";
 import "./NotificationPage.css";
 import { useNotifications } from "@/hooks/useNotifications";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import { useMarkNotificationRead } from "@/hooks/useMarkNotificationRead";
+
+const typePathMap = {
+  COURSE: "course-details",
+  INSTRUCTOR: "instructors",
+};
 
 const NotificationPage = () => {
   const [search, setSearch] = useState("");
@@ -17,7 +24,45 @@ const NotificationPage = () => {
     data: notifications = [],
     isLoading,
     isError,
+    error
   } = useNotifications(isRead);
+
+    const navigate = useNavigate();
+
+  const { mutate: markRead } = useMarkNotificationRead();
+
+  if (isLoading) {
+    return <div className="text-muted">Loading notifications…</div>;
+  }
+
+  if (isError) {
+    return (
+      <div className="text-danger text-center mt-4">
+        {toast.error(error.message)}
+        Failed to load notifications
+      </div>
+    );
+  }
+
+  const markAsRead = (id) => {
+    // call API: PATCH /notifications/{id}/read
+    // then navigate
+    markRead(id, {
+      onSuccess: () => {
+        toast.success("notification marked read");
+      },
+    });
+  };
+
+  const viewNotification = (subject, subjectType) => {
+            console.log(subject);
+        console.log(subjectType);
+        if (subjectType && typePathMap[subjectType]) {
+          navigate(`/admin/${typePathMap[subjectType]}`, {
+            state: { id: subject },
+          });
+        }
+  }
 
   if (isLoading) return <div>Loading...</div>;
   if (isError) return toast("some error occured while fetching notifications");
@@ -69,6 +114,8 @@ const NotificationPage = () => {
         notifications={filteredNotifications}
         selected={selected}
         setSelected={setSelected}
+        markAsRead={markAsRead}
+        viewNotification={viewNotification}
       />
     </div>
   );

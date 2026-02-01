@@ -5,7 +5,7 @@ import { createBooking, verifyPayment } from "@/services/booking";
 import Loader from "@/components/shared/Loader";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { removeFromWishlist } from "@/services/wishlist";
+import { markWishlistPurchased } from "@/services/wishlist";
 import { removeCourseFromWishlist } from "@/slices/wishlist/wishlistSlice";
 
 const ActionSection = ({ course }) => {
@@ -104,7 +104,7 @@ const ActionSection = ({ course }) => {
 
             setIsEnrolled(true);
             try {
-              await removeFromWishlist(course.courseId);
+              await markWishlistPurchased(course.courseId);
               dispatch(removeCourseFromWishlist(course.courseId));
             } catch {
               console.warn("Course was not in wishlist or already removed");

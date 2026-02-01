@@ -41,11 +41,11 @@ const formatTime = (iso) =>
     timeStyle: "short",
   });
 
-const NotificationRow = ({ data, selected, toggleSelect }) => {
+const NotificationRow = ({ data, selected, toggleSelect, markAsRead, viewNotification }) => {
   const { id, title, message, priority, type, createdAt, read } = data;
 
   return (
-    <tr className={`hover-light notification-row ${!read ? "unread" : ""}`}>
+    <tr  className={`hover-light notification-row ${!read ? "unread" : ""}`} >
       <td>
         <input
           type="checkbox"
@@ -56,7 +56,7 @@ const NotificationRow = ({ data, selected, toggleSelect }) => {
       </td>
 
       {/* Notification content */}
-      <td className="notification-cell">
+      <td className="notification-cell" style={{cursor:"pointer"}} onClick={() => viewNotification(data.subject, data.subjectType)} >
         <div className="d-flex gap-3 align-items-start">
           <div className="notification-icon text-primary">
             {typeIconMap[type]}
@@ -83,21 +83,22 @@ const NotificationRow = ({ data, selected, toggleSelect }) => {
       {/* Actions */}
       <td>
         <div className="d-flex gap-2">
-          <FaEye
+          {/* <FaEye
             size={16}
             className="material-action-icon text-primary"
             title="View"
-          />
+          /> */}
           <FaArchive
             size={16}
             className="material-action-icon text-secondary"
             title="Archive"
+            onClick={() => markAsRead(data.id)}
           />
-          <FaTrash
+          {/* <FaTrash
             size={16}
             className="material-action-icon text-danger"
             title="Delete"
-          />
+          /> */}
         </div>
       </td>
     </tr>

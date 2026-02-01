@@ -30,6 +30,21 @@ export const removeFromWishlist = async (courseId) => {
   }
 };
 
+export const markWishlistPurchased = async (courseId) => {
+  try {
+    const response = await apiClient.patch(`/api/v1/wishlist/${courseId}/purchased`);
+    return response.data;
+  } catch (error) {
+    if (error.response) {
+      return error.response.data;
+    }
+    return {
+      success: false,
+      message: "Server error. Please try again.",
+    };
+  }
+};
+
 export const getWishlistCount = async () => {
   try {
     const response = await apiClient.get(`/api/v1/wishlist/count`);

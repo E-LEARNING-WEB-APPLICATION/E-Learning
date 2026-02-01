@@ -54,7 +54,6 @@ import ExploreCourse from "./pages/student/explorePage/ExploreCourse";
 import Students from "./pages/instructor/Students/Students";
 import StudentList from "./pages/instructor/StudentList/StudentList";
 
-
 function App() {
   useNotificationSSE();
 

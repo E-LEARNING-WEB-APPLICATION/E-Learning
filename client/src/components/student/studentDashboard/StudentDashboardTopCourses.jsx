@@ -2,7 +2,7 @@ import React from "react";
 import CourseCard from "./StudentCourseCard";
 import StudentCourseCard from "./StudentCourseCard";
 
-const StudentDashboardTopCourses = ({ courses = [],page }) => {
+const StudentDashboardTopCourses = ({ courses = [], page }) => {
     if (!Array.isArray(courses) || courses.length === 0) return null;
 
     // Sort top-rated courses
@@ -15,14 +15,14 @@ const StudentDashboardTopCourses = ({ courses = [],page }) => {
         arr.reduce(
             (acc, _, i) =>
                 i % size === 0 ? [...acc, arr.slice(i, i + size)] : acc,
-            []
+            [],
         );
 
     const slides = chunk(topCourses, 4);
 
     return (
         <section className="py-5">
-            <div className="container" >
+            <div className="container">
                 <h3 className="fw-bold mb-4">Top Courses</h3>
 
                 <div
@@ -37,12 +37,13 @@ const StudentDashboardTopCourses = ({ courses = [],page }) => {
                                 } data-bs-interval="2000" `}
                                 key={`slide-${slideIndex}`}>
                                 <div className="row g-4">
-                                    {group.map((course) => {
-
-                                        return (
-                                            <StudentCourseCard course={course} page={page} />
-                                        );
-                                    })}
+                                    {group.map((course) => (
+                                        <StudentCourseCard
+                                            key={course.id}
+                                            course={course}
+                                            page={page}
+                                        />
+                                    ))}
                                 </div>
                             </div>
                         ))}

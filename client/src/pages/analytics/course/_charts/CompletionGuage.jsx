@@ -1,4 +1,4 @@
-const CompletionGauge = ({ percentage }) => {
+const ConversionGuage = ({ percentage }) => {
   return (
     <div className="d-flex flex-column align-items-center justify-content-center w-100 h-100">
       <div
@@ -18,9 +18,9 @@ const CompletionGauge = ({ percentage }) => {
       >
         {percentage}%
       </div>
-      <p className="mt-3 fw-semibold">Completion Rate</p>
+      <p className="mt-3 fw-semibold">Conversion Rate</p>
     </div>
   );
 };
 
-export default CompletionGauge;
+export default ConversionGuage;

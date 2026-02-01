@@ -16,6 +16,14 @@ export const markNotificationRead = async (notificationId, params) => {
   return response.data;
 };
 
+export const markNotificationDeleted = async (notificationId, params) => {
+  const response = await apiClient.delete(
+    `${API_BASE_PATH}/notifications/${notificationId}`,
+    params,
+  );
+  return response.data;
+};
+
 export const fetchUnreadCount = async (params) => {
   try {
     const response = await apiClient.get(

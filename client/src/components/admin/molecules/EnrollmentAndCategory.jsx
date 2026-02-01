@@ -25,7 +25,7 @@ const EnrollmentAndCategory = () => {
   const loadEnrollmentTrend = async () => {
     try {
       setLoadingEnrollments(true);
-      const response = await fetchStudentEnrolledTrendByMonth(duration);
+      const response = await fetchStudentEnrolledTrendByMonth({duration});
 
       const formatted = response.map((item) => ({
         label: formatMonth(item.month, item.year),

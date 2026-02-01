@@ -3,85 +3,159 @@ import AnalyticsSection from "../_components/AnalyticsSection";
 import ChartCard from "@/components/admin/atoms/NewChartCard";
 
 import CategorySplitChart from "./_charts/CategorySplitChart";
-import CompletionGauge from "./_charts/CompletionGuage";
 import EnrollmentTrendChart from "./_charts/EnrollmentTrendChart";
 import RatingDistributionChart from "./_charts/RatingDistributionChart";
 import RevenueContributionChart from "./_charts/RevenueContributionChart";
 import EngagementFunnelChart from "./_charts/EngagementFunnelChart";
+import { useEffect, useState } from "react";
+import { getAllDashboardCourses } from "@/services/courseService";
+import CourseFilterBar from "./CourseFilterBar";
+import {
+  fetchCategoryDistribution,
+  fetchCourseConversionRate,
+  fetchCourseRatingDistribution,
+  fetchStudentEnrolledTrendByMonth,
+  fetchTopCoursesByConversionRate,
+  fetchTopCoursesByRevenue,
+} from "@/services/admin/dashboardService";
+import ConversionGuage from "./_charts/CompletionGuage";
+import TopCourseConversionChart from "./_charts/TopCourseConversionChart";
+
+const MONTH_NAMES = [
+  "Jan",
+  "Feb",
+  "Mar",
+  "Apr",
+  "May",
+  "Jun",
+  "Jul",
+  "Aug",
+  "Sep",
+  "Oct",
+  "Nov",
+  "Dec",
+];
 
 export default function CourseAnalyticsPage() {
+  const [courses, setCourses] = useState([]);
+  const [selectedCourse, setSelectedCourse] = useState(null);
+  const [enrollmentData, setEnrollmentData] = useState([]);
+  const [courseRevenueData, setCourseRevenueData] = useState([]);
+  const [courseRatingData, setCourseRatingData] = useState([]);
+  const [categoryData, setCategoryData] = useState([]);
+  const [conversionRate, setConversionRate] = useState(0);
+  const [topCoursesByConversionRate, setTopCoursesByConversionRate] = useState(
+    [],
+  );
+
+  useEffect(() => {
+    getAllDashboardCourses().then((res) => {
+      setCourses(res);
+    });
+    fetchTopCoursesByRevenue().then((res) => {
+      const transformed = res.map((item) => ({
+        course: item.title,
+        revenue: item.revenue,
+      }));
+      setCourseRevenueData(transformed);
+    });
+
+    fetchTopCoursesByConversionRate().then((res) => {
+      const transformed = res.map((item) => ({
+        course: item.title,
+        conversionRate: item.conversionRate,
+      }));
+      console.log("top courses by conversion rate", transformed);
+      setTopCoursesByConversionRate(transformed);
+    });
+
+    loadCategoryDistribution();
+  }, []);
+
+  useEffect(() => {
+    fetchStudentEnrolledTrendByMonth({ courseId: selectedCourse }).then(
+      (res) => {
+        const transformed = res.map((item) => ({
+          month: MONTH_NAMES[item.month - 1],
+          enrollments: item.enrolledCount,
+        }));
+        setEnrollmentData(transformed);
+      },
+    );
+
+    fetchCourseConversionRate({ courseId: selectedCourse }).then((res) => {
+      setConversionRate(res);
+    });
+
+    console.log("selected course", selectedCourse)
+    fetchCourseRatingDistribution({ courseId: selectedCourse }).then(
+      (res) => {
+        const transformed = res.map((item) => ({
+          rating: `${item.rating}★`,
+          count: item.count,
+        }));
+        setCourseRatingData(transformed);
+      },
+    );
+  }, [selectedCourse]);
+
+  const loadCategoryDistribution = async () => {
+    const response = await fetchCategoryDistribution();
+
+    const formatted = response.map((item) => ({
+      category: item.categoryName,
+      value: item.courseCount,
+    }));
+
+    setCategoryData(formatted);
+  };
+
   return (
     <AnalyticsPageLayout title="Course Analytics">
-      {/* SECTION 1 */}
-      <AnalyticsSection title="Enrollment Overview">
-        <ChartCard className="col-md-8" title="Enrollment Trend">
-          <EnrollmentTrendChart
-            data={[
-              { month: "Jan", enrollments: 120 },
-              { month: "Feb", enrollments: 180 },
-              { month: "Mar", enrollments: 140 },
-              { month: "Apr", enrollments: 200 },
-              { month: "May", enrollments: 160 },
-            ]}
-          />
-        </ChartCard>
+      {/* 🔍 COURSE FILTER */}
+      <CourseFilterBar
+        courses={courses}
+        selectedCourse={selectedCourse}
+        onSelect={setSelectedCourse}
+      />
 
-        <ChartCard className="col-md-4" title="Completion Rate">
-          <CompletionGauge percentage={76} />
+      {/* SECTION 1 */}
+      <AnalyticsSection title="Enrollment Overview" Style={{ zIndex: 1 }}>
+        <ChartCard
+          className="col-md-12"
+          title={
+            selectedCourse
+              ? `Enrollment Trend — ${selectedCourse.title}`
+              : "Enrollment Trend (All Courses)"
+          }
+        >
+          <EnrollmentTrendChart data={enrollmentData} />
         </ChartCard>
       </AnalyticsSection>
 
       {/* SECTION 2 */}
       <AnalyticsSection title="Learner Insights">
-        <ChartCard className="col-md-4" title="Category Split">
-          <CategorySplitChart
-            data={[
-              { category: "Frontend", value: 20 },
-              { category: "Backend", value: 60 },
-              { category: "DevOps", value: 20 },
-            ]}
-          />
+        <ChartCard className="col-md-4" title="Conversion Rate">
+          <ConversionGuage percentage={conversionRate} />
         </ChartCard>
         <ChartCard className="col-md-4" title="Category Split">
-          <CategorySplitChart
-            data={[
-              { category: "Frontend", value: 20 },
-              { category: "Backend", value: 60 },
-              { category: "DevOps", value: 20 },
-            ]}
-          />
+          <CategorySplitChart data={categoryData} />
         </ChartCard>
 
         <ChartCard className="col-md-4" title="Rating Distribution">
-          <RatingDistributionChart
-            data={[
-              { rating: "1★", count: 10 },
-              { rating: "2★", count: 14 },
-              { rating: "3★", count: 30 },
-              { rating: "4★", count: 55 },
-              { rating: "5★", count: 85 },
-            ]}
-          />
+          <RatingDistributionChart data={courseRatingData} />
         </ChartCard>
       </AnalyticsSection>
 
       {/* SECTION 3 */}
       <AnalyticsSection title="Financial Performance">
         <ChartCard className="col-md-12" title="Revenue Contribution">
-          <RevenueContributionChart
-            data={[
-              { course: "React", revenue: 80000 },
-              { course: "Java", revenue: 60000 },
-              { course: "AWS", revenue: 50000 },
-              { course: "DevOps", revenue: 40000 },
-              { course: "OS", revenue: 50000 },
-            ]}
-          />
+          <RevenueContributionChart data={courseRevenueData} />
         </ChartCard>
       </AnalyticsSection>
 
       {/* SECTION 4 */}
-      <AnalyticsSection title="Engagement Funnel">
+      {/* <AnalyticsSection title="Engagement Funnel">
         <ChartCard className="col-md-12" title="User Engagement">
           <EngagementFunnelChart
             data={[
@@ -92,7 +166,15 @@ export default function CourseAnalyticsPage() {
             ]}
           />
         </ChartCard>
-      </AnalyticsSection>
+      </AnalyticsSection> */}
+    <AnalyticsSection title="Best Selling Courses">
+      <ChartCard
+        className="col-md-12"
+        title="Top Courses by Conversion Rate"
+      >
+        <TopCourseConversionChart data={topCoursesByConversionRate} />
+      </ChartCard>
+    </AnalyticsSection>
     </AnalyticsPageLayout>
   );
 }

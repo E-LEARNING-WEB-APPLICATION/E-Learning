@@ -1,7 +1,7 @@
 import React from "react";
 import NotificationRow from "./NotificationRow";
 
-const NotificationTable = ({ notifications, selected, setSelected }) => {
+const NotificationTable = ({ notifications, selected, setSelected, markAsRead, viewNotification }) => {
   const toggleSelect = (id) => {
     setSelected(
       selected.includes(id)
@@ -40,6 +40,8 @@ const NotificationTable = ({ notifications, selected, setSelected }) => {
                 data={n}
                 selected={selected}
                 toggleSelect={toggleSelect}
+                markAsRead={markAsRead}
+                viewNotification={viewNotification}
               />
             ))}
           </tbody>

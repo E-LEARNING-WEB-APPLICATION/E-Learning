@@ -49,11 +49,12 @@ export const fetchRevenueTrendByMonth = (duration) => {
   );
 };
 
-export const fetchStudentEnrolledTrendByMonth = (duration) => {
+export const fetchStudentEnrolledTrendByMonth = (params) => {
   return apiRequest(() =>
     apiClient.get(`${ADMIN_BASE_PATH}/student/enrolled/monthly`, {
       params: {
-        duration, // number default 6
+        months: params.duration, // number default 6
+        courseId: params.courseId,
       },
     }),
   );
@@ -84,6 +85,38 @@ export const fetchCategoryDistribution = (params) => {
 export const fetchTopCourseRatingOverview = (params) => {
   return apiRequest(() =>
     apiClient.get(`${API_BASE_PATH}/statistics/course/by-rating`, {
+      params,
+    }),
+  );
+};
+
+export const fetchTopCoursesByRevenue = (params) => {
+  return apiRequest(() =>
+    apiClient.get(`${API_BASE_PATH}/statistics/course/by-revenue`, {
+      params,
+    }),
+  );
+};
+
+export const fetchCourseRatingDistribution = (params) => {
+  return apiRequest(() =>
+    apiClient.get(`${API_BASE_PATH}/statistics/course/rating-distribution`, {
+      params,
+    }),
+  );
+};
+
+export const fetchCourseConversionRate = (params) => {
+  return apiRequest(() =>
+    apiClient.get(`${API_BASE_PATH}/statistics/course/conversion-rate`, {
+      params,
+    }),
+  );
+};
+
+export const fetchTopCoursesByConversionRate = (params) => {
+  return apiRequest(() =>
+    apiClient.get(`${API_BASE_PATH}/statistics/course/top/conversion-rate`, {
       params,
     }),
   );

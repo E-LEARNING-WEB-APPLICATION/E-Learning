@@ -37,7 +37,7 @@ const StudentNotificationsPage = () => {
     // then navigate
     markRead(id, {
       onSuccess: () => {
-        toast.success("notification marked unread");
+        toast.success("notification marked read");
         console.log(subject);
         console.log(subjectType);
         if (subjectType && typePathMap[subjectType]) {

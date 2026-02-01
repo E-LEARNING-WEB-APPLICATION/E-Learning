@@ -1,6 +1,6 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import { FaSort, FaSortUp, FaSortDown, FaTrash } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const statusColorMap = {
   REJECTED: "badge bg-danger text-white",
@@ -12,6 +12,13 @@ const InstructorTableView = ({ instructors, handleRemove }) => {
   const [search, setSearch] = useState("");
   const [sortField, setSortField] = useState("name");
   const [sortOrder, setSortOrder] = useState("asc");
+
+  const state = useLocation().state;
+  useEffect(() => {
+    if (state && state.id) {
+      setSearch(state.id);
+    }
+  }, [state]);
 
   /* ---------------- SORT HANDLER ---------------- */
   const handleSort = (field) => {
@@ -29,6 +36,7 @@ const InstructorTableView = ({ instructors, handleRemove }) => {
       .filter((i) => {
         const term = search.toLowerCase();
         return (
+          i.instructorId.toLowerCase().includes(term) ||
           i.firstName.toLowerCase().includes(term) ||
           i.lastName.toLowerCase().includes(term) ||
           i.email.toLowerCase().includes(term) ||

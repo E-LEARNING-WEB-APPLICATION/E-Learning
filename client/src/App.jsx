@@ -53,6 +53,7 @@ import UpdateTopic from "./pages/instructor/UpdateTopic/UpdateTopic";
 import ExploreCourse from "./pages/student/explorePage/ExploreCourse";
 import Students from "./pages/instructor/Students/Students";
 import StudentList from "./pages/instructor/StudentList/StudentList";
+import NotificationPage from "./pages/admin/Notifications/NotificationPage";
 
 function App() {
   useNotificationSSE();

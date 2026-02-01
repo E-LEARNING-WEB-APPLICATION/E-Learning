@@ -57,6 +57,7 @@ export function StudentDashboardCategoryCourse({
                     {filteredCourses.length > 0 ? (
                         filteredCourses.slice(0, 4).map((course) => (
                             <StudentCourseCard
+                                key={course.id}
                                 course={course}
                                 page={page}
                             />

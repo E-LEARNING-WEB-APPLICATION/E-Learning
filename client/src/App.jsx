@@ -50,6 +50,8 @@ import AdminSettings from "./pages/admin/Settings/AdminSettings";
 import EditCourse from "./pages/instructor/EditCourse/EditCourse";
 import EditSection from "./pages/instructor/EditSection/EditSection";
 import UpdateTopic from "./pages/instructor/UpdateTopic/UpdateTopic";
+import NotificationPage from "./pages/admin/notifications/NotificationPage";
+import ExploreCourse from "./pages/student/explorePage/ExploreCourse";
 import Students from "./pages/instructor/Students/Students";
 import StudentList from "./pages/instructor/StudentList/StudentList";
 import NotificationPage from "./pages/admin/notifications/NotificationPage";
@@ -86,6 +88,10 @@ function App() {
               path="courses/category/:categoryId"
               element={<CategoryCourses />}
             />
+            <Route 
+                path="courses/explore"
+                element={<ExploreCourse />}
+              />
             <Route
               path="instructor-registration"
               element={<InstructorRegistration />}
@@ -115,6 +121,10 @@ function App() {
               <Route
                 path="enrolled-course-details"
                 element={<CourseEnrolledPage />}
+              />
+              <Route 
+                path="courses/explore"
+                element={<ExploreCourse />}
               />
               <Route
                 path="courses/category/:categoryId"

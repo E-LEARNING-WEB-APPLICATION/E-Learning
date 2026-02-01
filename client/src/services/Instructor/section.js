@@ -1,10 +1,11 @@
+import { API_URL } from "@/utils/apiClient";
 import axios from "axios";
  
 
 
 export async function addTheSection( data ) 
 {    
-    const response = await axios.post('http://localhost:8080/api/v1/instructor/addSection',data , {
+    const response = await axios.post(`${API_URL}/api/v1/instructor/addSection`,data , {
             headers: { 
             Authorization: `Bearer ${localStorage.getItem("token")}`
         } 
@@ -16,7 +17,7 @@ export async function addTheSection( data )
 export async function getAllSections( courseId ) 
 {
 
-    const response = await axios.get(`http://localhost:8080/api/v1/instructor/getCourseSections/${courseId}`,{
+    const response = await axios.get(`${API_URL}/api/v1/instructor/getCourseSections/${courseId}`,{
         headers:
         {
             Authorization: `Bearer ${localStorage.getItem("token")}`
@@ -32,7 +33,7 @@ export async function getAllSections( courseId )
 
 export async function getSectionById(sectionId) {
   return axios.get(
-    `http://localhost:8080/api/v1/instructor/getSection/${sectionId}`,
+    `${API_URL}/api/v1/instructor/getSection/${sectionId}`,
     {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -44,7 +45,7 @@ export async function getSectionById(sectionId) {
 
 export async function updateSection(sectionId, data) {
   return axios.put(
-    `http://localhost:8080/api/v1/instructor/updateSection/${sectionId}`,
+    `${API_URL}/api/v1/instructor/updateSection/${sectionId}`,
     data,
     {
       headers: {

@@ -1,8 +1,13 @@
 import axios from "axios";
 import { getToken } from "./auth";
+import.meta.env.VITE_API_URL;
+
+export const API_URL = import.meta.env.VITE_API_URL;
+export const ADMIN_BASE_PATH = "api/v1/admin";
+export const API_BASE_PATH = "api/v1";
 
 const apiClient = axios.create({
-  baseURL: "http://localhost:8080/",
+  baseURL: API_URL,
   headers: {
     "Content-Type": "application/json",
   },
@@ -24,9 +29,5 @@ apiClient.interceptors.request.use(
   },
   (error) => Promise.reject(error),
 );
-
-export const API_URL = "http://localhost:8080/";
-export const ADMIN_BASE_PATH = "api/v1/admin";
-export const API_BASE_PATH = "api/v1";
 
 export default apiClient;

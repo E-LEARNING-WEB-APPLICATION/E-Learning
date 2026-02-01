@@ -1,8 +1,9 @@
+import { API_URL } from "@/utils/apiClient";
 import axios from "axios";
 
 
 export async function addCourse( formData) {
-    const response = await axios.post('http://localhost:5193/addCourse', formData,
+    const response = await axios.post(`${API_URL}/addCourse`, formData,
         {
             headers: { "Content-Type": "multipart/form-data" }
         }
@@ -12,7 +13,7 @@ export async function addCourse( formData) {
 
 export async function getAddedCourses() {
 
-  const response =  await axios.get('http://localhost:8080/api/v1/instructor/getAllInstructorCourses',
+  const response =  await axios.get(`${API_URL}/api/v1/instructor/getAllInstructorCourses`,
     {
             headers: { 
             Authorization: `Bearer ${localStorage.getItem("token")}`
@@ -30,7 +31,7 @@ export async function getAddedCourses() {
 
 export async function getCourseById(courseId) {
   const response = await axios.get(
-    `http://localhost:8080/api/v1/courses/${courseId}`,
+    `${API_URL}/api/v1/courses/${courseId}`,
     {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -43,7 +44,7 @@ export async function getCourseById(courseId) {
 
 export async function updateCourse(courseId, formData) {
   const response = await axios.put(
-    `http://localhost:8080/api/v1/instructor/updateCourse/${courseId}`,
+    `${API_URL}/api/v1/instructor/updateCourse/${courseId}`,
     formData,
     {
       headers: {
@@ -59,7 +60,7 @@ export async function updateCourse(courseId, formData) {
 
 export async function fetchCoursesData()
 {
- const response = await axios.get("http://localhost:8080/api/v1/instructor/getData",
+ const response = await axios.get(`${API_URL}/api/v1/instructor/getData`,
     {
       headers:
       {
@@ -73,7 +74,7 @@ export async function fetchCoursesData()
 
 export async function getStudents(courseId)
 {
-  const response = await axios.get(`http://localhost:8080/api/v1/instructor/getStudentsLists/${courseId}`,{
+  const response = await axios.get(`${API_URL}/api/v1/instructor/getStudentsLists/${courseId}`,{
     headers:
     {
       Authorization: `Bearer ${localStorage.getItem("token")}`
@@ -88,7 +89,7 @@ export async function getStudents(courseId)
 
 export async function setPublish(courseId, isPublished) {
   const response = await axios.put(
-    `http://localhost:8080/api/v1/instructor/changePublish/${courseId}`,
+    `${API_URL}/api/v1/instructor/changePublish/${courseId}`,
     null,
     {
       headers: {

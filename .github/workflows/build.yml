@@ -20,5 +20,5 @@ jobs:
         run: |
           docker build \
             --build-arg VITE_API_URL=${{ secrets.VITE_API_URL }} \
-            -t gandhiomkar/frontend:latest .
-          docker push gandhiomkar/frontend:latest
+            -t gandhiomkar/learnease-frontend:latest .
+          docker push gandhiomkar/learnease-frontend:latest

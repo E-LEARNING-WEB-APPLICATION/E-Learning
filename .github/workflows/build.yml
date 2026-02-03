@@ -3,6 +3,7 @@ name: Build & Push Frontend
 on:
   push:
     branches: ["task/test-deploy"]
+  workflow_dispatch:
 
 jobs:
   build:

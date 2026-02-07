@@ -1,59 +1,37 @@
-import { API_URL } from "@/utils/apiClient";
-import axios from "axios";
+import apiClient from "@/utils/apiClient";
 
-
-export async function addTopic( formData ) 
-{    
-     const response = await axios.post(`${API_URL}/api/v1/instructor/addTopic`, formData,
-        {
-            headers: { "Content-Type": "multipart/form-data" ,
-                Authorization: `Bearer ${localStorage.getItem("token")}`
-            }
-        }
-    )
-
-    return response
-}
-
-
-export async function getTopics( sectionId ) 
-{    
-     const response = await axios.get(`${API_URL}/api/v1/instructor/getTopics/${sectionId.sectionId}`,
-        {
-            headers: {
-                Authorization: `Bearer ${localStorage.getItem("token")}`
-            }
-        }
-    )
-
-    return response
-}
-
-
-
-export async function getTopicById(topicId) {
-  return axios.get(
-    `${API_URL}/api/v1/instructor/getTopic/${topicId}`,
-    {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-    }
-  );
-}
-
-export async function updateTopic(formData) {
-  return axios.put(
-    `${API_URL}/api/v1/instructor/updateTopic`,
+export async function addTopic(formData) {
+  const response = await apiClient.post(
+    `/api/v1/instructor/addTopic`,
     formData,
     {
       headers: {
         "Content-Type": "multipart/form-data",
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
-    }
+    },
   );
+
+  return response;
 }
 
+export async function getTopics(sectionId) {
+  const response = await apiClient.get(
+    `/api/v1/instructor/getTopics/${sectionId.sectionId}`,
+  );
 
+  return response;
+}
 
+export async function getTopicById(topicId) {
+  return apiClient.get(`/api/v1/instructor/getTopic/${topicId}`);
+}
+
+export async function updateTopic(formData) {
+  return apiClient.put(`/api/v1/instructor/updateTopic`, formData, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+  });
+}
